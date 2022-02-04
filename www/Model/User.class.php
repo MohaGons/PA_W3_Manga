@@ -2,7 +2,6 @@
 namespace App\Model;
 
 use App\Core\Sql;
-use PDO;
 
 class User extends Sql
 {
@@ -13,29 +12,16 @@ class User extends Sql
     protected $status = 0;
     protected $password;
     protected $token = null;
+    protected $avatar = null;
+    protected $gender = null;
+    protected $role = 1;
 
     public function __construct()
     {
-
+        echo "constructeur du Model User";
         parent::__construct();
     }
 
-
-    function checkLogin()
-    {
-
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
-
-        $q = "SELECT ID FROM mnga_user WHERE email = ? AND password = ?";
-
-        $req = $this->pdo->prepare($q);
-        $req->execute( [$email, $password] );
-        $results = $req->fetchAll();
-        return $results;
-
-
-    }
     /**
      * @return null
      */
@@ -150,6 +136,45 @@ class User extends Sql
         parent::save();
     }
 
+    public function getRole(): int
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setRole(int $role): void
+    {
+        $this->role = $role;
+    }
+
+    public function getAvatar(): string
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setAvatar(string $avatar): void
+    {
+        $this->avatar = strtolower(trim($avatar));
+    }
+
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setGender(string $gender): void
+    {
+        $this->gender = strtolower(trim($gender));
+    }
+
     public function getRegisterForm(): array
     {
         return [
@@ -206,19 +231,6 @@ class User extends Sql
                     "max"=>100,
                     "error"=>" Votre nom doit faire entre 2 et 100 caractères",
                 ],
-                "nationality"=>[
-                    "placeholder"=>"Votre nationalite ...",
-                    "type"=>"select",
-                    "id"=>"nationalityRegister",
-                    "class"=>"formRegister",
-                    "option"=> [
-                        "fr" => "French",
-                        "en" => "English",
-                        "es" => "Espagnol"
-                    ],
-                    "defaultValue" =>  "en"
-
-                ],
                 "gender"=>[
                     "type"=>"radio",
                     "option"=> [
@@ -237,6 +249,7 @@ class User extends Sql
                     ],
                     "defaultValue" =>  "feminin"
                 ],
+                /*
                 "cgu"=>[
                     "type"=>"checkbox",
                     "option"=> [
@@ -261,15 +274,7 @@ class User extends Sql
                     ],
                     "defaultValue" =>  "cgu2"
                 ],
-                "description"=> [
-                    "type"=> "textarea",
-                    "label"=> "Description : ",
-                    "id"=>"description",
-                    "class"=>"formRegister",
-                    'rows'=> 8,
-                    'cols'=> 33,
-                    'text'=>"Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500"
-                ],
+                */
                 "avatar"=> [
                     "type"=> "file",
                     "label"=> "Avatar : ",
@@ -277,11 +282,12 @@ class User extends Sql
                     "class"=>"formRegister",
                     "accept" => "image/*"
                 ]
-
             ]
         ];
     }
 
+
+    /*
     public function getLoginForm(): array
     {
         return [
@@ -310,5 +316,6 @@ class User extends Sql
             ]
         ];
     }
+    */
 
 }
