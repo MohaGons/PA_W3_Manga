@@ -95,6 +95,7 @@ class Builder
 
     }
 
+    /*
     public static function captcha() {
         $html = '<form action="validate.php" method="post">
                     <table>
@@ -114,7 +115,7 @@ class Builder
         echo $html;
 
     }
-
+    */
 
 
 }

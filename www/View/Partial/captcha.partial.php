@@ -1,1 +1,1 @@
-<?php App\Core\Builder::captcha(); ?>
+<?php //App\Core\Builder::captcha(); ?>

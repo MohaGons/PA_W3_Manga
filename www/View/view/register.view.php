@@ -3,9 +3,9 @@
 
 <?php $this->includePartial("form", $user->getRegisterForm());?>
 
-<?php $this->includePartial("captcha", null);?>
+<?php //$this->includePartial("captcha", null);?>
 
 
 
-<?php $this->includePartial("form", $user->getLoginForm());?>
+<?php //$this->includePartial("form", $user->getLoginForm());?>
 
