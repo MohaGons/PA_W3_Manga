@@ -4,6 +4,6 @@ define("DBDRIVER", "mysql");
 define("DBUSER", "root");
 define("DBPWD", "password");
 define("DBHOST", "database");
-define("DBNAME", "mvcdocker2");
+define("DBNAME", "pa_database");
 define("DBPORT", "3306");
-define("DBPREFIXE", "esgi_");
+define("DBPREFIXE", "mnga_");

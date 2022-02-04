@@ -26,12 +26,24 @@ class User {
     {
         $user = new UserModel();
 
+        if (isset($_POST['submit'])){
+            $errors = Verificator::checkForm($user->getRegisterForm(), $_POST);
+            if(!empty($_POST)) {
+                if(empty($errors)){
 
-        if(!empty($_POST)) {
+					$user->setFirstname(htmlspecialchars($_POST["firstname"]));
+					$user->setLastname(htmlspecialchars($_POST["lastname"]));
+					$user->setEmail(htmlspecialchars($_POST["email"]));
+					$user->setPassword(password_hash(htmlspecialchars($_POST["password"]), PASSWORD_BCRYPT));
+                    $user->setGender(htmlspecialchars($_POST["gender"]));
+					$user->setAvatar(password_hash(htmlspecialchars($_POST["avatar"]), PASSWORD_BCRYPT));
 
-            $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
-
-            print_r($result);
+					$user->save();
+					echo "<script>alert('Votre profil a bien été mis à jour')</script>";
+				} else{
+					print_r($errors);
+				}
+            }
         }
 
 
