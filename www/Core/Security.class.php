@@ -14,7 +14,16 @@ class Security
               security: true
          *
          */
-        return true;
+
+        $role = "admn";
+
+        if (in_array($role, $route["role"])) {
+            return true;
+        }
+        else {
+            return false;
+
+        }
     }
 
 
