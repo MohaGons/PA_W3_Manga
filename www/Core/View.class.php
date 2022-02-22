@@ -48,7 +48,7 @@ class View{
     {
         //$this->data = ["firstname"=>"yves"] -----> $firstname = "yves"
         extract($this->data);
-        include "view/".$this->template.".tpl.php";
+        include "View/Template/".$this->template.".tpl.php";
     }
 
 }

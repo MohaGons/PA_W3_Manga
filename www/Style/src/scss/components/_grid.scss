@@ -1,0 +1,66 @@
+.container {
+	//width: $container-width;
+	margin: 0 auto;
+	border: 1px solid black;
+	overflow-x: hidden;
+}
+
+.row{
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 calc(#{$gutter-width}/ -2);
+	&::after {
+		content: '';
+		flex-grow: 1000000;
+	}
+}
+
+@for $i from 1 through $col-nb {
+
+	.col-#{$i} {
+		flex-basis: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+		width: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+		padding: 0 calc(#{$gutter-width} / 2);
+	}
+
+	.col-sm-#{$i} {
+		flex-basis: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+		width: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+		padding: 0 calc(#{$gutter-width} / 2);
+	}
+}
+
+[class^="col-md"], [class^="col-lg"] {
+	flex-basis: 100%;
+	width: 100%;
+	padding: 0 calc(#{$gutter-width}/ 2);
+}
+
+@for $i from 1 through $col-nb {
+
+	@media all and (min-width: $md-width) {
+		.col-md-#{$i} {
+			flex-basis: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+			width: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+			padding: 0 calc(#{$gutter-width}/ 2);
+		}
+	}
+}
+
+@for $i from 1 through $col-nb {
+	@media all and (min-width: $lg-width) {
+		.col-lg-#{$i} {
+			flex-basis: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+			width: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+			padding: 0 calc(#{$gutter-width}/ 2);
+		}
+	}
+
+}
+
+
+
+
+
+
+
