@@ -1,118 +1,26 @@
-main .sidebar{
-  display: none;
+.sidebar{
+  width: 345px;
+  position: fixed;
+  left: 0;
+  height: 100%;
+  background-color: #23282D;
+}
+.sidebar-menu a{
+  display: block;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+.sidebar-menu ul{
+  list-style: none;
+}
+.sidebar-menu hr{
+  width: 165px;
+  position: absolute;
+  border: 1px solid #47515A;
 }
 
-main > .container {
-  margin-left: 0;
-}
-
-@media all and (min-width: $lg-width) {
-
-  main .sidebar{
-    position: fixed;
-    top: $header-height;
-    left: 0;
-    height: 100%;
-    background-color: #23282D;
-      width: $sidebar-width;
-    padding-top: $sidebar-padding-top;
-    display: block;
-  }
-
-  main .sidebar a{
-    display: block;
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 16px;
-    padding: 20px 20px;
-    border-bottom: 1px solid #47515A;
-    &:hover{
-      background-color: lighten($button-secondary-color, 10%);
-    }
-  }
-
-  main .sidebar ul{
-    list-style: none;
-    padding-inline-start: 0;
-    li:last-child{
-      a {
-        border-bottom: none;
-      }
-    }
-  }
-
-  main .sidebar hr{
-    width: 165px;
-    position: absolute;
-    border: 1px solid #47515A;
-  }
-
-  main .sidebar li{
-    width: 100%;
-    padding: 0 50px;
-    &:hover{
-      background-color: lighten($button-secondary-color, 10%);
-    }
-  }
-
-  main > .container {
-    margin-left: $sidebar-width;
-  }
-
-}
-
-@media all and (min-width: $xl-width) {
-
-  main .sidebar{
-    position: fixed;
-    top: $header-height;
-    left: 0;
-    height: 100%;
-    background-color: #23282D;
-    width: $sidebar-width;
-    padding-top: $sidebar-padding-top;
-    display: block;
-  }
-
-  main .sidebar a{
-    display: block;
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 16px;
-    padding: 20px 20px;
-    border-bottom: 1px solid #47515A;
-    &:hover{
-      background-color: lighten($button-secondary-color, 10%);
-    }
-  }
-
-  main .sidebar ul{
-    list-style: none;
-    padding-inline-start: 0;
-
-    li:last-child{
-      a {
-        border-bottom: none;
-      }
-    }
-  }
-
-  main .sidebar hr{
-    width: 165px;
-    position: absolute;
-    border: 1px solid #47515A;
-  }
-
-  main .sidebar li{
-    width: 100%;
-    padding: 0 50px;
-    &:hover{
-      background-color: lighten($button-secondary-color, 10%);
-    }
-  }
-
-  main > .container {
-    margin-left: $sidebar-width;
-  }
-
+.sidebar-menu li{
+  width: 100%;
+  margin-bottom: 1.7rem;
 }
