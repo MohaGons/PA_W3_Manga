@@ -1,10 +1,19 @@
 .button{
-	padding: 1em 2em;
+	user-select: none;
+	font-size: 1rem;
+	line-height: 1.5;
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	padding: .375rem .75rem;
 	display: inline-block;
 	color: $white;
 	background-color: $grey;
 	text-decoration: none;
-	transition: background-color 0.3s;
+	text-align: center;
+	border: 1px solid transparent;
+	border-radius: .25rem;
+	font-weight: 400;
+	white-space: nowrap;
+	vertical-align: middle;
 	@media screen and (max-width:760px){
 		font-size: rem(12);
 	}
@@ -12,10 +21,17 @@
 		background-color: lighten($grey, 10%);
 	}
 
-	&--alert{
-		background-color: $red;
+	&--primary{
+		background-color: $button-primary-color;
 		&:hover{
-			background-color: lighten($red, 10%);
+			background-color: lighten($button-primary-color, 10%);
+		}
+	}
+
+	&--secondary{
+		background-color: $button-secondary-color;
+		&:hover{
+			background-color: lighten($button-secondary-color, 10%);
 		}
 	}
 
@@ -25,5 +41,40 @@
 			background-color: lighten($green, 10%);
 		}
 	}
+
+	&--danger{
+		background-color: $red;
+		&:hover{
+			background-color: lighten($red, 10%);
+		}
+	}
+
+	&--warning{
+		background-color: $button-warning-color;
+		&:hover{
+			background-color: lighten($button-warning-color, 10%);
+		}
+	}
+	&--info{
+		background-color: $button-info-color;
+		&:hover{
+			background-color: lighten($button-info-color, 10%);
+		}
+	}
+
+	&--ligth{
+		background-color: $button-light-color;
+		&:hover{
+			background-color: lighten($button-light-color, 10%);
+		}
+	}
+
+	&--dark{
+		background-color: $button-dark-color;
+		&:hover{
+			background-color: lighten($button-dark-color, 10%);
+		}
+	}
+
 }
 
