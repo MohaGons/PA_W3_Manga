@@ -34,8 +34,11 @@ p {
 }
 
 .center-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  margin: 0 auto;
 }
 
 .center-form h1 {
@@ -840,6 +843,22 @@ header > .img-logo {
 }
 
 .card--lg label {
+  font-family: "Roboto", sans-serif;
+}
+
+.card--login {
+  border-radius: 30px;
+  height: 624px;
+  padding: 30px;
+  display: block;
+}
+
+.card--login h2, .card--login span, .card--login a {
+  font-family: "Roboto", sans-serif;
+  color: #8A8683;
+}
+
+.card--login label {
   font-family: "Roboto", sans-serif;
 }
 
