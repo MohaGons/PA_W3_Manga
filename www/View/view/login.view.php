@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-</head>
-<body>
-    <div class="center-form">
-        <h1>Manga</h1>
-
-        <div class="card card--lg">
+<div class="center-form">
+    <h1>Manga</h1>
+    <div class="col-lg-4">    
+        <div class="card card--login">
             <h2>Se connecter</h2>
         <!-- <img src="images/image1.jpg" alt="Avatar" style="width:100%"> -->
             <div class="col-lg-5">
@@ -33,9 +24,7 @@
 
             <a href="#">Mot de passe oublié ?</a>
         </div>
-
-        <p>Pas encore inscrit ?<a href="#"> S'inscrire</a></p>
-
     </div>
-</body>
-</html>
+    <p>Pas encore inscrit ?<a href="#"> S'inscrire</a></p>
+
+</div>

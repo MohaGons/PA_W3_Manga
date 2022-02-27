@@ -29,6 +29,22 @@
             font-family: $roboto;
         }
     }
+
+    &--login{
+        border-radius: 30px;
+        height: 624px;
+        padding: 30px; 
+        display: block;
+
+        h2, span, a{
+            font-family: $roboto;
+            color: #8A8683;
+        }
+
+        label{
+            font-family: $roboto;
+        }   
+    }
 }
 
 
