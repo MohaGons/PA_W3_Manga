@@ -23,42 +23,40 @@ h2{
 p{
 	line-height: 1.4em;
 }
+
+.container{
+	max-width: 1140px;
+	margin: auto;
+	& > section{
+		padding: 20px 0;
+	}
+}
+
 .center-form{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	text-align:center;
+    margin: 0 auto;
 
 	h1{
 		font-family: $song-myung;
 	}
-
+	
 	p{
 		color: #8A8683;
 	}
 }
 
-.card-content hr{
-	border:         none;
-	border-left:    1px solid hsla(200, 10%, 50%,100);
-	height:         100px;
-	width:          1px;
-}
-
-
 .input-text {
-	border-radius:19px;
-	border: 1px solid #328DAA;
-	background-color : #DAEFFE;
-	width: 421px;
-	height: 38px;
+    border-radius:19px;
+    border: 1px solid #328DAA;
+    background-color : #DAEFFE;
+    width: 421px;
+    height: 38px;
 }
 
 .input-checkbox {
 	cursor: pointer;
-	position: relative;
-
+    position: relative;
+	
 	& > span {
 		color: #8A8683;
 	}
@@ -67,7 +65,7 @@ p{
 		height: 20px;
 		width: 20px;
 		border: 1px solid #328DAA;
-		background-color : #DAEFFE;
+    	background-color : #DAEFFE;
 		appearance: none;
 		cursor: pointer;
 	}
@@ -86,31 +84,4 @@ p{
 		left: 0.5rem;
 		top: -0.4rem;
 	}
-}
-.articles{
-	height: auto;
-	width: $max-xl-width;
-	margin: auto;
-	overflow: hidden;
-	position: relative;
-	display: flex;
-}
-.imgArticle{
-	border-radius: 10px;
-	object-fit: cover;
-	width: 275px;
-	height: 155px;
-}
-
-.flexArticle{
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-p {
-	//font-family: Roboto;
-	//font-style: normal;
-	//font-weight: bold;
-	//font-size: 14px;
-	//line-height: 16px;
 }
