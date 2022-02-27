@@ -46,6 +46,44 @@ p {
   color: #8A8683;
 }
 
+.card-content {
+  margin-top: 30px;
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#borderline {
+  border-left: 2px solid black;
+  height: 100px;
+  margin: 0 10px;
+}
+
+.text-card {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.text-card > h2 {
+  font-size: 40px;
+  margin: 0 0 10px 0;
+}
+
+.text-card > p {
+  margin: 0;
+  max-height: 20px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #162D3E;
+}
+
 .input-text {
   border-radius: 19px;
   border: 1px solid #328DAA;
@@ -777,17 +815,23 @@ header > .img-logo {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 10px;
-  padding: 30px;
-  width: 505px;
   background-color: #FFF;
   height: 258px;
-  margin: 0 auto;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card h4 {
+  margin: 0;
 }
 
 .card--lg {
-  width: 517px;
   border-radius: 30px;
-  height: 624px;
+  height: 400px;
+  padding: 30px;
 }
 
 .card--lg h2, .card--lg span, .card--lg a {
