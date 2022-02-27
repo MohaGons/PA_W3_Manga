@@ -45,6 +45,46 @@ p{
 	}
 }
 
+.card-content {
+    margin-top: 30px;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+#borderline {
+    border-left: 2px solid black;
+    height: 100px;
+    margin: 0 10px;
+}
+
+.text-card {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align:center;
+
+    &>h2{
+        font-size: 40px;
+        margin: 0 0 10px 0;
+    }
+
+    &>p{
+        margin: 0;
+        max-height: 20px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        color: #162D3E;
+    }
+}
+
+
 .input-text {
     border-radius:19px;
     border: 1px solid #328DAA;
