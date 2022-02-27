@@ -1,18 +1,16 @@
 .container {
-	//width: $container-width;
 	margin: 0 auto;
-	border: 1px solid black;
 	overflow-x: hidden;
+	margin-top: $header-height;
+	padding: $sidebar-padding-top 50px 10px 50px;
+
 }
 
 .row{
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0 calc(#{$gutter-width}/ -2);
-	&::after {
-		content: '';
-		flex-grow: 1000000;
-	}
+	justify-content: space-around;
 }
 
 @for $i from 1 through $col-nb {
@@ -58,6 +56,16 @@
 
 }
 
+@for $i from 1 through $col-nb {
+	@media all and (min-width: $xl-width) {
+		.col-xl-#{$i} {
+			flex-basis: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+			width: calc(100 / (#{$col-nb} / #{$i}) * 1%);
+			padding: 0 calc(#{$gutter-width}/ 2);
+		}
+	}
+
+}
 
 
 
