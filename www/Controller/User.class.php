@@ -12,9 +12,29 @@ class User {
 
     public function login()
     {
-        $view = new View("login");
-        $view->assign("title", "Ceci est le titre de la page login");
+       // if (session_start()==NULL){
+            $user = new UserModel();
+            if(!empty($_POST)) {
+
+                $result = (new \App\Core\Security)->checkLogin();
+                if (count($result) == 0) {
+                    echo "Identifiant incorrect";
+                } else {
+                    session_start();
+                    $_SESSION['email'] = $_POST['email'];
+                    header('location:../View/dashboard.view.php');
+                }
+
+            }
+            $view = new View("login");
+            $view->assign("user", $user);
+        //}
+        //else{
+        //    header('location:../View/dashboard.view.php');
+        //}
+
     }
+
 
     public function logout()
     {

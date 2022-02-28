@@ -15,7 +15,7 @@ class User extends Sql
 
     public function __construct()
     {
-        echo "constructeur du Model User";
+
         parent::__construct();
     }
 
@@ -264,7 +264,6 @@ class User extends Sql
             ]
         ];
     }
-
 
     public function getLoginForm(): array
     {
