@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use PDO;
+
 class Security
 {
 
@@ -29,7 +31,7 @@ class Security
         }
 
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password']);
 
         $q = "SELECT ID FROM mnga_user WHERE email = ? AND password = ?";
 
