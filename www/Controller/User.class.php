@@ -16,7 +16,7 @@ class User {
             $user = new UserModel();
             if(!empty($_POST)) {
 
-                $result = (new \App\Core\Security)->checkLogin();
+                $result = (new \App\Model\User)->checkLogin();
                 if (count($result) == 0) {
                     echo "Identifiant incorrect";
                 } else {
