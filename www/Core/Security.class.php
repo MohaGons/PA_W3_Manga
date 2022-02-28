@@ -3,8 +3,9 @@
 namespace App\Core;
 
 use PDO;
+use function App\myAutoloader;
 
-class Security
+class Security extends Sql
 {
 
     public static function checkRoute($route):bool
@@ -30,17 +31,18 @@ class Security
 
     function checkLogin()
     {
-        try
+
+      /*  try
         {
             $bdd = new PDO('mysql:host=database;dbname=pa_database', 'root', 'password');
         }
         catch(\Exception $e)
         {
             die('Erreur : '.$e->getMessage());
-        }
+        }*/
 
         $email = $_POST['email'];
-        $password = password_hash($_POST['password']);
+        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
 
         $q = "SELECT ID FROM mnga_user WHERE email = ? AND password = ?";
 

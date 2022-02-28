@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use PDO;
 
 class User extends Sql
 {
@@ -19,6 +20,22 @@ class User extends Sql
         parent::__construct();
     }
 
+
+    function checkLogin()
+    {
+
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+
+        $q = "SELECT ID FROM mnga_user WHERE email = ? AND password = ?";
+
+        $req = $this->pdo->prepare($q);
+        $req->execute( [$email, $password] );
+        $results = $req->fetchAll();
+        return $results;
+
+
+    }
     /**
      * @return null
      */
