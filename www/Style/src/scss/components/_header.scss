@@ -129,7 +129,7 @@ header .sidebar a{
 		display: none;
 	}
 
-	main .container {
+	main > .container {
 		margin-left: $sidebar-width;
 	}
 }
@@ -156,7 +156,7 @@ header .sidebar a{
 		display: none;
 	}
 
-	main .container {
+	main > .container {
 		margin-left: $sidebar-width;
 	}
 }
