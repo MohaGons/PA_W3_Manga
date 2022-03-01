@@ -1,16 +1,23 @@
 .container {
 	margin: 0 auto;
+	padding: 10px 50px 10px 50px;
+}
+
+main > .container{
 	overflow-x: hidden;
 	margin-top: $header-height;
 	padding: $sidebar-padding-top 50px 10px 50px;
-
 }
 
 .row{
 	display: flex;
 	flex-wrap: wrap;
-	margin: 0 calc(#{$gutter-width}/ -2);
+	margin: 10px calc(#{$gutter-width}/ -2);
 	justify-content: space-around;
+}
+
+.col--flex {
+	display: flex;
 }
 
 @for $i from 1 through $col-nb {

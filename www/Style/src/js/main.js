@@ -3,13 +3,6 @@ $(document).ready(function(){
 	$('#menu-button').click(function () {
 		$('#headerSidebar').toggleClass('open');
 	})
-
-	// // Vérifier qu'il y a des ékéléments avec la classe .slider
-	// if($('.slider').length){
-	// 	$('.slider').each(function(){
-	// 		sliderInit($(this));
-	// 	})
-	// }
 })
 
 
