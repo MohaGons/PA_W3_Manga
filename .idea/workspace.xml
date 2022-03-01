@@ -6,8 +6,7 @@
       <change beforePath="$PROJECT_DIR$/www/Controller/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/User.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Core/Security.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Security.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/login.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/login.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/conf.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/conf.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/Template/sidebar.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/Template/sidebar.tpl.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +36,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../MAMP/htdocs/PA" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -51,7 +50,9 @@
       <updated>1645885925559</updated>
       <workItem from="1645885927000" duration="253000" />
       <workItem from="1645886261202" duration="1395000" />
-      <workItem from="1645888039146" duration="8407000" />
+      <workItem from="1645888039146" duration="10898000" />
+      <workItem from="1646067694045" duration="613000" />
+      <workItem from="1646162907004" duration="813000" />
     </task>
     <servers />
   </component>

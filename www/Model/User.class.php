@@ -3,7 +3,7 @@ namespace App\Model;
 
 use App\Core\Sql;
 use PDO;
-
+session_start();
 class User extends Sql
 {
     protected $id = null;
@@ -33,8 +33,27 @@ class User extends Sql
         $req->execute( [$email, $password] );
         $results = $req->fetchAll();
         return $results;
+    }
 
+    function passwordReset()
+    {
+        if (isset($_POST['pwdReset'])){
+            $email = strtolower(trim($email)); // On récupère le mail afin d envoyer le mail pour la récupèration du mot de passe
 
+            // Si le mail est vide alors on le traite pas
+            if(empty($email)){
+                $valid = false;
+                echo "Tapez votre Email";
+            }
+
+            if($valid){
+                $verification_mail = $this->pdo->query("SELECT nom, prenom, mail, n_mdp FROM utilisateur WHERE mail = ?", array($mail));
+                $verification_mail = $verification_mail->fetch();
+
+                if(isset($verification_mail['mail'])){
+                    if($verification_mail['n_mdp'] == 0){
+                        // On génère un mot de passe à l'aide de la fonction RAND de PHP
+                        $new_pass = rand();
     }
     /**
      * @return null

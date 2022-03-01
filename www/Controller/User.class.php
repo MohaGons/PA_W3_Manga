@@ -6,13 +6,13 @@ use App\Core\User as UserClean;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;
-
+session_start();
 class User {
 
 
     public function login()
     {
-       // if (session_start()==NULL){
+        if (!isset($_SESSION['email'])){
             $user = new UserModel();
             if(!empty($_POST)) {
 
@@ -28,10 +28,10 @@ class User {
             }
             $view = new View("login");
             $view->assign("user", $user);
-        //}
-        //else{
-        //    header('location:../View/dashboard.view.php');
-        //}
+        }
+        else{
+            header('location:../View/dashboard.view.php');
+        }
 
     }
 
