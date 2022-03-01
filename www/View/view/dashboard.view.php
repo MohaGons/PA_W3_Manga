@@ -48,11 +48,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 col--flex">
         <div class="card">
-            <div class="container">
-                <div class="row">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
+           <canvas id="myChart"></canvas>     
         </div>
     </div>
 </div>
