@@ -9,6 +9,7 @@ class Main{
     public function home()
     {
         echo "Welcome";
+        $view = new View("accueil");
     }
 
 

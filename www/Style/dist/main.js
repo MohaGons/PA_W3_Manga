@@ -4044,7 +4044,51 @@ $(document).ready(function () {
   $('#menu-button').click(function () {
     $('#headerSidebar').toggleClass('open');
   });
-}); // function sliderInit(slider){
+  SliderInit();
+});
+
+function slideBtn(direction) {}
+
+function SliderInit() {
+  var slides = document.querySelectorAll(".slider-item");
+  var slideBtns = document.querySelectorAll(".slider-control .btn");
+  var prevBtn = slideBtns[0],
+      nextBtn = slideBtns[1]; //click handle
+
+  prevBtn.onclick = function (e) {
+    var activeSlider = document.querySelector(".slider-item.active");
+    var slideCount = document.querySelector(".slider-count");
+
+    if (activeSlider.dataset.target == 1) {
+      var lastSlide = slides[slides.length - 1];
+      slideCount.textContent = "".concat(lastSlide.dataset.target, "/").concat(slides.length);
+      lastSlide.classList.add("active");
+    } else {
+      activeSlider.previousElementSibling.classList.add("active");
+      slideCount.textContent = "".concat(activeSlider.previousElementSibling.dataset.target, "/").concat(slides.length);
+    }
+
+    activeSlider.classList.remove("active");
+  }; //next btn
+
+
+  nextBtn.onclick = function (e) {
+    var activeSlider = document.querySelector(".slider-item.active");
+    var nextSlide = activeSlider.nextElementSibling;
+    var slideCount = document.querySelector(".slider-count");
+
+    if (activeSlider.dataset.target != 3) {
+      nextSlide.classList.add("active");
+      slideCount.textContent = "".concat(nextSlide.dataset.target, "/").concat(slides.length);
+    } else {
+      var firstSlide = slides[0];
+      firstSlide.classList.add("active");
+      slideCount.textContent = "".concat(firstSlide.dataset.target, "/").concat(slides.length);
+    }
+
+    activeSlider.classList.remove("active");
+  };
+} // function sliderInit(slider){
 // 	var container = $('<div></div>'); // div vide
 // 	container.addClass('slides-container');
 // 	container.html(slider.html());
@@ -4068,7 +4112,6 @@ $(document).ready(function () {
 // 	})
 // 	startAutoPlay(slider);
 // }
-//
 // function next(slider){
 // 	var currentSlide = slider.attr('data-currentSlide');
 // 	var nextSlide = Number(currentSlide) + 1;
@@ -4171,8 +4214,6 @@ $(document).ready(function () {
 // 	stopAutoPlay(slider); // pas vraiment nécessaire
 // 	startAutoPlay(slider);
 // }
-//
-//
 // function disableNav(slider){
 // 	slider.find('nav').css({
 // 		'pointer-events':'none',
@@ -4199,7 +4240,7 @@ $(document).ready(function () {
 // function stopAutoPlay(slider){
 // 	clearInterval(interval)
 // }
-//
+
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
