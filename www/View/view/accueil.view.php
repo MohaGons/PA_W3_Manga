@@ -13,8 +13,8 @@
             </div>
             <div class='slider-count'>1/3</div>
             <div class="slider-control">
-                <button class="btn"> <i class='fa fa-chevron-left'></i> </button>
-                <button class="btn"> <i class='fa fa-chevron-right'></i> </button>
+                <button class="btn btn-slider-left"> <i class="fa-solid fa-arrow-left"></i> </button>
+                <button class="btn btn-slider-right"> <i class="fa-solid fa-arrow-right"></i> </button>
             </div>
         </div>
     </div>
