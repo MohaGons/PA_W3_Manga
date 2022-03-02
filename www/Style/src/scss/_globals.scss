@@ -87,10 +87,25 @@ p{
 		top: -0.4rem;
 	}
 }
+.articles{
+	height: auto;
+	width: $max-xl-width;
+	margin: auto;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+}
+.imgArticle{
+	border-radius: 10px;
+	object-fit: cover;
+	width: 275px;
+	height: 155px;
+}
 
-img{
-	//border-radius: 10px;
-	//object-fit: cover;
+.flexArticle{
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 p {
 	//font-family: Roboto;

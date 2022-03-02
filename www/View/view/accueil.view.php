@@ -20,34 +20,26 @@
     </div>
 </div>
 
-<!--<div class="row">-->
-<!--    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 col--flex">-->
-<!--        <div class="Actualite">-->
-<!--            <div class="container">-->
-<!--                <img src="assets/logo.png" width="275" height="155">-->
-<!--                <p>Article</p>-->
-<!--                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 col--flex">-->
-<!--        <div class="Actualite">-->
-<!--            <div class="container">-->
-<!--                <img src="assets/logo.png" width="275" height="155">-->
-<!--                <p>Article</p>-->
-<!--                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 col--flex">-->
-<!--        <div class="Actualite">-->
-<!--            <div class="container">-->
-<!--                <img src="assets/logo.png" width="275" height="155">-->
-<!--                <p>Article</p>-->
-<!--                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="row">
+    <div class="col-xl-12">
+        <div class="articles">
+            <div class="row">
+                <div class="col-xl-4 col--flex flexArticle">
+                    <img class="imgArticle" src="./../Style/images/manga.jpg">
+                    <p>Article</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>
+                </div>
+                <div class="col-xl-4 col--flex flexArticle">
+                    <img class="imgArticle" src="../../Style/images/journal.jpg">
+                    <p>Article</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>
+                </div>
+                <div class="col-xl-4 col--flex flexArticle">
+                    <img class="imgArticle" src="../../Style/images/journal.jpg">
+                    <p>Article</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

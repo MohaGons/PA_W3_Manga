@@ -156,7 +156,7 @@ header .sidebar a{
 		font-weight: bold;
 	}
 
-	#headerFront .container, #mainFront .container {
+	#headerFront .container{
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -166,7 +166,7 @@ header .sidebar a{
 	}
 
 	#mainFront > .container{
-		top: $header-height;
+		margin: $sidebar-padding-top auto;
 	}
 
 	#headerFront .container > nav ul {
