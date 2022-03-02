@@ -1,3 +1,4 @@
+//HEADER ADMIN
 header{
 	position: fixed;
 	width: 100%;
@@ -26,6 +27,10 @@ header{
 	font-size: 18px;
 	height: 100%;
 	align-items: center;
+
+	&--front{
+		color: black;
+	}
 }
 
 .photoAndMenu{
@@ -107,6 +112,9 @@ header .sidebar a{
 	background-size: contain;
 }
 
+//HEADER FRONT
+
+
 @media all and (min-width: $lg-width) {
 	header{
 		position: fixed;
@@ -146,6 +154,43 @@ header .sidebar a{
 		justify-content: space-between;
 		align-items: center;
 		font-weight: bold;
+	}
+
+	#headerFront .container, #mainFront .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		max-width: $max-xl-width;
+		margin: auto;
+		position: relative;
+	}
+
+	#mainFront > .container{
+		top: $header-height;
+	}
+
+	#headerFront .container > nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+	}
+
+	#headerFront .container > nav li a {
+		padding: 0.5em;
+		display: block;
+		text-decoration: none;
+		color: black;
+	}
+
+	.header--front {
+		background-color: $light-grey;
+		display: inherit;
+		justify-content: inherit;
+		align-items: inherit;
+
+		//justify-content: flex-start;
+
 	}
 
 	#menu-button{
