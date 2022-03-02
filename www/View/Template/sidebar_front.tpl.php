@@ -1,4 +1,4 @@
-<nav id="site-nav">
+<nav id="site-nav" class="sidebarFront">
     <ul>
         <li><a href="#">ACTUALITÉS</a></li>
         <li><a href="#">PLANNING</a></li>

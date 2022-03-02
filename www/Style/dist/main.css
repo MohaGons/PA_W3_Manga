@@ -882,10 +882,6 @@ header .sidebar {
   transition: left 1s;
 }
 
-div.open {
-  left: 0;
-}
-
 header .sidebar ul {
   list-style: none;
   -webkit-padding-start: 0;
@@ -911,6 +907,89 @@ header .sidebar li:hover {
 header .sidebar a {
   display: block;
   color: #FFFFFF;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 20px 20px;
+  border-bottom: 1px solid #47515A;
+}
+
+#headerFront .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1140px;
+  margin: auto;
+  position: relative;
+}
+
+#mainFront > .container {
+  margin: 50px auto;
+}
+
+#headerFront .container > nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+#headerFront .container > nav li a {
+  padding: 0.5em;
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+.header--front {
+  background-color: #F1F1F1;
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+}
+
+header .sidebarFront {
+  position: fixed;
+  top: 80px;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background-color: #F1F1F1;
+  transition: left 1s;
+  color: black;
+}
+header .sidebarFront li:last-child {
+  display: none;
+}
+
+div.open, nav.open {
+  left: 0;
+}
+
+header .sidebarFront ul {
+  list-style: none;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+header .sidebarFront ul li:last-child a {
+  border-bottom: none;
+}
+
+header .sidebarFront li {
+  width: 100%;
+  text-align: center;
+  padding: 0 50px;
+}
+header .sidebarFront li:hover {
+  background-color: #868e96;
+}
+
+header .sidebarFront a {
+  display: block;
+  color: black;
   text-decoration: none;
   font-size: 16px;
   padding: 20px 20px;
@@ -962,6 +1041,120 @@ header .sidebar a {
   main > .container {
     margin-left: 350px;
   }
+
+  header .sidebar ul {
+    list-style: none;
+    -webkit-padding-start: 0;
+            padding-inline-start: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  header .sidebar ul li:last-child a {
+    border-bottom: none;
+  }
+
+  header .sidebar li {
+    width: 100%;
+    text-align: center;
+    padding: 0 50px;
+  }
+  header .sidebar li:hover {
+    background-color: #868e96;
+  }
+
+  header .sidebar a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 20px 20px;
+    border-bottom: 1px solid #47515A;
+  }
+
+  #headerFront .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1140px;
+    margin: auto;
+    position: relative;
+  }
+
+  #mainFront > .container {
+    margin: 50px auto;
+  }
+
+  #headerFront .container > nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  #headerFront .container > nav li a {
+    padding: 0.5em;
+    display: block;
+    text-decoration: none;
+    color: black;
+  }
+
+  .header--front {
+    background-color: #F1F1F1;
+    display: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+  }
+
+  header .sidebarFront {
+    position: fixed;
+    top: 80px;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: #F1F1F1;
+    transition: left 1s;
+    color: black;
+  }
+  header .sidebarFront li:last-child {
+    display: none;
+  }
+
+  div.open, nav.open {
+    left: 0;
+  }
+
+  header .sidebarFront ul {
+    list-style: none;
+    -webkit-padding-start: 0;
+            padding-inline-start: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  header .sidebarFront ul li:last-child a {
+    border-bottom: none;
+  }
+
+  header .sidebarFront li {
+    width: 100%;
+    text-align: center;
+    padding: 0 50px;
+  }
+  header .sidebarFront li:hover {
+    background-color: #868e96;
+  }
+
+  header .sidebarFront a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 20px 20px;
+    border-bottom: 1px solid #47515A;
+  }
 }
 @media all and (min-width: 1200px) {
   header {
@@ -990,14 +1183,14 @@ header .sidebar a {
     margin: 50px auto;
   }
 
-  #headerFront .container > nav ul {
+  #site-nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
   }
 
-  #headerFront .container > nav li a {
+  #site-nav li a {
     padding: 0.5em;
     display: block;
     text-decoration: none;

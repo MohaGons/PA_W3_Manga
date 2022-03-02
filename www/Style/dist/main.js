@@ -4043,6 +4043,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 $(document).ready(function () {
   $('#menu-button').click(function () {
     $('#headerSidebar').toggleClass('open');
+    $('#site-nav').toggleClass('open');
   });
   SliderInit();
 });

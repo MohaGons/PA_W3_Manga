@@ -20,7 +20,10 @@
             </a>
             <p>Manga-site</p>
         </div>
-        <?php include "View/Template/sidebar_front.tpl.php";?>
+        <div class="photoAndMenu">
+            <button id="menu-button">    </button>
+            <?php include "View/Template/sidebar_front.tpl.php";?>
+        </div>
     </div>
 </header>
 

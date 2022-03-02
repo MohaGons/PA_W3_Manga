@@ -2,7 +2,9 @@ $(document).ready(function(){
 
 	$('#menu-button').click(function () {
 		$('#headerSidebar').toggleClass('open');
+		$('#site-nav').toggleClass('open');
 	})
+
 	SliderInit();
 })
 
