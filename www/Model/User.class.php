@@ -183,7 +183,8 @@ class User extends Sql
                 "action"=>"",
                 "id"=>"formRegister",
                 "class"=>"formRegister",
-                "submit"=>"S'inscrire"
+                "submit"=>"S'inscrire",
+                "inscription"=>"inscription"
             ],
             "inputs"=>[
                 "email"=>[
