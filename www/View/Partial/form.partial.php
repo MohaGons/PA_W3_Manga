@@ -8,5 +8,5 @@
 
 
 
-    <input type="submit" name="<?= $config["config"]["inscription"]??""?>" value="<?= $config["config"]["submit"]??"Envoyer"?>">
+    <input type="submit" value="<?= $config["config"]["submit"]??"Envoyer"?>">
 </form>
