@@ -26,7 +26,7 @@ class User {
     {
         $user = new UserModel();
 
-        if (isset($_POST['submit'])){
+        if (isset($_POST['inscription'])){
             $errors = Verificator::checkForm($user->getRegisterForm(), $_POST);
             if(!empty($_POST)) {
                 if(empty($errors)){
