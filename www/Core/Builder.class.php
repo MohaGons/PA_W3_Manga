@@ -71,8 +71,8 @@ class Builder
                 case "file":
                     $html .= "<label for='".$name."'>".$configInput["label"]."</label>";
                     $html .= "<div><input type='".$configInput["type"]."'
-                                class='".$value["class"]."'
-                                id='".$value["id"]."'
+                                class='".$configInput["class"]."'
+                                id='".$configInput["id"]."'
                                 name='".$name."'
                                 accept='".$configInput["accept"]."'></div><br>";
                     break;
@@ -95,6 +95,7 @@ class Builder
 
     }
 
+    /*
     public static function captcha() {
         $html = '<form action="validate.php" method="post">
                     <table>
@@ -114,7 +115,7 @@ class Builder
         echo $html;
 
     }
-
+    */
 
 
 }
