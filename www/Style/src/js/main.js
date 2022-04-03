@@ -2,15 +2,59 @@ $(document).ready(function(){
 
 	$('#menu-button').click(function () {
 		$('#headerSidebar').toggleClass('open');
+		$('#site-nav').toggleClass('open');
 	})
 
-	// // Vérifier qu'il y a des ékéléments avec la classe .slider
-	// if($('.slider').length){
-	// 	$('.slider').each(function(){
-	// 		sliderInit($(this));
-	// 	})
-	// }
+	SliderInit();
 })
+
+
+function slideBtn(direction) {}
+
+function SliderInit() {
+	let slides = document.querySelectorAll(".slider-item");
+	let slideBtns = document.querySelectorAll(".slider-control .btn");
+	let prevBtn = slideBtns[0],
+		nextBtn = slideBtns[1];
+	//click handle
+	prevBtn.onclick = (e) => {
+		let activeSlider = document.querySelector(".slider-item.active");
+
+		let slideCount = document.querySelector(".slider-count");
+
+		if (activeSlider.dataset.target == 1) {
+			let lastSlide = slides[slides.length - 1];
+			slideCount.textContent = `${lastSlide.dataset.target}/${slides.length}`;
+
+			lastSlide.classList.add("active");
+		} else {
+			activeSlider.previousElementSibling.classList.add("active");
+			slideCount.textContent = `${activeSlider.previousElementSibling.dataset.target}/${slides.length}`;
+		}
+
+		activeSlider.classList.remove("active");
+	};
+	//next btn
+	nextBtn.onclick = (e) => {
+		let activeSlider = document.querySelector(".slider-item.active");
+		let nextSlide = activeSlider.nextElementSibling;
+
+		let slideCount = document.querySelector(".slider-count");
+
+		if (activeSlider.dataset.target != 3) {
+			nextSlide.classList.add("active");
+			slideCount.textContent = `${nextSlide.dataset.target}/${slides.length}`;
+		} else {
+			let firstSlide = slides[0];
+			firstSlide.classList.add("active");
+			slideCount.textContent = `${firstSlide.dataset.target}/${slides.length}`;
+		}
+
+		activeSlider.classList.remove("active");
+	};
+}
+
+
 
 
 // function sliderInit(slider){
@@ -37,7 +81,7 @@ $(document).ready(function(){
 // 	})
 // 	startAutoPlay(slider);
 // }
-//
+
 // function next(slider){
 // 	var currentSlide = slider.attr('data-currentSlide');
 // 	var nextSlide = Number(currentSlide) + 1;
@@ -140,8 +184,8 @@ $(document).ready(function(){
 // 	stopAutoPlay(slider); // pas vraiment nécessaire
 // 	startAutoPlay(slider);
 // }
-//
-//
+
+
 // function disableNav(slider){
 // 	slider.find('nav').css({
 // 		'pointer-events':'none',
@@ -168,7 +212,7 @@ $(document).ready(function(){
 // function stopAutoPlay(slider){
 // 	clearInterval(interval)
 // }
-//
+
 
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {

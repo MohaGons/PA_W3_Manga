@@ -25,3 +25,7 @@
   controller: admin
   action: home
   security: true
+
+/accueil:
+  controller: main
+  action: home

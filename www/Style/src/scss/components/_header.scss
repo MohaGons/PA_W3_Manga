@@ -1,3 +1,4 @@
+//HEADER ADMIN
 header{
 	position: fixed;
 	width: 100%;
@@ -26,6 +27,10 @@ header{
 	font-size: 18px;
 	height: 100%;
 	align-items: center;
+
+	&--front{
+		color: black;
+	}
 }
 
 .photoAndMenu{
@@ -50,9 +55,6 @@ header .sidebar{
 	transition: left 1s;
 }
 
-div.open{
-	left: 0;
-}
 
 header .sidebar ul{
 	list-style: none;
@@ -87,6 +89,93 @@ header .sidebar a{
 	border-bottom: 1px solid #47515A;
 }
 
+#headerFront .container{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: $max-xl-width;
+	margin: auto;
+	position: relative;
+}
+
+#mainFront > .container{
+	margin: $sidebar-padding-top auto;
+}
+
+#headerFront .container > nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+#headerFront .container > nav li a {
+	padding: 0.5em;
+	display: block;
+	text-decoration: none;
+	color: black;
+}
+
+.header--front {
+	background-color: $light-grey;
+	display: inherit;
+	justify-content: inherit;
+	align-items: inherit;
+}
+
+
+header .sidebarFront{
+	position: fixed;
+	top: $header-height;
+	left: 100%;
+	width: 100%;
+	height: 100%;
+	background-color: $light-grey;
+	transition: left 1s;
+	color: black;
+
+	li:last-child {
+		display: none;
+	}
+}
+
+div.open, nav.open{
+	left: 0;
+}
+
+header .sidebarFront ul{
+	list-style: none;
+	padding-inline-start: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	li:last-child{
+		a {
+			border-bottom: none;
+		}
+	}
+}
+
+header .sidebarFront li{
+	width: 100%;
+	text-align: center;
+	padding: 0 50px;
+	&:hover{
+		background-color: lighten($button-secondary-color, 10%);
+	}
+
+}
+
+header .sidebarFront a{
+	display: block;
+	color: black;
+	text-decoration: none;
+	font-size: 16px;
+	padding: 20px 20px;
+	border-bottom: 1px solid #47515A;
+}
+
 #menu-button{
 	background-color: transparent;
 	padding: 0;
@@ -106,6 +195,9 @@ header .sidebar a{
 	background-position: center;
 	background-size: contain;
 }
+
+//HEADER FRONT
+
 
 @media all and (min-width: $lg-width) {
 	header{
@@ -129,9 +221,130 @@ header .sidebar a{
 		display: none;
 	}
 
-	main .container {
+	main > .container {
 		margin-left: $sidebar-width;
 	}
+
+	header .sidebar ul{
+		list-style: none;
+		padding-inline-start: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		li:last-child{
+			a {
+				border-bottom: none;
+			}
+		}
+	}
+
+	header .sidebar li{
+		width: 100%;
+		text-align: center;
+		padding: 0 50px;
+		&:hover{
+			background-color: lighten($button-secondary-color, 10%);
+		}
+
+	}
+
+	header .sidebar a{
+		display: block;
+		color: #FFFFFF;
+		text-decoration: none;
+		font-size: 16px;
+		padding: 20px 20px;
+		border-bottom: 1px solid #47515A;
+	}
+
+	#headerFront .container{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		max-width: $max-xl-width;
+		margin: auto;
+		position: relative;
+	}
+
+	#mainFront > .container{
+		margin: $sidebar-padding-top auto;
+	}
+
+	#headerFront .container > nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+	}
+
+	#headerFront .container > nav li a {
+		padding: 0.5em;
+		display: block;
+		text-decoration: none;
+		color: black;
+	}
+
+	.header--front {
+		background-color: $light-grey;
+		display: inherit;
+		justify-content: inherit;
+		align-items: inherit;
+	}
+
+
+	header .sidebarFront{
+		position: fixed;
+		top: $header-height;
+		left: 100%;
+		width: 100%;
+		height: 100%;
+		background-color: $light-grey;
+		transition: left 1s;
+		color: black;
+
+		li:last-child {
+			display: none;
+		}
+	}
+
+	div.open, nav.open{
+		left: 0;
+	}
+
+	header .sidebarFront ul{
+		list-style: none;
+		padding-inline-start: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		li:last-child{
+			a {
+				border-bottom: none;
+			}
+		}
+	}
+
+	header .sidebarFront li{
+		width: 100%;
+		text-align: center;
+		padding: 0 50px;
+		&:hover{
+			background-color: lighten($button-secondary-color, 10%);
+		}
+
+	}
+
+	header .sidebarFront a{
+		display: block;
+		color: black;
+		text-decoration: none;
+		font-size: 16px;
+		padding: 20px 20px;
+		border-bottom: 1px solid #47515A;
+	}
+
 }
 
 @media all and (min-width: $xl-width) {
@@ -148,6 +361,40 @@ header .sidebar a{
 		font-weight: bold;
 	}
 
+	#headerFront .container{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		max-width: $max-xl-width;
+		margin: auto;
+		position: relative;
+	}
+
+	#mainFront > .container{
+		margin: $sidebar-padding-top auto;
+	}
+
+	#site-nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+	}
+
+	#site-nav li a {
+		padding: 0.5em;
+		display: block;
+		text-decoration: none;
+		color: black;
+	}
+
+	.header--front {
+		background-color: $light-grey;
+		display: inherit;
+		justify-content: inherit;
+		align-items: inherit;
+	}
+
 	#menu-button{
 		display: none;
 	}
@@ -156,7 +403,23 @@ header .sidebar a{
 		display: none;
 	}
 
-	main .container {
+	main > .container {
 		margin-left: $sidebar-width;
 	}
+
+	//header .sidebarFront{
+	//	position: inherit;
+	//	top: inherit;
+	//	left: inherit;
+	//	width: inherit;
+	//	height: inherit;
+	//	background-color: inherit;
+	//	transition: inherit;
+	//	color: black;
+	//	display: inherit;
+	//
+	//	li:last-child {
+	//		display: inherit;
+	//	}
+	//}
 }

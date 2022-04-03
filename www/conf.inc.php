@@ -6,4 +6,4 @@ define("DBPWD", "password");
 define("DBHOST", "database");
 define("DBNAME", "pa_database");
 define("DBPORT", "3306");
-define("DBPREFIXE", "esgi_");
+define("DBPREFIXE", "mnga_");
