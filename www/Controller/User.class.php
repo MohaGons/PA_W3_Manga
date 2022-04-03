@@ -12,21 +12,26 @@ class User {
 
     public function login()
     {
-            $user = new UserModel();
-            if(!empty($_POST)) {
+        $user = new UserModel();
+            $errors = [];
 
-                $result = (new \App\Model\User)->checkLogin();
-                if (count($result) == 0) {
-                    echo "Identifiant incorrect";
+        if(!empty($_POST)) {
+
+                $result = Verificator::checkFormLogin($user->getLoginForm(), $_POST);
+                if (!empty($result)) {
+                    $errors = $result;
+//                    die(var_dump($errors));
                 } else {
                     session_start();
                     $_SESSION['email'] = $_POST['email'];
-                    header('location:../View/dashboard.view.php');
+                    header('location:'.DASHBOARD_VIEW_ROUTE);
                 }
 
             }
             $view = new View("login");
             $view->assign("user", $user);
+            $view->assign("errors", $errors);
+
         //}
         //else{
         //    header('location:../View/dashboard.view.php');
@@ -49,16 +54,14 @@ class User {
         if(!empty($_POST)) {
 
             $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
-            print_r($result);
-
 
             if (empty($result)) {
                 $user->setFirstname(htmlspecialchars($_POST["firstname"]));
                 $user->setLastname(htmlspecialchars($_POST["lastname"]));
                 $user->setEmail(htmlspecialchars($_POST["email"]));
-                $user->setPassword(password_hash(htmlspecialchars($_POST["password"]), PASSWORD_BCRYPT));
+                $user->setPassword(htmlspecialchars($_POST["password"]));
                 $user->setGender(htmlspecialchars($_POST["gender"]));
-                $user->setAvatar(password_hash(htmlspecialchars($_POST["avatar"]), PASSWORD_BCRYPT));
+                $user->setAvatar(htmlspecialchars($_POST["avatar"]));
 
                 $user->save();
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
