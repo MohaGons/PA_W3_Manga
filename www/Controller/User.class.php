@@ -12,9 +12,28 @@ class User {
 
     public function login()
     {
-        $view = new View("login");
-        $view->assign("title", "Ceci est le titre de la page login");
+            $user = new UserModel();
+            if(!empty($_POST)) {
+
+                $result = (new \App\Model\User)->checkLogin();
+                if (count($result) == 0) {
+                    echo "Identifiant incorrect";
+                } else {
+                    session_start();
+                    $_SESSION['email'] = $_POST['email'];
+                    header('location:../View/dashboard.view.php');
+                }
+
+            }
+            $view = new View("login");
+            $view->assign("user", $user);
+        //}
+        //else{
+        //    header('location:../View/dashboard.view.php');
+        //}
+
     }
+
 
     public function logout()
     {
@@ -25,30 +44,35 @@ class User {
     public function register()
     {
         $user = new UserModel();
+        $errors = [];
 
-        if (isset($_POST['submit'])){
-            $errors = Verificator::checkForm($user->getRegisterForm(), $_POST);
-            if(!empty($_POST)) {
-                if(empty($errors)){
+        if(!empty($_POST)) {
 
-					$user->setFirstname(htmlspecialchars($_POST["firstname"]));
-					$user->setLastname(htmlspecialchars($_POST["lastname"]));
-					$user->setEmail(htmlspecialchars($_POST["email"]));
-					$user->setPassword(password_hash(htmlspecialchars($_POST["password"]), PASSWORD_BCRYPT));
-                    $user->setGender(htmlspecialchars($_POST["gender"]));
-					$user->setAvatar(password_hash(htmlspecialchars($_POST["avatar"]), PASSWORD_BCRYPT));
+            $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
+            print_r($result);
 
-					$user->save();
-					echo "<script>alert('Votre profil a bien été mis à jour')</script>";
-				} else{
-					print_r($errors);
-				}
+
+            if (empty($result)) {
+                $user->setFirstname(htmlspecialchars($_POST["firstname"]));
+                $user->setLastname(htmlspecialchars($_POST["lastname"]));
+                $user->setEmail(htmlspecialchars($_POST["email"]));
+                $user->setPassword(password_hash(htmlspecialchars($_POST["password"]), PASSWORD_BCRYPT));
+                $user->setGender(htmlspecialchars($_POST["gender"]));
+                $user->setAvatar(password_hash(htmlspecialchars($_POST["avatar"]), PASSWORD_BCRYPT));
+
+                $user->save();
+                echo "<script>alert('Votre profil a bien été mis à jour')</script>";
+            }
+            else {
+                $errors = $result;
             }
         }
+        
 
 
         $view = new View("Register");
         $view->assign("user", $user);
+        $view->assign("errors", $errors);
     }
 
 
