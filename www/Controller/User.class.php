@@ -12,7 +12,6 @@ class User {
 
     public function login()
     {
-       // if (session_start()==NULL){
             $user = new UserModel();
             if(!empty($_POST)) {
 
@@ -45,11 +44,13 @@ class User {
     public function register()
     {
         $user = new UserModel();
+        $errors = [];
 
         if(!empty($_POST)) {
 
-            $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
+            $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
             print_r($result);
+
 
             if (empty($result)) {
                 $user->setFirstname(htmlspecialchars($_POST["firstname"]));
@@ -62,12 +63,16 @@ class User {
                 $user->save();
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
             }
+            else {
+                $errors = $result;
+            }
         }
         
 
 
         $view = new View("Register");
         $view->assign("user", $user);
+        $view->assign("errors", $errors);
     }
 
 
