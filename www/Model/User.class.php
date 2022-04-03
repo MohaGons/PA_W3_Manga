@@ -24,19 +24,24 @@ class User extends Sql
     }
 
 
-    function checkLogin()
+    public function checkLogin($data)
     {
 
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+        $email = htmlspecialchars($data['email']);
+        $password = htmlspecialchars($data['password']);
 
-        $q = "SELECT ID FROM mnga_user WHERE email = ? AND password = ?";
+
+        $q = "SELECT ID, email, password FROM mnga_user WHERE email = :email";
+
 
         $req = $this->pdo->prepare($q);
-        $req->execute( [$email, $password] );
-        $results = $req->fetchAll();
-        return $results;
-
+        $req->execute(['email' => $email]);
+        $results = $req->fetch();
+        if (password_verify($password, $results['password'])) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
     /**
