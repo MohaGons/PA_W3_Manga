@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Model\User as UserModel;
 
+
 class Verificator
 {
 
@@ -49,6 +50,22 @@ class Verificator
         return $errors;
     }
 
+    public static function checkFormLogin($config, $data): array
+    {
+        $errors = [];
+        $user = new UserModel();
+
+        $results = $user->checkLogin($data);
+
+        if ($results == false) {
+            $errors[] = "Votre identifiant ou votre mot de passe est incorect";
+            return $errors;
+        }
+        else {
+            return $errors;
+
+        }
+    }
 
     public static function checkEmail($email): bool
     {
@@ -61,12 +78,4 @@ class Verificator
             && preg_match("/[0-9]/",$pwd, $result )
             && preg_match("/[A-Z]/",$pwd, $result );
     }
-
-    public static function checkLogin($pwd): bool
-    {
-        $user = new UserModel();
-
-        $user->findIdByEmail("fassory.diaby@gmail.com");
-    }
-
 }

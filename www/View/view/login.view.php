@@ -9,6 +9,11 @@
             <?php $this->includePartial("form", $user->getLoginForm());?>
 
             <a href="#">Mot de passe oublié ?</a>
+            <?php if (!empty($errors)) {
+                foreach ($errors as $error) {
+                    echo $error. "<br>";
+                }
+            }?>
         </div>
     </div>
     <p>Pas encore inscrit ?<a href="#"> S'inscrire</a></p>
