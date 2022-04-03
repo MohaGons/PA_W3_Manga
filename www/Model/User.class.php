@@ -237,6 +237,7 @@ class User extends Sql
                     "class"=>"formRegister",
                     "min"=>2,
                     "max"=>25,
+                    "required"=>true,
                     "error"=>" Votre prénom doit faire entre 2 et 25 caractères",
                 ],
                 "lastname"=>[
@@ -246,6 +247,7 @@ class User extends Sql
                     "class"=>"formRegister",
                     "min"=>2,
                     "max"=>100,
+                    "required"=>true,
                     "error"=>" Votre nom doit faire entre 2 et 100 caractères",
                 ],
                 "gender"=>[
