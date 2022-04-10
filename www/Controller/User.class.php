@@ -6,9 +6,9 @@ use App\Core\User as UserClean;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;
+use App\Core\Mailer;
 
 class User {
-
 
     public function login()
     {
@@ -39,12 +39,10 @@ class User {
 
     }
 
-
     public function logout()
     {
         echo "Se déconnecter";
     }
-
 
     public function register()
     {
@@ -65,31 +63,23 @@ class User {
 
                 $user->save();
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
+
+                $destinataire = $_POST["email"];
+                $name = $_POST["firstname"];
+                $lastname = $_POST["lastname"];
+                $subject = 'test';
+                $body = 'test';
+
+                Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
             }
             else {
                 $errors = $result;
             }
         }
-        
-
 
         $view = new View("Register");
         $view->assign("user", $user);
         $view->assign("errors", $errors);
     }
 
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
