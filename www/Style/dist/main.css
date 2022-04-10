@@ -961,7 +961,8 @@ header .sidebarFront li:last-child {
   display: none;
 }
 
-div.open, nav.open {
+div.open,
+nav.open {
   left: 0;
 }
 
@@ -1121,7 +1122,8 @@ header .sidebarFront a {
     display: none;
   }
 
-  div.open, nav.open {
+  div.open,
+nav.open {
     left: 0;
   }
 
