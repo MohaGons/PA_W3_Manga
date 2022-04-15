@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use PDO;
 
 class User extends Sql
 {
@@ -18,10 +19,31 @@ class User extends Sql
 
     public function __construct()
     {
-        echo "constructeur du Model User";
+
         parent::__construct();
     }
 
+
+    public function checkLogin($data)
+    {
+
+        $email = htmlspecialchars($data['email']);
+        $password = htmlspecialchars($data['password']);
+
+
+        $q = "SELECT ID, email, password FROM mnga_user WHERE email = :email";
+
+
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $results = $req->fetch();
+        if (password_verify($password, $results['password'])) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     /**
      * @return null
      */
@@ -220,6 +242,7 @@ class User extends Sql
                     "class"=>"formRegister",
                     "min"=>2,
                     "max"=>25,
+                    "required"=>true,
                     "error"=>" Votre prénom doit faire entre 2 et 25 caractères",
                 ],
                 "lastname"=>[
@@ -229,6 +252,7 @@ class User extends Sql
                     "class"=>"formRegister",
                     "min"=>2,
                     "max"=>100,
+                    "required"=>true,
                     "error"=>" Votre nom doit faire entre 2 et 100 caractères",
                 ],
                 "gender"=>[
@@ -287,7 +311,6 @@ class User extends Sql
     }
 
 
-    /*
     public function getLoginForm(): array
     {
         return [
@@ -316,6 +339,4 @@ class User extends Sql
             ]
         ];
     }
-    */
-
 }
