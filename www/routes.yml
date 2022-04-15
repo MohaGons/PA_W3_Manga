@@ -29,3 +29,11 @@
 /accueil:
   controller: main
   action: home
+
+/mot_de_passe:
+  controller : user
+  action     : mot_de_passe
+
+/dashboard/parametre:
+  controller : admin
+  action : parametre

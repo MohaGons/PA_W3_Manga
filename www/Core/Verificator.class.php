@@ -4,7 +4,6 @@ namespace App\Core;
 
 use App\Model\User as UserModel;
 
-
 class Verificator
 {
 
@@ -78,4 +77,20 @@ class Verificator
             && preg_match("/[0-9]/",$pwd, $result )
             && preg_match("/[A-Z]/",$pwd, $result );
     }
+
+    public static function checkFormPasswordReset($config, $data): array
+    {
+        $errors = array();
+        $user = new UserModel();
+        $results = $user->checkPasswordReset($data);
+        if ($results == false) {
+            $errors[] = "Votre Email n'existe pas ";
+            return $errors;
+        }
+        else {
+            $errors[] = "Un email a ete envoyé a l'adresse : <strong>".$data['email']."</strong>";
+            return $errors;
+        }
+    }
+
 }

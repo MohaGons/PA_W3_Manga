@@ -78,6 +78,27 @@ class User {
         $view->assign("errors", $errors);
     }
 
+    public function  mot_de_passe()
+    {
+        $user = new UserModel();
+        $errors = [];
+
+        if(!empty($_POST)) {
+
+            $result = Verificator::checkFormPasswordReset($user->getPasswordResetForm(), $_POST);
+            if (!empty($result)) {
+                $errors = $result;
+            } else {
+                $errors = $result;
+            }
+
+        }
+
+        $view = new View("mot_passe_oublier");
+        $view->assign("user", $user);
+        $view->assign("errors", $errors);
+    }
+
 
 
 

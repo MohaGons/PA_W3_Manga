@@ -44,6 +44,22 @@ class User extends Sql
         }
 
     }
+
+    public function checkPasswordReset($data)
+    {
+
+        $email = htmlspecialchars($data['email']);
+        $q = "SELECT * FROM mnga_user WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $results = $req->fetch();
+        if ($results > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     /**
      * @return null
      */
@@ -339,4 +355,28 @@ class User extends Sql
             ]
         ];
     }
+
+    public function getPasswordResetForm(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formLogin",
+                "class"=>"formLogin",
+                "submit"=>"Envoyer"
+            ],
+            "inputs"=>[
+                "email"=>[
+                    "placeholder"=>"Votre email ...",
+                    "type"=>"email",
+                    "id"=>"emailRegister",
+                    "class"=>"formRegister",
+                    "required"=>true,
+                ]
+            ]
+        ];
+    }
+
+  
 }
