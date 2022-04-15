@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Core\User as UserClean;
-use App\Core\Verificator;
+use App\Core\PasswordReset;
 use App\Core\View;
 use App\Model\User as UserModel;
 use App\Core\Mailer;
@@ -81,5 +81,28 @@ class User {
         $view->assign("user", $user);
         $view->assign("errors", $errors);
     }
+
+
+    public function  mot_de_passe()
+    {
+        $user = new UserModel();
+        $errors = [];
+
+        if(!empty($_POST)) {
+
+            $result = PasswordReset::checkFormPasswordReset($user->getPasswordResetForm(), $_POST);
+            if (!empty($result)) {
+                $errors = $result;
+            } else {
+                $errors = $result;
+            }
+
+        }
+
+        $view = new View("mot_passe_oublier");
+        $view->assign("user", $user);
+        $view->assign("errors", $errors);
+    }
+
 
 }

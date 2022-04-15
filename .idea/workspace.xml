@@ -2,27 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/Core/Mailer.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/PHPMailer/Exception.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/PHPMailer/PHPMailer.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/PHPMailer/SMTP.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_04_2022_14_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_04_2022_14_05__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_38__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_38__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_38__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_38__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_49__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_49__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_49__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/Core/PasswordReset.class.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/View/view/mot_passe_oublier.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Controller/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Security.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Security.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Sql.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Sql.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Core/Verificator.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Verificator.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Style/dist/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/Style/dist/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Style/src/scss/components/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/www/Style/src/scss/components/_header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/login.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/login.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/register.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/register.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/conf.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/conf.inc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
