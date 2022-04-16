@@ -2,9 +2,6 @@
   controller: main
   action: home
 
-
-
-
 /nous-contacter:
   controller: main
   action: contact
@@ -20,6 +17,10 @@
 /register:
   controller: user
   action: register
+
+/eventRegister:
+  controller: event
+  action: eventRegister
 
 /dashboard:
   controller: admin
