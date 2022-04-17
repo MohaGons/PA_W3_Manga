@@ -8,7 +8,7 @@
          <img src="images/image1.jpg" alt="Avatar" style="width:100%">
             <?php $this->includePartial("form", $user->getLoginForm());?>
 
-            <a href="#">Mot de passe oublié ?</a>
+            <a href="recuperer_mdp">Mot de passe oublié ?</a>
             <?php if (!empty($errors)) {
                 foreach ($errors as $error) {
                     echo $error. "<br>";

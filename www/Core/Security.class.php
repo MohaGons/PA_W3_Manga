@@ -47,8 +47,7 @@ class Security extends Sql
         $req = $this->pdo->prepare($q);
         $req->execute( [$email, $date ,$token] );
         $results = $req->fetchAll();
-        return $results;
-
+        return [$results,$token];
 
     }
 

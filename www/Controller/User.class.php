@@ -127,9 +127,8 @@ class User {
                     if ($password == $password_c){
                         //$user->setPassword($password);
                         $password = password_hash($password, PASSWORD_DEFAULT);
-                        if ($user->NewPassword($password,$email)){
-                            $errors[] = "<br>Votre mot de passe est modofier";
-                        }
+                        $user->NewPassword($password,$email);
+                        $errors[] = "<br>Votre mot de passe est modefié<br><a href='login'>Se connecter</a>";
                     }
                     else{
                         $errors[] = "<br>Verifier que vous avez mis le meme password dans les deux champs";
