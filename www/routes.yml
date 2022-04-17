@@ -30,10 +30,10 @@
   controller: main
   action: home
 
-/mot_de_passe:
+/recuperer_mdp:
   controller : user
-  action     : mot_de_passe
+  action     : recuperer_mdp
 
-/dashboard/parametre:
-  controller : admin
-  action : parametre
+/initialiser_mdp:
+  controller : user
+  action     : initialiser_mdp

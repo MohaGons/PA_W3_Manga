@@ -60,6 +60,52 @@ class User extends Sql
         }
 
     }
+
+    public function checkPasswordInit($data)
+    {
+
+        $email = htmlspecialchars($_GET['email']);
+        $token = htmlspecialchars($_GET['token']);
+        //$email = "amine@gmail.com";
+        $q = "SELECT * FROM passwords WHERE email = :email ORDER BY id DESC";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $results = $req->fetch();
+        if ($results[0] > 0) {
+            if($token == $results['token'] ){
+                $date_action = time();
+                if($date_action-$results['date_demande']>3600){
+                    $results = 2;
+                    return $results;
+                }
+                else{
+                    $results = $results['token'];
+                    return $results;
+                }
+            }
+            else{
+                //Token incorrect
+                $results = NULL;
+                return $results;
+            }
+        } else {
+            //email n'exist pas
+            $results = NULL;
+            return $results;
+        }
+
+    }
+
+    public function NewPassword(string $Password, string $Email)
+    {
+        $q = "UPDATE mnga_user SET  password = :password WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute( ['password'=> $Password, 'email' => $Email] );
+        $results = $req->fetchAll();
+        return $results;
+    }
+
+
     /**
      * @return null
      */
@@ -371,6 +417,35 @@ class User extends Sql
                     "placeholder"=>"Votre email ...",
                     "type"=>"email",
                     "id"=>"emailRegister",
+                    "class"=>"formRegister",
+                    "required"=>true,
+                ]
+            ]
+        ];
+    }
+
+    public function getPasswordInitForm(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formLogin",
+                "class"=>"formLogin",
+                "submit"=>"Valider"
+            ],
+            "inputs"=>[
+                "password"=>[
+                    "placeholder"=>"Nouveau Password",
+                    "type"=>"password",
+                    "id"=>"pwdRegister",
+                    "class"=>"formRegister",
+                    "required"=>true,
+                ],
+                "confirm_password"=>[
+                    "placeholder"=>"Confirmer Password",
+                    "type"=>"password",
+                    "id"=>"pwdRegister",
                     "class"=>"formRegister",
                     "required"=>true,
                 ]

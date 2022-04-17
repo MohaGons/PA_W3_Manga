@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/Core/PasswordReset.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/View/view/mot_passe_oublier.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/View/view/mot_passe_initier.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Controller/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Verificator.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Verificator.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Core/PasswordReset.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/PasswordReset.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Core/Security.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Security.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,9 +42,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/PA_W3_Manga" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/www/View/view" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\View\view" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -58,6 +62,7 @@
       <workItem from="1645885927000" duration="253000" />
       <workItem from="1645886261202" duration="1395000" />
       <workItem from="1645888039146" duration="8407000" />
+      <workItem from="1650192376143" duration="14551000" />
     </task>
     <servers />
   </component>

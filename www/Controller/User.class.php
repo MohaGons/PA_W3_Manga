@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Core\User as UserClean;
+use App\Core\Verificator;
 use App\Core\PasswordReset;
 use App\Core\View;
 use App\Model\User as UserModel;
@@ -83,7 +84,7 @@ class User {
     }
 
 
-    public function  mot_de_passe()
+    public function  recuperer_mdp()
     {
         $user = new UserModel();
         $errors = [];
@@ -102,6 +103,47 @@ class User {
         $view = new View("mot_passe_oublier");
         $view->assign("user", $user);
         $view->assign("errors", $errors);
+    }
+
+    public function  initialiser_mdp()
+    {
+        $user = new UserModel();
+        $errors = [];
+        $token  = $_GET['token'];
+        $email  = $_GET['email'];
+        if (isset($token)){
+
+            $result = PasswordReset::checkFormPasswordInit($user->getPasswordInitForm(), $_POST);
+            if ($result[0]===1){
+                echo "<script>alert('Vous avez depassé 1h pour reinitialiser votre Mot de passe')</script>";
+            }
+            if ($result[0]===0){
+                echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
+            }
+            else{
+                if(!empty($_POST)) {
+                    $password = $_POST["password"];
+                    $password_c = $_POST["confirm_password"];
+                    if ($password == $password_c){
+                        //$user->setPassword($password);
+                        $password = password_hash($password, PASSWORD_DEFAULT);
+                        if ($user->NewPassword($password,$email)){
+                            $errors[] = "<br>Votre mot de passe est modofier";
+                        }
+                    }
+                    else{
+                        $errors[] = "<br>Verifier que vous avez mis le meme password dans les deux champs";
+                    }
+
+                }
+                $view = new View("mot_passe_initier");
+                $view->assign("user", $user);
+                $view->assign("errors", $errors);
+            }
+        }
+        else{
+            echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
+        }
     }
 
 
