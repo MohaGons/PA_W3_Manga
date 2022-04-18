@@ -23,9 +23,6 @@ class Event extends Sql
 
     public function save(): void
     {
-        //Pré traitement par exemple
-        //echo "pre traitement";
-        echo get_object_vars($this);
         parent::save();
     }
 

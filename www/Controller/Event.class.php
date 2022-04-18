@@ -13,7 +13,6 @@ class Event
     {
         $event = new EventModel();
         $errors = [];
-        echo "<script>alert('L'évènement')</script>";
         if (!empty($_POST)) {
 
             $result = Verificator::checkEventFormRegister($event->getEventFormRegister(), $_POST);
