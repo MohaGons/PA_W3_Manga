@@ -5,7 +5,8 @@ namespace App\Core;
 class Builder
 {
 
-    public static function render($config){
+    public static function render($config)
+    {
 
         foreach ($config["inputs"] as $name => $configInput) {
 
@@ -14,31 +15,30 @@ class Builder
             $html = "";
             switch ($configInput["type"]) {
                 case "select":
-                    $html = "<select name='".$name."'
-                     id='".$configInput["id"]."'>";
-                     foreach ($configInput["option"] as $option => $value) {
-                        $html .= "<option value='".$option."'";
-                         if ($option === $configInput["defaultValue"]) {
-                             $html .= " selected";
-                         }
+                    $html = "<select name='" . $name . "'
+                     id='" . $configInput["id"] . "'>";
+                    foreach ($configInput["option"] as $option => $value) {
+                        $html .= "<option value='" . $option . "'";
+                        if ($option === $configInput["defaultValue"]) {
+                            $html .= " selected";
+                        }
                         $html .= ">$value</option>";
-
-                     }
-                     $html .= "</select>";
+                    }
+                    $html .= "</select>";
                     break;
                 case "radio":
                     foreach ($configInput["option"] as $option => $value) {
                         $html .= "<div>";
-                        $html .= "<input type='".$configInput["type"]."'
-                            class='".$value["class"]."'
-                            id='".$value["id"]."'
-                            name='".$name."'
-                            value='".$value["value"]."'";
+                        $html .= "<input type='" . $configInput["type"] . "'
+                            class='" . $value["class"] . "'
+                            id='" . $value["id"] . "'
+                            name='" . $name . "'
+                            value='" . $value["value"] . "'";
                         if ($value["id"] === $configInput["defaultValue"]) {
                             $html .= " checked";
                         }
                         $html .= "><br>";
-                        $html .= "<label for='".$name."'>";
+                        $html .= "<label for='" . $name . "'>";
                         $html .= $value["label"];
                         $html .= "</label></div>";
                     }
@@ -46,53 +46,49 @@ class Builder
                     break;
                 case "checkbox":
                     foreach ($configInput["option"] as $option => $value) {
-                        $html .= "<div><input type='".$configInput["type"]."'
-                                class='".$value["class"]."'
-                                id='".$value["id"]."'
-                                name='".$name."'
-                                value='".$value["value"]."'";
+                        $html .= "<div><input type='" . $configInput["type"] . "'
+                                class='" . $value["class"] . "'
+                                id='" . $value["id"] . "'
+                                name='" . $name . "'
+                                value='" . $value["value"] . "'";
                         if ($value["id"] === $configInput["defaultValue"]) {
                             $html .= " checked";
                         }
                         $html .= "><br>";
-                        $html .= "<label for='".$name."'>".$value["label"]."</label></div>";
-                }
+                        $html .= "<label for='" . $name . "'>" . $value["label"] . "</label></div>";
+                    }
                     break;
                 case "textarea":
-                    $html .= "<label for='".$name."'>".$configInput["label"]."</label>";
-                    $html .= "<textarea id='".$configInput["id"]."'
-                                class='".$configInput["class"]."'
-                                id='".$value["id"]."'
-                                name='".$name."'
-                                rows='".$configInput["rows"]."'
-                                cols='".$configInput["cols"]."'>".$configInput["text"]."</textarea><br>";
+                    $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                    $html .= "<textarea id='" . $configInput["id"] . "'
+                                class='" . $configInput["class"] . "'
+                                name='" . $name . "'
+                                placeholder='" . $configInput["placeholder"] . "'
+                                rows='" . $configInput["rows"] . "'
+                                cols='" . $configInput["cols"] . "'></textarea><br>";
 
                     break;
                 case "file":
-                    $html .= "<label for='".$name."'>".$configInput["label"]."</label>";
-                    $html .= "<div><input type='".$configInput["type"]."'
-                                class='".$configInput["class"]."'
-                                id='".$configInput["id"]."'
-                                name='".$name."'
-                                accept='".$configInput["accept"]."'></div><br>";
+                    $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                    $html .= "<div><input type='" . $configInput["type"] . "'
+                                class='" . $configInput["class"] . "'
+                                id='" . $configInput["id"] . "'
+                                name='" . $name . "'
+                                accept='" . $configInput["accept"] . "'></div><br>";
                     break;
                 default:
-                    $html = "<input name='".$name."'
-                            class='".$configInput["class"]."'
-                            id='".$configInput["id"]."'
-                            placeholder='".$configInput["placeholder"]."'
-                            type='".$configInput["type"]."'
+                    $html = "<input name='" . $name . "'
+                            class='" . $configInput["class"] . "'
+                            id='" . $configInput["id"] . "'
+                            placeholder='" . $configInput["placeholder"] . "'
+                            type='" . $configInput["type"] . "'
                            
                             ><br>";
                     break;
-
             }
 
             echo $html;
-
         }
-
-
     }
 
     /*
@@ -116,6 +112,4 @@ class Builder
 
     }
     */
-
-
 }

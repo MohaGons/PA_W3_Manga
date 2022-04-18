@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Core\Event as EventClean;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\Event as EventModel;
-use App\Core\Mailer;
 
 class Event
 {
@@ -15,7 +13,7 @@ class Event
     {
         $event = new EventModel();
         $errors = [];
-
+        echo "<script>alert('L'évènement')</script>";
         if (!empty($_POST)) {
 
             $result = Verificator::checkEventFormRegister($event->getEventFormRegister(), $_POST);

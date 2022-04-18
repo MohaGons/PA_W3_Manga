@@ -80,33 +80,40 @@ class Verificator
             die("Tentative de hack");
         }
 
-        // foreach ($config["inputs"] as $name => $input) {
-        //     if (!empty($input["required"]) && $input["required"] == true && empty($data[$name])) {
-        //         $errors[] = $name . " ne peut pas être vide";
-        //     }
 
-        //     if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
-        //         $errors[] = $input["error"];
-        //     }
+        foreach ($config["inputs"] as $name => $input) {
+            if (!empty($input["required"]) && $input["required"] == true && empty($data[$name])) {
+                $errors[] = $name . " ne peut pas être vide";
+            }
 
-        //     if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
-        //         $errors[] = $input["error"];
-        //     }
+            if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                $errors[] = $input["error"];
+            }
 
-        //     if ($input["type"] == "email" &&  !self::checkEmail($data[$name])) {
-        //         $errors[] = $input["error"];
-        //     }
+            if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
+                $errors[] = $input["error"];
+            }
 
-        //     if ($input["type"] == "password" &&  !self::checkPwd($data[$name]) && empty($input["confirm"])) {
-        //         $errors[] = $input["error"];
-        //     }
+            if ($input["type"] == "date" &&  !self::checkDate($data[$name])) {
+                $errors[] = $input["error"];
+            }
 
-        //     if (!empty($input["confirm"]) && $data[$name] != $data[$input["confirm"]]) {
-        //         $errors[] = $input["error"];
-        //     }
-        // }
+            if (!empty($input["confirm"]) && $data[$name] != $data[$input["confirm"]]) {
+                $errors[] = $input["error"];
+            }
+        }
 
 
         return $errors;
+    }
+
+
+    public static function checkDate($date): bool
+    {
+        if (strtotime($date) > strtotime('now')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

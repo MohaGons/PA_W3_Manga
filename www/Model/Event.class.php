@@ -10,7 +10,7 @@ class Event extends Sql
     protected $id = null;
     protected $name = null;
     protected $description = null;
-    protected $price = null;
+    protected $price = 0;
     protected $date = null;
     protected $photo = null;
 
@@ -20,6 +20,14 @@ class Event extends Sql
         parent::__construct();
     }
 
+
+    public function save(): void
+    {
+        //Pré traitement par exemple
+        //echo "pre traitement";
+        echo get_object_vars($this);
+        parent::save();
+    }
 
     /**
      * @return null
@@ -43,7 +51,7 @@ class Event extends Sql
      */
     public function setName(?string $name): void
     {
-        $this->name;
+        $this->name = $name;
     }
 
     /**
@@ -59,13 +67,13 @@ class Event extends Sql
      */
     public function setDescription(?string $description): void
     {
-        $this->description;
+        $this->description = $description;
     }
 
     /**
      * @return null
      */
-    public function getPrice(): ?string
+    public function getPrice(): int
     {
         return $this->price;
     }
@@ -73,9 +81,9 @@ class Event extends Sql
     /**
      * @param null $price
      */
-    public function setPrice(?string $price): void
+    public function setPrice(?int $price): void
     {
-        $this->price;
+        $this->price = $price;
     }
 
     /**
@@ -91,7 +99,7 @@ class Event extends Sql
      */
     public function setDate(?string $date): void
     {
-        $this->date;
+        $this->date = $date;
     }
 
 
@@ -108,7 +116,7 @@ class Event extends Sql
      */
     public function setPhoto(?string $photo): void
     {
-        $this->photo;
+        $this->photo = $photo;
     }
 
 
@@ -126,7 +134,7 @@ class Event extends Sql
             ],
             "inputs" => [
                 "name" => [
-                    "placeholder" => "Nom de l'évènement",
+                    "placeholder" => "Nom...",
                     "type" => "text",
                     "id" => "eventRegister",
                     "class" => "formEvent",
@@ -136,11 +144,14 @@ class Event extends Sql
                     "errorUnicity" => "Un évènement existe déjà avec ce nom"
                 ],
                 "description" => [
-                    "placeholder" => "Description de l'évènement",
-                    "type" => "text",
+                    "label" => "",
+                    "placeholder" => "Description...",
+                    "type" => "textarea",
                     "id" => "descriptionRegister",
                     "class" => "FormEvent",
                     "required" => true,
+                    "rows" => 5,
+                    "cols" => 20,
                     "error" => "Mettre une description correct"
                 ],
                 "price" => [
@@ -148,6 +159,7 @@ class Event extends Sql
                     "type" => "number",
                     "id" => "priceRegister",
                     "class" => "formEvent",
+                    "min" => 0,
                     "required" => true,
                     "error" => "Mettre un prix correct",
 
@@ -166,7 +178,7 @@ class Event extends Sql
                     "type" => "file",
                     "id" => "photoRegister",
                     "class" => "formEvent",
-                    "required" => true,
+                    //"required" => true,
                     "error" => "Mettre une photo correct",
                     "accept" => "image/*"
                 ]
