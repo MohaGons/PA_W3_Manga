@@ -35,11 +35,8 @@ abstract class Sql
 
     }
 
-
     public function save(): void
     {
-
-
         $colums = get_object_vars($this);
         $varToExclude = get_class_vars(get_class());
         $colums = array_diff_key($colums, $varToExclude);
@@ -60,7 +57,20 @@ abstract class Sql
         //Si ID null alors insert sinon update
     }
 
+    public function getCategories(){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_category");
+		$query->execute();
+		$categorie_data = $query->fetchall();
+		return $categorie_data;
+	}
 
+    public function deleteCategory(){
+		if(!empty($_POST['id'])){
+			$category_Id = $_POST['id'];
 
-
+			$query = $this->pdo->prepare("DELETE FROM mnga_category WHERE id= :id");
+			$query->bindValue(':id', $category_Id);
+			$query->execute();
+		}
+	}
 }

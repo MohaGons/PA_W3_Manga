@@ -2,9 +2,6 @@
   controller: main
   action: home
 
-
-
-
 /nous-contacter:
   controller: main
   action: contact
@@ -29,3 +26,7 @@
 /accueil:
   controller: main
   action: home
+
+/categorie:
+  controller: user
+  action: category
