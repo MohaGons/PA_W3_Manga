@@ -6,7 +6,11 @@ use App\Core\User as UserClean;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;
+<<<<<<< HEAD
 use App\Core\Mailer;
+=======
+use App\Model\Category;
+>>>>>>> d9c7585d32201d07e1009dffb24a8a38b34c0472
 
 class User {
 
@@ -82,4 +86,33 @@ class User {
         $view->assign("errors", $errors);
     }
 
+<<<<<<< HEAD
+=======
+    public function category()
+    {
+        $category = new Category();
+        $category->deleteCategory();
+
+        if(!empty($_POST)) {
+
+            $result = Verificator::checkForm($category->getCategoryForm(), $_POST);
+            print_r($result);
+
+            if (empty($result)) {
+                $category->setNameCategory(htmlspecialchars($_POST["name"]));
+                $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
+                $category->save();
+                echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
+            }
+        }
+        
+        $view = new View("category", "back");
+        $view->assign("category", $category);
+
+        $categorie_data = $category->getCategories();        
+        $view->assign("categorie_data", $categorie_data);
+    }
+
+
+>>>>>>> d9c7585d32201d07e1009dffb24a8a38b34c0472
 }

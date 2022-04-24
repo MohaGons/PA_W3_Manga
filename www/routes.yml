@@ -30,3 +30,7 @@
 /accueil:
   controller: main
   action: home
+
+/categorie:
+  controller: user
+  action: category
