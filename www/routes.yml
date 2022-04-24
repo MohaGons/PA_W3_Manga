@@ -18,9 +18,9 @@
   controller: user
   action: register
 
-/eventRegister:
+/event:
   controller: event
-  action: eventRegister
+  action: event
 
 /dashboard:
   controller: admin

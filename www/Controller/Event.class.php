@@ -9,7 +9,7 @@ use App\Model\Event as EventModel;
 class Event
 {
 
-    public function EventRegister()
+    public function Event()
     {
         $event = new EventModel();
         $errors = [];
@@ -30,8 +30,10 @@ class Event
             }
         }
 
-        $view = new View("eventRegister");
+        $view = new View("event");
         $view->assign("event", $event);
+        $event = $event->getEvents();
+        $view->assign("event_data", $event);
         $view->assign("errors", $errors);
     }
 }

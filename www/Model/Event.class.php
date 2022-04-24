@@ -182,4 +182,87 @@ class Event extends Sql
             ]
         ];
     }
+
+    public function getEventEditFormRegister(): array
+    {
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "formEvent",
+                "class" => "formEvent",
+                "submit" => "Modifier L'evenement"
+            ],
+            "inputs" => [
+                "name" => [
+                    "placeholder" => "Nom...",
+                    "type" => "text",
+                    "id" => "eventRegister",
+                    "class" => "formEvent",
+                    "required" => true,
+                    "error" => "Nom de l'évènement incorect",
+                    "unicity" => true,
+                    "errorUnicity" => "Un évènement existe déjà avec ce nom"
+                ],
+                "description" => [
+                    "label" => "",
+                    "placeholder" => "Description...",
+                    "type" => "textarea",
+                    "id" => "descriptionRegister",
+                    "class" => "FormEvent",
+                    "required" => true,
+                    "rows" => 5,
+                    "cols" => 20,
+                    "error" => "Mettre une description correct"
+                ],
+                "price" => [
+                    "placeholder" => "....",
+                    "type" => "number",
+                    "id" => "priceRegister",
+                    "class" => "formEvent",
+                    "min" => 0,
+                    "required" => true,
+                    "error" => "Mettre un prix correct",
+
+                ],
+                "date" => [
+                    "placeholder" => "...",
+                    "type" => "date",
+                    "id" => "dateRegister",
+                    "class" => "formEvent",
+                    "required" => true,
+                    "error" => "Mettre une date correct",
+                ],
+                "photo" => [
+                    "placeholder" => "....",
+                    "label" => "Fichier de l'évènement ",
+                    "type" => "file",
+                    "id" => "photoRegister",
+                    "class" => "formEvent",
+                    //"required" => true,
+                    "error" => "Mettre une photo correct",
+                    "accept" => "image/*"
+                ]
+            ]
+        ];
+    }
+
+    public function getEvents()
+    {
+        $query = $this->pdo->prepare("SELECT * FROM mnga_event");
+        $query->execute();
+        $event_data = $query->fetchall();
+        return $event_data;
+    }
+
+    public function deleteEvent()
+    {
+        if (!empty($_POST['id'])) {
+            $event_Id = $_POST['id'];
+
+            $query = $this->pdo->prepare("DELETE FROM mnga_event WHERE id= :id");
+            $query->bindValue(':id', $event_Id);
+            $query->execute();
+        }
+    }
 }
