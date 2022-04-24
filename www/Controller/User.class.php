@@ -6,35 +6,32 @@ use App\Core\User as UserClean;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;
-<<<<<<< HEAD
 use App\Core\Mailer;
-=======
 use App\Model\Category;
->>>>>>> d9c7585d32201d07e1009dffb24a8a38b34c0472
 
-class User {
+class User
+{
 
     public function login()
     {
         $user = new UserModel();
-            $errors = [];
+        $errors = [];
 
-        if(!empty($_POST)) {
+        if (!empty($_POST)) {
 
-                $result = Verificator::checkFormLogin($user->getLoginForm(), $_POST);
-                if (!empty($result)) {
-                    $errors = $result;
-//                    die(var_dump($errors));
-                } else {
-                    session_start();
-                    $_SESSION['email'] = $_POST['email'];
-                    header('location:'.DASHBOARD_VIEW_ROUTE);
-                }
-
+            $result = Verificator::checkFormLogin($user->getLoginForm(), $_POST);
+            if (!empty($result)) {
+                $errors = $result;
+                //                    die(var_dump($errors));
+            } else {
+                session_start();
+                $_SESSION['email'] = $_POST['email'];
+                header('location:' . DASHBOARD_VIEW_ROUTE);
             }
-            $view = new View("login");
-            $view->assign("user", $user);
-            $view->assign("errors", $errors);
+        }
+        $view = new View("login");
+        $view->assign("user", $user);
+        $view->assign("errors", $errors);
 
         //}
         //else{
@@ -53,7 +50,7 @@ class User {
         $user = new UserModel();
         $errors = [];
 
-        if(!empty($_POST)) {
+        if (!empty($_POST)) {
 
             $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
 
@@ -75,8 +72,7 @@ class User {
                 $body = 'test';
 
                 Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
-            }
-            else {
+            } else {
                 $errors = $result;
             }
         }
@@ -86,14 +82,12 @@ class User {
         $view->assign("errors", $errors);
     }
 
-<<<<<<< HEAD
-=======
     public function category()
     {
         $category = new Category();
         $category->deleteCategory();
 
-        if(!empty($_POST)) {
+        if (!empty($_POST)) {
 
             $result = Verificator::checkForm($category->getCategoryForm(), $_POST);
             print_r($result);
@@ -105,14 +99,11 @@ class User {
                 echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
             }
         }
-        
+
         $view = new View("category", "back");
         $view->assign("category", $category);
 
-        $categorie_data = $category->getCategories();        
+        $categorie_data = $category->getCategories();
         $view->assign("categorie_data", $categorie_data);
     }
-
-
->>>>>>> d9c7585d32201d07e1009dffb24a8a38b34c0472
 }
