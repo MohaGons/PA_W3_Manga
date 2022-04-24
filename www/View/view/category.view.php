@@ -4,7 +4,7 @@
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 col--flex">
         <table class="table-latitude">
             <thead>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
                 <th>Contrôles
                 <button class="control--add" id="add-button">Ajouter</button>
