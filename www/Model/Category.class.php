@@ -83,14 +83,14 @@ class Category extends Sql
                 "submit"=>"Valider"
             ],
             "inputs"=>[
-                "name"=>[
+                "editname"=>[
                     "placeholder"=>"Nom",
                     "type"=>"text",
                     "id"=>"editNameCategory",
                     "class"=>"editFormCategory",
                     "required"=>true,
                 ],
-                "description"=>[
+                "editdescription"=>[
                     "placeholder"=>"description",
                     "type"=>"text",
                     "id"=>"editDescriptionCategory",

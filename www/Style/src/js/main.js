@@ -1,11 +1,11 @@
 var modal_add = $("#modal-add");
 var modal_edit = $("#modal-edit");
-var modal_delete = $("#modal-delete");
+//var modal_delete = $("#modal-delete");
 
 // Get the button that opens the modal
 var btn_add = $("#add-button");
 var btn_edit = $(".control--modify");
-var btn_delete = $("");
+//var btn_delete = $(".	--delete");
 
 /*
 $(".control--modify").click(function(){
@@ -26,15 +26,17 @@ btn_edit.click(function(){
 	modal_edit.css("display", "block");
 })
 
+/*
 btn_delete.click(function(){
 	modal_delete.css("display", "block");
 })
+*/
 
 // When the user clicks on <span> (x), close the modal
 span.click(function(){
 	modal_add.css("display", "none");
 	modal_edit.css("display", "none");
-	modal_delete.css("display", "none");
+	//modal_delete.css("display", "none");
 })
 
 // When the user clicks anywhere outside of the modal, close it
@@ -50,11 +52,13 @@ $(window).click(function(event) {
 	}
 })
   
+/*
 $(window).click(function(event) {
 	if (event.target == modal_delete) {
 	  	modal_delete.css("display", "none");	
 	}
 })
+*/
 
 $(document).ready(function(){
 	$('#menu-button').click(function () {

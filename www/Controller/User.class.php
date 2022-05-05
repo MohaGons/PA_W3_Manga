@@ -54,7 +54,6 @@ class User {
     public function category()
     {
         $category = new Category();
-        $category->deleteCategory();
 
         if(!empty($_POST)) {
 
@@ -74,6 +73,16 @@ class User {
 
         $categorie_data = $category->getCategories();        
         $view->assign("categorie_data", $categorie_data);
+    }
+
+    public function deleteCategory()
+    {
+        $category = new Category();
+        if(!empty($_POST['category_id'])){
+			$category_Id = $_POST['category_id'];
+            $category->deleteCategory($category_Id);
+        }
+
     }
 
 

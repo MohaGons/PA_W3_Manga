@@ -64,13 +64,9 @@ abstract class Sql
 		return $categorie_data;
 	}
 
-    public function deleteCategory(){
-		if(!empty($_POST['id'])){
-			$category_Id = $_POST['id'];
-
-			$query = $this->pdo->prepare("DELETE FROM mnga_category WHERE id= :id");
-			$query->bindValue(':id', $category_Id);
-			$query->execute();
-		}
+    public function deleteCategory($category_Id){
+        $query = $this->pdo->prepare("DELETE FROM mnga_category WHERE id= :id");
+        $query->bindValue(':id', $category_Id);
+        $query->execute();
 	}
 }

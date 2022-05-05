@@ -17,8 +17,8 @@
                             <td><?= $value["name"] ?></td>
                             <td><?= $value["description"] ?></td>
                             <td>
-                                <button class="control--modify" id="modify-button<?= $value['id']?>">Modifier</button>
-                                <button class="control--delete" id="delete-button<?= $value['id']?>">Supprimer</button>
+                                <button class="control--modify" id="<?= $value['id']?>">Modifier</button>
+                                <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
                             </td>
                         </tr>
                 <?php 
@@ -50,7 +50,7 @@
             <h2>modifier une catégorie</h2>
         </div>
         <div class="modal-body">
-            <?php $this->includePartial("form", $category->getCategoryForm());?>
+            <?php $this->includePartial("form", $category->editCategoryForm());?>
         </div>
     </div>
 </div> 
@@ -72,4 +72,4 @@
 <?php 
     }
 ?>
-<script src="../../Style/dist/deleteCategory.js"></script>
+<script src="../../Style/src/js/deleteCategory.js"></script>

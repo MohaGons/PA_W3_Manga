@@ -30,3 +30,7 @@
 /categorie:
   controller: user
   action: category
+
+/deleteCategorie:
+  controller: user
+  action: deleteCategory
