@@ -29,11 +29,7 @@ class User extends Sql
 
         $email = htmlspecialchars($data['email']);
         $password = htmlspecialchars($data['password']);
-
-
         $q = "SELECT ID, email, password FROM mnga_user WHERE email = :email";
-
-
         $req = $this->pdo->prepare($q);
         $req->execute(['email' => $email]);
         $results = $req->fetch();
@@ -56,33 +52,48 @@ class User extends Sql
     /**
      * @return null
      */
-    public function getFirstname(): ?string
+    public function getFirstname($email): ?string
     {
-        return $this->firstname;
+        $q = "SELECT firstname FROM mnga_user WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $firstname = $req->fetch();
+        return $firstname['firstname'];
     }
 
     /**
      * @param null $firstname
      */
-    public function setFirstname(?string $firstname): void
+    public function setFirstname(?string $firstname,$email): void
     {
-        $this->firstname = ucwords(strtolower(trim($firstname)));
+        $firstname = ucwords(strtolower(trim($firstname)));
+        $q = "UPDATE mnga_user SET firstname=? WHERE email=?";
+        $stmt= $this->pdo->prepare($q);
+        $stmt->execute([$firstname,$email]);
+
     }
 
     /**
      * @return null
      */
-    public function getLastname(): ?string
+    public function getLastname($email): ?string
     {
-        return $this->lastname;
+        $q = "SELECT lastname FROM mnga_user WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $lastname = $req->fetch();
+        return $lastname['lastname'];
     }
 
     /**
      * @param null $lastname
      */
-    public function setLastname(?string $lastname): void
+    public function setLastname(?string $lastname,$email): void
     {
-        $this->lastname = strtoupper(trim($lastname));
+        $lastname = strtoupper(trim($lastname));
+        $q = "UPDATE mnga_user SET lastname=? WHERE email=?";
+        $stmt= $this->pdo->prepare($q);
+        $stmt->execute([$lastname,$email]);
     }
 
     /**
@@ -171,9 +182,13 @@ class User extends Sql
         $this->role = $role;
     }
 
-    public function getAvatar(): string
+    public function getAvatar($email): string
     {
-        return $this->avatar;
+        $q = "SELECT avatar FROM mnga_user WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $avatar = $req->fetch();
+        return $avatar['avatar'];
     }
 
     /**
@@ -184,9 +199,13 @@ class User extends Sql
         $this->avatar = strtolower(trim($avatar));
     }
 
-    public function getGender(): string
+    public function getGender($email): string
     {
-        return $this->gender;
+        $q = "SELECT gender FROM mnga_user WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $gender = $req->fetch();
+        return $gender['gender'];
     }
 
     /**
@@ -196,6 +215,18 @@ class User extends Sql
     {
         $this->gender = strtolower(trim($gender));
     }
+
+   public function deletecompte($email)
+   {
+       $q = "DELETE FROM mnga_user WHERE email = :email";
+       $req = $this->pdo->prepare($q);
+       if($req->execute(['email' => $email])){
+         return 1;
+       }
+       else{
+           return 0;
+       }
+   }
 
     public function getRegisterForm(): array
     {
@@ -335,6 +366,48 @@ class User extends Sql
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
                     "required"=>true,
+                ]
+            ]
+        ];
+    }
+
+    public function getParamForm($data): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formLogin",
+                "class"=>"formLogin",
+                "submit"=>"Valider"
+            ],
+            "inputs"=>[
+                "firstname"=>[
+                    "placeholder"=>$data['firstname'],
+                    "type"=>"text",
+                    "id"=>"emailRegister",
+                    "class"=>"formRegister",
+                    "required"=>false,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>" Votre prénom doit faire entre 2 et 25 caractères",
+                ],
+                "lastname"=>[
+                    "placeholder"=>$data['lastname'],
+                    "type"=>"text",
+                    "id"=>"pwdRegister",
+                    "class"=>"formRegister",
+                    "required"=>false,
+                    "min"=>2,
+                    "max"=>100,
+                    "error"=>" Votre nom doit faire entre 2 et 100 caractères",
+                ],
+                "avatar"=> [
+                    "type"=> "file",
+                    "label"=> "Avatar : ".$data['avatar'],
+                    "id"=>"avatar",
+                    "class"=>"formRegister",
+                    "accept" => "image/*"
                 ]
             ]
         ];

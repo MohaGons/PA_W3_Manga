@@ -29,3 +29,11 @@
 /accueil:
   controller: main
   action: home
+
+/parametre:
+  controller: user
+  action : parametre
+
+/deletecompte:
+   controller: user
+   action : deletecompte

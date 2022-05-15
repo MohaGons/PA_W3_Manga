@@ -50,6 +50,22 @@ class Verificator
         return $errors;
     }
 
+    public static function checkFormParam($config, $data): array
+    {
+        $errors = [];
+        foreach ($config["inputs"] as $name=>$input) {
+            if (!empty($data[$name])){
+                if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                    $errors[] = $input["error"];
+                }
+                if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
+                    $errors[] = $input["error"];
+                }
+            }
+        }
+        return $errors;
+    }
+
     public static function checkFormLogin($config, $data): array
     {
         $errors = [];
