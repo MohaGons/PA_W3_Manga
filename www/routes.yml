@@ -34,3 +34,7 @@
 /deleteCategorie:
   controller: user
   action: deleteCategory
+
+/editCategorie:
+  controller: user
+  action: editCategory

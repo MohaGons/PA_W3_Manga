@@ -17,8 +17,8 @@ $(".control--delete").click(function(){
 		            
             },
             success: function(res){
-                    console.log(res);
                     console.log('Success !');
+                    window.location.href = window.location.origin + "/categorie";
             }
             
         });

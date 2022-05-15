@@ -82,7 +82,21 @@ class User {
 			$category_Id = $_POST['category_id'];
             $category->deleteCategory($category_Id);
         }
+    }
 
+    public function editCategory()
+    {
+        $category = new Category();
+        $view = new View("edit-category", "back");
+        $view->assign("category", $category);
+        
+        if(!empty($_POST)){
+			$category->setId($_GET["id"]);
+			$category->setNameCategory(htmlspecialchars($_POST["name"]));
+            $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
+            $category->save();
+            echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
+		}
     }
 
 

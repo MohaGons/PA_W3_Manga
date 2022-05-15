@@ -23,6 +23,10 @@ class Category extends Sql
         return $this->id;
     }
 
+    public function setId($id){
+        $this->id = $id;
+    }
+
     public function getNameCategory(): ?string
     {
         return $this->name;

@@ -22,3 +22,7 @@ $(window).click(function( event ) {
     modal.css("display", "none")
   }
 })
+
+$(".control--delete").click(function(){
+    window.location = "http://localhost/categorie";
+})

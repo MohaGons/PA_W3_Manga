@@ -21,20 +21,7 @@ abstract class Sql
         $getCalledClassExploded = explode("\\", strtolower(get_called_class())); // App\Model\User
         $this->table = DBPREFIXE.end($getCalledClassExploded);
     }
-
-
-    /**
-     * @param null $id
-     */
-    public function setId(?int $id): self
-    {
-        $sql = "SELECT * FROM ".$this->table." WHERE id=:id";
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute( ["id"=>$id] );
-        return $queryPrepared->fetchObject(get_called_class());
-
-    }
-
+    
     public function save(): void
     {
         $colums = get_object_vars($this);

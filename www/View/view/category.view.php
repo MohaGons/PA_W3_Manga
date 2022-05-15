@@ -17,7 +17,7 @@
                             <td><?= $value["name"] ?></td>
                             <td><?= $value["description"] ?></td>
                             <td>
-                                <button class="control--modify" id="<?= $value['id']?>">Modifier</button>
+                            <a href="editCategorie?id=<?= $value['id']?>">Update</a>
                                 <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
                             </td>
                         </tr>
@@ -41,35 +41,4 @@
         </div>
     </div>
 </div> 
-
-<!-- modification d'une catégorie -->
-<div class="modal" id="modal-edit">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>modifier une catégorie</h2>
-        </div>
-        <div class="modal-body">
-            <?php $this->includePartial("form", $category->editCategoryForm());?>
-        </div>
-    </div>
-</div> 
-
-<!-- suppréssion d'une catégorie -->
-<?php 
-    foreach ($categorie_data as $key => $value){ ?>
-        <div class="modal" id="modal-delete">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Supprimer une catégorie</h2>
-                </div>
-                <div class="modal-body">
-                <button class="control--delete" onclick="window.location.href="/categorie?id= <?= $value['id'] ?>'">Supprimer</button>
-                </div>
-            </div>
-        </div> 
-<?php 
-    }
-?>
 <script src="../../Style/src/js/deleteCategory.js"></script>
