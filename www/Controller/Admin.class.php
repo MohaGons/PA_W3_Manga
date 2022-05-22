@@ -17,6 +17,4 @@ class Admin{
         $view->assign("firstname", $firstname);
         $view->assign("lastname", "SKRZYPCZYK");
     }
-
-
 }
