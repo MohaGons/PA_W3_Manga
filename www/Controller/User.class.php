@@ -7,14 +7,38 @@ use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;
 use App\Model\Category;
+use App\Core\Mailer;
+
 
 class User {
 
-
     public function login()
     {
-        $view = new View("login");
-        $view->assign("title", "Ceci est le titre de la page login");
+        $user = new UserModel();
+            $errors = [];
+
+        if(!empty($_POST)) {
+
+                $result = Verificator::checkFormLogin($user->getLoginForm(), $_POST);
+                if (!empty($result)) {
+                    $errors = $result;
+//                    die(var_dump($errors));
+                } else {
+                    session_start();
+                    $_SESSION['email'] = $_POST['email'];
+                    header('location:'.DASHBOARD_VIEW_ROUTE);
+                }
+
+            }
+            $view = new View("login");
+            $view->assign("user", $user);
+            $view->assign("errors", $errors);
+
+        //}
+        //else{
+        //    header('location:../View/dashboard.view.php');
+        //}
+
     }
 
     public function logout()
@@ -22,34 +46,44 @@ class User {
         echo "Se déconnecter";
     }
 
-
     public function register()
     {
         $user = new UserModel();
+        $errors = [];
 
         if(!empty($_POST)) {
 
-            $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
-            print_r($result);
+            $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
 
             if (empty($result)) {
                 $user->setFirstname(htmlspecialchars($_POST["firstname"]));
                 $user->setLastname(htmlspecialchars($_POST["lastname"]));
                 $user->setEmail(htmlspecialchars($_POST["email"]));
-                $user->setPassword(password_hash(htmlspecialchars($_POST["password"]), PASSWORD_BCRYPT));
+                $user->setPassword(htmlspecialchars($_POST["password"]));
                 $user->setGender(htmlspecialchars($_POST["gender"]));
-                $user->setAvatar(password_hash(htmlspecialchars($_POST["avatar"]), PASSWORD_BCRYPT));
+                $user->setAvatar(htmlspecialchars($_POST["avatar"]));
 
                 $user->save();
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
+
+                $destinataire = $_POST["email"];
+                $name = $_POST["firstname"];
+                $lastname = $_POST["lastname"];
+                $subject = 'test';
+                $body = 'test';
+
+                Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+            }
+            else {
+                $errors = $result;
             }
         }
-        
-
 
         $view = new View("Register");
         $view->assign("user", $user);
+        $view->assign("errors", $errors);
     }
+
 
     public function category()
     {
@@ -99,16 +133,4 @@ class User {
 		}
     }
 
-
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -2,10 +2,13 @@
 
 namespace App\Core;
 
+use App\Model\User as UserModel;
+
+
 class Verificator
 {
 
-    public static function checkForm($config, $data): array
+    public static function checkFormRegister($config, $data): array
     {
         $errors = [];
 
@@ -15,12 +18,16 @@ class Verificator
 
         foreach ($config["inputs"] as $name=>$input)
         {
-            if(!isset($data[$name])){
-                $errors[]="Il manque le champ :".$name;
+            if(!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
+                $errors[]= $name ." ne peut pas être vide";
             }
 
-            if(!empty($input["required"]) && empty($data[$name]) ){
-                $errors[]=$name ." ne peut pas être vide";
+            if(!empty($input["min"]) && strlen($data[$name]) < $input["min"]){
+                $errors[]= $input["error"];
+            }
+
+            if(!empty($input["max"]) && strlen($data[$name]) > $input["max"]){
+                $errors[]= $input["error"];
             }
 
             if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
@@ -35,12 +42,30 @@ class Verificator
                 $errors[]=$input["error"];
             }
 
+
+
         }
 
 
         return $errors;
     }
 
+    public static function checkFormLogin($config, $data): array
+    {
+        $errors = [];
+        $user = new UserModel();
+
+        $results = $user->checkLogin($data);
+
+        if ($results == false) {
+            $errors[] = "Votre identifiant ou votre mot de passe est incorect";
+            return $errors;
+        }
+        else {
+            return $errors;
+
+        }
+    }
 
     public static function checkEmail($email): bool
     {
