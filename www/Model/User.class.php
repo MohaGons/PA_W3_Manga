@@ -74,6 +74,18 @@ class User extends Sql
     }
 
     /**
+     * @param null $firstname
+     */
+    public function setFirstnameId(?string $firstname,$id): void
+    {
+        $firstname = ucwords(strtolower(trim($firstname)));
+        $q = "UPDATE mnga_user SET firstname=? WHERE ID=?";
+        $stmt= $this->pdo->prepare($q);
+        $stmt->execute([$firstname,$id]);
+
+    }
+
+    /**
      * @return null
      */
     public function getLastname($email): ?string
@@ -97,6 +109,18 @@ class User extends Sql
     }
 
     /**
+     * @param null $lastname
+     */
+    public function setLastnameId(?string $lastname,$id): void
+    {
+        $lastname = strtoupper(trim($lastname));
+        $q = "UPDATE mnga_user SET lastname=? WHERE ID=?";
+        $stmt= $this->pdo->prepare($q);
+        $stmt->execute([$lastname,$id]);
+    }
+
+
+    /**
      * @return mixed
      */
     public function getEmail(): string
@@ -110,6 +134,14 @@ class User extends Sql
     public function setEmail(string $email): void
     {
         $this->email = strtolower(trim($email));
+    }
+
+    public function setEmailId(string $email, $id): void
+    {
+        $email = strtoupper(trim($email));
+        $q = "UPDATE mnga_user SET email=? WHERE ID=?";
+        $stmt= $this->pdo->prepare($q);
+        $stmt->execute([$email,$id]);
     }
 
     /**
@@ -226,6 +258,26 @@ class User extends Sql
        else{
            return 0;
        }
+   }
+
+    public function deleteuser($id)
+    {
+        $q = "DELETE FROM mnga_user WHERE ID = :id";
+        $req = $this->pdo->prepare($q);
+        if($req->execute(['id' => $id])){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+   public function getAllUsers(){
+       $q = "SELECT * FROM mnga_user";
+       $req = $this->pdo->prepare($q);
+       $req ->execute();
+       $resultat = $req->fetchAll();
+       return $resultat;
    }
 
     public function getRegisterForm(): array
@@ -409,6 +461,51 @@ class User extends Sql
                     "class"=>"formRegister",
                     "accept" => "image/*"
                 ]
+            ]
+        ];
+    }
+
+    public function updateUser(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formLogin",
+                "class"=>"formLogin",
+                "submit"=>"Valider"
+            ],
+            "inputs"=>[
+                "firstname"=>[
+                    "placeholder"=>'New Firstname',
+                    "type"=>"text",
+                    "id"=>"emailRegister",
+                    "class"=>"formRegister",
+                    "required"=>false,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>"Le prénom doit faire entre 2 et 25 caractères",
+                ],
+                "lastname"=>[
+                    "placeholder"=>'New Lastname',
+                    "type"=>"text",
+                    "id"=>"pwdRegister",
+                    "class"=>"formRegister",
+                    "required"=>false,
+                    "min"=>2,
+                    "max"=>100,
+                    "error"=>"Le nom doit faire entre 2 et 100 caractères",
+                ],
+                "email"=>[
+                    "placeholder"=>"New email",
+                    "type"=>"email",
+                    "id"=>"emailRegister",
+                    "class"=>"formRegister",
+                    "required"=>true,
+                    "error"=>"Email incorrect",
+                    "unicity"=>true,
+                    "errorUnicity"=>"Un compte existe déjà avec cet email"
+                ],
             ]
         ];
     }

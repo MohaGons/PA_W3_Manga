@@ -37,3 +37,11 @@
 /deletecompte:
    controller: user
    action : deletecompte
+
+/utilisateurs:
+   controller: admin
+   action : utilisateurs
+
+/utilisateurs/update:
+  controller: admin
+  action: utilisateurs_update
