@@ -82,6 +82,7 @@ class User {
         $view->assign("errors", $errors);
     }
     public function parametre(){
+        $messages =[];
         $user = new UserModel();
         $email = $_SESSION['email'];
         $lastname = $user->getLastname($email);
@@ -95,10 +96,17 @@ class User {
                 {
                 $lastname =$_POST["lastname"];
                 $user->setLastname($lastname,$email);
+                $messages[]  = "Votre LastName a été modifier avec succés";
                 }
                 if (!empty($_POST["firstname"])){
                 $firstname = $_POST["firstname"];
                 $user->setFirstname($firstname,$email);
+                $messages[] = "Votre FirstName a été modifier avec succés";
+                }
+                if (!empty($_POST["password"])){
+                $password = $_POST["password"];
+                $user->setPassword($password,$email);
+                $messages[]  = "Votre Password a été modifier avec succés";
                 }
            }
             else{
@@ -115,7 +123,12 @@ class User {
         );
         $view->assign("data",$data);
         $view->assign("user",$user);
-        $view->assign("errors",$errors);
+        if (isset($errors)){
+            $view->assign("errors",$errors);
+        }
+        if (isset($messages)){
+            $view->assign("messages",$messages);
+        }
     }
 
     public function deletecompte(){

@@ -139,9 +139,12 @@ class User extends Sql
     /**
      * @param mixed $password
      */
-    public function setPassword(string $password): void
+    public function setPassword($password, $email): void
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $q = "UPDATE mnga_user SET password=? WHERE email=?";
+        $stmt= $this->pdo->prepare($q);
+        $stmt->execute([$password,$email]);
     }
 
     /**
@@ -386,7 +389,7 @@ class User extends Sql
                     "placeholder"=>$data['firstname'],
                     "type"=>"text",
                     "id"=>"emailRegister",
-                    "class"=>"formRegister",
+                    "class"=>"input",
                     "required"=>false,
                     "min"=>2,
                     "max"=>25,
@@ -396,19 +399,27 @@ class User extends Sql
                     "placeholder"=>$data['lastname'],
                     "type"=>"text",
                     "id"=>"pwdRegister",
-                    "class"=>"formRegister",
+                    "class"=>"input",
                     "required"=>false,
                     "min"=>2,
                     "max"=>100,
                     "error"=>" Votre nom doit faire entre 2 et 100 caractères",
                 ],
-                "avatar"=> [
+                "password"=>[
+                    "placeholder"=>"Nouveau mot de passe ...",
+                    "type"=>"password",
+                    "id"=>"pwdRegister",
+                    "class"=>"input",
+                    "required"=>false,
+                ],
+                /*"avatar"=> [
                     "type"=> "file",
                     "label"=> "Avatar : ".$data['avatar'],
                     "id"=>"avatar",
-                    "class"=>"formRegister",
+                    "class"=>"input",
                     "accept" => "image/*"
-                ]
+                ]*/
+
             ]
         ];
     }
