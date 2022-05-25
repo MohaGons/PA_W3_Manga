@@ -21,7 +21,6 @@ class Admin{
     }
     public function utilisateurs(){
         $user = new UserModel();
-
         $messages = [];
         if (isset($_GET['action'])){
             $action = $_GET['action'];
@@ -35,18 +34,39 @@ class Admin{
                     $messages[]= "un erreur est survenue, reesayer plus tard";
                 }
             }
-            if($action=='update'){
-
-            }
-            if ($action=='contact'){
-
-            }
         }
-        $users = $user->getAllUsers();
-        $Nbusers = count($users);
+        $pagination=6;
+        if (isset($_GET['page'])){
+            $page=$_GET['page'];
+        }
+        else{
+            $page=1;
+        }
+        $deb = ($pagination*$page)-$pagination;
+        $fin=  $deb+$pagination;
+        if($_GET['action']=='date'){
+            $users = $user->getAllUsersByDate();
+        }
+        elseif($_GET['action']=='nom'){
+            $users = $user->getAllUsersByName();
+        }
+        else{
+            if (isset($_GET['user'])){
+              $search = $_GET['user'];
+              $users = $user->searchUser($search);
+            }
+            else{
+                $users = $user->getAllUsers($deb,$fin);
+            }
+
+        }
+
+        $Nbusers = count($user->NombreUsers());
+        $Nbpages = ceil($Nbusers / $pagination);
         $view = new View("utilisateurs", "back");
         $view->assign("users", $users);
         $view->assign("Nbusers", $Nbusers);
+        $view->assign("Nbpages", $Nbpages);
         $view->assign("messages", $messages);
     }
 

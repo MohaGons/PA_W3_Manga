@@ -272,14 +272,46 @@ class User extends Sql
         }
     }
 
-   public function getAllUsers(){
-       $q = "SELECT * FROM mnga_user";
+    public function NombreUsers(){
+        $q = "SELECT * FROM mnga_user";
+        $req = $this->pdo->prepare($q);
+        $req ->execute();
+        $resultat = $req->fetchAll();
+        return $resultat;
+    }
+   public function getAllUsers($deb,$fin){
+       $q = "SELECT * FROM mnga_user LIMIT :deb, :fin";
        $req = $this->pdo->prepare($q);
+       $req->bindValue(':deb', $deb, PDO::PARAM_INT);
+       $req->bindValue(':fin', $fin, PDO::PARAM_INT);
        $req ->execute();
        $resultat = $req->fetchAll();
        return $resultat;
    }
 
+    public function getAllUsersByDate(){
+        $q = "SELECT * FROM mnga_user ORDER BY createdAt DESC";
+        $req = $this->pdo->prepare($q);
+        $req ->execute();
+        $resultat = $req->fetchAll();
+        return $resultat;
+    }
+    public function getAllUsersByName(){
+        $q = "SELECT * FROM mnga_user ORDER BY lastname";
+        $req = $this->pdo->prepare($q);
+        $req ->execute();
+        $resultat = $req->fetchAll();
+        return $resultat;
+    }
+    public function searchUser($search){
+        $search = "%$search%";
+        $q = "SELECT * FROM mnga_user WHERE lastname LIKE :search OR firstname LIKE :search ";
+        $req = $this->pdo->prepare($q);
+        $req->bindValue('search', $search);
+        $req->execute();
+        $resultat = $req->fetchAll();
+        return $resultat;
+    }
     public function getRegisterForm(): array
     {
         return [
