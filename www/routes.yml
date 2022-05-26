@@ -2,9 +2,6 @@
   controller: main
   action: home
 
-
-
-
 /nous-contacter:
   controller: main
   action: contact
@@ -30,6 +27,7 @@
   controller: main
   action: home
 
+
 /parametre:
   controller: user
   action : parametre
@@ -45,3 +43,16 @@
 /utilisateurs/update:
   controller: admin
   action: utilisateurs_update
+
+/categorie:
+  controller: user
+  action: category
+
+/deleteCategorie:
+  controller: user
+  action: deleteCategory
+
+/editCategorie:
+  controller: user
+  action: editCategory
+

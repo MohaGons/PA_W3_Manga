@@ -1,4 +1,4 @@
-<?php
+php
 
 namespace App\Controller;
 use App\Model\User as UserModel;
@@ -19,6 +19,7 @@ class Admin{
         $view->assign("firstname", $firstname);
         $view->assign("lastname", "SKRZYPCZYK");
     }
+
     public function utilisateurs(){
         $user = new UserModel();
         $messages = [];
