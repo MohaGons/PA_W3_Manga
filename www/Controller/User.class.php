@@ -84,7 +84,7 @@ class User {
     public function parametre(){
         $messages =[];
         $user = new UserModel();
-        $email = $_SESSION['email'];
+        $email = 'AMINECHERIGUIFR@GMAIL.COM';
         $lastname = $user->getLastname($email);
         $firstname = $user->getFirstname($email);
         $gender = $user->getGender($email);
