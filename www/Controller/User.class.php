@@ -83,6 +83,59 @@ class User {
         $view->assign("user", $user);
         $view->assign("errors", $errors);
     }
+    public function parametre(){
+        $user = new UserModel();
+        $email = $_SESSION['email'];
+        $lastname = $user->getLastname($email);
+        $firstname = $user->getFirstname($email);
+        $gender = $user->getGender($email);
+        $avatar = $user->getAvatar($email);
+        if(!empty($_POST)) {
+            $result = Verificator::checkFormParam($user->getParamForm($data), $_POST);
+            if (empty($result)){
+                if (!empty($_POST["lastname"]))
+                {
+                $lastname =$_POST["lastname"];
+                $user->setLastname($lastname,$email);
+                }
+                if (!empty($_POST["firstname"])){
+                $firstname = $_POST["firstname"];
+                $user->setFirstname($firstname,$email);
+                }
+           }
+            else{
+                $errors = $result;
+            }
+        }
+        $view = new View("parametre", "back");
+        $data= array(
+            "email"=>$email,
+            "lastname"=>$lastname,
+            "firstname"=>$firstname,
+            "gender"=>$gender,
+            "avatar"=>$avatar
+        );
+        $view->assign("data",$data);
+        $view->assign("user",$user);
+        $view->assign("errors",$errors);
+    }
+
+    public function deletecompte(){
+        $user = new UserModel;
+        $email = $_GET['email'];
+        if ($email == $_SESSION['email']){
+            $user->deletecompte($email);
+            if($user==1){
+                echo "<script>alert('Votre compte a bien été supprimer')</script>";
+            }
+            else{
+                echo "<script>alert('Reessayer plus tard')</script>";
+            }
+        }
+        else{
+            header('location:'.LOGIN_VIEW_ROUTE);
+        }
+    }
 
 
     public function category()
