@@ -1,4 +1,4 @@
-php
+<?php
 
 namespace App\Controller;
 use App\Model\User as UserModel;
@@ -11,8 +11,6 @@ class Admin{
 
     public function home()
     {
-        //Connecté à la bdd
-        //j'ai récup le prenom
         $firstname = "Yves";
 
         $view = new View("dashboard", "back");
@@ -81,9 +79,9 @@ class Admin{
         if(!empty($_POST)) {
             $result = Verificator::checkupdateUser($user->updateUser(), $_POST);
             if (empty($result)){
-                $user->setFirstnameId( $_POST['firstname'],$id);
-                $user->setLastnameId($_POST['lastname'],$id);
-                $user->setEmailId($_POST['email'],$id);
+                $user->updateFirstnameId( $_POST['firstname'],$id);
+                $user->updateLastnameId($_POST['lastname'],$id);
+                $user->updateEmailId($_POST['email'],$id);
                 $messages[] = 'la modification a été faite !';
             }
             else{

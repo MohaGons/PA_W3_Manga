@@ -96,11 +96,11 @@ class User {
                 if (!empty($_POST["lastname"]))
                 {
                 $lastname =$_POST["lastname"];
-                $user->setLastname($lastname,$email);
+                $user->updateLastname($lastname,$email);
                 }
                 if (!empty($_POST["firstname"])){
                 $firstname = $_POST["firstname"];
-                $user->setFirstname($firstname,$email);
+                $user->updateFirstname($firstname,$email);
                 }
            }
             else{

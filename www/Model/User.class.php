@@ -64,7 +64,16 @@ class User extends Sql
     /**
      * @param null $firstname
      */
-    public function setFirstname(?string $firstname,$email): void
+    public function setFirstname(?string $firstname): void
+    {
+        $this->firstname = ucwords(strtolower(trim($firstname)));
+    }
+
+
+    /**
+     * @param null $firstname
+     */
+    public function updateFirstname(?string $firstname,$email): void
     {
         $firstname = ucwords(strtolower(trim($firstname)));
         $q = "UPDATE mnga_user SET firstname=? WHERE email=?";
@@ -76,7 +85,7 @@ class User extends Sql
     /**
      * @param null $firstname
      */
-    public function setFirstnameId(?string $firstname,$id): void
+    public function updateFirstnameId(?string $firstname,$id): void
     {
         $firstname = ucwords(strtolower(trim($firstname)));
         $q = "UPDATE mnga_user SET firstname=? WHERE ID=?";
@@ -100,7 +109,15 @@ class User extends Sql
     /**
      * @param null $lastname
      */
-    public function setLastname(?string $lastname,$email): void
+    public function setLastname(?string $lastname): void
+    {
+        $this->lastname = strtoupper(trim($lastname));
+    }
+
+    /**
+     * @param null $lastname
+     */
+    public function updateLastname(?string $lastname,$email): void
     {
         $lastname = strtoupper(trim($lastname));
         $q = "UPDATE mnga_user SET lastname=? WHERE email=?";
@@ -111,7 +128,7 @@ class User extends Sql
     /**
      * @param null $lastname
      */
-    public function setLastnameId(?string $lastname,$id): void
+    public function updateLastnameId(?string $lastname,$id): void
     {
         $lastname = strtoupper(trim($lastname));
         $q = "UPDATE mnga_user SET lastname=? WHERE ID=?";
@@ -136,7 +153,7 @@ class User extends Sql
         $this->email = strtolower(trim($email));
     }
 
-    public function setEmailId(string $email, $id): void
+    public function updateEmailId(string $email, $id): void
     {
         $email = strtoupper(trim($email));
         $q = "UPDATE mnga_user SET email=? WHERE ID=?";
