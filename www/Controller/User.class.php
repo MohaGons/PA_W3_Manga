@@ -8,14 +8,16 @@ use App\Core\View;
 use App\Model\User as UserModel;
 use App\Model\Category;
 use App\Core\Mailer;
+use App\Core\Session as Session;
 
 
 class User {
 
     public function login()
     {
+        $session = New Session();
         $user = new UserModel();
-            $errors = [];
+        $errors = [];
 
         if(!empty($_POST)) {
 
@@ -24,8 +26,8 @@ class User {
                     $errors = $result;
 //                    die(var_dump($errors));
                 } else {
-                    session_start();
-                    $_SESSION['email'] = $_POST['email'];
+                    $session->ensureStarted();
+                    $session->setd('email',$_POST['email']);
                     header('location:'.DASHBOARD_VIEW_ROUTE);
                 }
 
@@ -43,7 +45,9 @@ class User {
 
     public function logout()
     {
-        echo "Se déconnecter";
+        $session = New Session();
+        $session->sessionDestroy();
+        header('location:'.LOGIN_VIEW_ROUTE);
     }
 
     public function register()
@@ -85,7 +89,8 @@ class User {
     }
     public function parametre(){
         $user = new UserModel();
-        $email = $_SESSION['email'];
+        $session = New Session();
+        $email= $session->get('email','');
         $lastname = $user->getLastname($email);
         $firstname = $user->getFirstname($email);
         $gender = $user->getGender($email);

@@ -11,11 +11,7 @@ class Admin{
 
     public function home()
     {
-        $firstname = "Yves";
-
         $view = new View("dashboard", "back");
-        $view->assign("firstname", $firstname);
-        $view->assign("lastname", "SKRZYPCZYK");
     }
 
     public function utilisateurs(){
