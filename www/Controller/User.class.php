@@ -8,24 +8,24 @@ use App\Core\View;
 use App\Model\User as UserModel;
 use App\Model\Category;
 use App\Core\Mailer;
+use App\Core\Session as Session;
 
 
 class User {
 
     public function login()
     {
+        $session = New Session();
         $user = new UserModel();
-            $errors = [];
-
+        $errors = [];
         if(!empty($_POST)) {
 
-                $result = Verificator::checkFormLogin($user->getLoginForm(), $_POST);
-                if (!empty($result)) {
-                    $errors = $result;
-//                    die(var_dump($errors));
+                $result = $user->checkLogin($_POST);
+                if ($result==false) {
+                    $errors[] = 'Vos identifiants de connexion ne correspondent à aucun compte ';
                 } else {
-                    session_start();
-                    $_SESSION['email'] = $_POST['email'];
+                    $session->ensureStarted();
+                    $session->set('email',$_POST['email']);
                     header('location:'.DASHBOARD_VIEW_ROUTE);
                 }
 
@@ -43,11 +43,15 @@ class User {
 
     public function logout()
     {
-        echo "Se déconnecter";
+        $session = New Session();
+        $session->delete('email');
+        $session->sessionDestroy();
+        header('location:'.LOGIN_VIEW_ROUTE);
     }
 
     public function register()
     {
+        $session = New Session();
         $user = new UserModel();
         $errors = [];
 
@@ -65,14 +69,15 @@ class User {
 
                 $user->save();
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
-
+                $session->ensureStarted();
+                $session->set('email',$_POST['email']);
                 $destinataire = $_POST["email"];
                 $name = $_POST["firstname"];
                 $lastname = $_POST["lastname"];
                 $subject = 'test';
                 $body = 'test';
-
                 Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+                header('location:'.DASHBOARD_VIEW_ROUTE);
             }
             else {
                 $errors = $result;
@@ -85,7 +90,8 @@ class User {
     }
     public function parametre(){
         $user = new UserModel();
-        $email = $_SESSION['email'];
+        $session = New Session();
+        $email= $session->get('email','');
         $lastname = $user->getLastname($email);
         $firstname = $user->getFirstname($email);
         $gender = $user->getGender($email);
