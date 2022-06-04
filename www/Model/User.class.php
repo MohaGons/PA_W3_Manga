@@ -26,7 +26,6 @@ class User extends Sql
 
     public function checkLogin($data)
     {
-
         $email = htmlspecialchars($data['email']);
         $password = htmlspecialchars($data['password']);
         $q = "SELECT ID, email, password FROM mnga_user WHERE email = :email";

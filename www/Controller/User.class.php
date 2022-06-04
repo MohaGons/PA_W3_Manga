@@ -18,16 +18,14 @@ class User {
         $session = New Session();
         $user = new UserModel();
         $errors = [];
-
         if(!empty($_POST)) {
 
-                $result = Verificator::checkFormLogin($user->getLoginForm(), $_POST);
-                if (!empty($result)) {
-                    $errors = $result;
-//                    die(var_dump($errors));
+                $result = $user->checkLogin($_POST);
+                if ($result==false) {
+                    $errors[] = 'Vos identifiants de connexion ne correspondent à aucun compte ';
                 } else {
                     $session->ensureStarted();
-                    $session->setd('email',$_POST['email']);
+                    $session->set('email',$_POST['email']);
                     header('location:'.DASHBOARD_VIEW_ROUTE);
                 }
 
@@ -46,12 +44,14 @@ class User {
     public function logout()
     {
         $session = New Session();
+        $session->delete('email');
         $session->sessionDestroy();
         header('location:'.LOGIN_VIEW_ROUTE);
     }
 
     public function register()
     {
+        $session = New Session();
         $user = new UserModel();
         $errors = [];
 
@@ -69,14 +69,15 @@ class User {
 
                 $user->save();
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
-
+                $session->ensureStarted();
+                $session->set('email',$_POST['email']);
                 $destinataire = $_POST["email"];
                 $name = $_POST["firstname"];
                 $lastname = $_POST["lastname"];
                 $subject = 'test';
                 $body = 'test';
-
                 Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+                header('location:'.DASHBOARD_VIEW_ROUTE);
             }
             else {
                 $errors = $result;
