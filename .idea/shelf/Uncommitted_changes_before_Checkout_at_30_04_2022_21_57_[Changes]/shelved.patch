@@ -1,0 +1,44 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"1d7b2d99-d076-4f9c-8fc8-ec635a2da11d\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/www/View/view/mot_passe_initier.view.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/Controller/User.class.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/Controller/User.class.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/Core/PasswordReset.class.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/Core/PasswordReset.class.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/Core/Security.class.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/Core/Security.class.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/Model/User.class.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/Model/User.class.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/index.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/index.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/routes.yml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/routes.yml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedIndex\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"25eSBojIVZOE4c6MUsn3XWg5y1K\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/www/View/view\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Amine\\Desktop\\PA_W3_Manga\\www\\View\\view\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"1d7b2d99-d076-4f9c-8fc8-ec635a2da11d\" name=\"Changes\" comment=\"\" />\r\n      <created>1645885925559</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1645885925559</updated>\r\n      <workItem from=\"1645885927000\" duration=\"253000\" />\r\n      <workItem from=\"1645886261202\" duration=\"1395000\" />\r\n      <workItem from=\"1645888039146\" duration=\"8407000\" />\r\n      <workItem from=\"1650192376143\" duration=\"14551000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -2,14 +2,8 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/www/View/view/mot_passe_initier.view.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/Controller/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/User.class.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/Core/PasswordReset.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/PasswordReset.class.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/Core/Security.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Security.class.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_38_[Changes]1/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_49_[Changes]1/shelved.patch" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -42,7 +36,7 @@
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$/www/View/view" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../MAMP/htdocs/Perso" />
+     <property name="nodejs_package_manager_path" value="npm" />
+     <property name="vue.rearranger.settings.migration" value="true" />
+   </component>
+@@ -63,6 +57,7 @@
+       <workItem from="1645886261202" duration="1395000" />
+       <workItem from="1645888039146" duration="8407000" />
+       <workItem from="1650192376143" duration="14551000" />
++      <workItem from="1650695823006" duration="44000" />
+     </task>
+     <servers />
+   </component>

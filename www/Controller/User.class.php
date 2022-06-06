@@ -8,49 +8,141 @@ use App\Core\View;
 use App\Model\User as UserModel;
 use App\Model\Category;
 use App\Model\Forum;
+use App\Core\Mailer;
+use App\Core\Session as Session;
 
 class User {
 
-
     public function login()
     {
-        $view = new View("login");
-        $view->assign("title", "Ceci est le titre de la page login");
+        $session = New Session();
+        $user = new UserModel();
+        $errors = [];
+        if(!empty($_POST)) {
+
+                $result = $user->checkLogin($_POST);
+                if ($result==false) {
+                    $errors[] = 'Vos identifiants de connexion ne correspondent à aucun compte ';
+                } else {
+                    $session->ensureStarted();
+                    $session->set('email',$_POST['email']);
+                    header('location:'.DASHBOARD_VIEW_ROUTE);
+                }
+
+            }
+            $view = new View("login");
+            $view->assign("user", $user);
+            $view->assign("errors", $errors);
+
+        //}
+        //else{
+        //    header('location:../View/dashboard.view.php');
+        //}
+
     }
 
     public function logout()
     {
-        echo "Se déconnecter";
+        $session = New Session();
+        $session->delete('email');
+        $session->sessionDestroy();
+        header('location:'.LOGIN_VIEW_ROUTE);
     }
-
 
     public function register()
     {
+        $session = New Session();
         $user = new UserModel();
+        $errors = [];
 
         if(!empty($_POST)) {
 
-            $result = Verificator::checkForm($user->getRegisterForm(), $_POST);
-            print_r($result);
+            $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
 
             if (empty($result)) {
                 $user->setFirstname(htmlspecialchars($_POST["firstname"]));
                 $user->setLastname(htmlspecialchars($_POST["lastname"]));
                 $user->setEmail(htmlspecialchars($_POST["email"]));
-                $user->setPassword(password_hash(htmlspecialchars($_POST["password"]), PASSWORD_BCRYPT));
+                $user->setPassword(htmlspecialchars($_POST["password"]));
                 $user->setGender(htmlspecialchars($_POST["gender"]));
-                $user->setAvatar(password_hash(htmlspecialchars($_POST["avatar"]), PASSWORD_BCRYPT));
+                $user->setAvatar(htmlspecialchars($_POST["avatar"]));
 
                 $user->save();
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
+                $session->ensureStarted();
+                $session->set('email',$_POST['email']);
+                $destinataire = $_POST["email"];
+                $name = $_POST["firstname"];
+                $lastname = $_POST["lastname"];
+                $subject = 'test';
+                $body = 'test';
+                Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+                header('location:'.DASHBOARD_VIEW_ROUTE);
+            }
+            else {
+                $errors = $result;
             }
         }
-        
-
 
         $view = new View("Register");
         $view->assign("user", $user);
+        $view->assign("errors", $errors);
     }
+    public function parametre(){
+        $user = new UserModel();
+        $session = New Session();
+        $email= $session->get('email','');
+        $lastname = $user->getLastname($email);
+        $firstname = $user->getFirstname($email);
+        $gender = $user->getGender($email);
+        $avatar = $user->getAvatar($email);
+        if(!empty($_POST)) {
+            $result = Verificator::checkFormParam($user->getParamForm($data), $_POST);
+            if (empty($result)){
+                if (!empty($_POST["lastname"]))
+                {
+                $lastname =$_POST["lastname"];
+                $user->updateLastname($lastname,$email);
+                }
+                if (!empty($_POST["firstname"])){
+                $firstname = $_POST["firstname"];
+                $user->updateFirstname($firstname,$email);
+                }
+           }
+            else{
+                $errors = $result;
+            }
+        }
+        $view = new View("parametre", "back");
+        $data= array(
+            "email"=>$email,
+            "lastname"=>$lastname,
+            "firstname"=>$firstname,
+            "gender"=>$gender,
+            "avatar"=>$avatar
+        );
+        $view->assign("data",$data);
+        $view->assign("user",$user);
+        $view->assign("errors",$errors);
+    }
+
+    public function deletecompte(){
+        $user = new UserModel;
+        $email = $_GET['email'];
+        if ($email == $_SESSION['email']){
+            $user->deletecompte($email);
+            if($user==1){
+                echo "<script>alert('Votre compte a bien été supprimer')</script>";
+            }
+            else{
+                echo "<script>alert('Reessayer plus tard')</script>";
+            }
+        }
+        else{
+            header('location:'.LOGIN_VIEW_ROUTE);
+        }
+    }
+
 
     public function category()
     {
@@ -154,16 +246,4 @@ class User {
         $forum_data = $forum->getForum($forum->setId($_GET["id"]));        
         $view->assign("forum_data", $forum_data);
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -27,6 +27,23 @@
   controller: main
   action: home
 
+
+/parametre:
+  controller: user
+  action : parametre
+
+/deletecompte:
+   controller: user
+   action : deletecompte
+
+/utilisateurs:
+   controller: admin
+   action : utilisateurs
+
+/utilisateurs/update:
+  controller: admin
+  action: utilisateurs_update
+
 /categorie:
   controller: user
   action: category

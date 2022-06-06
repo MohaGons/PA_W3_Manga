@@ -1,5 +1,5 @@
 //HEADER ADMIN
-header{
+header {
 	position: fixed;
 	width: 100%;
 	height: $header-height;
@@ -12,28 +12,28 @@ header{
 	font-weight: bold;
 }
 
-.img-logo{
+.img-logo {
 	display: flex;
-	border-radius: 50px; 
-	width: 50px ; 
+	border-radius: 50px;
+	width: 50px;
 	height: 50px;
 	margin-left: 44px;
 	margin-right: 10px;
 }
 
-.logoAndName{
+.logoAndName {
 	display: flex;
 	color: #FFFFFF;
 	font-size: 18px;
 	height: 100%;
 	align-items: center;
 
-	&--front{
+	&--front {
 		color: black;
 	}
 }
 
-.photoAndMenu{
+.photoAndMenu {
 	display: flex;
 	color: #FFFFFF;
 	font-size: 18px;
@@ -41,11 +41,11 @@ header{
 	align-items: center;
 }
 
-header>.img-logo{
+header>.img-logo {
 	margin-right: 44px;
 }
 
-header .sidebar{
+header .sidebar {
 	position: fixed;
 	top: $header-height;
 	left: 100%;
@@ -56,31 +56,33 @@ header .sidebar{
 }
 
 
-header .sidebar ul{
+header .sidebar ul {
 	list-style: none;
 	padding-inline-start: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	li:last-child{
+
+	li:last-child {
 		a {
 			border-bottom: none;
 		}
 	}
 }
 
-header .sidebar li{
+header .sidebar li {
 	width: 100%;
 	text-align: center;
 	padding: 0 50px;
-	&:hover{
+
+	&:hover {
 		background-color: lighten($button-secondary-color, 10%);
 	}
 
 }
 
-header .sidebar a{
+header .sidebar a {
 	display: block;
 	color: #FFFFFF;
 	text-decoration: none;
@@ -89,7 +91,7 @@ header .sidebar a{
 	border-bottom: 1px solid #47515A;
 }
 
-#headerFront .container{
+#headerFront .container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -98,18 +100,18 @@ header .sidebar a{
 	position: relative;
 }
 
-#mainFront > .container{
+#mainFront>.container {
 	margin: $sidebar-padding-top auto;
 }
 
-#headerFront .container > nav ul {
+#headerFront .container>nav ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	display: flex;
 }
 
-#headerFront .container > nav li a {
+#headerFront .container>nav li a {
 	padding: 0.5em;
 	display: block;
 	text-decoration: none;
@@ -124,7 +126,7 @@ header .sidebar a{
 }
 
 
-header .sidebarFront{
+header .sidebarFront {
 	position: fixed;
 	top: $header-height;
 	left: 100%;
@@ -139,35 +141,38 @@ header .sidebarFront{
 	}
 }
 
-div.open, nav.open{
+div.open,
+nav.open {
 	left: 0;
 }
 
-header .sidebarFront ul{
+header .sidebarFront ul {
 	list-style: none;
 	padding-inline-start: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	li:last-child{
+
+	li:last-child {
 		a {
 			border-bottom: none;
 		}
 	}
 }
 
-header .sidebarFront li{
+header .sidebarFront li {
 	width: 100%;
 	text-align: center;
 	padding: 0 50px;
-	&:hover{
+
+	&:hover {
 		background-color: lighten($button-secondary-color, 10%);
 	}
 
 }
 
-header .sidebarFront a{
+header .sidebarFront a {
 	display: block;
 	color: black;
 	text-decoration: none;
@@ -176,7 +181,7 @@ header .sidebarFront a{
 	border-bottom: 1px solid #47515A;
 }
 
-#menu-button{
+#menu-button {
 	background-color: transparent;
 	padding: 0;
 	border: none;
@@ -185,7 +190,7 @@ header .sidebarFront a{
 	z-index: 10;
 }
 
-#menu-button::before{
+#menu-button::before {
 	content: '';
 	display: block;
 	width: 24px;
@@ -200,7 +205,7 @@ header .sidebarFront a{
 
 
 @media all and (min-width: $lg-width) {
-	header{
+	header {
 		position: fixed;
 		width: 100%;
 		height: $header-height;
@@ -213,43 +218,45 @@ header .sidebarFront a{
 		font-weight: bold;
 	}
 
-	#menu-button{
+	#menu-button {
 		display: none;
 	}
 
-	header .sidebar{
+	header .sidebar {
 		display: none;
 	}
 
-	main > .container {
+	main>.container {
 		margin-left: $sidebar-width;
 	}
 
-	header .sidebar ul{
+	header .sidebar ul {
 		list-style: none;
 		padding-inline-start: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		li:last-child{
+
+		li:last-child {
 			a {
 				border-bottom: none;
 			}
 		}
 	}
 
-	header .sidebar li{
+	header .sidebar li {
 		width: 100%;
 		text-align: center;
 		padding: 0 50px;
-		&:hover{
+
+		&:hover {
 			background-color: lighten($button-secondary-color, 10%);
 		}
 
 	}
 
-	header .sidebar a{
+	header .sidebar a {
 		display: block;
 		color: #FFFFFF;
 		text-decoration: none;
@@ -258,7 +265,7 @@ header .sidebarFront a{
 		border-bottom: 1px solid #47515A;
 	}
 
-	#headerFront .container{
+	#headerFront .container {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -267,18 +274,18 @@ header .sidebarFront a{
 		position: relative;
 	}
 
-	#mainFront > .container{
+	#mainFront>.container {
 		margin: $sidebar-padding-top auto;
 	}
 
-	#headerFront .container > nav ul {
+	#headerFront .container>nav ul {
 		list-style: none;
 		margin: 0;
 		padding: 0;
 		display: flex;
 	}
 
-	#headerFront .container > nav li a {
+	#headerFront .container>nav li a {
 		padding: 0.5em;
 		display: block;
 		text-decoration: none;
@@ -293,7 +300,7 @@ header .sidebarFront a{
 	}
 
 
-	header .sidebarFront{
+	header .sidebarFront {
 		position: fixed;
 		top: $header-height;
 		left: 100%;
@@ -308,35 +315,38 @@ header .sidebarFront a{
 		}
 	}
 
-	div.open, nav.open{
+	div.open,
+	nav.open {
 		left: 0;
 	}
 
-	header .sidebarFront ul{
+	header .sidebarFront ul {
 		list-style: none;
 		padding-inline-start: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		li:last-child{
+
+		li:last-child {
 			a {
 				border-bottom: none;
 			}
 		}
 	}
 
-	header .sidebarFront li{
+	header .sidebarFront li {
 		width: 100%;
 		text-align: center;
 		padding: 0 50px;
-		&:hover{
+
+		&:hover {
 			background-color: lighten($button-secondary-color, 10%);
 		}
 
 	}
 
-	header .sidebarFront a{
+	header .sidebarFront a {
 		display: block;
 		color: black;
 		text-decoration: none;
@@ -348,7 +358,7 @@ header .sidebarFront a{
 }
 
 @media all and (min-width: $xl-width) {
-	header{
+	header {
 		position: fixed;
 		width: 100%;
 		height: $header-height;
@@ -361,7 +371,7 @@ header .sidebarFront a{
 		font-weight: bold;
 	}
 
-	#headerFront .container{
+	#headerFront .container {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -370,7 +380,7 @@ header .sidebarFront a{
 		position: relative;
 	}
 
-	#mainFront > .container{
+	#mainFront>.container {
 		margin: $sidebar-padding-top auto;
 	}
 
@@ -395,15 +405,15 @@ header .sidebarFront a{
 		align-items: inherit;
 	}
 
-	#menu-button{
+	#menu-button {
 		display: none;
 	}
 
-	header .sidebar{
+	header .sidebar {
 		display: none;
 	}
 
-	main > .container {
+	main>.container {
 		margin-left: $sidebar-width;
 	}
 
