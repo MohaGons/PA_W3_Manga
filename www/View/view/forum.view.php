@@ -1,10 +1,10 @@
-<h1>Catégories</h1>
+<h1>Forum</h1>
 
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 col--flex">
         <table class="table-latitude">
             <thead>
-                <th>Nom</th>
+                <th>Titre</th>
                 <th>Description</th>
                 <th>Contrôles
                 <button class="control--add" id="add-button">Ajouter</button>
@@ -12,9 +12,9 @@
             </thead>
             <tbody>
                 <?php 
-                    foreach ($categorie_data as $key => $value){ ?>
+                    foreach ($forums_data as $key => $value){ ?>
                         <tr>
-                            <td><?= $value["name"] ?></td>
+                            <td><?= $value["title"] ?></td>
                             <td><?= $value["description"] ?></td>
                             <td>
                             <a href="editForum?id=<?= $value['id']?>">Update</a>
@@ -34,11 +34,11 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close">&times;</span>
-            <h2>Ajouter une catégorie</h2>
+            <h2>Ajouter un forum</h2>
         </div>
         <div class="modal-body">
-            <?php $this->includePartial("form", $category->getCategoryForm());?>
+            <?php $this->includePartial("form", $forum->getForumForm());?>
         </div>
     </div>
 </div> 
-<script src="../../Style/src/js/deleteCategory.js"></script>
+<script src="../../Style/src/js/deleteForum.js"></script>
