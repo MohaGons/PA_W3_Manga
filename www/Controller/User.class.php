@@ -7,6 +7,7 @@ use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;
 use App\Model\Category;
+use App\Model\Forum;
 
 class User {
 
@@ -99,6 +100,60 @@ class User {
 		}
     }
 
+    public function forum()
+    {
+        $forum = new Forum();
+
+        if(!empty($_POST)) {
+
+            $result = Verificator::checkForm($forum->getForumForm(), $_POST);
+            print_r($result);
+
+            if (empty($result)) { 
+                $forum->setTitleForum(htmlspecialchars($_POST["title"]));
+                $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
+                $forum->setPictureForum(htmlspecialchars($_POST["picture"]));
+                $forum->setUserId(1);
+                $forum->save();
+                echo "<script>alert('Votre forum a bien été mis " .$_FILES['picture']['tmp_name']." à jour')</script>";
+            }
+        }
+        
+        $view = new View("forum", "back");
+        $view->assign("forum", $forum);
+
+        $forums_data = $forum->getForums();        
+        $view->assign("forums_data", $forums_data);
+    }
+
+    public function deleteForum()
+    {
+        $forum = new Forum();
+        if(!empty($_POST['forum_id'])){
+			$forum_Id = $_POST['forum_id'];
+            $forum->deleteForum($forum_Id);
+        }
+    }
+
+    public function editForum()
+    {
+        $forum = new Forum();
+        $view = new View("edit-forum", "back");
+        $view->assign("forum", $forum);
+        
+        if(!empty($_POST)){
+			$forum->setId($_GET["id"]);
+			$forum->setTitleForum(htmlspecialchars($_POST["title"]));
+            $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
+            $forum->setPictureForum(htmlspecialchars($_POST["picture"]));
+            $forum->setUserId(1);
+            $forum->save();
+            echo "<script>alert('Votre forum a bien été mis à jour')</script>";
+		}
+
+        $forum_data = $forum->getForum($forum->setId($_GET["id"]));        
+        $view->assign("forum_data", $forum_data);
+    }
 
 }
 

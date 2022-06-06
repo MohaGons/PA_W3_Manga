@@ -38,3 +38,15 @@
 /editCategorie:
   controller: user
   action: editCategory
+
+/forum:
+  controller: user
+  action: forum
+
+/deleteForum:
+  controller: user
+  action: deleteForum
+
+/editForum:
+  controller: user
+  action: editForum

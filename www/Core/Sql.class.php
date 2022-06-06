@@ -56,4 +56,25 @@ abstract class Sql
         $query->bindValue(':id', $category_Id);
         $query->execute();
 	}
+
+    public function getForums(){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_forum");
+		$query->execute();
+		$forums_data = $query->fetchall();
+		return $forums_data;
+	}
+
+    public function getForum($forum_Id){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_forum WHERE id= :id");
+        $query->bindValue(':id', $forum_Id);
+		$query->execute();
+		$forums_data = $query->fetchall();
+		return $forums_data;
+	}
+
+    public function deleteForum($forum_Id){
+        $query = $this->pdo->prepare("DELETE FROM mnga_forum WHERE id= :id");
+        $query->bindValue(':id', $forum_Id);
+        $query->execute();
+	}
 }
