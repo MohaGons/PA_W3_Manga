@@ -67,3 +67,7 @@
 /editForum:
   controller: user
   action: editForum
+
+/apparence:
+  controller: user
+  action: apparence

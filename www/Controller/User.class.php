@@ -246,4 +246,9 @@ class User {
         $forum_data = $forum->getForum($forum->setId($_GET["id"]));        
         $view->assign("forum_data", $forum_data);
     }
+
+    public function apparence()
+    {
+        $view = new View("apparence", "back");
+    }
 }
