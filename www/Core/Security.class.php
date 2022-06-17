@@ -2,7 +2,10 @@
 
 namespace App\Core;
 
-class Security
+use PDO;
+use function App\myAutoloader;
+
+class Security extends Sql
 {
 
     public static function checkRoute($route):bool
@@ -16,6 +19,7 @@ class Security
          */
         return true;
     }
+
 
 
 }

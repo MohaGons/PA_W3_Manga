@@ -2,10 +2,13 @@
 
 namespace App\Core;
 
+use App\Model\User as UserModel;
+
+
 class Verificator
 {
 
-    public static function checkForm($config, $data): array
+    public static function checkFormRegister($config, $data): array
     {
         $errors = [];
 
@@ -15,12 +18,16 @@ class Verificator
 
         foreach ($config["inputs"] as $name=>$input)
         {
-            if(!isset($data[$name])){
-                $errors[]="Il manque le champ :".$name;
+            if(!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
+                $errors[]= $name ." ne peut pas être vide";
             }
 
-            if(!empty($input["required"]) && empty($data[$name]) ){
-                $errors[]=$name ." ne peut pas être vide";
+            if(!empty($input["min"]) && strlen($data[$name]) < $input["min"]){
+                $errors[]= $input["error"];
+            }
+
+            if(!empty($input["max"]) && strlen($data[$name]) > $input["max"]){
+                $errors[]= $input["error"];
             }
 
             if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
@@ -35,9 +42,47 @@ class Verificator
                 $errors[]=$input["error"];
             }
 
+
+
         }
 
 
+        return $errors;
+    }
+
+    public static function checkFormParam($config, $data): array
+    {
+        $errors = [];
+        foreach ($config["inputs"] as $name=>$input) {
+            if (!empty($data[$name])){
+                if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                    $errors[] = $input["error"];
+                }
+                if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
+                    $errors[] = $input["error"];
+                }
+                if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
+                    $errors[]=$input["error"];
+                }
+            }
+        }
+        return $errors;
+    }
+
+
+    public static function checkupdateUser($config, $data): array
+    {
+        $errors = [];
+        foreach ($config["inputs"] as $name=>$input) {
+            if (!empty($data[$name])){
+                if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                    $errors[] = $input["error"];
+                }
+                if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
+                    $errors[] = $input["error"];
+                }
+            }
+        }
         return $errors;
     }
 
