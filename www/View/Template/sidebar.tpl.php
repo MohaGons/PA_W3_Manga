@@ -8,7 +8,7 @@
         <li><a href="/commentaires"><i class="fa-solid fa-comment-dots"></i> Commentaires</a></li>
         <li><a href="/utilisateurs"><i class="fa-solid fa-user"></i> Utilisateurs</a></li>
         <li><a href="/articles"><i class="fa-solid fa-newspaper"></i> Articles</a></li>
-        <li><a href="/categories"><i class="fa-solid fa-calendar"></i> Catégories</a></li>
+        <li><a href="/categorie"><i class="fa-solid fa-calendar"></i> Catégories</a></li>
         <li><a href="/parametre"><i class="fa-solid fa-gear"></i> Parametres</a></li>
         <li><a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Deconnexion</a></li>
     </ul>
