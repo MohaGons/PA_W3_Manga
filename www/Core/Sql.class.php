@@ -77,4 +77,18 @@ abstract class Sql
         $query->bindValue(':id', $forum_Id);
         $query->execute();
 	}
+    public function getMangas(){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_manga");
+		$query->execute();
+		$manga_data = $query->fetchall();
+		return $manga_data;
+	}
+
+    public function deleteManga($manga_Id){
+
+		$query = $this->pdo->prepare("DELETE FROM mnga_manga WHERE id= :id");
+		$query->bindValue(':id', $manga_Id);
+		$query->execute();
+		
+    }
 }

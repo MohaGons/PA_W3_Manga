@@ -71,3 +71,14 @@
 /apparence:
   controller: user
   action: apparence
+/manga:
+  controller: user
+  action: manga
+
+/editManga:
+  controller: user
+  action: editManga
+
+/deleteManga:
+  controller: user
+  action: deleteManga
