@@ -9,12 +9,9 @@ use App\Model\User as UserModel;
 use App\Model\Category;
 use App\Model\Forum;
 use App\Core\Mailer;
-<<<<<<< HEAD
 use App\Core\Session as Session;
-=======
 use App\Model\Manga;
 
->>>>>>> 6e3997d (finish crud manga)
 
 class User {
 
