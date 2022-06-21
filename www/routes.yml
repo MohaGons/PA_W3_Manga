@@ -1,31 +1,38 @@
 /:
   controller: main
   action: home
+  security: All
 
 /nous-contacter:
   controller: main
   action: contact
+  security: [Abonne]
+
 
 /login:
   controller: user
   action: login
+  security : All
 
 /logout:
   controller: user
   action: logout
+  security: [Abonne,Admin,Editeur]
 
 /register:
   controller: user
   action: register
+  security: All
 
 /dashboard:
   controller: admin
   action: home
-  security: true
+  security: [Admin,Abonne,Editeur]
 
 /accueil:
   controller: main
   action: home
+  security: [Abonne]
 
 /recuperer_mdp:
   controller : user
@@ -38,30 +45,38 @@
 /parametre:
   controller: user
   action : parametre
+  security: [Abonne]
+
 
 /deletecompte:
    controller: user
    action : deletecompte
+   security: [Abonne]
 
 /utilisateurs:
    controller: admin
    action : utilisateurs
+   security: [Admin,Abonne]
 
 /utilisateurs/update:
   controller: admin
   action: utilisateurs_update
+  security: [Abonne]
 
 /categorie:
   controller: user
   action: category
+  security: [Abonne]
 
 /deleteCategorie:
   controller: user
   action: deleteCategory
+  security: [Abonne]
 
 /editCategorie:
   controller: user
   action: editCategory
+  security: [Abonne]
 
 /forum:
   controller: user

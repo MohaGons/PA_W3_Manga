@@ -30,6 +30,9 @@ class User {
                 } else {
                     $session->ensureStarted();
                     $session->set('email',$_POST['email']);
+                    $roleId = $user->getRoleByEmail($_POST['email']);
+                    $role = $user->getRole($roleId['role']);
+                    $session->set('role',$role['role']);
                     header('location:'.DASHBOARD_VIEW_ROUTE);
                 }
 
@@ -37,11 +40,6 @@ class User {
             $view = new View("login");
             $view->assign("user", $user);
             $view->assign("errors", $errors);
-
-        //}
-        //else{
-        //    header('location:../View/dashboard.view.php');
-        //}
 
     }
 
