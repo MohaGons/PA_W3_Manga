@@ -6,7 +6,7 @@
 /nous-contacter:
   controller: main
   action: contact
-  security: [Abonne]
+  security: All
 
 
 /login:
@@ -32,74 +32,82 @@
 /accueil:
   controller: main
   action: home
-  security: [Abonne]
+  security: All
 
 /recuperer_mdp:
   controller : user
   action     : recuperer_mdp
+  security   : All
 
 /initialiser_mdp:
   controller : user
   action     : initialiser_mdp
+  security   : All
 
 /parametre:
   controller: user
   action : parametre
-  security: [Abonne]
+  security: [Admin,Editeur,Abonne]
 
 
 /deletecompte:
    controller: user
    action : deletecompte
-   security: [Abonne]
+   security: [Admin,Editeur,Abonne]
 
 /utilisateurs:
    controller: admin
    action : utilisateurs
-   security: [Admin,Abonne]
+   security: [Admin,Editeur,Abonne]
 
 /utilisateurs/update:
   controller: admin
   action: utilisateurs_update
-  security: [Abonne]
+  security: [Admin,Editeur,Abonne]
 
 /categorie:
   controller: user
   action: category
-  security: [Abonne]
+  security: All
 
 /deleteCategorie:
   controller: user
   action: deleteCategory
-  security: [Abonne]
+  security: [Admin,Editeur,Abonne]
 
 /editCategorie:
   controller: user
   action: editCategory
-  security: [Abonne]
+  security: [Admin,Editeur,Abonne]
 
 /forum:
   controller: user
   action: forum
+  security: [Admin,Editeur,Abonne]
 
 /deleteForum:
   controller: user
   action: deleteForum
+  security: [Admin,Editeur,Abonne]
 
 /editForum:
   controller: user
   action: editForum
+  security: [Admin,Editeur,Abonne]
 
 /apparence:
   controller: user
   action: apparence
+  security: [Admin,Editeur,Abonne]
 /manga:
   controller: user
   action: manga
+  security: [Admin,Editeur,Abonne]
 
 /editManga:
   controller: user
   action: editManga
+  security: [Admin,Editeur,Abonne]
 
 /deleteManga:
   controller: user
