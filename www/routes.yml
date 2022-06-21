@@ -34,6 +34,13 @@
   action: home
   security: [Abonne]
 
+/recuperer_mdp:
+  controller : user
+  action     : recuperer_mdp
+
+/initialiser_mdp:
+  controller : user
+  action     : initialiser_mdp
 
 /parametre:
   controller: user
@@ -71,3 +78,29 @@
   action: editCategory
   security: [Abonne]
 
+/forum:
+  controller: user
+  action: forum
+
+/deleteForum:
+  controller: user
+  action: deleteForum
+
+/editForum:
+  controller: user
+  action: editForum
+
+/apparence:
+  controller: user
+  action: apparence
+/manga:
+  controller: user
+  action: manga
+
+/editManga:
+  controller: user
+  action: editManga
+
+/deleteManga:
+  controller: user
+  action: deleteManga

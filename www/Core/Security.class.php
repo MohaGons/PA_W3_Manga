@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Core;
-
+use App\Model\User as UserModel;
 use PDO;
 use function App\myAutoloader;
 use App\Core\Session as Session;

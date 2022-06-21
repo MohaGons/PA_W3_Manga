@@ -1,0 +1,38 @@
+Index: www/Controller/User.class.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Controller;\r\n\r\nuse App\\Core\\User as UserClean;\r\nuse App\\Core\\Verificator;\r\nuse App\\Core\\View;\r\nuse App\\Model\\User as UserModel;\r\n\r\nclass User {\r\n\r\n\r\n    public function login()\r\n    {\r\n        $user = new UserModel();\r\n            $errors = [];\r\n\r\n        if(!empty($_POST)) {\r\n\r\n                $result = Verificator::checkFormLogin($user->getLoginForm(), $_POST);\r\n                if (!empty($result)) {\r\n                    $errors = $result;\r\n//                    die(var_dump($errors));\r\n                } else {\r\n                    session_start();\r\n                    $_SESSION['email'] = $_POST['email'];\r\n                    header('location:'.DASHBOARD_VIEW_ROUTE);\r\n                }\r\n\r\n            }\r\n            $view = new View(\"login\");\r\n            $view->assign(\"user\", $user);\r\n            $view->assign(\"errors\", $errors);\r\n\r\n        //}\r\n        //else{\r\n        //    header('location:../View/dashboard.view.php');\r\n        //}\r\n\r\n    }\r\n\r\n\r\n    public function logout()\r\n    {\r\n        echo \"Se déconnecter\";\r\n    }\r\n\r\n\r\n    public function register()\r\n    {\r\n        $user = new UserModel();\r\n        $errors = [];\r\n\r\n        if(!empty($_POST)) {\r\n\r\n            $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);\r\n\r\n            if (empty($result)) {\r\n                $user->setFirstname(htmlspecialchars($_POST[\"firstname\"]));\r\n                $user->setLastname(htmlspecialchars($_POST[\"lastname\"]));\r\n                $user->setEmail(htmlspecialchars($_POST[\"email\"]));\r\n                $user->setPassword(htmlspecialchars($_POST[\"password\"]));\r\n                $user->setGender(htmlspecialchars($_POST[\"gender\"]));\r\n                $user->setAvatar(htmlspecialchars($_POST[\"avatar\"]));\r\n\r\n                $user->save();\r\n                echo \"<script>alert('Votre profil a bien été mis à jour')</script>\";\r\n            }\r\n            else {\r\n                $errors = $result;\r\n            }\r\n        }\r\n        \r\n\r\n\r\n        $view = new View(\"Register\");\r\n        $view->assign(\"user\", $user);\r\n        $view->assign(\"errors\", $errors);\r\n    }\r\n\r\n\r\n\r\n\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/www/Controller/User.class.php b/www/Controller/User.class.php
+--- a/www/Controller/User.class.php	
++++ b/www/Controller/User.class.php	
+@@ -78,6 +78,27 @@
+         $view->assign("errors", $errors);
+     }
+ 
++    public function  mot_de_passe()
++    {
++        $user = new UserModel();
++        $errors = [];
++
++        if(!empty($_POST)) {
++
++            $result = Verificator::checkFormPasswordReset($user->getPasswordResetForm(), $_POST);
++            if (!empty($result)) {
++                $errors = $result;
++            } else {
++                $errors = $result;
++            }
++
++        }
++
++        $view = new View("mot_passe_oublier");
++        $view->assign("user", $user);
++        $view->assign("errors", $errors);
++    }
++
+ 
+ 
+ 

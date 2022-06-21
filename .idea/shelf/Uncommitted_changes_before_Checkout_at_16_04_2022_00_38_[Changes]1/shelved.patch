@@ -1,0 +1,213 @@
+Index: www/Core/Verificator.class.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Core;\r\n\r\nuse App\\Model\\User as UserModel;\r\n\r\n\r\nclass Verificator\r\n{\r\n\r\n    public static function checkFormRegister($config, $data): array\r\n    {\r\n        $errors = [];\r\n\r\n        if( count($config[\"inputs\"]) != count($_POST)){\r\n            die(\"Tentative de hack\");\r\n        }\r\n\r\n        foreach ($config[\"inputs\"] as $name=>$input)\r\n        {\r\n            if(!empty($input[\"required\"]) && $input[\"required\"] == true && empty($data[$name])){\r\n                $errors[]= $name .\" ne peut pas être vide\";\r\n            }\r\n\r\n            if(!empty($input[\"min\"]) && strlen($data[$name]) < $input[\"min\"]){\r\n                $errors[]= $input[\"error\"];\r\n            }\r\n\r\n            if(!empty($input[\"max\"]) && strlen($data[$name]) > $input[\"max\"]){\r\n                $errors[]= $input[\"error\"];\r\n            }\r\n\r\n            if($input[\"type\"]==\"email\" &&  !self::checkEmail($data[$name])) {\r\n                $errors[]=$input[\"error\"];\r\n            }\r\n\r\n            if($input[\"type\"]==\"password\" &&  !self::checkPwd($data[$name]) && empty($input[\"confirm\"])) {\r\n                $errors[]=$input[\"error\"];\r\n            }\r\n\r\n            if( !empty($input[\"confirm\"]) && $data[$name]!=$data[$input[\"confirm\"]]  ){\r\n                $errors[]=$input[\"error\"];\r\n            }\r\n\r\n\r\n\r\n        }\r\n\r\n\r\n        return $errors;\r\n    }\r\n\r\n    public static function checkFormLogin($config, $data): array\r\n    {\r\n        $errors = [];\r\n        $user = new UserModel();\r\n\r\n        $results = $user->checkLogin($data);\r\n\r\n        if ($results == false) {\r\n            $errors[] = \"Votre identifiant ou votre mot de passe est incorect\";\r\n            return $errors;\r\n        }\r\n        else {\r\n            return $errors;\r\n\r\n        }\r\n    }\r\n\r\n    public static function checkEmail($email): bool\r\n    {\r\n        return filter_var($email, FILTER_VALIDATE_EMAIL);\r\n    }\r\n\r\n    public static function checkPwd($pwd): bool\r\n    {\r\n        return strlen($pwd)>=8\r\n            && preg_match(\"/[0-9]/\",$pwd, $result )\r\n            && preg_match(\"/[A-Z]/\",$pwd, $result );\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/www/Core/Verificator.class.php b/www/Core/Verificator.class.php
+--- a/www/Core/Verificator.class.php	
++++ b/www/Core/Verificator.class.php	
+@@ -4,7 +4,6 @@
+ 
+ use App\Model\User as UserModel;
+ 
+-
+ class Verificator
+ {
+ 
+@@ -78,4 +77,20 @@
+             && preg_match("/[0-9]/",$pwd, $result )
+             && preg_match("/[A-Z]/",$pwd, $result );
+     }
++
++    public static function checkFormPasswordReset($config, $data): array
++    {
++        $errors = array();
++        $user = new UserModel();
++        $results = $user->checkPasswordReset($data);
++        if ($results == false) {
++            $errors[] = "Votre Email n'existe pas ";
++            return $errors;
++        }
++        else {
++            $errors[] = "Un email a ete envoyé a l'adresse : <strong>".$data['email']."</strong>";
++            return $errors;
++        }
++    }
++
+ }
+\ No newline at end of file
+Index: www/routes.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/:\r\n  controller: main\r\n  action: home\r\n\r\n\r\n\r\n\r\n/nous-contacter:\r\n  controller: main\r\n  action: contact\r\n\r\n/login:\r\n  controller: user\r\n  action: login\r\n\r\n/logout:\r\n  controller: user\r\n  action: logout\r\n\r\n/register:\r\n  controller: user\r\n  action: register\r\n\r\n/dashboard:\r\n  controller: admin\r\n  action: home\r\n  security: true\r\n\r\n/accueil:\r\n  controller: main\r\n  action: home\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/www/routes.yml b/www/routes.yml
+--- a/www/routes.yml	
++++ b/www/routes.yml	
+@@ -29,3 +29,11 @@
+ /accueil:
+   controller: main
+   action: home
++
++/mot_de_passe:
++  controller : user
++  action     : mot_de_passe
++
++/dashboard/parametre:
++  controller : admin
++  action : parametre
+\ No newline at end of file
+Index: www/Model/User.class.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\nnamespace App\\Model;\r\n\r\nuse App\\Core\\Sql;\r\nuse PDO;\r\n\r\nclass User extends Sql\r\n{\r\n    protected $id = null;\r\n    protected $firstname = null;\r\n    protected $lastname = null;\r\n    protected $email;\r\n    protected $status = 0;\r\n    protected $password;\r\n    protected $token = null;\r\n    protected $avatar = null;\r\n    protected $gender = null;\r\n    protected $role = 1;\r\n\r\n    public function __construct()\r\n    {\r\n\r\n        parent::__construct();\r\n    }\r\n\r\n\r\n    public function checkLogin($data)\r\n    {\r\n\r\n        $email = htmlspecialchars($data['email']);\r\n        $password = htmlspecialchars($data['password']);\r\n\r\n\r\n        $q = \"SELECT ID, email, password FROM mnga_user WHERE email = :email\";\r\n\r\n\r\n        $req = $this->pdo->prepare($q);\r\n        $req->execute(['email' => $email]);\r\n        $results = $req->fetch();\r\n        if (password_verify($password, $results['password'])) {\r\n            return true;\r\n        } else {\r\n            return false;\r\n        }\r\n\r\n    }\r\n    /**\r\n     * @return null\r\n     */\r\n    public function getId(): ?int\r\n    {\r\n        return $this->id;\r\n    }\r\n\r\n\r\n    /**\r\n     * @return null\r\n     */\r\n    public function getFirstname(): ?string\r\n    {\r\n        return $this->firstname;\r\n    }\r\n\r\n    /**\r\n     * @param null $firstname\r\n     */\r\n    public function setFirstname(?string $firstname): void\r\n    {\r\n        $this->firstname = ucwords(strtolower(trim($firstname)));\r\n    }\r\n\r\n    /**\r\n     * @return null\r\n     */\r\n    public function getLastname(): ?string\r\n    {\r\n        return $this->lastname;\r\n    }\r\n\r\n    /**\r\n     * @param null $lastname\r\n     */\r\n    public function setLastname(?string $lastname): void\r\n    {\r\n        $this->lastname = strtoupper(trim($lastname));\r\n    }\r\n\r\n    /**\r\n     * @return mixed\r\n     */\r\n    public function getEmail(): string\r\n    {\r\n        return $this->email;\r\n    }\r\n\r\n    /**\r\n     * @param mixed $email\r\n     */\r\n    public function setEmail(string $email): void\r\n    {\r\n        $this->email = strtolower(trim($email));\r\n    }\r\n\r\n    /**\r\n     * @return int\r\n     */\r\n    public function getStatus(): int\r\n    {\r\n        return $this->status;\r\n    }\r\n\r\n    /**\r\n     * @param int $status\r\n     */\r\n    public function setStatus(int $status): void\r\n    {\r\n        $this->status = $status;\r\n    }\r\n\r\n    /**\r\n     * @return mixed\r\n     */\r\n    public function getPassword(): string\r\n    {\r\n        return $this->password;\r\n    }\r\n\r\n    /**\r\n     * @param mixed $password\r\n     */\r\n    public function setPassword(string $password): void\r\n    {\r\n        $this->password = password_hash($password, PASSWORD_DEFAULT);\r\n    }\r\n\r\n    /**\r\n     * @return null\r\n     */\r\n    public function getToken(): ?string\r\n    {\r\n        return $this->token;\r\n    }\r\n\r\n    /**\r\n     * @param null\r\n     */\r\n    public function generateToken(): void\r\n    {\r\n        $bytes = random_bytes(128);\r\n        $this->token = substr(str_shuffle(bin2hex($bytes)), 0, 255);\r\n    }\r\n\r\n\r\n    public function save(): void\r\n    {\r\n        //Pré traitement par exemple\r\n        //echo \"pre traitement\";\r\n        parent::save();\r\n    }\r\n\r\n    public function getRole(): int\r\n    {\r\n        return $this->role;\r\n    }\r\n\r\n    /**\r\n     * @param int $status\r\n     */\r\n    public function setRole(int $role): void\r\n    {\r\n        $this->role = $role;\r\n    }\r\n\r\n    public function getAvatar(): string\r\n    {\r\n        return $this->avatar;\r\n    }\r\n\r\n    /**\r\n     * @param mixed $email\r\n     */\r\n    public function setAvatar(string $avatar): void\r\n    {\r\n        $this->avatar = strtolower(trim($avatar));\r\n    }\r\n\r\n    public function getGender(): string\r\n    {\r\n        return $this->gender;\r\n    }\r\n\r\n    /**\r\n     * @param mixed $email\r\n     */\r\n    public function setGender(string $gender): void\r\n    {\r\n        $this->gender = strtolower(trim($gender));\r\n    }\r\n\r\n    public function getRegisterForm(): array\r\n    {\r\n        return [\r\n            \"config\"=>[\r\n                \"method\"=>\"POST\",\r\n                \"action\"=>\"\",\r\n                \"id\"=>\"formRegister\",\r\n                \"class\"=>\"formRegister\",\r\n                \"submit\"=>\"S'inscrire\"\r\n            ],\r\n            \"inputs\"=>[\r\n                \"email\"=>[\r\n                    \"placeholder\"=>\"Votre email ...\",\r\n                    \"type\"=>\"email\",\r\n                    \"id\"=>\"emailRegister\",\r\n                    \"class\"=>\"formRegister\",\r\n                    \"required\"=>true,\r\n                    \"error\"=>\"Email incorrect\",\r\n                    \"unicity\"=>true,\r\n                    \"errorUnicity\"=>\"Un compte existe déjà avec cet email\"\r\n                ],\r\n                \"password\"=>[\r\n                    \"placeholder\"=>\"Votre mot de passe ...\",\r\n                    \"type\"=>\"password\",\r\n                    \"id\"=>\"pwdRegister\",\r\n                    \"class\"=>\"formRegister\",\r\n                    \"required\"=>true,\r\n                    \"error\"=>\"Votre mot de passe doit faire au min 8 caratères avec une majuscule et un chiffre\"\r\n                ],\r\n                \"passwordConfirm\"=>[\r\n                    \"placeholder\"=>\"Confirmation ...\",\r\n                    \"type\"=>\"password\",\r\n                    \"id\"=>\"pwdConfirmRegister\",\r\n                    \"class\"=>\"formRegister\",\r\n                    \"required\"=>true,\r\n                    \"error\"=>\"Votre confirmation de mot de passe ne correspond pas\",\r\n                    \"confirm\"=>\"password\"\r\n                ],\r\n                \"firstname\"=>[\r\n                    \"placeholder\"=>\"Votre prénom ...\",\r\n                    \"type\"=>\"text\",\r\n                    \"id\"=>\"firstnameRegister\",\r\n                    \"class\"=>\"formRegister\",\r\n                    \"min\"=>2,\r\n                    \"max\"=>25,\r\n                    \"required\"=>true,\r\n                    \"error\"=>\" Votre prénom doit faire entre 2 et 25 caractères\",\r\n                ],\r\n                \"lastname\"=>[\r\n                    \"placeholder\"=>\"Votre nom ...\",\r\n                    \"type\"=>\"text\",\r\n                    \"id\"=>\"lastnameRegister\",\r\n                    \"class\"=>\"formRegister\",\r\n                    \"min\"=>2,\r\n                    \"max\"=>100,\r\n                    \"required\"=>true,\r\n                    \"error\"=>\" Votre nom doit faire entre 2 et 100 caractères\",\r\n                ],\r\n                \"gender\"=>[\r\n                    \"type\"=>\"radio\",\r\n                    \"option\"=> [\r\n                        [\r\n                            \"value\"=>\"M\",\r\n                            \"label\"=>\"Masculin\",\r\n                            \"id\"=>\"male\",\r\n                            \"class\"=>\"formRegister\",\r\n                        ],\r\n                        [\r\n                            \"value\"=>\"F\",\r\n                            \"label\"=>\"Féminin\",\r\n                            \"id\"=>\"feminin\",\r\n                            \"class\"=>\"formRegister\",\r\n                        ]\r\n                    ],\r\n                    \"defaultValue\" =>  \"feminin\"\r\n                ],\r\n                /*\r\n                \"cgu\"=>[\r\n                    \"type\"=>\"checkbox\",\r\n                    \"option\"=> [\r\n                        [\r\n                            \"value\"=>\"cgu1\",\r\n                            \"label\"=>\"CGU 1\",\r\n                            \"id\"=>\"cgu1\",\r\n                            \"class\"=>\"formRegister\",\r\n                        ],\r\n                        [\r\n                            \"value\"=>\"cgu2\",\r\n                            \"label\"=>\"CGU 2\",\r\n                            \"id\"=>\"cgu2\",\r\n                            \"class\"=>\"formRegister\",\r\n                        ],\r\n                        [\r\n                            \"value\"=>\"cgu3\",\r\n                            \"label\"=>\"CGU 3\",\r\n                            \"id\"=>\"cgu3\",\r\n                            \"class\"=>\"formRegister\",\r\n                        ]\r\n                    ],\r\n                    \"defaultValue\" =>  \"cgu2\"\r\n                ],\r\n                */\r\n                \"avatar\"=> [\r\n                    \"type\"=> \"file\",\r\n                    \"label\"=> \"Avatar : \",\r\n                    \"id\"=>\"avatar\",\r\n                    \"class\"=>\"formRegister\",\r\n                    \"accept\" => \"image/*\"\r\n                ]\r\n            ]\r\n        ];\r\n    }\r\n\r\n\r\n    public function getLoginForm(): array\r\n    {\r\n        return [\r\n            \"config\"=>[\r\n                \"method\"=>\"POST\",\r\n                \"action\"=>\"\",\r\n                \"id\"=>\"formLogin\",\r\n                \"class\"=>\"formLogin\",\r\n                \"submit\"=>\"Se connecter\"\r\n            ],\r\n            \"inputs\"=>[\r\n                \"email\"=>[\r\n                    \"placeholder\"=>\"Votre email ...\",\r\n                    \"type\"=>\"email\",\r\n                    \"id\"=>\"emailRegister\",\r\n                    \"class\"=>\"formRegister\",\r\n                    \"required\"=>true,\r\n                ],\r\n                \"password\"=>[\r\n                    \"placeholder\"=>\"Votre mot de passe ...\",\r\n                    \"type\"=>\"password\",\r\n                    \"id\"=>\"pwdRegister\",\r\n                    \"class\"=>\"formRegister\",\r\n                    \"required\"=>true,\r\n                ]\r\n            ]\r\n        ];\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/www/Model/User.class.php b/www/Model/User.class.php
+--- a/www/Model/User.class.php	
++++ b/www/Model/User.class.php	
+@@ -43,6 +43,22 @@
+             return false;
+         }
+ 
++    }
++
++    public function checkPasswordReset($data)
++    {
++
++        $email = htmlspecialchars($data['email']);
++        $q = "SELECT * FROM mnga_user WHERE email = :email";
++        $req = $this->pdo->prepare($q);
++        $req->execute(['email' => $email]);
++        $results = $req->fetch();
++        if ($results > 0) {
++            return true;
++        } else {
++            return false;
++        }
++
+     }
+     /**
+      * @return null
+@@ -339,4 +355,28 @@
+             ]
+         ];
+     }
++
++    public function getPasswordResetForm(): array
++    {
++        return [
++            "config"=>[
++                "method"=>"POST",
++                "action"=>"",
++                "id"=>"formLogin",
++                "class"=>"formLogin",
++                "submit"=>"Envoyer"
++            ],
++            "inputs"=>[
++                "email"=>[
++                    "placeholder"=>"Votre email ...",
++                    "type"=>"email",
++                    "id"=>"emailRegister",
++                    "class"=>"formRegister",
++                    "required"=>true,
++                ]
++            ]
++        ];
++    }
++
++  
+ }
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"1d7b2d99-d076-4f9c-8fc8-ec635a2da11d\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/Controller/User.class.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/Controller/User.class.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/Core/Security.class.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/Core/Security.class.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/Model/User.class.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/Model/User.class.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/View/view/login.view.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/View/view/login.view.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/www/conf.inc.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/www/conf.inc.php\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"feature/sidebar\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedIndex\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"25eSBojIVZOE4c6MUsn3XWg5y1K\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../../../../MAMP/htdocs/PA\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"1d7b2d99-d076-4f9c-8fc8-ec635a2da11d\" name=\"Changes\" comment=\"\" />\r\n      <created>1645885925559</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1645885925559</updated>\r\n      <workItem from=\"1645885927000\" duration=\"253000\" />\r\n      <workItem from=\"1645886261202\" duration=\"1395000\" />\r\n      <workItem from=\"1645888039146\" duration=\"8407000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -2,12 +2,12 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="">
++      <change afterPath="$PROJECT_DIR$/www/View/view/mot_passe_oublier.view.php" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/www/Controller/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/User.class.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/Core/Security.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Security.class.php" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/www/Core/Verificator.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Verificator.class.php" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/View/view/login.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/login.view.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/www/conf.inc.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/conf.inc.php" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -20,7 +20,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="feature/sidebar" />
++        <entry key="$PROJECT_DIR$" value="feature/password_oublier" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -29,6 +29,9 @@
+     <option name="selectedIndex" value="1" />
+   </component>
+   <component name="ProjectId" id="25eSBojIVZOE4c6MUsn3XWg5y1K" />
++  <component name="ProjectLevelVcsManager">
++    <ConfirmationsSetting value="2" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+@@ -37,7 +40,7 @@
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../MAMP/htdocs/PA" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+     <property name="nodejs_package_manager_path" value="npm" />
+     <property name="vue.rearranger.settings.migration" value="true" />
+   </component>
+@@ -52,6 +55,7 @@
+       <workItem from="1645885927000" duration="253000" />
+       <workItem from="1645886261202" duration="1395000" />
+       <workItem from="1645888039146" duration="8407000" />
++      <workItem from="1650060345072" duration="726000" />
+     </task>
+     <servers />
+   </component>
+Index: www/View/view/mot_passe_oublier.view.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/www/View/view/mot_passe_oublier.view.php b/www/View/view/mot_passe_oublier.view.php
+new file mode 100644
+--- /dev/null	
++++ b/www/View/view/mot_passe_oublier.view.php	
+@@ -0,0 +1,15 @@
++<div class="center-form">
++    <h1>Récuperer Mot de passe </h1>
++    <div class="col-lg-4">
++        <div class="card card--login">
++            <h2>Email</h2>
++            <?php $this->includePartial("form", $user->getPasswordResetForm());?>
++            <?php if (!empty($errors)) {
++                foreach ($errors as $error) {
++                    echo $error. "<br>";
++                }
++            }?>
++        </div>
++    </div>
++</div>
++

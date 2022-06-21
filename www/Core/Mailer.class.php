@@ -8,7 +8,7 @@ use App\PHPMailer\PHPMailer;
 use App\PHPMailer\SMTP;
 use App\PHPMailer\Exception;
 
-class Mailer 
+class Mailer
 {
 
     public static function sendMail($destinataire, $name, $lastname, $subject, $body) {
@@ -32,7 +32,7 @@ class Mailer
             $mail->addAddress($destinataire, $name.' '. $lastname);     //Add a recipient
             //$mail->addAddress('ellen@example.com');               //Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
-            $mail->addCC('fassory.diaby@gmail.com');
+            //$mail->addCC('fassory.diaby@gmail.com');
             //$mail->addBCC('bcc@example.com');
 
             //Attachments
