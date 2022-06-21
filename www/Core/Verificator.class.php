@@ -4,7 +4,6 @@ namespace App\Core;
 
 use App\Model\User as UserModel;
 
-
 class Verificator
 {
 
@@ -98,4 +97,6 @@ class Verificator
             && preg_match("/[0-9]/",$pwd, $result )
             && preg_match("/[A-Z]/",$pwd, $result );
     }
+    
+
 }

@@ -27,6 +27,13 @@
   controller: main
   action: home
 
+/recuperer_mdp:
+  controller : user
+  action     : recuperer_mdp
+
+/initialiser_mdp:
+  controller : user
+  action     : initialiser_mdp
 
 /parametre:
   controller: user
