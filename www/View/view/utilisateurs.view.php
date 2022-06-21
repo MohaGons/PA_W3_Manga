@@ -41,19 +41,20 @@
     </form>
 </div>
 </div>
-
 <hr><br>
 <?php if (!empty($messages)) {
     foreach ($messages as $message) {
         echo "<h2 style='color:red'>".$message. "</h2><br>";
     }
 }?>
+
 <table style="width:100%;" >
     <tr style="background-color: black;height: 50px ; color:white;">
         <th>Gender</th>
         <th>Nom</th>
         <th>Prénom</th>
         <th>Email</th>
+        <th>Role</th>
         <th>Date Inscription</th>
     </tr>
     <?php
@@ -61,9 +62,10 @@
         ?>
         <tr style="text-align: center; height:30px;background-color: lightgrey">
             <td><?= $user['gender'] ?></td>
-            <td ><?= $user['lastname'] ?></td>
+            <td><?= $user['lastname'] ?></td>
             <td><?= $user['firstname'] ?></td>
             <td><?= $user['email'] ?></td>
+            <td><?= $user['role'] ?></td>
             <td><?= $user['createdAt'] ?></td>
 
             <td><a href="?action=delete&id=<?= $user['ID'] ?>"><i class="fa-solid fa-trash"></i></a></td>

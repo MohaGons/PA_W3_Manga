@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use App\Model\Role as RoleModel;
 use PDO;
 
 class User extends Sql
@@ -217,9 +218,27 @@ class User extends Sql
         parent::save();
     }
 
-    public function getRole(): int
+    public function getRole($id)
     {
-        return $this->role;
+        $q = "SELECT role FROM roles WHERE id = :id";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['id' => $id]);
+        return $req->fetch();
+    }
+
+    public function getRoleByEmail($email)
+    {
+        $q = "SELECT role FROM mnga_user WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        return $req->fetch();
+    }
+
+    public function updateRole($email, $id)
+    {
+        $q = "UPDATE mnga_user SET role=? WHERE ID=?";
+        $req = $this->pdo->prepare($q);
+        $req->execute([$email,$id]);
     }
 
     /**
@@ -515,6 +534,9 @@ class User extends Sql
 
     public function updateUser(): array
     {
+        $role = new RoleModel();
+        $roles = $role->getAllRoles();
+
         return [
             "config"=>[
                 "method"=>"POST",
@@ -553,6 +575,12 @@ class User extends Sql
                     "error"=>"Email incorrect",
                     "unicity"=>true,
                     "errorUnicity"=>"Un compte existe déjà avec cet email"
+                ],
+                "role"=>[
+                    "type"=>"select",
+                    "id"=>"select",
+                    "option"=> $roles,
+                    "defaultValue" =>  ""
                 ],
             ]
         ];

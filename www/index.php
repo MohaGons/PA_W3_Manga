@@ -2,7 +2,7 @@
 namespace App;
 
 require "conf.inc.php";
-
+use App\Core\Security;
 //E
 
 function myAutoloader( $class )
@@ -22,7 +22,7 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\myAutoloader");
 
-use App\Core\Security;
+
 
 $fileRoutes = "routes.yml";
 
