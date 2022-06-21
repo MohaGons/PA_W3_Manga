@@ -49,22 +49,42 @@ class Verificator
         return $errors;
     }
 
-    public static function checkFormLogin($config, $data): array
+    public static function checkFormParam($config, $data): array
     {
         $errors = [];
-        $user = new UserModel();
-
-        $results = $user->checkLogin($data);
-
-        if ($results == false) {
-            $errors[] = "Votre identifiant ou votre mot de passe est incorect";
-            return $errors;
+        foreach ($config["inputs"] as $name=>$input) {
+            if (!empty($data[$name])){
+                if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                    $errors[] = $input["error"];
+                }
+                if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
+                    $errors[] = $input["error"];
+                }
+                if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
+                    $errors[]=$input["error"];
+                }
+            }
         }
-        else {
-            return $errors;
-
-        }
+        return $errors;
     }
+
+
+    public static function checkupdateUser($config, $data): array
+    {
+        $errors = [];
+        foreach ($config["inputs"] as $name=>$input) {
+            if (!empty($data[$name])){
+                if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                    $errors[] = $input["error"];
+                }
+                if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
+                    $errors[] = $input["error"];
+                }
+            }
+        }
+        return $errors;
+    }
+
 
     public static function checkEmail($email): bool
     {

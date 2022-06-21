@@ -11,7 +11,7 @@
             <a href="recuperer_mdp">Mot de passe oublié ?</a>
             <?php if (!empty($errors)) {
                 foreach ($errors as $error) {
-                    echo $error. "<br>";
+                    echo "<br>". $error. "<br>";
                 }
             }?>
         </div>

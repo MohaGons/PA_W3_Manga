@@ -2,9 +2,6 @@
   controller: main
   action: home
 
-
-
-
 /nous-contacter:
   controller: main
   action: contact
@@ -37,3 +34,58 @@
 /initialiser_mdp:
   controller : user
   action     : initialiser_mdp
+
+/parametre:
+  controller: user
+  action : parametre
+
+/deletecompte:
+   controller: user
+   action : deletecompte
+
+/utilisateurs:
+   controller: admin
+   action : utilisateurs
+
+/utilisateurs/update:
+  controller: admin
+  action: utilisateurs_update
+
+/categorie:
+  controller: user
+  action: category
+
+/deleteCategorie:
+  controller: user
+  action: deleteCategory
+
+/editCategorie:
+  controller: user
+  action: editCategory
+
+/forum:
+  controller: user
+  action: forum
+
+/deleteForum:
+  controller: user
+  action: deleteForum
+
+/editForum:
+  controller: user
+  action: editForum
+
+/apparence:
+  controller: user
+  action: apparence
+/manga:
+  controller: user
+  action: manga
+
+/editManga:
+  controller: user
+  action: editManga
+
+/deleteManga:
+  controller: user
+  action: deleteManga
