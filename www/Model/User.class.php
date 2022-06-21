@@ -71,8 +71,8 @@ class User extends Sql
         $req = $this->pdo->prepare($q);
         $req->execute(['email' => $email]);
         $results = $req->fetch();
-        if ($results[0] > 0) {
-            if($token == $results['token'] ){
+        if (!empty($results)) {
+            if($token==$results['token'] && $results['statut']==0){
                 $date_action = time();
                 if($date_action-$results['date_demande']>3600){
                     $results = 2;
@@ -87,7 +87,8 @@ class User extends Sql
                 //Token incorrect
                 $results = NULL;
                 return $results;
-            }
+                }
+
         } else {
             //email n'exist pas
             $results = NULL;
@@ -101,7 +102,7 @@ class User extends Sql
         $q = "UPDATE mnga_user SET  password = :password WHERE email = :email";
         $req = $this->pdo->prepare($q);
         $req->execute( ['password'=> $Password, 'email' => $Email] );
-        $results = $req->fetchAll();
+        $results = $req->fetch();
         return $results;
     }
 

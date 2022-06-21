@@ -7,6 +7,7 @@ use App\Core\Verificator;
 use App\Core\PasswordReset;
 use App\Core\View;
 use App\Model\User as UserModel;
+use App\Model\Password as PasswordModel;
 use App\Core\Mailer;
 
 class User {
@@ -88,18 +89,10 @@ class User {
     {
         $user = new UserModel();
         $errors = [];
-
         if(!empty($_POST)) {
-
             $result = PasswordReset::checkFormPasswordReset($user->getPasswordResetForm(), $_POST);
-            if (!empty($result)) {
-                $errors = $result;
-            } else {
-                $errors = $result;
-            }
-
+            $errors = $result;
         }
-
         $view = new View("mot_passe_oublier");
         $view->assign("user", $user);
         $view->assign("errors", $errors);
@@ -108,6 +101,7 @@ class User {
     public function  initialiser_mdp()
     {
         $user = new UserModel();
+        $mdp = new PasswordModel();
         $errors = [];
         $token  = $_GET['token'];
         $email  = $_GET['email'];
@@ -116,9 +110,11 @@ class User {
             $result = PasswordReset::checkFormPasswordInit($user->getPasswordInitForm(), $_POST);
             if ($result[0]===1){
                 echo "<script>alert('Vous avez depassé 1h pour reinitialiser votre Mot de passe')</script>";
+                //header('location:'.LOGIN_VIEW_ROUTE);
             }
             if ($result[0]===0){
                 echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
+                //header('location:'.LOGIN_VIEW_ROUTE);
             }
             else{
                 if(!empty($_POST)) {
@@ -128,6 +124,7 @@ class User {
                         //$user->setPassword($password);
                         $password = password_hash($password, PASSWORD_DEFAULT);
                         $user->NewPassword($password,$email);
+                        $mdp->UpdateStatut(1,$email);
                         $errors[] = "<br>Votre mot de passe est modefié<br><a href='login'>Se connecter</a>";
                     }
                     else{
