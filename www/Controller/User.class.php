@@ -254,7 +254,7 @@ class User {
     public function forum()
     {
         $forum = new Forum();
-        $view = new View("forum", "back");
+        $view = new View("forum", "front");
         $view->assign("forum", $forum);
 
         $forum_data = $forum->getForum($_GET["id"]);        
