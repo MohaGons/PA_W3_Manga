@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Model\User as UserModel;
+use App\Model\Role as RoleModel;
 use App\Core\View;
 use App\Core\Verificator;
 use MongoDB\BSON\Decimal128;
@@ -53,13 +54,14 @@ class Admin{
             else{
                 $users = $user->getAllUsers($deb,$fin);
             }
-
         }
-
+        //$roles = $role->getRole(1);*
+        $test= $user->getRoleByEmail('aminecherigui44@gmail.com');
         $Nbusers = count($user->NombreUsers());
         $Nbpages = ceil($Nbusers / $pagination);
         $view = new View("utilisateurs", "back");
         $view->assign("users", $users);
+        $view->assign("role", $test);
         $view->assign("Nbusers", $Nbusers);
         $view->assign("Nbpages", $Nbpages);
         $view->assign("messages", $messages);
@@ -69,15 +71,21 @@ class Admin{
         $user = new UserModel();
         $messages=[];
         $id = $_GET['id'];
-       /* $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $email = $_POST['email'];*/
         if(!empty($_POST)) {
             $result = Verificator::checkupdateUser($user->updateUser(), $_POST);
             if (empty($result)){
-                $user->updateFirstnameId( $_POST['firstname'],$id);
-                $user->updateLastnameId($_POST['lastname'],$id);
-                $user->updateEmailId($_POST['email'],$id);
+                if(!empty($_POST["firstname"])){
+                    $user->updateFirstnameId( $_POST['firstname'],$id);
+                }
+                if(!empty($_POST["lastname"])){
+                    $user->updateLastnameId($_POST['lastname'],$id);
+                }
+                if(!empty($_POST["email"])){
+                   $user->updateEmailId($_POST['email'],$id);
+                }
+                if(!empty($_POST["role"])){
+                   $user->updateRole($_POST['role'],$id);
+                }
                 $messages[] = 'la modification a été faite !';
             }
             else{

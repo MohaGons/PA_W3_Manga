@@ -8,7 +8,7 @@ use App\PHPMailer\PHPMailer;
 use App\PHPMailer\SMTP;
 use App\PHPMailer\Exception;
 
-class Mailer 
+class Mailer
 {
 
     public static function sendMail($destinataire, $name, $lastname, $subject, $body) {

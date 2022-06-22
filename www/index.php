@@ -2,7 +2,7 @@
 namespace App;
 
 require "conf.inc.php";
-
+use App\Core\Security;
 //E
 
 function myAutoloader( $class )
@@ -22,7 +22,7 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\myAutoloader");
 
-use App\Core\Security;
+
 
 $fileRoutes = "routes.yml";
 
@@ -35,7 +35,6 @@ if(file_exists($fileRoutes)){
 
 
 $uri = explode("?", $_SERVER["REQUEST_URI"])[0];
-
 
 if(empty($routes[$uri]) || empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])){
     die("Page 404");

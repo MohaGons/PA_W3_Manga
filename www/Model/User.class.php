@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use App\Model\Role as RoleModel;
 use PDO;
 
 class User extends Sql
@@ -39,6 +40,69 @@ class User extends Sql
         }
 
     }
+
+    public function checkPasswordReset($data)
+    {
+
+        $email = htmlspecialchars($data['email']);
+        $q = "SELECT * FROM mnga_user WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $results = $req->fetch();
+        if ($results > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function checkPasswordInit($data)
+    {
+
+        $email = htmlspecialchars($_GET['email']);
+        $token = htmlspecialchars($_GET['token']);
+        //$email = "amine@gmail.com";
+        $q = "SELECT * FROM passwords WHERE email = :email ORDER BY id DESC";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        $results = $req->fetch();
+        if (!empty($results)) {
+            if($token==$results['token'] && $results['statut']==0){
+                $date_action = time();
+                if($date_action-$results['date_demande']>3600){
+                    $results = 2;
+                    return $results;
+                }
+                else{
+                    $results = $results['token'];
+                    return $results;
+                }
+            }
+            else{
+                //Token incorrect
+                $results = NULL;
+                return $results;
+                }
+
+        } else {
+            //email n'exist pas
+            $results = NULL;
+            return $results;
+        }
+
+    }
+
+    public function NewPassword(string $Password, string $Email)
+    {
+        $q = "UPDATE mnga_user SET  password = :password WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute( ['password'=> $Password, 'email' => $Email] );
+        $results = $req->fetch();
+        return $results;
+    }
+
+
     /**
      * @return null
      */
@@ -217,9 +281,27 @@ class User extends Sql
         parent::save();
     }
 
-    public function getRole(): int
+    public function getRole($id)
     {
-        return $this->role;
+        $q = "SELECT role FROM roles WHERE id = :id";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['id' => $id]);
+        return $req->fetch();
+    }
+
+    public function getRoleByEmail($email)
+    {
+        $q = "SELECT role FROM mnga_user WHERE email = :email";
+        $req = $this->pdo->prepare($q);
+        $req->execute(['email' => $email]);
+        return $req->fetch();
+    }
+
+    public function updateRole($email, $id)
+    {
+        $q = "UPDATE mnga_user SET role=? WHERE ID=?";
+        $req = $this->pdo->prepare($q);
+        $req->execute([$email,$id]);
     }
 
     /**
@@ -471,6 +553,7 @@ class User extends Sql
         ];
     }
 
+
     public function getParamForm($data): array
     {
         return [
@@ -515,6 +598,9 @@ class User extends Sql
 
     public function updateUser(): array
     {
+        $role = new RoleModel();
+        $roles = $role->getAllRoles();
+
         return [
             "config"=>[
                 "method"=>"POST",
@@ -554,6 +640,63 @@ class User extends Sql
                     "unicity"=>true,
                     "errorUnicity"=>"Un compte existe déjà avec cet email"
                 ],
+                "role"=>[
+                    "type"=>"select",
+                    "id"=>"select",
+                    "option"=> $roles,
+                    "defaultValue" =>  ""
+                ],
+            ]
+        ];
+    }
+  
+    public function getPasswordResetForm(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formLogin",
+                "class"=>"formLogin",
+                "submit"=>"Envoyer"
+            ],
+            "inputs"=>[
+                "email"=>[
+                    "placeholder"=>"Votre email ...",
+                    "type"=>"email",
+                    "id"=>"emailRegister",
+                    "class"=>"formRegister",
+                    "required"=>true,
+                ]
+            ]
+        ];
+    }
+  
+      public function getPasswordInitForm(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formLogin",
+                "class"=>"formLogin",
+                "submit"=>"Valider"
+            ],
+            "inputs"=>[
+                "password"=>[
+                    "placeholder"=>"Nouveau Password",
+                    "type"=>"password",
+                    "id"=>"pwdRegister",
+                    "class"=>"formRegister",
+                    "required"=>true,
+                ],
+                "confirm_password"=>[
+                    "placeholder"=>"Confirmer Password",
+                    "type"=>"password",
+                    "id"=>"pwdRegister",
+                    "class"=>"formRegister",
+                    "required"=>true,
+                ]
             ]
         ];
     }
