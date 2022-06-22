@@ -9,6 +9,7 @@ class Forum extends Sql
     protected $title = null;
     protected $description = null;
     protected $picture = null;
+    protected $category_id = null;
     protected $user_id = null;
 
     public function __construct()
@@ -59,6 +60,16 @@ class Forum extends Sql
         $this->picture = $picture;
     }
 
+    public function getCategoryId(): ?int
+    {
+        return $this->category_id;
+    }
+
+    public function setCategoryId($category_id){
+        $this->category_id = $category_id;
+    }
+
+
     public function getUserId(): ?int
     {
         return $this->user_id;
@@ -75,7 +86,6 @@ class Forum extends Sql
                 "method"=>"POST",
                 "action"=>"",
                 "id"=>"formForum",
-                "enctype"=>"multipart/form-data",
                 "class"=>"formForum",
                 "submit"=>"Valider"
             ],
@@ -88,10 +98,13 @@ class Forum extends Sql
                     "required"=>true,
                 ],
                 "description"=>[
-                    "placeholder"=>"Description",
-                    "type"=>"text",
+                    "label"=> "Description: ",
+                    "type"=>"textarea",
                     "id"=>"descriptionForum",
                     "class"=>"formForum",
+                    "rows"=>"5",
+                    "cols"=>"33",
+                    "text"=>"test",
                     "required"=>false,
                 ],
                 "picture"=> [
@@ -100,6 +113,12 @@ class Forum extends Sql
                     "id"=>"picture",
                     "class"=>"formForum",
                     "accept" => "image/*"
+                ],
+                "categories"=> [
+                    "type"=> "select",
+                    "id"=>"picture",
+                    "option"=>['test', 'oof'], // METTRE LES CATEGORIES ET PAS CETTE LISTE
+                    "defaultValue"=>"test",
                 ]
             ]
         ];

@@ -24,7 +24,7 @@ class Builder
                         $html .= ">$value</option>";
 
                      }
-                     $html .= "</select>";
+                     $html .= "</select><br>";
                     break;
                 case "radio":
                     foreach ($configInput["option"] as $option => $value) {
@@ -62,7 +62,6 @@ class Builder
                     $html .= "<label for='".$name."'>".$configInput["label"]."</label>";
                     $html .= "<textarea id='".$configInput["id"]."'
                                 class='".$configInput["class"]."'
-                                id='".$value["id"]."'
                                 name='".$name."'
                                 rows='".$configInput["rows"]."'
                                 cols='".$configInput["cols"]."'>".$configInput["text"]."</textarea><br>";

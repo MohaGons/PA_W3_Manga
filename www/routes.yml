@@ -56,9 +56,9 @@
   controller: user
   action: editCategory
 
-/forum:
+/forums:
   controller: user
-  action: forum
+  action: forums
 
 /deleteForum:
   controller: user
@@ -68,9 +68,10 @@
   controller: user
   action: editForum
 
-/apparence:
+/forum:
   controller: user
-  action: apparence
+  action: forum
+
 /manga:
   controller: user
   action: manga

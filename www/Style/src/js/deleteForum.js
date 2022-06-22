@@ -11,7 +11,7 @@ $(".control--delete").click(function(){
             },
             success: function(res){
                     console.log('Success !');
-                    window.location.href = window.location.origin + "/forum";
+                    window.location.href = window.location.origin + "/forums";
             }
             
         });

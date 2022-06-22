@@ -152,7 +152,7 @@ class User {
 
         if(!empty($_POST)) {
 
-            $result = Verificator::checkForm($category->getCategoryForm(), $_POST);
+            $result = Verificator::checkFormRegister($category->getCategoryForm(), $_POST);
             print_r($result);
 
             if (empty($result)) {
@@ -194,26 +194,27 @@ class User {
 		}
     }
 
-    public function forum()
+    public function forums()
     {
         $forum = new Forum();
 
         if(!empty($_POST)) {
 
-            $result = Verificator::checkForm($forum->getForumForm(), $_POST);
+            $result = Verificator::checkFormRegister($forum->getForumForm(), $_POST);
             print_r($result);
 
             if (empty($result)) { 
                 $forum->setTitleForum(htmlspecialchars($_POST["title"]));
                 $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
                 $forum->setPictureForum(htmlspecialchars($_POST["picture"]));
+                $forum->setCategoryId(2);
                 $forum->setUserId(1);
                 $forum->save();
-                echo "<script>alert('Votre forum a bien été mis " .$_FILES['picture']['tmp_name']." à jour')</script>";
+                echo "<script>alert('Votre forum a bien été mis à jour')</script>";
             }
         }
         
-        $view = new View("forum", "back");
+        $view = new View("forums", "back");
         $view->assign("forum", $forum);
 
         $forums_data = $forum->getForums();        
@@ -240,6 +241,7 @@ class User {
 			$forum->setTitleForum(htmlspecialchars($_POST["title"]));
             $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
             $forum->setPictureForum(htmlspecialchars($_POST["picture"]));
+            $forum->setCategoryId(2);
             $forum->setUserId(1);
             $forum->save();
             echo "<script>alert('Votre forum a bien été mis à jour')</script>";
@@ -249,10 +251,16 @@ class User {
         $view->assign("forum_data", $forum_data);
     }
 
-    public function apparence()
+    public function forum()
     {
-        $view = new View("apparence", "back");
+        $forum = new Forum();
+        $view = new View("forum", "back");
+        $view->assign("forum", $forum);
+
+        $forum_data = $forum->getForum($_GET["id"]);        
+        $view->assign("forum_data", $forum_data);
     }
+
     public function manga()
     {
         $manga = new Manga();
