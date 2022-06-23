@@ -40,11 +40,7 @@ class Verificator
             if( !empty($input["confirm"]) && $data[$name]!=$data[$input["confirm"]]  ){
                 $errors[]=$input["error"];
             }
-
-
-
         }
-
 
         return $errors;
     }
@@ -82,6 +78,7 @@ class Verificator
                 }
             }
         }
+
         return $errors;
     }
 
@@ -98,5 +95,4 @@ class Verificator
             && preg_match("/[A-Z]/",$pwd, $result );
     }
     
-
 }

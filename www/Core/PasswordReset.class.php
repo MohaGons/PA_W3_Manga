@@ -59,6 +59,4 @@ class PasswordReset extends Sql
         }
     }
 
-
-
 }
