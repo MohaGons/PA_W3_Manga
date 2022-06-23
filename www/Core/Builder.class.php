@@ -5,11 +5,10 @@ namespace App\Core;
 class Builder
 {
 
-    public static function render($config){
+    public static function render($config)
+    {
 
         foreach ($config["inputs"] as $name => $configInput) {
-
-
 
             $html = "";
             switch ($configInput["type"]) {
@@ -91,7 +90,6 @@ class Builder
 
         }
 
-
     }
 
     /*
@@ -115,6 +113,5 @@ class Builder
 
     }
     */
-
 
 }

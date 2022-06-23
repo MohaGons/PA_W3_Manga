@@ -5,6 +5,7 @@ use App\Core\MysqlBuilder;
 
 class Manga extends MysqlBuilder
 {
+    
     protected $id = null;   
     protected $type = null;
     protected $title = null;

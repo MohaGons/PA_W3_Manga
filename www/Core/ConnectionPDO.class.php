@@ -13,7 +13,6 @@ class ConnectionPDO {
     private $username = DBUSER;
     private $password = DBPWD;
 
-
     public function __construct()
     {
         try {

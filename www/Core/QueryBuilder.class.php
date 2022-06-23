@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-
 interface QueryBuilder
 {
     public function select(array $columns): QueryBuilder;

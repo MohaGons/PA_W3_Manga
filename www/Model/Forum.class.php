@@ -6,6 +6,7 @@ use App\Core\Sql;
 
 class Forum extends MysqlBuilder
 {
+
     protected $id = null;   
     protected $title = null;
     protected $description = null;
@@ -123,4 +124,5 @@ class Forum extends MysqlBuilder
             ]
         ];
     }
+
 }
