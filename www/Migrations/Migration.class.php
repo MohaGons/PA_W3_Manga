@@ -23,6 +23,8 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\Migrations\myAutoloader");
 
+use App\Model\Password;
+use App\Model\Role;
 use App\Model\User;
 use App\Model\Manga;
 
@@ -69,4 +71,25 @@ $colums["production_studio"] = "varchar(50) NOT NULL";
 
 $manga->createTable($colums);
 
+//MIGRATION CREATE TABLE PASSWORD
+$password = new Password();
 
+$colums = $password->getColums();
+
+$colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["email"] = "varchar(255) NOT NULL,";
+$colums["date_demande"] = "int(11) NOT NULL,";
+$colums["token"] = "varchar(255) NOT NULL,";
+$colums["statut"] = "int(11) NOT NULL DEFAULT '0'";
+
+$password->createTable($colums);
+
+//MIGRATION CREATE TABLE ROLE
+$role = new Role();
+
+$colums = $role->getColums();
+
+$colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["role"] = "varchar(50) DEFAULT 'abonné'";
+
+$role->createTable($colums);

@@ -2,10 +2,10 @@
 
 namespace App\Model;
 
-use App\Core\Sql;
+use App\Core\MysqlBuilder;
 use PDO;
 
-class Password extends Sql
+class Password extends MysqlBuilder
 {
   public function UpdateStatut($Nb,$Email){
       $q = "UPDATE passwords SET  statut = :nb WHERE email = :email";
