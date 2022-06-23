@@ -485,6 +485,7 @@ class User extends MysqlBuilder
                     "type"=>"email",
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
+                    "error"=>"Email incorrect",
                     "required"=>true,
                 ],
                 "password"=>[
