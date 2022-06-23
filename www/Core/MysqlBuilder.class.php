@@ -15,7 +15,6 @@ abstract class MysqlBuilder implements QueryBuilder
     {
         $connectionPDO = ConnectionPDO::getInstance();
         $this->pdo = $connectionPDO->pdo;
-//        die(var_dump($pdo));
 
         $getCalledClassExploded = explode("\\", strtolower(get_called_class())); // App\Model\User
         $this->table = DBPREFIXE.end($getCalledClassExploded);
@@ -100,7 +99,6 @@ abstract class MysqlBuilder implements QueryBuilder
 
 
         if (in_array($this->table, $tables)) {
-//            var_dump($this->table);
             $this->deleteTable();
             $this->createTable($columns);
         }
@@ -159,7 +157,6 @@ abstract class MysqlBuilder implements QueryBuilder
         if (isset($query->limit)) {
             $sql .= $query->limit;
         }
-
 
         return $sql;
 
