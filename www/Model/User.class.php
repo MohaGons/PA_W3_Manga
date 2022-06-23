@@ -524,29 +524,6 @@ class User extends MysqlBuilder
         ];
     }
 
-    public function getImagesForm(): array
-    {
-        return [
-            "config"=>[
-                "method"=>"POST",
-                "action"=>"",
-                "id"=>"formRegister",
-                "class"=>"formRegister",
-                "submit"=>"Telecharger"
-            ],
-            "inputs"=>[
-
-                "avatar"=> [
-                    "type"=> "file",
-                    "label"=> "file",
-                    "id"=>"file",
-                    "class"=>"formRegister",
-                    "accept" => ""
-                ]
-            ]
-        ];
-    }
-
 
     public function getLoginForm(): array
     {
