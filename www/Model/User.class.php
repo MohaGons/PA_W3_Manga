@@ -276,7 +276,7 @@ class User extends MysqlBuilder
 
     public function getRole($id)
     {
-        $q = "SELECT role FROM roles WHERE id = :id";
+        $q = "SELECT role FROM mnga_role WHERE id = :id";
         $req = $this->pdo->prepare($q);
         $req->execute(['id' => $id]);
         return $req->fetch();
