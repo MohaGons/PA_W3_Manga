@@ -20,23 +20,26 @@ class User {
 
     public function login()
     {
-        $session = New Session();
         $user = new UserModel();
         $errors = [];
         if(!empty($_POST)) {
-
+            $result = Verificator::checkFormLogin($user->getLoginForm(), $_POST);
+            if (empty($result)) {
+                die(var_dump("test"));
+            }
+            else {
+                die(var_dump($result));
+            }
             $result = $user->checkLogin($_POST);
             if ($result==false) {
                 $errors[] = 'Vos identifiants de connexion ne correspondent à aucun compte ';
             } else {
-                $session->ensureStarted();
-                $session->set('email',$_POST['email']);
+                Session::set('email',$_POST['email']);
                 $roleId = $user->getRoleByEmail($_POST['email']);
                 $role = $user->getRole($roleId['role']);
-                $session->set('role',$role['role']);
+                Session::set('role',$role['role']);
                 header('location:'.DASHBOARD_VIEW_ROUTE);
             }
-
         }
 
         $view = new View("login");
@@ -47,9 +50,7 @@ class User {
 
     public function logout()
     {
-        $session = New Session();
-        $session->delete('email');
-        $session->sessionDestroy();
+        Session::destroy();
         header('location:'.LOGIN_VIEW_ROUTE);
     }
 

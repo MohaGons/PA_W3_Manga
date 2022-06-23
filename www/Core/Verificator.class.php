@@ -45,6 +45,28 @@ class Verificator
         return $errors;
     }
 
+    public static function checkFormLogin($config, $data): array
+    {
+        $errors = [];
+
+        if( count($config["inputs"]) != count($_POST)){
+            die("Tentative de hack");
+        }
+
+        foreach ($config["inputs"] as $name=>$input)
+        {
+            if(!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
+                $errors[]= $name ." ne peut pas être vide";
+            }
+
+            if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
+                $errors[]=$input["error"];
+            }
+        }
+
+        return $errors;
+    }
+
     public static function checkFormParam($config, $data): array
     {
         $errors = [];

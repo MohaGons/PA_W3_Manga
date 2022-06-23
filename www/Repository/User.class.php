@@ -36,4 +36,18 @@ class User {
         return $result;
     }
 
+    public static function checkLogin($data) {
+        $userModel = new UserModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $email = htmlspecialchars($data['email']);
+        $password = htmlspecialchars($data['password']);
+
+        $userModel->select(["id", "email", "password"]);
+        $userModel->where("email", $email, "=");
+        $req = $connectionPDO->pdo->prepare($userModel->getQuery());
+        $req->execute();
+
+    }
+
 }
