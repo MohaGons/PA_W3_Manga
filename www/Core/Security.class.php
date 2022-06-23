@@ -1,35 +1,30 @@
 <?php
 
 namespace App\Core;
-use App\Model\User as UserModel;
-use PDO;
-use function App\myAutoloader;
+
 use App\Core\Session as Session;
-class Security extends Sql
+
+class Security
 {
 
     public static function checkRoute($route):bool
     {
-        $session =new Session();
-        $session->ensureStarted();
         $security = $route['security'];
-        if ($security==='All'){
+        if ($security === 'All'){
         return true;
         }
-        if(isset($_SESSION['role'])){
+        Session::get("role");
+        if(!empty($_SESSION['role'])){
             $role = $_SESSION['role'];
-            for ($i=0;$i<count($security);$i++){
-                if ($security[$i]===$role){
-                    return true;
-                }
+            if (in_array($role, $security))
+            {
+                return true;
             }
             return false;
         }
         else{
             return false;
         }
-
-
     }
 
 
