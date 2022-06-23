@@ -23,6 +23,8 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\Migrations\myAutoloader");
 
+use App\Model\Category;
+use App\Model\Forum;
 use App\Model\Password;
 use App\Model\Role;
 use App\Model\User;
@@ -93,3 +95,27 @@ $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["role"] = "varchar(50) DEFAULT 'abonné'";
 
 $role->createTable($colums);
+
+//MIGRATION CREATE TABLE FORUM
+$forum = new Forum();
+
+$colums = $forum->getColums();
+
+$colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["title"] = "varchar(100) NOT NULL,";
+$colums["description"] = "text,";
+$colums["picture"] = "varchar(255) NOT NULL,";
+$colums["user_id"] = "int(11) NOT NULL";
+
+$forum->createTable($colums);
+
+//MIGRATION CREATE TABLE CATEGORY
+$category = new Category();
+
+$colums = $category->getColums();
+
+$colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["name"] = "varchar(100) NOT NULL,";
+$colums["description"] = "text";
+
+$category->createTable($colums);
