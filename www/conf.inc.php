@@ -11,4 +11,5 @@ define("DBPREFIXE", "mnga_");
 
 //LIEN VIEW
 define("DASHBOARD_VIEW_ROUTE", "/dashboard");
+define("HOME_ROUTE", "/");
 define("LOGIN_VIEW_ROUTE", "/login");
