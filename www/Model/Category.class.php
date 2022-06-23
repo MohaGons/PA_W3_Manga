@@ -1,9 +1,9 @@
 <?php
 namespace App\Model;
 
-use App\Core\Sql;
+use App\Core\MysqlBuilder;
 
-class Category extends Sql
+class Category extends MysqlBuilder
 {
     protected $id = null;   
     protected $name = null;
@@ -11,7 +11,6 @@ class Category extends Sql
 
     public function __construct()
     {
-        echo "constructeur du Model Category";
         parent::__construct();
     }
 
