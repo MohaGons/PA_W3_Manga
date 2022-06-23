@@ -1,11 +1,11 @@
 <?php
 namespace App\Model;
 
-use App\Core\Sql;
+use App\Core\MysqlBuilder;
 use App\Model\Role as RoleModel;
 use PDO;
 
-class User extends Sql
+class User extends MysqlBuilder
 {
     protected $id = null;
     protected $firstname = null;
@@ -273,13 +273,6 @@ class User extends Sql
         $this->token = substr(str_shuffle(bin2hex($bytes)), 0, 255);
     }
 
-
-    public function save(): void
-    {
-        //Pré traitement par exemple
-        //echo "pre traitement";
-        parent::save();
-    }
 
     public function getRole($id)
     {
@@ -680,7 +673,7 @@ class User extends Sql
             ]
         ];
     }
-  
+
     public function getPasswordResetForm(): array
     {
         return [
@@ -702,7 +695,7 @@ class User extends Sql
             ]
         ];
     }
-  
+
       public function getPasswordInitForm(): array
     {
         return [
