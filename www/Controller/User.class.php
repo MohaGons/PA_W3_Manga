@@ -25,22 +25,23 @@ class User {
         $errors = [];
         if(!empty($_POST)) {
 
-                $result = $user->checkLogin($_POST);
-                if ($result==false) {
-                    $errors[] = 'Vos identifiants de connexion ne correspondent à aucun compte ';
-                } else {
-                    $session->ensureStarted();
-                    $session->set('email',$_POST['email']);
-                    $roleId = $user->getRoleByEmail($_POST['email']);
-                    $role = $user->getRole($roleId['role']);
-                    $session->set('role',$role['role']);
-                    header('location:'.DASHBOARD_VIEW_ROUTE);
-                }
-
+            $result = $user->checkLogin($_POST);
+            if ($result==false) {
+                $errors[] = 'Vos identifiants de connexion ne correspondent à aucun compte ';
+            } else {
+                $session->ensureStarted();
+                $session->set('email',$_POST['email']);
+                $roleId = $user->getRoleByEmail($_POST['email']);
+                $role = $user->getRole($roleId['role']);
+                $session->set('role',$role['role']);
+                header('location:'.DASHBOARD_VIEW_ROUTE);
             }
-            $view = new View("login");
-            $view->assign("user", $user);
-            $view->assign("errors", $errors);
+
+        }
+
+        $view = new View("login");
+        $view->assign("user", $user);
+        $view->assign("errors", $errors);
 
     }
 
@@ -102,7 +103,8 @@ class User {
         $view = new View("Register");
         $view->assign("user", $user);
         $view->assign("errors", $errors);
-    }
+}
+
     public function parametre(){
         $user = new UserModel();
         $session = New Session();
