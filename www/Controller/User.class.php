@@ -8,6 +8,7 @@ use App\Core\PasswordReset;
 use App\Core\View;
 use App\Model\User as UserModel;
 use App\Model\Password as PasswordModel;
+use App\Model\Media as MediaModel;
 use App\Model\Category;
 use App\Model\Forum;
 use App\Core\Mailer;
@@ -56,6 +57,7 @@ class User {
     {
         $session = New Session();
         $user = new UserModel();
+        $media = new MediaModel();
         $errors = [];
 
         if(!empty($_POST)) {
@@ -68,8 +70,8 @@ class User {
                 $user->setPassword(htmlspecialchars($_POST["password"]));
                 $user->setGender(htmlspecialchars($_POST["gender"]));
                 $user->setAvatar(htmlspecialchars($_POST["avatar"]));
-
                 $user->save();
+                $media->setAvatar("Avatar",'$_POST["email"]');
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
                 $session->ensureStarted();
                 $session->set('email',$_POST['email']);
