@@ -26,7 +26,4 @@ class Security
             return false;
         }
     }
-
-
-
 }
