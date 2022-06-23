@@ -13,6 +13,7 @@ use App\Model\Forum;
 use App\Core\Mailer;
 use App\Core\Session as Session;
 use App\Model\Manga;
+use App\Repository\User as UserRepository;
 
 
 class User {
@@ -53,7 +54,6 @@ class User {
 
     public function register()
     {
-        $session = New Session();
         $user = new UserModel();
         $errors = [];
 
@@ -61,29 +61,38 @@ class User {
             $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
 
             if (empty($result)) {
-                $user->setFirstname(htmlspecialchars($_POST["firstname"]));
-                $user->setLastname(htmlspecialchars($_POST["lastname"]));
-                $user->setEmail(htmlspecialchars($_POST["email"]));
-                $user->setPassword(htmlspecialchars($_POST["password"]));
-                $user->setGender(htmlspecialchars($_POST["gender"]));
-                $user->setAvatar(htmlspecialchars($_POST["avatar"]));
+                $userRepository = UserRepository::findByEmail(htmlspecialchars($_POST["email"]));
 
-                $user->save();
-                echo "<script>alert('Votre profil a bien été mis à jour')</script>";
-                $session->ensureStarted();
-                $session->set('email',$_POST['email']);
-                $destinataire = $_POST["email"];
-                $name = $_POST["firstname"];
-                $lastname = $_POST["lastname"];
-                $subject = 'test';
-                $body = 'test';
-                Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
-                $session->ensureStarted();
-                $session->set('email',$_POST['email']);
-                $roleId = $user->getRoleByEmail($_POST['email']);
-                $role = $user->getRole($roleId['role']);
-                $session->set('role',$role['role']);
-                header('location:'.DASHBOARD_VIEW_ROUTE);
+                if (empty($userRepository)) {
+                    $user->setFirstname(htmlspecialchars($_POST["firstname"]));
+                    $user->setLastname(htmlspecialchars($_POST["lastname"]));
+                    $user->setEmail(htmlspecialchars($_POST["email"]));
+                    $user->setPassword(htmlspecialchars($_POST["password"]));
+                    $user->setGender(htmlspecialchars($_POST["gender"]));
+                    $user->setAvatar(htmlspecialchars($_POST["avatar"]));
+                    $user->save();
+
+                    echo "<script>alert('Votre profil a bien été mis à jour')</script>";
+
+                    Session::set('email',$_POST['email']);
+                    $destinataire = $_POST["email"];
+                    $name = $_POST["firstname"];
+                    $lastname = $_POST["lastname"];
+                    $subject = 'test';
+                    $body = 'test';
+                    Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+
+                    $roleId = $user->getRoleByEmail($_POST['email']);
+
+                    $role = $user->getRole($roleId['role']);
+                    Session::set('role',$role['role']);
+                    header('location:'.HOME_ROUTE);
+                }
+                else {
+                    $errors[]= "Il existe déjà un compte pour l'adresse mail " .$_POST["email"]. ". Veuillez en renseigner un autre.";
+                }
+
+
             }
             else {
                 $errors = $result;
