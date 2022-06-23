@@ -76,8 +76,8 @@ class User {
                 $destinataire = $_POST["email"];
                 $name = $_POST["firstname"];
                 $lastname = $_POST["lastname"];
-                $subject = 'test';
-                $body = 'test';
+                $subject = 'Inscription MangaSite';
+                $body = 'Bienvenue ' . $name . ' sur MangaSite';
                 Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
                 $session->ensureStarted();
                 $session->set('email',$_POST['email']);
@@ -302,7 +302,7 @@ class User {
         $view = new View("manga", "back");
         $view->assign("manga", $manga);
 
-        $manga_data = $manga->getMangas();        
+        $manga_data = $manga->getMangas();
         $view->assign("manga_data", $manga_data);
     }
 

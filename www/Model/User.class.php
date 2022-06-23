@@ -7,6 +7,7 @@ use PDO;
 
 class User extends MysqlBuilder
 {
+
     protected $id = null;
     protected $firstname = null;
     protected $lastname = null;
@@ -23,7 +24,6 @@ class User extends MysqlBuilder
 
         parent::__construct();
     }
-
 
     public function checkLogin($data)
     {
@@ -102,7 +102,6 @@ class User extends MysqlBuilder
         return $results;
     }
 
-
     /**
      * @return null
      */
@@ -110,7 +109,6 @@ class User extends MysqlBuilder
     {
         return $this->id;
     }
-
 
     /**
      * @return null
@@ -131,7 +129,6 @@ class User extends MysqlBuilder
     {
         $this->firstname = ucwords(strtolower(trim($firstname)));
     }
-
 
     /**
      * @param null $firstname
@@ -198,7 +195,6 @@ class User extends MysqlBuilder
         $stmt= $this->pdo->prepare($q);
         $stmt->execute([$lastname,$id]);
     }
-
 
     /**
      * @return mixed
@@ -272,7 +268,6 @@ class User extends MysqlBuilder
         $bytes = random_bytes(128);
         $this->token = substr(str_shuffle(bin2hex($bytes)), 0, 255);
     }
-
 
     public function getRole($id)
     {
@@ -395,6 +390,7 @@ class User extends MysqlBuilder
         $resultat = $req->fetchAll();
         return $resultat;
     }
+
     public function getAllUsersByName(){
         $q = "SELECT * FROM mnga_user ORDER BY lastname";
         $req = $this->pdo->prepare($q);
@@ -402,6 +398,7 @@ class User extends MysqlBuilder
         $resultat = $req->fetchAll();
         return $resultat;
     }
+
     public function searchUser($search){
         $search = "%$search%";
         $q = "SELECT * FROM mnga_user WHERE lastname LIKE :search OR firstname LIKE :search ";
@@ -411,6 +408,7 @@ class User extends MysqlBuilder
         $resultat = $req->fetchAll();
         return $resultat;
     }
+
     public function getRegisterForm(): array
     {
         return [
@@ -524,7 +522,6 @@ class User extends MysqlBuilder
         ];
     }
 
-
     public function getLoginForm(): array
     {
         return [
@@ -553,7 +550,6 @@ class User extends MysqlBuilder
             ]
         ];
     }
-
 
     public function getParamForm($data): array
     {
@@ -701,4 +697,5 @@ class User extends MysqlBuilder
             ]
         ];
     }
+
 }

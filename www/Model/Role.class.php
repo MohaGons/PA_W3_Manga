@@ -29,4 +29,5 @@ class Role extends MysqlBuilder
         }
         return $roles;
     }
+
 }

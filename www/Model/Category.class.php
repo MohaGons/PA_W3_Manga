@@ -5,6 +5,7 @@ use App\Core\MysqlBuilder;
 
 class Category extends MysqlBuilder
 {
+
     protected $id = null;   
     protected $name = null;
     protected $description = null;
@@ -103,4 +104,5 @@ class Category extends MysqlBuilder
             ]
         ];
     }
+
 }

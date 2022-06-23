@@ -29,9 +29,6 @@ class Security extends Sql
             return false;
         }
 
-
     }
-
-
 
 }
