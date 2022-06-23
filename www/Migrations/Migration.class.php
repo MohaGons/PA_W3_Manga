@@ -105,6 +105,7 @@ $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["title"] = "varchar(100) NOT NULL,";
 $colums["description"] = "text,";
 $colums["picture"] = "varchar(255) NOT NULL,";
+$colums["category_id"] = "int(11) NOT NULL,";
 $colums["user_id"] = "int(11) NOT NULL";
 
 $forum->createTable($colums);
