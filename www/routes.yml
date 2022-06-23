@@ -113,3 +113,9 @@
 /deleteManga:
   controller: user
   action: deleteManga
+  security: [Admin,Editeur,Abonne]
+
+/images:
+  controller: user
+  action : images
+  security: All

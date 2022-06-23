@@ -329,6 +329,14 @@ class User extends Sql
         $this->avatar = strtolower(trim($avatar));
     }
 
+    /**
+     * @param mixed $email
+     */
+    public function updateAvatar(string $avatar): void
+    {
+
+    }
+
     public function getGender($email): string
     {
         $q = "SELECT gender FROM mnga_user WHERE email = :email";
@@ -518,6 +526,29 @@ class User extends Sql
                     "id"=>"avatar",
                     "class"=>"formRegister",
                     "accept" => "image/*"
+                ]
+            ]
+        ];
+    }
+
+    public function getImagesForm(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formRegister",
+                "class"=>"formRegister",
+                "submit"=>"Telecharger"
+            ],
+            "inputs"=>[
+
+                "avatar"=> [
+                    "type"=> "file",
+                    "label"=> "file",
+                    "id"=>"file",
+                    "class"=>"formRegister",
+                    "accept" => ""
                 ]
             ]
         ];

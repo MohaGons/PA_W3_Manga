@@ -58,7 +58,6 @@ class User {
         $errors = [];
 
         if(!empty($_POST)) {
-
             $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
 
             if (empty($result)) {
@@ -79,6 +78,11 @@ class User {
                 $subject = 'test';
                 $body = 'test';
                 Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+                $session->ensureStarted();
+                $session->set('email',$_POST['email']);
+                $roleId = $user->getRoleByEmail($_POST['email']);
+                $role = $user->getRole($roleId['role']);
+                $session->set('role',$role['role']);
                 header('location:'.DASHBOARD_VIEW_ROUTE);
             }
             else {
@@ -125,7 +129,10 @@ class User {
         );
         $view->assign("data",$data);
         $view->assign("user",$user);
-        $view->assign("errors",$errors);
+        if (!empty($errors)){
+            $view->assign("errors",$errors);
+        }
+
     }
 
     public function deletecompte(){
@@ -390,6 +397,5 @@ class User {
             echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
         }
     }
-
 
 }
