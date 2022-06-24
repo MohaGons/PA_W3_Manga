@@ -11,9 +11,9 @@ class Verificator
     {
         $errors = [];
 
-        if( count($config["inputs"]) != count($_POST)){
+       /* if( count($config["inputs"]) != count($_POST)){
             die("Tentative de hack");
-        }
+        }*/
 
         foreach ($config["inputs"] as $name=>$input)
         {

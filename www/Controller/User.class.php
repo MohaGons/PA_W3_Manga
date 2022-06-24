@@ -69,9 +69,9 @@ class User {
                 $user->setEmail(htmlspecialchars($_POST["email"]));
                 $user->setPassword(htmlspecialchars($_POST["password"]));
                 $user->setGender(htmlspecialchars($_POST["gender"]));
-                $user->setAvatar(htmlspecialchars($_POST["avatar"]));
+                $user->setAvatar(htmlspecialchars($_FILES["file"]["name"]));
                 $user->save();
-                $media->setAvatar("Avatar",'$_POST["email"]');
+                $media->setMedia("Avatars",$_POST["email"],"set");
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
                 $session->ensureStarted();
                 $session->set('email',$_POST['email']);
@@ -101,13 +101,17 @@ class User {
     public function parametre(){
         $user = new UserModel();
         $session = New Session();
+        $media = new MediaModel();
         $email= $session->get('email','');
         $lastname = $user->getLastname($email);
         $firstname = $user->getFirstname($email);
         $gender = $user->getGender($email);
         $avatar = $user->getAvatar($email);
         if(!empty($_POST)) {
-            $result = Verificator::checkFormParam($user->getParamForm($data), $_POST);
+            if (!empty($result)){
+                $result = Verificator::checkFormParam($user->getParamForm($data), $_POST);
+            }
+
             if (empty($result)){
                 if (!empty($_POST["lastname"]))
                 {
@@ -118,10 +122,26 @@ class User {
                 $firstname = $_POST["firstname"];
                 $user->updateFirstname($firstname,$email);
                 }
+                if (!empty($_POST["email"])){
+                   $errors[]="Désolé, vous ne pouvez pas modifier votre Email";
+                }
            }
             else{
                 $errors = $result;
             }
+        }
+        if (isset($_POST['file'])){
+            $message = $media->setMedia("Avatars",$_SESSION['email'],"update");
+            $errors= $message;
+            if ($message==NULL){
+                header('Location: ./parametre');
+            }
+        }
+        if (isset($_GET['avatar'])){
+            $nom=htmlspecialchars($_GET['avatar']);
+            $media->updateAvatar($nom,$_SESSION['email']);
+            $errors[]= "Votre Avatar est mise a jour avec succes";
+            header('Location: ./parametre');
         }
         $view = new View("parametre", "back");
         $data= array(
@@ -383,7 +403,7 @@ class User {
                     if ($password == $password_c){
                         //$user->setPassword($password);
                         $password = password_hash($password, PASSWORD_DEFAULT);
-                        $user->NewPassword($password,$email);
+                        $mdp->NewPassword($password,$email);
                         $mdp->UpdateStatut(1,$email);
                         $errors[] = "<br>Votre mot de passe est modefié<br><a href='login'>Se connecter</a>";
                     }
@@ -400,6 +420,47 @@ class User {
         else{
             echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
         }
+    }
+
+    public function updatemdp(){
+        $user = new UserModel();
+        $mdp = new PasswordModel();
+        $errors = [];
+        $email  = $_GET['email'];
+        $Session_email = $_SESSION['email'];
+        if ($email == $Session_email){
+            if (!empty($_POST)){
+                $oldpassword = htmlspecialchars($_POST['oldpassword']);
+                $newpassword = htmlspecialchars($_POST['password']);
+                $cfmpassword = htmlspecialchars($_POST['confirm_password']);
+                if($mdp->verifiemdp($oldpassword, $email)){
+                    $result = Verificator::checkPwd($newpassword);
+                    if ($result){
+                         if ($newpassword==$cfmpassword){
+                             $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+                             $mdp->NewPassword($newpassword,$email);
+                             $errors[]="Votre mot de passe est modifié avec succes";
+                         }
+                         else{
+                             $errors[]="Les champs mot de passe et la confirmation ne sont pas compatible, verifier votre saisie avant de validé";
+                         }
+                    }
+                    else{
+                        $errors[]="Votre nouveau mot de passe doit contenir au moins majuscule, nombre, 8 characteres";
+                    }
+                }
+                else{
+                    $errors[]="Verifier votre ancien mot de passe, il est pas correct";
+                }
+
+            }
+        }
+        else{
+            header('location:'.LOGIN_VIEW_ROUTE);
+        }
+        $view = new View("updatepassword", "back");
+        $view->assign("user", $user);
+        $view->assign("errors", $errors);
     }
 
 }
