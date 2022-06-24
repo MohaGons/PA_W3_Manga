@@ -1,6 +1,7 @@
 <div id="headerSidebar" class="sidebar">
     <ul>
         <li><a href="/dashboard"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+        <li><a href="/media"><i class="fa fa-folder"></i> Medias</a></li>
         <li><a href="/template"><i class="fa-solid fa-file"></i> Template</a></li>
         <li><a href="/pages"><i class="fa-solid fa-file"></i> Pages</a></li>
         <li><a href="/manga"><i class="fa-brands fa-napster"></i> Animé/manga</a></li>

@@ -117,3 +117,14 @@
   controller: user
   action : images
   security: All
+
+/media:
+    controller: media
+    action: Allmedia
+    security: [Admin,Editeur,Abonne]
+
+/updatepassword:
+  controller: user
+  action: updatemdp
+  security: [Admin,Editeur,Abonne]
+
