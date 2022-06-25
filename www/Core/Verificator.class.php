@@ -57,10 +57,6 @@ class Verificator
             if(!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
                 $errors[]= $name ." ne peut pas être vide";
             }
-
-            if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
-                $errors[]=$input["error"];
-            }
         }
 
         return $errors;

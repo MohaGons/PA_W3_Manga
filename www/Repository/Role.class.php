@@ -26,7 +26,7 @@ class Role {
         $roleModel = new RoleModel();
         $connectionPDO = new ConnectionPDO();
 
-        $roleModel->select(["id"]);
+        $roleModel->select(["*"]);
         $roleModel->where("id", $id, "=");
         $req = $connectionPDO->pdo->prepare($roleModel->getQuery());
         $req->execute();
@@ -47,6 +47,21 @@ class Role {
         $req->execute();
 
         $result = $req->fetchAll();
+
+        return $result;
+    }
+
+    public static function getRoleName($id)
+    {
+        $roleModel = new RoleModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $roleModel->select(["role"]);
+        $roleModel->where("id", $id, "=");
+        $req = $connectionPDO->pdo->prepare($roleModel->getQuery());
+        $req->execute();
+
+        $result = $req->fetch();
 
         return $result;
     }
