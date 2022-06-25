@@ -44,4 +44,74 @@ abstract class Sql
         //Si ID null alors insert sinon update
     }
 
+
+    public function getCategories(){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_category");
+		$query->execute();
+		$categorie_data = $query->fetchall();
+		return $categorie_data;
+	}
+
+    public function getCategory($category_Id){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_category WHERE id= :id");
+        $query->bindValue(':id', $category_Id);
+		$query->execute();
+		$category_data = $query->fetch();
+		return $category_data;
+	}
+
+    public function getCategoryNames(){
+        $category_name = [];
+        $category_id = [];
+		$query = $this->pdo->prepare("SELECT id, name FROM mnga_category");
+		$query->execute();
+		$categorie_data = $query->fetchall();
+        foreach ($categorie_data as $key => $value){
+            $category_id[] = $value["id"];
+            $category_name[] = $value["name"];
+        }
+        $category_infos = array_combine($category_id, $category_name);
+		return $category_infos;
+	}
+
+    public function deleteCategory($category_Id){
+        $query = $this->pdo->prepare("DELETE FROM mnga_category WHERE id= :id");
+        $query->bindValue(':id', $category_Id);
+        $query->execute();
+	}
+
+    public function getForums(){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_forum");
+		$query->execute();
+		$forums_data = $query->fetchall();
+		return $forums_data;
+	}
+
+    public function getForum($forum_Id){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_forum WHERE id= :id");
+        $query->bindValue(':id', $forum_Id);
+		$query->execute();
+		$forums_data = $query->fetch();
+		return $forums_data;
+	}
+
+    public function deleteForum($forum_Id){
+        $query = $this->pdo->prepare("DELETE FROM mnga_forum WHERE id= :id");
+        $query->bindValue(':id', $forum_Id);
+        $query->execute();
+	}
+    public function getMangas(){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_manga");
+		$query->execute();
+		$manga_data = $query->fetchall();
+		return $manga_data;
+	}
+
+    public function deleteManga($manga_Id){
+
+		$query = $this->pdo->prepare("DELETE FROM mnga_manga WHERE id= :id");
+		$query->bindValue(':id', $manga_Id);
+		$query->execute();
+		
+    }
 }
