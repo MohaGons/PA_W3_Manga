@@ -26,11 +26,12 @@
 /event:
   controller: event
   action: event
+  security: All
 
 /dashboard:
   controller: admin
   action: home
-  security: [Admin, Abonne, Editeur]
+  security: All
 
 /accueil:
   controller: main

@@ -142,7 +142,6 @@ class Event extends Sql
                 ],
                 "description" => [
                     "label" => "",
-                    "placeholder" => "Description...",
                     "type" => "textarea",
                     "id" => "descriptionRegister",
                     "class" => "FormEvent",
@@ -195,7 +194,7 @@ class Event extends Sql
             ],
             "inputs" => [
                 "name" => [
-                    "placeholder" => "Nom...",
+                    "placeholder" => "test...",
                     "type" => "text",
                     "id" => "eventRegister",
                     "class" => "formEvent",

@@ -11,11 +11,7 @@ class Verificator
     {
         $errors = [];
 
-<<<<<<< HEAD
-        if (count($config["inputs"]) != count($_POST)) {
-=======
-       /* if( count($config["inputs"]) != count($_POST)){
->>>>>>> 02e4753ea1254533dc4b14e671913289034f38b3
+        /* if( count($config["inputs"]) != count($_POST)){
             die("Tentative de hack");
         }*/
 
@@ -51,16 +47,16 @@ class Verificator
     public static function checkFormParam($config, $data): array
     {
         $errors = [];
-        foreach ($config["inputs"] as $name=>$input) {
-            if (!empty($data[$name])){
+        foreach ($config["inputs"] as $name => $input) {
+            if (!empty($data[$name])) {
                 if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
                     $errors[] = $input["error"];
                 }
                 if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
                     $errors[] = $input["error"];
                 }
-                if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
-                    $errors[]=$input["error"];
+                if ($input["type"] == "email" &&  !self::checkEmail($data[$name])) {
+                    $errors[] = $input["error"];
                 }
             }
         }
@@ -71,8 +67,8 @@ class Verificator
     public static function checkupdateUser($config, $data): array
     {
         $errors = [];
-        foreach ($config["inputs"] as $name=>$input) {
-            if (!empty($data[$name])){
+        foreach ($config["inputs"] as $name => $input) {
+            if (!empty($data[$name])) {
                 if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
                     $errors[] = $input["error"];
                 }
@@ -141,8 +137,4 @@ class Verificator
             return false;
         }
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 02e4753ea1254533dc4b14e671913289034f38b3
 }

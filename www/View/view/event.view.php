@@ -56,7 +56,7 @@
             <h2>modifier un évènement</h2>
         </div>
         <div class="modal-body">
-            <?php $this->includePartial("form", $event->getEventFormRegister()); ?>
+            <?php $this->includePartial("form", $event->getEventEditFormRegister()); ?>
         </div>
     </div>
 </div>
