@@ -1530,3 +1530,25 @@ main > .container {
   background-color: #5cb85c;
   color: white;
 }
+
+.dataTables_wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.dataTables_wrapper tbody tr {
+  text-align: center;
+  height: 30px;
+  background-color: lightgrey;
+}
+.dataTables_wrapper thead tr {
+  background-color: black;
+  height: 50px;
+  color: white;
+}
+
+#users_table {
+  width: 100%;
+  margin: 10px 0 10px 0;
+}

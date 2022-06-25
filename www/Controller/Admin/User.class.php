@@ -19,62 +19,10 @@ use App\Repository\User as UserRepository;
 class User {
 
     public function index(){
-//        echo "<pre>";
-//        die(var_dump($_GET));
-
-        $messages = [];
-
-//        if (isset($_GET['action'])){
-//            $action = $_GET['action'];
-//            $id = $_GET['id'];
-//            if($action=='delete'){
-//                $res = $user->deleteuser($id);
-//                if($res==1){
-//                    $messages[]= "l'utilisateur a été bien supprimé !";
-//                }
-//                else{
-//                    $messages[]= "un erreur est survenue, reesayer plus tard";
-//                }
-//            }
-//        }
-//        $pagination=6;
-//        if (isset($_GET['page'])){
-//            $page=$_GET['page'];
-//        }
-//        else{
-//            $page=1;
-//        }
-//        $deb = ($pagination*$page)-$pagination;
-//        $fin=  $deb+$pagination;
-//        if($_GET['action']=='date'){
-//            $users = $user->getAllUsersByDate();
-//        }
-//        elseif($_GET['action']=='nom'){
-//            $users = $user->getAllUsersByName();
-//        }
-//        else{
-//            if (isset($_GET['user'])){
-//                $search = $_GET['user'];
-//                $users = $user->searchUser($search);
-//            }
-//            else{
-//                $users = $user->getAllUsers($deb,$fin);
-//            }
-//        }
-
-
-//        //$roles = $role->getRole(1);*
-//        $test= $user->getRoleByEmail('aminecherigui44@gmail.com');
-//        $Nbusers = count($user->NombreUsers());
-//        $Nbpages = ceil($Nbusers / $pagination);
-
         $users = UserRepository::all();
+
         $view = new View("admin/user_index", "back");
         $view->assign("users", $users);
-//        $view->assign("role", $test);
-//        $view->assign("Nbusers", $Nbusers);
-//        $view->assign("Nbpages", $Nbpages);
-//        $view->assign("messages", $messages);
     }
 
     public function edit(){
