@@ -36,7 +36,7 @@
                 <th>Date Inscription</th>
                 <th></th>
                 <th></th>
-                <th>s</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -63,17 +63,5 @@
     </table>
     <hr>
 </div>
-
-
-
-<!--<div class="pagination">-->
-<!--    --><?php
-//    if (isset($_GET['page'])){
-//        $active=$_GET['page'];
-//    }
-//    for($page = 1; $page <= $Nbpages; $page++): ?>
-<!--        <a href="?page=--><?//= $page ?><!--" --><?php //if (isset($active) && $page==$active){?><!-- class="active" --><?php //}?><!-->--><?//= $page ?><!--</a>-->
-<!--    --><?php //endfor ?>
-<!--</div>-->
 
 
