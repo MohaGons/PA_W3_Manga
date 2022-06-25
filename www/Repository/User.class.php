@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Core\Session as Session;
 use App\Model\User as UserModel;
 use App\Core\ConnectionPDO;
 
@@ -31,7 +32,7 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        $result = $req->fetchAll();
+        $result = $req->fetch();
 
         return $result;
     }
@@ -42,12 +43,24 @@ class User {
 
         $email = htmlspecialchars($data['email']);
         $password = htmlspecialchars($data['password']);
+        $column["email"] = $email;
 
-        $userModel->select(["id", "email", "password"]);
+        $userModel->select(["id", "email", "password", "role"]);
         $userModel->where("email", $email, "=");
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
-        $req->execute();
+        $req->execute($column);
 
+        $result = $req->fetch();
+
+        if (password_verify($password, $result['password'])) {
+            Session::set('email', $result['email']);
+            $role = Role::getRoleName($result['role']);
+            Session::set('role', $role["role"]);
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
 }

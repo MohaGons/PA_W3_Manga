@@ -9,22 +9,22 @@
   security: All
 
 /login:
-  controller: user
+  controller: authentification
   action: login
   security : All
 
 /logout:
-  controller: user
+  controller: authentification
   action: logout
   security: [Abonne,Admin,Editeur]
 
 /register:
-  controller: user
+  controller: authentification
   action: register
   security: All
 
-/dashboard:
-  controller: admin
+/admin:
+  controller: main
   action: home
   security: [Admin,Abonne,Editeur]
 
@@ -53,14 +53,14 @@
    action : deletecompte
    security: [Admin]
 
-/utilisateurs:
-   controller: admin
-   action : utilisateurs
+/admin/utilisateurs:
+   controller: user
+   action : index
    security: [Admin,Editeur,Abonne]
 
-/utilisateurs/update:
-  controller: admin
-  action: utilisateurs_update
+/admin/utilisateurs/update:
+  controller: user
+  action: edit
   security: [Admin,Editeur,Abonne]
 
 /categorie:

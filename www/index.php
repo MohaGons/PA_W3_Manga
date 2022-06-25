@@ -48,7 +48,14 @@ $action = strtolower($routes[$uri]["action"]);
 // $Controller = User
 // $action = login
 
-$controllerFile = "Controller/".$controller.".class.php";
+$adminController = strpos($uri, "/admin");
+if ($adminController === false) {
+    $controllerFile = "Controller/".$controller.".class.php";
+}
+else {
+    $controllerFile = "Controller/Admin/".$controller.".class.php";
+}
+
 if(!file_exists($controllerFile)){
     die("Le fichier Controller n'existe pas");
 }
