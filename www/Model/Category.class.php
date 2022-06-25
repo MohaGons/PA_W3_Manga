@@ -1,17 +1,17 @@
 <?php
 namespace App\Model;
 
-use App\Core\Sql;
+use App\Core\MysqlBuilder;
 
-class Category extends Sql
+class Category extends MysqlBuilder
 {
+
     protected $id = null;   
     protected $name = null;
     protected $description = null;
 
     public function __construct()
     {
-        echo "constructeur du Model Category";
         parent::__construct();
     }
 
@@ -21,6 +21,10 @@ class Category extends Sql
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
     }
 
     public function getNameCategory(): ?string
@@ -83,14 +87,14 @@ class Category extends Sql
                 "submit"=>"Valider"
             ],
             "inputs"=>[
-                "name"=>[
+                "editname"=>[
                     "placeholder"=>"Nom",
                     "type"=>"text",
                     "id"=>"editNameCategory",
                     "class"=>"editFormCategory",
                     "required"=>true,
                 ],
-                "description"=>[
+                "editdescription"=>[
                     "placeholder"=>"description",
                     "type"=>"text",
                     "id"=>"editDescriptionCategory",
@@ -100,4 +104,5 @@ class Category extends Sql
             ]
         ];
     }
+
 }

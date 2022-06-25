@@ -1,49 +1,34 @@
 <?php
 
 namespace App\Core;
-
+use App\Model\User as UserModel;
 use PDO;
 use function App\myAutoloader;
-
+use App\Core\Session as Session;
 class Security extends Sql
 {
 
     public static function checkRoute($route):bool
     {
-        /*
-         * /dashboard:
-              Controller: admin
-              action: home
-              security: true
-         *
-         */
+        $session =new Session();
+        $session->ensureStarted();
+        $security = $route['security'];
+        if ($security==='All'){
         return true;
-    }
-
-    function checkLogin()
-    {
-
-      /*  try
-        {
-            $bdd = new PDO('mysql:host=database;dbname=pa_database', 'root', 'password');
         }
-        catch(\Exception $e)
-        {
-            die('Erreur : '.$e->getMessage());
-        }*/
-
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
-
-        $q = "SELECT ID FROM mnga_user WHERE email = ? AND password = ?";
-
-        $req = $bdd->prepare($q);
-        $req->execute( [$email, $password] );
-        $results = $req->fetchAll();
-        return $results;
-
+        if(isset($_SESSION['role'])){
+            $role = $_SESSION['role'];
+            for ($i=0;$i<count($security);$i++){
+                if ($security[$i]===$role){
+                    return true;
+                }
+            }
+            return false;
+        }
+        else{
+            return false;
+        }
 
     }
-
 
 }

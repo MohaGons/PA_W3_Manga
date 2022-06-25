@@ -4,7 +4,6 @@ namespace App\Core;
 
 use App\Model\User as UserModel;
 
-
 class Verificator
 {
 
@@ -12,9 +11,13 @@ class Verificator
     {
         $errors = [];
 
+<<<<<<< HEAD
         if (count($config["inputs"]) != count($_POST)) {
+=======
+       /* if( count($config["inputs"]) != count($_POST)){
+>>>>>>> 02e4753ea1254533dc4b14e671913289034f38b3
             die("Tentative de hack");
-        }
+        }*/
 
         foreach ($config["inputs"] as $name => $input) {
             if (!empty($input["required"]) && $input["required"] == true && empty($data[$name])) {
@@ -42,24 +45,46 @@ class Verificator
             }
         }
 
+        return $errors;
+    }
+
+    public static function checkFormParam($config, $data): array
+    {
+        $errors = [];
+        foreach ($config["inputs"] as $name=>$input) {
+            if (!empty($data[$name])){
+                if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                    $errors[] = $input["error"];
+                }
+                if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
+                    $errors[] = $input["error"];
+                }
+                if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
+                    $errors[]=$input["error"];
+                }
+            }
+        }
+        return $errors;
+    }
+
+
+    public static function checkupdateUser($config, $data): array
+    {
+        $errors = [];
+        foreach ($config["inputs"] as $name=>$input) {
+            if (!empty($data[$name])){
+                if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                    $errors[] = $input["error"];
+                }
+                if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
+                    $errors[] = $input["error"];
+                }
+            }
+        }
 
         return $errors;
     }
 
-    public static function checkFormLogin($config, $data): array
-    {
-        $errors = [];
-        $user = new UserModel();
-
-        $results = $user->checkLogin($data);
-
-        if ($results == false) {
-            $errors[] = "Votre identifiant ou votre mot de passe est incorect";
-            return $errors;
-        } else {
-            return $errors;
-        }
-    }
 
     public static function checkEmail($email): bool
     {
@@ -116,4 +141,8 @@ class Verificator
             return false;
         }
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 02e4753ea1254533dc4b14e671913289034f38b3
 }

@@ -1,22 +1,27 @@
 /:
   controller: main
   action: home
+  security: All
 
 /nous-contacter:
   controller: main
   action: contact
+  security: All
 
 /login:
   controller: user
   action: login
+  security: All
 
 /logout:
   controller: user
   action: logout
+  security: [Abonne, Admin, Editeur]
 
 /register:
   controller: user
   action: register
+  security: All
 
 /event:
   controller: event
@@ -25,12 +30,104 @@
 /dashboard:
   controller: admin
   action: home
-  security: true
+  security: [Admin, Abonne, Editeur]
 
 /accueil:
   controller: main
   action: home
+  security: All
+
+/recuperer_mdp:
+  controller: user
+  action: recuperer_mdp
+  security: All
+
+/initialiser_mdp:
+  controller: user
+  action: initialiser_mdp
+  security: All
+
+/parametre:
+  controller: user
+  action: parametre
+  security: [Admin, Editeur, Abonne]
+
+/deletecompte:
+  controller: user
+  action: deletecompte
+  security: [Admin]
+
+/utilisateurs:
+  controller: admin
+  action: utilisateurs
+  security: [Admin, Editeur, Abonne]
+
+/utilisateurs/update:
+  controller: admin
+  action: utilisateurs_update
+  security: [Admin, Editeur, Abonne]
 
 /categorie:
   controller: user
   action: category
+  security: All
+
+/deleteCategorie:
+  controller: user
+  action: deleteCategory
+  security: [Admin]
+
+/editCategorie:
+  controller: user
+  action: editCategory
+  security: [Admin, Editeur, Abonne]
+
+/forums:
+  controller: user
+  action: forums
+  security: [Admin, Editeur, Abonne]
+
+/deleteForum:
+  controller: user
+  action: deleteForum
+  security: [Admin]
+
+/editForum:
+  controller: user
+  action: editForum
+  security: [Admin, Editeur, Abonne]
+
+/forum:
+  controller: user
+  action: forum
+  security: [Admin, Editeur, Abonne]
+
+/manga:
+  controller: user
+  action: manga
+  security: [Admin, Editeur, Abonne]
+
+/editManga:
+  controller: user
+  action: editManga
+  security: [Admin, Editeur, Abonne]
+
+/deleteManga:
+  controller: user
+  action: deleteManga
+  security: [Admin]
+
+/images:
+  controller: user
+  action: images
+  security: All
+
+/media:
+  controller: media
+  action: Allmedia
+  security: [Admin, Editeur, Abonne]
+
+/updatepassword:
+  controller: user
+  action: updatemdp
+  security: [Admin, Editeur, Abonne]

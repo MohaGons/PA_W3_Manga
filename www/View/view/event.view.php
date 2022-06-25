@@ -1,16 +1,4 @@
-<h1>Créer un nouvel évènement</h1>
-
-
-<?php $this->includePartial("form", $event->getEventFormRegister()); ?>
-<?php if (!empty($errors)) {
-    foreach ($errors as $error) {
-        echo $error . "<br>";
-    }
-}
-
-?>
-
-<h1>Events</h1>
+<h1>Les events </h1>
 
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 col--flex">
@@ -47,7 +35,7 @@
     </div>
 </div>
 
-<!-- ajout d'une catégorie -->
+<!-- ajout d'un event -->
 <div class="modal" id="modal-add">
     <div class="modal-content">
         <div class="modal-header">
@@ -60,7 +48,7 @@
     </div>
 </div>
 
-<!-- modification d'une catégorie -->
+<!-- modification d'un event -->
 <div class="modal" id="modal-edit">
     <div class="modal-content">
         <div class="modal-header">
@@ -73,7 +61,7 @@
     </div>
 </div>
 
-<!-- suppréssion d'une catégorie -->
+<!-- suppréssion d'un event -->
 <?php
 foreach ($event as $key => $value) { ?>
     <div class="modal" id="modal-delete">

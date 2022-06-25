@@ -17,8 +17,8 @@
                             <td><?= $value["name"] ?></td>
                             <td><?= $value["description"] ?></td>
                             <td>
-                                <button class="control--modify" id="modify-button<?= $value['id']?>">Modifier</button>
-                                <button class="control--delete" id="delete-button<?= $value['id']?>">Supprimer</button>
+                            <a href="editForum?id=<?= $value['id']?>">Update</a>
+                                <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
                             </td>
                         </tr>
                 <?php 
@@ -41,35 +41,12 @@
         </div>
     </div>
 </div> 
-
-<!-- modification d'une catégorie -->
-<div class="modal" id="modal-edit">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>modifier une catégorie</h2>
-        </div>
-        <div class="modal-body">
-            <?php $this->includePartial("form", $category->getCategoryForm());?>
-        </div>
-    </div>
-</div> 
-
-<!-- suppréssion d'une catégorie -->
-<?php 
-    foreach ($categorie_data as $key => $value){ ?>
-        <div class="modal" id="modal-delete">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Supprimer une catégorie</h2>
-                </div>
-                <div class="modal-body">
-                <button class="control--delete" onclick="window.location.href="/categorie?id= <?= $value['id'] ?>'">Supprimer</button>
-                </div>
-            </div>
-        </div> 
-<?php 
-    }
-?>
-<script src="../../Style/dist/deleteCategory.js"></script>
+<script src="../../Style/src/js/deleteCategory.js"></script>
+<script>
+$('.control--add').css('background-color', localStorage.buttonAdd);
+$('.control--delete').css('background-color', localStorage.buttonDelete);
+$('.button').css('background-color', localStorage.button);
+$('body').css('background-color', localStorage.background);
+$('h1').css('color', localStorage.h1Color);
+$("*").css("font-family", localStorage.font);
+</script>

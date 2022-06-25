@@ -21,20 +21,7 @@ abstract class Sql
         $getCalledClassExploded = explode("\\", strtolower(get_called_class())); // App\Model\User
         $this->table = DBPREFIXE.end($getCalledClassExploded);
     }
-
-
-    /**
-     * @param null $id
-     */
-    public function setId(?int $id): self
-    {
-        $sql = "SELECT * FROM ".$this->table." WHERE id=:id";
-        $queryPrepared = $this->pdo->prepare($sql);
-        $queryPrepared->execute( ["id"=>$id] );
-        return $queryPrepared->fetchObject(get_called_class());
-
-    }
-
+    
     public function save(): void
     {
         $colums = get_object_vars($this);
@@ -57,20 +44,4 @@ abstract class Sql
         //Si ID null alors insert sinon update
     }
 
-    public function getCategories(){
-		$query = $this->pdo->prepare("SELECT * FROM mnga_category");
-		$query->execute();
-		$categorie_data = $query->fetchall();
-		return $categorie_data;
-	}
-
-    public function deleteCategory(){
-		if(!empty($_POST['id'])){
-			$category_Id = $_POST['id'];
-
-			$query = $this->pdo->prepare("DELETE FROM mnga_category WHERE id= :id");
-			$query->bindValue(':id', $category_Id);
-			$query->execute();
-		}
-	}
 }
