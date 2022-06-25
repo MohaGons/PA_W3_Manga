@@ -1,17 +1,17 @@
 <?php
 namespace App\Model;
 
-use App\Core\Sql;
+use App\Core\MysqlBuilder;
 
-class Category extends Sql
+class Category extends MysqlBuilder
 {
+
     protected $id = null;   
     protected $name = null;
     protected $description = null;
 
     public function __construct()
     {
-        echo "constructeur du Model Category";
         parent::__construct();
     }
 
@@ -112,4 +112,5 @@ class Category extends Sql
             ]
         ];
     }
+
 }

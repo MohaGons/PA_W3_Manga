@@ -11,9 +11,9 @@ class Verificator
     {
         $errors = [];
 
-        if( count($config["inputs"]) != count($_POST)){
+       /* if( count($config["inputs"]) != count($_POST)){
             die("Tentative de hack");
-        }
+        }*/
 
         foreach ($config["inputs"] as $name=>$input)
         {
@@ -40,11 +40,7 @@ class Verificator
             if( !empty($input["confirm"]) && $data[$name]!=$data[$input["confirm"]]  ){
                 $errors[]=$input["error"];
             }
-
-
-
         }
-
 
         return $errors;
     }
@@ -81,6 +77,7 @@ class Verificator
                 }
             }
         }
+
         return $errors;
     }
 
@@ -97,5 +94,4 @@ class Verificator
             && preg_match("/[A-Z]/",$pwd, $result );
     }
     
-
 }

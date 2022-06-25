@@ -7,8 +7,8 @@ use App\Core\View;
 use App\Core\Verificator;
 use MongoDB\BSON\Decimal128;
 
-class Admin{
-
+class Admin
+{
 
     public function home()
     {
@@ -96,6 +96,5 @@ class Admin{
         $view->assign("user", $user);
         $view->assign("messages", $messages);
     }
-
 
 }

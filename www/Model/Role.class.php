@@ -1,10 +1,10 @@
 <?php
 namespace App\Model;
 
-use App\Core\Sql;
+use App\Core\MysqlBuilder;
 use PDO;
 
-class Role extends Sql
+class Role extends MysqlBuilder
 {
 
     public function getRole($id)
@@ -29,4 +29,5 @@ class Role extends Sql
         }
         return $roles;
     }
+
 }

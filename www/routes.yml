@@ -8,7 +8,6 @@
   action: contact
   security: All
 
-
 /login:
   controller: user
   action: login
@@ -49,11 +48,10 @@
   action : parametre
   security: [Admin,Editeur,Abonne]
 
-
 /deletecompte:
    controller: user
    action : deletecompte
-   security: [Admin,Editeur,Abonne]
+   security: [Admin]
 
 /utilisateurs:
    controller: admin
@@ -73,7 +71,7 @@
 /deleteCategorie:
   controller: user
   action: deleteCategory
-  security: [Admin,Editeur,Abonne]
+  security: [Admin]
 
 /editCategorie:
   controller: user
@@ -88,7 +86,7 @@
 /deleteForum:
   controller: user
   action: deleteForum
-  security: [Admin,Editeur,Abonne]
+  security: [Admin]
 
 /editForum:
   controller: user
@@ -113,3 +111,20 @@
 /deleteManga:
   controller: user
   action: deleteManga
+  security: [Admin]
+
+/images:
+  controller: user
+  action : images
+  security: All
+
+/media:
+    controller: media
+    action: Allmedia
+    security: [Admin,Editeur,Abonne]
+
+/updatepassword:
+  controller: user
+  action: updatemdp
+  security: [Admin,Editeur,Abonne]
+

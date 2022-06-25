@@ -44,6 +44,7 @@ abstract class Sql
         //Si ID null alors insert sinon update
     }
 
+
     public function getCategories(){
 		$query = $this->pdo->prepare("SELECT * FROM mnga_category");
 		$query->execute();

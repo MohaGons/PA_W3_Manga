@@ -1,10 +1,11 @@
 <?php
 namespace App\Model;
 
-use App\Core\Sql;
+use App\Core\MysqlBuilder;
 
-class Manga extends Sql
+class Manga extends MysqlBuilder
 {
+    
     protected $id = null;   
     protected $type = null;
     protected $title = null;
@@ -23,7 +24,6 @@ class Manga extends Sql
 
     public function __construct()
     {
-        echo "constructeur du Model Manga";
         parent::__construct();
     }
 

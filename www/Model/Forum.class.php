@@ -1,10 +1,12 @@
 <?php
 namespace App\Model;
 
+use App\Core\MysqlBuilder;
 use App\Core\Sql;
 
-class Forum extends Sql
+class Forum extends MysqlBuilder
 {
+
     protected $id = null;   
     protected $title = null;
     protected $description = null;
@@ -13,7 +15,6 @@ class Forum extends Sql
 
     public function __construct()
     {
-        echo "constructeur du Model Forum";
         parent::__construct();
     }
 
@@ -151,4 +152,5 @@ class Forum extends Sql
             ]
         ];
     }
+
 }

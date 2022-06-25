@@ -22,8 +22,6 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\myAutoloader");
 
-
-
 $fileRoutes = "routes.yml";
 
 if(file_exists($fileRoutes)){
@@ -31,8 +29,6 @@ if(file_exists($fileRoutes)){
 }else{
     die("Le fichier de routing n'existe pas");
 }
-
-
 
 $uri = explode("?", $_SERVER["REQUEST_URI"])[0];
 
@@ -45,12 +41,8 @@ if(!Security::checkRoute($routes[$uri])){
     die("NotAuthorized");
 }
 
-
 $controller = ucfirst(strtolower($routes[$uri]["controller"]));
 $action = strtolower($routes[$uri]["action"]);
-
-
-
 
 // $uri = /login
 // $Controller = User
@@ -71,7 +63,7 @@ if( !class_exists($controller)){
 $objectController = new $controller();
 
 
-if( !method_exists($objectController, $action) ){
+if(!method_exists($objectController, $action) ){
     die("La methode n'existe pas");
 }
 

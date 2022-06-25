@@ -4,8 +4,9 @@ namespace App\Core;
 
 use App\Core\Builder;
 
-class View{
-
+class View
+{
+    
     private $view;
     private $template;
     private $data = [];

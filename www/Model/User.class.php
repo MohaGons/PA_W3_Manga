@@ -1,12 +1,13 @@
 <?php
 namespace App\Model;
 
-use App\Core\Sql;
+use App\Core\MysqlBuilder;
 use App\Model\Role as RoleModel;
 use PDO;
 
-class User extends Sql
+class User extends MysqlBuilder
 {
+
     protected $id = null;
     protected $firstname = null;
     protected $lastname = null;
@@ -24,7 +25,6 @@ class User extends Sql
         parent::__construct();
     }
 
-
     public function checkLogin($data)
     {
         $email = htmlspecialchars($data['email']);
@@ -41,68 +41,6 @@ class User extends Sql
 
     }
 
-    public function checkPasswordReset($data)
-    {
-
-        $email = htmlspecialchars($data['email']);
-        $q = "SELECT * FROM mnga_user WHERE email = :email";
-        $req = $this->pdo->prepare($q);
-        $req->execute(['email' => $email]);
-        $results = $req->fetch();
-        if ($results > 0) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    public function checkPasswordInit($data)
-    {
-
-        $email = htmlspecialchars($_GET['email']);
-        $token = htmlspecialchars($_GET['token']);
-        //$email = "amine@gmail.com";
-        $q = "SELECT * FROM passwords WHERE email = :email ORDER BY id DESC";
-        $req = $this->pdo->prepare($q);
-        $req->execute(['email' => $email]);
-        $results = $req->fetch();
-        if (!empty($results)) {
-            if($token==$results['token'] && $results['statut']==0){
-                $date_action = time();
-                if($date_action-$results['date_demande']>3600){
-                    $results = 2;
-                    return $results;
-                }
-                else{
-                    $results = $results['token'];
-                    return $results;
-                }
-            }
-            else{
-                //Token incorrect
-                $results = NULL;
-                return $results;
-                }
-
-        } else {
-            //email n'exist pas
-            $results = NULL;
-            return $results;
-        }
-
-    }
-
-    public function NewPassword(string $Password, string $Email)
-    {
-        $q = "UPDATE mnga_user SET  password = :password WHERE email = :email";
-        $req = $this->pdo->prepare($q);
-        $req->execute( ['password'=> $Password, 'email' => $Email] );
-        $results = $req->fetch();
-        return $results;
-    }
-
-
     /**
      * @return null
      */
@@ -110,7 +48,6 @@ class User extends Sql
     {
         return $this->id;
     }
-
 
     /**
      * @return null
@@ -131,7 +68,6 @@ class User extends Sql
     {
         $this->firstname = ucwords(strtolower(trim($firstname)));
     }
-
 
     /**
      * @param null $firstname
@@ -198,7 +134,6 @@ class User extends Sql
         $stmt= $this->pdo->prepare($q);
         $stmt->execute([$lastname,$id]);
     }
-
 
     /**
      * @return mixed
@@ -273,17 +208,9 @@ class User extends Sql
         $this->token = substr(str_shuffle(bin2hex($bytes)), 0, 255);
     }
 
-
-    public function save(): void
-    {
-        //Pré traitement par exemple
-        //echo "pre traitement";
-        parent::save();
-    }
-
     public function getRole($id)
     {
-        $q = "SELECT role FROM roles WHERE id = :id";
+        $q = "SELECT role FROM mnga_role WHERE id = :id";
         $req = $this->pdo->prepare($q);
         $req->execute(['id' => $id]);
         return $req->fetch();
@@ -327,6 +254,14 @@ class User extends Sql
     public function setAvatar(string $avatar): void
     {
         $this->avatar = strtolower(trim($avatar));
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function updateAvatar(string $avatar): void
+    {
+
     }
 
     public function getGender($email): string
@@ -394,6 +329,7 @@ class User extends Sql
         $resultat = $req->fetchAll();
         return $resultat;
     }
+
     public function getAllUsersByName(){
         $q = "SELECT * FROM mnga_user ORDER BY lastname";
         $req = $this->pdo->prepare($q);
@@ -401,6 +337,7 @@ class User extends Sql
         $resultat = $req->fetchAll();
         return $resultat;
     }
+
     public function searchUser($search){
         $search = "%$search%";
         $q = "SELECT * FROM mnga_user WHERE lastname LIKE :search OR firstname LIKE :search ";
@@ -410,6 +347,7 @@ class User extends Sql
         $resultat = $req->fetchAll();
         return $resultat;
     }
+
     public function getRegisterForm(): array
     {
         return [
@@ -417,6 +355,7 @@ class User extends Sql
                 "method"=>"POST",
                 "action"=>"",
                 "id"=>"formRegister",
+                "enctype"=>"multipart/form-data",
                 "class"=>"formRegister",
                 "submit"=>"S'inscrire"
             ],
@@ -512,17 +451,16 @@ class User extends Sql
                     "defaultValue" =>  "cgu2"
                 ],
                 */
-                "avatar"=> [
+                "file"=> [
                     "type"=> "file",
                     "label"=> "Avatar : ",
-                    "id"=>"avatar",
+                    "id"=>"file",
                     "class"=>"formRegister",
-                    "accept" => "image/*"
+                    "accept" => ""
                 ]
             ]
         ];
     }
-
 
     public function getLoginForm(): array
     {
@@ -552,7 +490,6 @@ class User extends Sql
             ]
         ];
     }
-
 
     public function getParamForm($data): array
     {
@@ -587,12 +524,15 @@ class User extends Sql
                     "max"=>100,
                     "error"=>" Votre nom doit faire entre 2 et 100 caractères",
                 ],
-                "avatar"=> [
-                    "type"=> "file",
-                    "label"=> "Avatar : ".$data['avatar'],
-                    "id"=>"avatar",
-                    "class"=>"formRegister",
-                    "accept" => "image/*"
+                 "email"=>[
+                    "placeholder"=>$data['email'],
+                    "type"=>"text",
+                    "id"=>"pwdRegister",
+                    "class"=>"formparam",
+                    "required"=>false,
+                    "min"=>2,
+                    "max"=>100,
+                    "error"=>" Votre email doit faire entre 2 et 100 caractères",
                 ]
             ]
         ];
@@ -651,7 +591,7 @@ class User extends Sql
             ]
         ];
     }
-  
+
     public function getPasswordResetForm(): array
     {
         return [
@@ -673,8 +613,8 @@ class User extends Sql
             ]
         ];
     }
-  
-      public function getPasswordInitForm(): array
+
+    public function getPasswordInitForm(): array
     {
         return [
             "config"=>[
@@ -702,4 +642,41 @@ class User extends Sql
             ]
         ];
     }
+
+    public function getUpdatePwdForm(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formLogin",
+                "class"=>"formLogin",
+                "submit"=>"Valider"
+            ],
+            "inputs"=>[
+                "oldpassword"=>[
+                    "placeholder"=>"Ancien Password",
+                    "type"=>"password",
+                    "id"=>"pwdRegister",
+                    "class"=>"formparam",
+                    "required"=>true,
+                ],
+                "password"=>[
+                    "placeholder"=>"Nouveau Password",
+                    "type"=>"password",
+                    "id"=>"pwdRegister",
+                    "class"=>"formparam",
+                    "required"=>true,
+                ],
+                "confirm_password"=>[
+                    "placeholder"=>"Confirmer Password",
+                    "type"=>"password",
+                    "id"=>"pwdRegister",
+                    "class"=>"formparam",
+                    "required"=>true,
+                ]
+            ]
+        ];
+    }
+
 }

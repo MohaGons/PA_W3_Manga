@@ -7,20 +7,22 @@ use App\Core\Mailer;
 use function App\myAutoloader;
 use App\Core\Security as User;
 use App\Model\User as UserModel;
+use App\Model\Password as PasswordModel;
 class PasswordReset extends Sql
 {
     public static function checkFormPasswordReset($config, $data):array
     {
         $errors = array();
         $user = new UserModel();
-        $results = $user->checkPasswordReset($data);
+        $mdp = new PasswordModel();
+        $results = $mdp->checkPasswordReset($data);
         if ($results == false) {
             $errors[] = "<br>Votre Email n'existe pas ";
             return $errors;
         }
         else {
             $user = new User();
-            $results = $user->checkPassword($data);
+            $results = $mdp->checkPassword($data);
             $destinataire = $data['email'];
             $name = '';
             $lastname = '';
@@ -38,8 +40,9 @@ class PasswordReset extends Sql
     {
         $errors = array();
         $user = new UserModel();
+        $mdp = new PasswordModel();
         // verifier si token existe sinon retour null
-        $results = $user->checkPasswordInit($data);
+        $results = $mdp->checkPasswordInit($data);
         if ($results != NULL ) {
             if($results==2){
                 //$errors[] = "<br>La durée maximum d'une heur est depassé";
@@ -58,7 +61,5 @@ class PasswordReset extends Sql
             return $errors;
         }
     }
-
-
 
 }
