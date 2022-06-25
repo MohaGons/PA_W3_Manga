@@ -81,7 +81,7 @@ class Builder
                             id='".$configInput["id"]."'
                             placeholder='".$configInput["placeholder"]."'
                             type='".$configInput["type"]."'
-                           
+                            value='".$configInput["value"]."'
                             ><br>";
                     break;
 

@@ -63,20 +63,26 @@ class Category extends Sql
                     "type"=>"text",
                     "id"=>"nameCategory",
                     "class"=>"formCategory",
+                    "value"=>"",
                     "required"=>true,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>"Veuillez mettre au moins mettre le nom (faire entre 2 et 25 caractères)",
+                    
                 ],
                 "description"=>[
-                    "placeholder"=>"description",
+                    "placeholder"=>"description (facultatif)",
                     "type"=>"text",
                     "id"=>"descriptionCategory",
                     "class"=>"formCategory",
+                    "value"=>"",
                     "required"=>false,
                 ]
             ]
         ];
     }
 
-    public function editCategoryForm(): array
+    public function editCategoryForm($categorie_data): array
     {
         return [
             "config"=>[
@@ -87,18 +93,20 @@ class Category extends Sql
                 "submit"=>"Valider"
             ],
             "inputs"=>[
-                "editname"=>[
+                "editName"=>[
                     "placeholder"=>"Nom",
                     "type"=>"text",
                     "id"=>"editNameCategory",
                     "class"=>"editFormCategory",
+                    "value"=>$categorie_data['name'],
                     "required"=>true,
                 ],
-                "editdescription"=>[
+                "editDescription"=>[
                     "placeholder"=>"description",
                     "type"=>"text",
                     "id"=>"editDescriptionCategory",
                     "class"=>"editFormCategory",
+                    "value"=>$categorie_data['description'],
                     "required"=>false,
                 ]
             ]
