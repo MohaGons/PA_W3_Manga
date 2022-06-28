@@ -7,13 +7,18 @@
         </div>
         <div class="modal-body">
             <?php $this->includePartial("form", $forum->editParamForum($forum_data, $categorie_data));?>
+            <?php if (!empty($errors)) {
+                foreach ($errors as $error) {
+                    echo $error. "<br>";
+                }
+            }?>
         </div>
     </div>
 </div>
 
 <script>
     ClassicEditor
-    .create( document.querySelector( '#descriptionForum' ) )
+    .create( document.querySelector( '#editDescriptionForum' ) )
     .catch( error => {
         console.error( error );
     } );

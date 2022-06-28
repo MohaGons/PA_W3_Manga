@@ -47,7 +47,7 @@ abstract class MysqlBuilder implements QueryBuilder
             foreach ($colums as $key=>$value) {
                 $update[] = $key."=:".$key;
             }
-            $this->update($colums);
+            $this->update($update);
         }
 
         $queryPrepared = $this->pdo->prepare($this->getQuery());
@@ -169,6 +169,14 @@ abstract class MysqlBuilder implements QueryBuilder
 		return $categorie_data;
 	}
 
+    public function getCategory($category_Id){
+		$query = $this->pdo->prepare("SELECT * FROM mnga_category WHERE id= :id");
+        $query->bindValue(':id', $category_Id);
+		$query->execute();
+		$category_data = $query->fetch();
+		return $category_data;
+	}
+
     public function deleteCategory($category_Id){
         $query = $this->pdo->prepare("DELETE FROM mnga_category WHERE id= :id");
         $query->bindValue(':id', $category_Id);
@@ -182,11 +190,25 @@ abstract class MysqlBuilder implements QueryBuilder
 		return $forums_data;
 	}
 
+    public function getCategoryNames(){
+        $category_name = [];
+        $category_id = [];
+		$query = $this->pdo->prepare("SELECT id, name FROM mnga_category");
+		$query->execute();
+		$categorie_data = $query->fetchall();
+        foreach ($categorie_data as $key => $value){
+            $category_id[] = $value["id"];
+            $category_name[] = $value["name"];
+        }
+        $category_infos = array_combine($category_id, $category_name);
+		return $category_infos;
+	}
+
     public function getForum($forum_Id){
 		$query = $this->pdo->prepare("SELECT * FROM mnga_forum WHERE id= :id");
         $query->bindValue(':id', $forum_Id);
 		$query->execute();
-		$forums_data = $query->fetchall();
+		$forums_data = $query->fetch();
 		return $forums_data;
 	}
 
