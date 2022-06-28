@@ -195,6 +195,7 @@ class Manga extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"typeManga",
                     "class"=>"formManga",
+                    "value"=>"",
                     "required"=>true,
                 ],
                 "title"=>[
@@ -202,6 +203,7 @@ class Manga extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"titleManga",
                     "class"=>"formManga",
+                    "value"=>"",
                     "required"=>true,
                 ],
                 "description"=>[
@@ -209,6 +211,7 @@ class Manga extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"descriptionManga",
                     "class"=>"formManga",
+                    "value"=>"",
                     "required"=>true,
                 ],
                 "releaseDate"=>[
@@ -223,6 +226,7 @@ class Manga extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"authorManga",
                     "class"=>"formManga",
+                    "value"=>"",
                     "required"=>true,
                 ],
                 "status"=>[
@@ -230,6 +234,7 @@ class Manga extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"statusManga",
                     "class"=>"formManga",
+                    "value"=>"",
                     "required"=>true,
                 ],
                 "category"=>[
@@ -237,6 +242,7 @@ class Manga extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"categoryManga",
                     "class"=>"formManga",
+                    "value"=>"",
                     "required"=>true,
                 ],
                 "nbTomes"=>[
@@ -265,6 +271,7 @@ class Manga extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"diffusionManga",
                     "class"=>"formManga",
+                    "value"=>"",
                     "required"=>true,
                 ],
                 "nbSeasons"=>[
@@ -279,6 +286,7 @@ class Manga extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"productionStudioManga",
                     "class"=>"formManga",
+                    "value"=>"",
                     "required"=>true,
                 ],
                 "image"=>[

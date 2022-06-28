@@ -2,7 +2,6 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
-use App\Core\Sql;
 
 class Forum extends MysqlBuilder
 {
@@ -132,16 +131,22 @@ class Forum extends MysqlBuilder
                     "class"=>"formForum",
                     "value"=>$forum_data['title'],
                     "required"=>true,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "editDescription"=>[
                     "label"=>"Description: ",
                     "type"=>"textarea",
-                    "id"=>"descriptionForum",
+                    "id"=>"editDescriptionForum",
                     "class"=>"formForum",
                     "rows"=>"5",
                     "cols"=>"33",
                     "text"=>$forum_data['description'],
-                    "required"=>false,
+                    "required"=>true,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "categories"=> [
                     "type"=> "select",

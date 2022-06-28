@@ -186,7 +186,9 @@ class User {
 
             $result = Verificator::checkFormParam($category->getCategoryForm(), $_POST);
             if (empty($result)) {
-                $category->setNameCategory(htmlspecialchars($_POST["name"]));
+                if (!empty($_POST["name"])) {
+                    $forum->setNameCategory(htmlspecialchars($_POST["name"]));
+                }
                 $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
                 $category->save();
                 echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
@@ -217,16 +219,27 @@ class User {
         $category = new Category();
         $view = new View("edit-category", "back");
         $view->assign("category", $category);
+        $errors = [];
+        $categorie_data = $category->getCategory($_GET["id"]);  
         
         if(!empty($_POST)){
-			$category->setId($_GET["id"]);
-			$category->setNameCategory(htmlspecialchars($_POST["editName"]));
-            $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
-            $category->save();
-            echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
-		}
+            $result = Verificator::checkFormParam($category->editCategoryForm($categorie_data), $_POST);
 
-        $categorie_data = $category->getCategory($_GET["id"]);        
+            if (empty($result)) {
+                $category->setId($_GET["id"]);
+                if (!empty($_POST["editName"])) {
+                    $category->setNameCategory(htmlspecialchars($_POST["editName"]));
+                }
+                $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
+                $category->save();
+                //echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
+                header('Location: ./categorie');
+            } else {
+                $errors = $result;
+            }
+		}
+      
+        $view->assign("errors", $errors);
         $view->assign("categorie_data", $categorie_data);
     }
 
@@ -239,7 +252,7 @@ class User {
         
         if(!empty($_POST)) {
 
-            $result = Verificator::checkFormParam($forum->getForumForm($categorie_data), $_POST);
+            $result = Verificator::checkFormRegister($forum->getForumForm($categorie_data), $_POST);
 
             if (empty($result)) { 
                 if (!empty($_POST["title"])) {
@@ -284,21 +297,36 @@ class User {
         $category = new Category();
         $view = new View("edit-forum", "back");
         $view->assign("forum", $forum);
-        
-        if(!empty($_POST)){
-			$forum->setId($_GET["id"]);
-			$forum->setTitleForum(htmlspecialchars($_POST["editTitle"]));
-            $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
-            $forum->setCategoryId($_POST["categories"]);
-            $forum->setUserId(1);
-            $forum->save();
-            echo "<script>alert('Votre forum a bien été mis à jour')</script>";
-		}
+        $categorie_data = $category->getCategoryNames();  
+        $forum_data = $forum->getForum($_GET["id"]); 
+        $errors = [];
 
-        $categorie_data = $category->getCategoryNames();        
+        if(!empty($_POST)) {
+
+            $result = Verificator::checkFormRegister($forum->editParamForum($forum_data, $categorie_data), $_POST);
+
+            if (empty($result)) { 
+                $forum->setId($_GET["id"]);
+                if (!empty($_POST["editTitle"])) {
+                    $forum->setTitleForum(htmlspecialchars($_POST["editTitle"]));
+                }
+                if (!empty($_POST["editDescription"])) {
+                    $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
+                }
+                if (!empty($_POST["categories"])) {
+                    $forum->setCategoryId($_POST["categories"]);
+                }
+                $forum->setUserId(1);
+                $forum->save();
+                //echo "<script>alert('Votre forum a bien été mis à jour')</script>";
+                header('Location: ./forums');
+            } else {
+                $errors = $result;
+            }
+        }
+      
         $view->assign("categorie_data", $categorie_data);
-
-        $forum_data = $forum->getForum($_GET["id"]);        
+        $view->assign("errors", $errors);       
         $view->assign("forum_data", $forum_data);
     }
 
