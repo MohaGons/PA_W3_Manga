@@ -260,7 +260,7 @@ class Manga extends MysqlBuilder
                     "required"=>true,
                 ],
                 "nbEpisodes"=>[
-                    "placeholder"=>"nombres d'épisodes",
+                    "placeholder"=>"nombres d'episodes",
                     "type"=>"int",
                     "id"=>"nbEpisodesManga",
                     "class"=>"formManga",

@@ -71,7 +71,7 @@ class CommentaireForum extends MysqlBuilder
             "inputs"=>[
                 "commentaire"=>[
                     "placeholder"=>"Commentaire",
-                    "type"=>"text",
+                    "type"=>"textarea",
                     "id"=>"commentaire",
                     "class"=>"formForum",
                     "value"=>"",
