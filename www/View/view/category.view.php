@@ -17,7 +17,7 @@
                             <td><?= $value["name"] ?></td>
                             <td><?= $value["description"] ?></td>
                             <td>
-                            <a href="editForum?id=<?= $value['id']?>">Update</a>
+                            <a href="editCategorie?id=<?= $value['id']?>">Update</a>
                                 <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
                             </td>
                         </tr>
@@ -38,6 +38,11 @@
         </div>
         <div class="modal-body">
             <?php $this->includePartial("form", $category->getCategoryForm());?>
+            <?php if (!empty($errors)) {
+                foreach ($errors as $error) {
+                    echo $error. "<br>";
+                }
+            }?>
         </div>
     </div>
 </div> 

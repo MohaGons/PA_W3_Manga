@@ -1,5 +1,5 @@
 <h1>Les events </h1>
-<a href="/test"> test </a>
+
 
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 col--flex">
@@ -49,19 +49,6 @@
     </div>
 </div>
 
-<!-- modification d'un event -->
-<div class="modal" id="modal-edit">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>modifier un évènement</h2>
-        </div>
-        <div class="modal-body">
-            <?php $this->includePartial("form", $event->getEventEditFormRegister()); ?>
-        </div>
-    </div>
-</div>
-
 <!-- suppréssion d'un event -->
 <?php
 foreach ($event as $key => $value) { ?>
@@ -70,13 +57,12 @@ foreach ($event as $key => $value) { ?>
     <h2>Supprimer un évènement</h2>
     </div>
     <a href="deletEvent?id=<?= $event_id ?>">Supprimer </a>
-    <a href="/test"> test </a>
     </div>
     </div>
 <?php
 }
 ?>
-<script src="../../Style/dist/deleteCategory.js"></script>
+<script src="../../Style/dist/deleteEvent.js"></script>
 
 <?php //$this->includePartial("captcha", null);
 ?>

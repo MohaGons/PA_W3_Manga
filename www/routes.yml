@@ -34,7 +34,7 @@
   security: All
 
 /deleteEvent:
-  controller: event
+  controller: user
   action: deleteEvent
   security: All
 
@@ -114,17 +114,17 @@
   security: [Admin, Editeur, Abonne]
 
 /manga:
-  controller: user
+  controller: manga
   action: manga
   security: [Admin, Editeur, Abonne]
 
 /editManga:
-  controller: user
+  controller: manga
   action: editManga
   security: [Admin, Editeur, Abonne]
 
 /deleteManga:
-  controller: user
+  controller: manga
   action: deleteManga
   security: [Admin]
 

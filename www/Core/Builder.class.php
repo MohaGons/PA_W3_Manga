@@ -68,6 +68,15 @@ class Builder
                                 name='" . $name . "'
                                 accept='" . $configInput["accept"] . "'></div><br>";
                     break;
+                case "text":
+                    $html = "<input name='".$name."'
+                            class='".$configInput["class"]."'
+                            id='".$configInput["id"]."'
+                            placeholder='".$configInput["placeholder"]."'
+                            type='".$configInput["type"]."'
+                            value='".$configInput["value"]."'
+                            ><br>";
+                    break;
                 default:
                     $html = "<input name='" . $name . "'
                             class='" . $configInput["class"] . "'

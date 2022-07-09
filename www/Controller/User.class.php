@@ -14,6 +14,8 @@ use App\Model\Forum;
 use App\Core\Mailer;
 use App\Core\Session as Session;
 use App\Model\Manga;
+use App\Model\Event as EventModel;
+
 
 
 class User
@@ -38,10 +40,14 @@ class User
                 header('location:' . DASHBOARD_VIEW_ROUTE);
             }
         }
-
         $view = new View("login");
         $view->assign("user", $user);
         $view->assign("errors", $errors);
+        /*
+        if (!empty($session->get('email',''))) {
+            header('location:'.DASHBOARD_VIEW_ROUTE);
+        }
+        */
     }
 
     public function logout()
@@ -120,9 +126,6 @@ class User
                     $firstname = $_POST["firstname"];
                     $user->updateFirstname($firstname, $email);
                 }
-                if (!empty($_POST["email"])) {
-                    $errors[] = "Désolé, vous ne pouvez pas modifier votre Email";
-                }
             } else {
                 $errors = $result;
             }
@@ -175,22 +178,26 @@ class User
     public function category()
     {
         $category = new Category();
+        $errors = [];
 
         if (!empty($_POST)) {
 
-            $result = Verificator::checkFormRegister($category->getCategoryForm(), $_POST);
-            print_r($result);
-
+            $result = Verificator::checkFormParam($category->getCategoryForm(), $_POST);
             if (empty($result)) {
-                $category->setNameCategory(htmlspecialchars($_POST["name"]));
+                if (!empty($_POST["name"])) {
+                    $forum->setNameCategory(htmlspecialchars($_POST["name"]));
+                }
                 $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
                 $category->save();
                 echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
+            } else {
+                $errors = $result;
             }
         }
 
         $view = new View("category", "back");
         $view->assign("category", $category);
+        $view->assign("errors", $errors);
 
         $categorie_data = $category->getCategories();
         $view->assign("categorie_data", $categorie_data);
@@ -210,38 +217,64 @@ class User
         $category = new Category();
         $view = new View("edit-category", "back");
         $view->assign("category", $category);
+        $errors = [];
+        $categorie_data = $category->getCategory($_GET["id"]);
 
         if (!empty($_POST)) {
-            $category->setId($_GET["id"]);
-            $category->setNameCategory(htmlspecialchars($_POST["name"]));
-            $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
-            $category->save();
-            echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
+            $result = Verificator::checkFormParam($category->editCategoryForm($categorie_data), $_POST);
+
+            if (empty($result)) {
+                $category->setId($_GET["id"]);
+                if (!empty($_POST["editName"])) {
+                    $category->setNameCategory(htmlspecialchars($_POST["editName"]));
+                }
+                $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
+                $category->save();
+                //echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
+                header('Location: ./categorie');
+            } else {
+                $errors = $result;
+            }
         }
+
+        $view->assign("errors", $errors);
+        $view->assign("categorie_data", $categorie_data);
     }
 
     public function forums()
     {
         $forum = new Forum();
+        $category = new Category();
+        $errors = [];
+        $categorie_data = $category->getCategoryNames();
 
         if (!empty($_POST)) {
 
-            $result = Verificator::checkFormRegister($forum->getForumForm(), $_POST);
-            print_r($result);
+            $result = Verificator::checkFormRegister($forum->getForumForm($categorie_data), $_POST);
 
             if (empty($result)) {
-                $forum->setTitleForum(htmlspecialchars($_POST["title"]));
-                $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
-                $forum->setPictureForum(htmlspecialchars($_POST["picture"]));
-                $forum->setCategoryId(2);
+                if (!empty($_POST["title"])) {
+                    $forum->setTitleForum(htmlspecialchars($_POST["title"]));
+                }
+                if (!empty($_POST["description"])) {
+                    $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
+                }
+                if (!empty($_POST["categories"])) {
+                    $forum->setCategoryId($_POST["categories"]);
+                }
                 $forum->setUserId(1);
                 $forum->save();
                 echo "<script>alert('Votre forum a bien été mis à jour')</script>";
+            } else {
+                $errors = $result;
             }
         }
 
         $view = new View("forums", "back");
         $view->assign("forum", $forum);
+        $view->assign("errors", $errors);
+
+        $view->assign("categorie_data", $categorie_data);
 
         $forums_data = $forum->getForums();
         $view->assign("forums_data", $forums_data);
@@ -259,21 +292,39 @@ class User
     public function editForum()
     {
         $forum = new Forum();
+        $category = new Category();
         $view = new View("edit-forum", "back");
         $view->assign("forum", $forum);
+        $categorie_data = $category->getCategoryNames();
+        $forum_data = $forum->getForum($_GET["id"]);
+        $errors = [];
 
         if (!empty($_POST)) {
-            $forum->setId($_GET["id"]);
-            $forum->setTitleForum(htmlspecialchars($_POST["title"]));
-            $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
-            $forum->setPictureForum(htmlspecialchars($_POST["picture"]));
-            $forum->setCategoryId(2);
-            $forum->setUserId(1);
-            $forum->save();
-            echo "<script>alert('Votre forum a bien été mis à jour')</script>";
+
+            $result = Verificator::checkFormRegister($forum->editParamForum($forum_data, $categorie_data), $_POST);
+
+            if (empty($result)) {
+                $forum->setId($_GET["id"]);
+                if (!empty($_POST["editTitle"])) {
+                    $forum->setTitleForum(htmlspecialchars($_POST["editTitle"]));
+                }
+                if (!empty($_POST["editDescription"])) {
+                    $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
+                }
+                if (!empty($_POST["categories"])) {
+                    $forum->setCategoryId($_POST["categories"]);
+                }
+                $forum->setUserId(1);
+                $forum->save();
+                //echo "<script>alert('Votre forum a bien été mis à jour')</script>";
+                header('Location: ./forums');
+            } else {
+                $errors = $result;
+            }
         }
 
-        $forum_data = $forum->getForum($forum->setId($_GET["id"]));
+        $view->assign("categorie_data", $categorie_data);
+        $view->assign("errors", $errors);
         $view->assign("forum_data", $forum_data);
     }
 
@@ -286,79 +337,6 @@ class User
         $forum_data = $forum->getForum($_GET["id"]);
         $view->assign("forum_data", $forum_data);
     }
-
-    public function manga()
-    {
-        $manga = new Manga();
-
-        if (!empty($_POST)) {
-
-            $result = Verificator::checkFormRegister($manga->getMangaForm(), $_POST);
-            print_r($result);
-
-            if (empty($result)) {
-                $manga->setTypeManga(htmlspecialchars($_POST["type"]));
-                $manga->setTitleManga(htmlspecialchars($_POST["title"]));
-                $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
-                $manga->setImageManga(htmlspecialchars($_POST["image"]));
-                $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
-                $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
-                $manga->setStatusManga(htmlspecialchars($_POST["status"]));
-                $manga->setCategoryManga(htmlspecialchars($_POST["category"]));
-                $manga->setNbTomesManga(htmlspecialchars($_POST["nbTomes"]));
-                $manga->setNbChaptersManga(htmlspecialchars($_POST["nbChapters"]));
-                $manga->setNbEpisodesManga(htmlspecialchars($_POST["nbEpisodes"]));
-                $manga->setDiffusionManga(htmlspecialchars($_POST["diffusion"]));
-                $manga->setNbSeasonsManga(htmlspecialchars($_POST["nbSeasons"]));
-                $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
-                $manga->save();
-                echo "<script>alert('Votre manga a bien été mis à jour')</script>";
-            }
-        }
-
-        $view = new View("manga", "back");
-        $view->assign("manga", $manga);
-
-        $manga_data = $manga->getMangas();
-        $view->assign("manga_data", $manga_data);
-    }
-
-    public function deleteManga()
-    {
-        $manga = new Manga();
-        if (!empty($_POST['manga_id'])) {
-            $manga_Id = $_POST['manga_id'];
-            $manga->deleteManga($manga_Id);
-        }
-    }
-
-    public function editManga()
-    {
-        $manga = new Manga();
-        $view = new View("edit-manga", "back");
-        $view->assign("manga", $manga);
-
-        if (!empty($_POST)) {
-            $manga->setId($_GET["id"]);
-            $manga->setTypeManga(htmlspecialchars($_POST["type"]));
-            $manga->setTitleManga(htmlspecialchars($_POST["title"]));
-            $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
-            $manga->setImageManga(htmlspecialchars($_POST["image"]));
-            $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
-            $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
-            $manga->setStatusManga(htmlspecialchars($_POST["status"]));
-            $manga->setCategoryManga(htmlspecialchars($_POST["category"]));
-            $manga->setNbTomesManga(htmlspecialchars($_POST["nbTomes"]));
-            $manga->setNbChaptersManga(htmlspecialchars($_POST["nbChapters"]));
-            $manga->setNbEpisodesManga(htmlspecialchars($_POST["nbEpisodes"]));
-            $manga->setDiffusionManga(htmlspecialchars($_POST["diffusion"]));
-            $manga->setNbSeasonsManga(htmlspecialchars($_POST["nbSeasons"]));
-            $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
-            $manga->save();
-            echo "<script>alert('Votre manga a bien été mis à jour')</script>";
-        }
-    }
-
 
     public function  recuperer_mdp()
     {
@@ -373,7 +351,7 @@ class User
         $view->assign("errors", $errors);
     }
 
-    public function  initialiser_mdp()
+    public function initialiser_mdp()
     {
         $user = new UserModel();
         $mdp = new PasswordModel();

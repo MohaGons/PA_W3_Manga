@@ -63,7 +63,6 @@ class Verificator
         return $errors;
     }
 
-
     public static function checkupdateUser($config, $data): array
     {
         $errors = [];

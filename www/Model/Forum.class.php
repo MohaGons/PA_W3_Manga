@@ -2,7 +2,6 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
-use App\Core\Sql;
 
 class Forum extends MysqlBuilder
 {
@@ -10,7 +9,6 @@ class Forum extends MysqlBuilder
     protected $id = null;   
     protected $title = null;
     protected $description = null;
-    protected $picture = null;
     protected $category_id = null;
     protected $user_id = null;
 
@@ -51,16 +49,6 @@ class Forum extends MysqlBuilder
         $this->description = ucwords(strtolower(trim($description)));
     }
 
-    public function getPictureForum(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPictureForum(?string $picture): void
-    {
-        $this->picture = $picture;
-    }
-
     public function getCategoryId(): ?int
     {
         return $this->category_id;
@@ -80,7 +68,7 @@ class Forum extends MysqlBuilder
         $this->user_id = $user_id;
     }
 
-    public function getForumForm(): array
+    public function getForumForm($categorie_data): array
     {
         return [
             "config"=>[
@@ -96,7 +84,11 @@ class Forum extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"nameForum",
                     "class"=>"formForum",
+                    "value"=>"",
                     "required"=>true,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "description"=>[
                     "label"=> "Description: ",
@@ -105,21 +97,62 @@ class Forum extends MysqlBuilder
                     "class"=>"formForum",
                     "rows"=>"5",
                     "cols"=>"33",
-                    "text"=>"test",
-                    "required"=>false,
-                ],
-                "picture"=> [
-                    "type"=> "file",
-                    "label"=> "Image: ",
-                    "id"=>"picture",
-                    "class"=>"formForum",
-                    "accept" => "image/*"
+                    "text"=>"",
+                    "required"=>true,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "categories"=> [
                     "type"=> "select",
                     "id"=>"picture",
-                    "option"=>['test', 'oof'], // METTRE LES CATEGORIES ET PAS CETTE LISTE
-                    "defaultValue"=>"test",
+                    "option"=>$categorie_data,
+                    "defaultValue"=>"",
+                ]
+            ]
+        ];
+    }
+
+    public function editParamForum($forum_data, $categorie_data): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formForum",
+                "class"=>"formForum",
+                "submit"=>"Valider"
+            ],
+            "inputs"=>[
+                "editTitle"=>[
+                    "placeholder"=>"Titre",
+                    "type"=>"text",
+                    "id"=>"nameForum",
+                    "class"=>"formForum",
+                    "value"=>$forum_data['title'],
+                    "required"=>true,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>"Votre titre doit faire entre 2 et 25 caractères",
+                ],
+                "editDescription"=>[
+                    "label"=>"Description: ",
+                    "type"=>"textarea",
+                    "id"=>"editDescriptionForum",
+                    "class"=>"formForum",
+                    "rows"=>"5",
+                    "cols"=>"33",
+                    "text"=>$forum_data['description'],
+                    "required"=>true,
+                    "min"=>2,
+                    "max"=>25,
+                    "error"=>"Votre titre doit faire entre 2 et 25 caractères",
+                ],
+                "categories"=> [
+                    "type"=> "select",
+                    "id"=>"picture",
+                    "option"=>$categorie_data,
+                    "defaultValue"=>$forum_data['category_id'],
                 ]
             ]
         ];

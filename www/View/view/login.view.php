@@ -16,6 +16,6 @@
             }?>
         </div>
     </div>
-    <p>Pas encore inscrit ?<a href="#"> S'inscrire</a></p>
+    <p>Pas encore inscrit ?<a href="/register"> S'inscrire</a></p>
 
 </div>

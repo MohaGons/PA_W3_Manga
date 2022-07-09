@@ -7,7 +7,7 @@
             <h2>Editer une catégorie</h2>
         </div>
         <div class="modal-body">
-            <?php $this->includePartial("form", $category->getCategoryForm());?>
+            <?php $this->includePartial("form", $category->editCategoryForm($categorie_data));?>
         </div>
     </div>
 </div>

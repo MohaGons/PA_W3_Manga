@@ -2,10 +2,11 @@
 
 namespace App\Model;
 
-use App\Core\Sql;
-use PDO;
+use App\Core\MysqlBuilder;
 
-class Event extends Sql
+
+
+class Event extends MysqlBuilder
 {
     protected $id = null;
     protected $name = null;
@@ -32,6 +33,11 @@ class Event extends Sql
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
 
@@ -182,7 +188,7 @@ class Event extends Sql
         ];
     }
 
-    public function getEventEditFormRegister(): array
+    public function getEventEditFormRegister($categorie_data): array
     {
         return [
             "config" => [
@@ -200,6 +206,7 @@ class Event extends Sql
                     "class" => "formEvent",
                     "required" => true,
                     "error" => "Nom de l'évènement incorect",
+                    "value" => $categorie_data['name'],
                     "unicity" => true,
                     "errorUnicity" => "Un évènement existe déjà avec ce nom"
 
@@ -210,6 +217,7 @@ class Event extends Sql
                     "type" => "textarea",
                     "id" => "descriptionRegister",
                     "class" => "FormEvent",
+                    "value" => $categorie_data['description'],
                     "required" => true,
                     "rows" => 5,
                     "cols" => 20,
@@ -222,6 +230,7 @@ class Event extends Sql
                     "class" => "formEvent",
                     "min" => 0,
                     "required" => true,
+                    "value" => $categorie_data['price'],
                     "error" => "Mettre un prix correct",
 
                 ],
@@ -231,6 +240,7 @@ class Event extends Sql
                     "id" => "dateRegister",
                     "class" => "formEvent",
                     "required" => true,
+                    "value" => $categorie_data['date'],
                     "error" => "Mettre une date correct",
                 ],
                 "photo" => [
@@ -239,27 +249,12 @@ class Event extends Sql
                     "type" => "file",
                     "id" => "photoRegister",
                     "class" => "formEvent",
+                    "value" => $categorie_data['photo'],
                     //"required" => true,
                     "error" => "Mettre une photo correct",
                     "accept" => "image/*"
                 ]
             ]
         ];
-    }
-
-    public function getEvents()
-    {
-        $query = $this->pdo->prepare("SELECT * FROM mnga_event");
-        $query->execute();
-        $event_data = $query->fetchall();
-        return $event_data;
-    }
-
-    public function deleteEvent($id)
-    {
-
-        $query = $this->pdo->prepare("DELETE FROM mnga_event WHERE id= :id");
-        $query->bindValue(':id', $id);
-        $query->execute();
     }
 }
