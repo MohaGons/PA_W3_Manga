@@ -11,22 +11,37 @@
 /login:
   controller: user
   action: login
-  security : All
+  security: All
 
 /logout:
   controller: user
   action: logout
-  security: [Abonne,Admin,Editeur]
+  security: [Abonne, Admin, Editeur]
 
 /register:
   controller: user
   action: register
   security: All
 
+/event:
+  controller: event
+  action: event
+  security: All
+
+/eventEdit:
+  controller: event
+  action: editEvent
+  security: All
+
+/deleteEvent:
+  controller: user
+  action: deleteEvent
+  security: All
+
 /dashboard:
   controller: admin
   action: home
-  security: [Admin,Abonne,Editeur]
+  security: All
 
 /accueil:
   controller: main
@@ -34,34 +49,34 @@
   security: All
 
 /recuperer_mdp:
-  controller : user
-  action     : recuperer_mdp
-  security   : All
+  controller: user
+  action: recuperer_mdp
+  security: All
 
 /initialiser_mdp:
-  controller : user
-  action     : initialiser_mdp
-  security   : All
+  controller: user
+  action: initialiser_mdp
+  security: All
 
 /parametre:
   controller: user
-  action : parametre
-  security: [Admin,Editeur,Abonne]
+  action: parametre
+  security: [Admin, Editeur, Abonne]
 
 /deletecompte:
-   controller: user
-   action : deletecompte
-   security: [Admin]
+  controller: user
+  action: deletecompte
+  security: [Admin]
 
 /utilisateurs:
-   controller: admin
-   action : utilisateurs
-   security: [Admin,Editeur,Abonne]
+  controller: admin
+  action: utilisateurs
+  security: [Admin, Editeur, Abonne]
 
 /utilisateurs/update:
   controller: admin
   action: utilisateurs_update
-  security: [Admin,Editeur,Abonne]
+  security: [Admin, Editeur, Abonne]
 
 /categorie:
   controller: user
@@ -76,12 +91,12 @@
 /editCategorie:
   controller: user
   action: editCategory
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /forums:
   controller: user
   action: forums
-  security: [Admin,Editeur,Abonne]
+  security: [Admin, Editeur, Abonne]
 
 /deleteForum:
   controller: user
@@ -91,22 +106,22 @@
 /editForum:
   controller: user
   action: editForum
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /forum:
   controller: user
   action: forum
-  security: [Admin,Editeur,Abonne]
+  security: [Admin, Editeur, Abonne]
 
 /manga:
   controller: manga
   action: manga
-  security: [Admin,Editeur,Abonne]
+  security: [Admin, Editeur, Abonne]
 
 /editManga:
   controller: manga
   action: editManga
-  security: [Admin,Editeur,Abonne]
+  security: [Admin, Editeur, Abonne]
 
 /deleteManga:
   controller: manga
@@ -115,16 +130,15 @@
 
 /images:
   controller: user
-  action : images
+  action: images
   security: All
 
 /media:
-    controller: media
-    action: Allmedia
-    security: [Admin,Editeur,Abonne]
+  controller: media
+  action: Allmedia
+  security: [Admin, Editeur, Abonne]
 
 /updatepassword:
   controller: user
   action: updatemdp
-  security: [Admin,Editeur,Abonne]
-
+  security: [Admin, Editeur, Abonne]
