@@ -11,7 +11,7 @@
 /login:
   controller: user
   action: login
-  security : All
+  security: All
 
 /logout:
   controller: user
@@ -21,6 +21,21 @@
 /register:
   controller: user
   action: register
+  security: All
+
+/event:
+  controller: event
+  action: event
+  security: All
+
+/eventEdit:
+  controller: event
+  action: editEvent
+  security: All
+
+/deleteEvent:
+  controller: user
+  action: deleteEvent
   security: All
 
 /dashboard:
@@ -34,14 +49,14 @@
   security: All
 
 /recuperer_mdp:
-  controller : user
-  action     : recuperer_mdp
-  security   : All
+  controller: user
+  action: recuperer_mdp
+  security: All
 
 /initialiser_mdp:
-  controller : user
-  action     : initialiser_mdp
-  security   : All
+  controller: user
+  action: initialiser_mdp
+  security: All
 
 /parametre:
   controller: user
@@ -49,9 +64,9 @@
   security: All
 
 /deletecompte:
-   controller: user
-   action : deletecompte
-   security: [Admin]
+  controller: user
+  action: deletecompte
+  security: [Admin]
 
 /utilisateurs:
    controller: admin
@@ -115,7 +130,7 @@
 
 /images:
   controller: user
-  action : images
+  action: images
   security: All
 
 /media:
@@ -127,4 +142,3 @@
   controller: user
   action: updatemdp
   security: All
-

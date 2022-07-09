@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Template du front</title>
@@ -11,29 +12,30 @@
 </head>
 
 <body>
-<header id="headerFront" class="header--front">
+    <header id="headerFront" class="header--front">
 
-    <div class="container">
-        <div class="logoAndName logoAndName--front">
-            <a href="#">
-                <img class="img-logo" src="../../Style/images/Gambling-school.png">
-            </a>
-            <p>Manga-site</p>
+        <div class="container">
+            <div class="logoAndName logoAndName--front">
+                <a href="#">
+                    <img class="img-logo" src="../../Style/images/Gambling-school.png">
+                </a>
+                <p>Manga-site</p>
+            </div>
+            <div class="photoAndMenu">
+                <button id="menu-button"> </button>
+                <?php include "View/Template/sidebar_front.tpl.php"; ?>
+            </div>
         </div>
-        <div class="photoAndMenu">
-            <button id="menu-button">    </button>
-            <?php include "View/Template/sidebar_front.tpl.php";?>
+    </header>
+
+    <main id="mainFront">
+        <div class="container">
+            <?php include "View/view/" . $this->view . ".view.php"; ?>
         </div>
-    </div>
-</header>
+    </main>
 
-<main id="mainFront">
-    <div class="container">
-        <?php include "View/view/".$this->view.".view.php";?>
-    </div>
-</main>
-
-<script src="../../Style/dist/main.js"></script>
+    <script src="../../Style/dist/main.js"></script>
 
 </body>
+
 </html>
