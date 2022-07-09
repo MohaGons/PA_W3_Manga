@@ -459,6 +459,11 @@ class User extends MysqlBuilder
                     "id"=>"file",
                     "class"=>"formRegister",
                     "accept" => ""
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Se connecter",
                 ]
             ]
         ];
@@ -488,6 +493,11 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
                     "required"=>true,
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Se connecter",
                 ]
             ]
         ];
@@ -536,6 +546,11 @@ class User extends MysqlBuilder
                     "min"=>2,
                     "max"=>100,
                     "error"=>" Votre email doit faire entre 2 et 100 caractères",
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];
@@ -593,6 +608,11 @@ class User extends MysqlBuilder
                     "option"=> $roles,
                     "defaultValue" =>  ""
                 ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
+                ]
             ]
         ];
     }
@@ -615,6 +635,11 @@ class User extends MysqlBuilder
                     "class"=>"formRegister",
                     "required"=>true,
                 ]
+            ],
+            "submit"=>[
+                "type"=>"submit",
+                "class"=>"button-submit",
+                "title"=>"Confirmer",
             ]
         ];
     }
@@ -643,6 +668,11 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
                     "required"=>true,
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];
@@ -679,6 +709,11 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
                     "required"=>true,
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];

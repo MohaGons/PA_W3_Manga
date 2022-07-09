@@ -297,6 +297,11 @@ class Manga extends MysqlBuilder
                     "required"=>true,
                     "accept"=>"image/*",
                 ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
+                ]
             ]
         ];
     }

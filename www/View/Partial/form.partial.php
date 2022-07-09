@@ -6,8 +6,4 @@
 
 
     <?php App\Core\Builder::render($config); ?>
-
-
-
-    <input type="submit" value="<?= $config["config"]["submit"]??"Envoyer"?>">
 </form>

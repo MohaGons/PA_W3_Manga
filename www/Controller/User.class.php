@@ -185,7 +185,7 @@ class User
             $result = Verificator::checkFormParam($category->getCategoryForm(), $_POST);
             if (empty($result)) {
                 if (!empty($_POST["name"])) {
-                    $forum->setNameCategory(htmlspecialchars($_POST["name"]));
+                    $category->setNameCategory(htmlspecialchars($_POST["name"]));
                 }
                 $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
                 $category->save();

@@ -77,6 +77,25 @@ class Builder
                             value='".$configInput["value"]."'
                             ><br>";
                     break;
+                case "email":
+                    $html = "<div class='form-field'><input name='".$name."'
+                            class='".$configInput["class"]."'
+                            id='".$configInput["id"]."'
+                            placeholder='".$configInput["placeholder"]."'
+                            type='".$configInput["type"]."'
+                            ></div><br>";
+                    break;
+                case "password":
+                    $html = "<div class='form-field'><input name='".$name."'
+                            class='".$configInput["class"]."'
+                            id='".$configInput["id"]."'
+                            placeholder='".$configInput["placeholder"]."'
+                            type='".$configInput["type"]."'
+                            ></div><br>";
+                    break;
+                case "submit":
+                    $html = "<button type='".$configInput["type"]."' class='".$configInput["class"]."'><p>".$configInput["title"]."</p></button><br>";
+                    break;
                 default:
                     $html = "<input name='" . $name . "'
                             class='" . $configInput["class"] . "'
