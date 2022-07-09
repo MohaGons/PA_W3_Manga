@@ -187,7 +187,7 @@ class Event extends Sql
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "",
+                "action" => "/eventEdit",
                 "id" => "formEvent",
                 "class" => "formEvent",
                 "submit" => "Modifier L'evenement"
@@ -202,6 +202,7 @@ class Event extends Sql
                     "error" => "Nom de l'évènement incorect",
                     "unicity" => true,
                     "errorUnicity" => "Un évènement existe déjà avec ce nom"
+
                 ],
                 "description" => [
                     "label" => "",
@@ -254,14 +255,11 @@ class Event extends Sql
         return $event_data;
     }
 
-    public function deleteEvent()
+    public function deleteEvent($id)
     {
-        if (!empty($_POST['id'])) {
-            $event_Id = $_POST['id'];
 
-            $query = $this->pdo->prepare("DELETE FROM mnga_event WHERE id= :id");
-            $query->bindValue(':id', $event_Id);
-            $query->execute();
-        }
+        $query = $this->pdo->prepare("DELETE FROM mnga_event WHERE id= :id");
+        $query->bindValue(':id', $id);
+        $query->execute();
     }
 }

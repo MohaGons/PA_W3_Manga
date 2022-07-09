@@ -28,6 +28,16 @@
   action: event
   security: All
 
+/eventEdit:
+  controller: event
+  action: editEvent
+  security: All
+
+/deleteEvent:
+  controller: event
+  action: deleteEvent
+  security: All
+
 /dashboard:
   controller: admin
   action: home
@@ -81,7 +91,7 @@
 /editCategorie:
   controller: user
   action: editCategory
-  security: [Admin, Editeur, Abonne]
+  security: All
 
 /forums:
   controller: user
@@ -96,7 +106,7 @@
 /editForum:
   controller: user
   action: editForum
-  security: [Admin, Editeur, Abonne]
+  security: All
 
 /forum:
   controller: user

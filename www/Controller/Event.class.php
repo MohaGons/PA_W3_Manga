@@ -41,11 +41,14 @@ class Event
 
     public function deleteEvent()
     {
-        $event = new Event();
-        if (!empty($_POST['event_id'])) {
-            $event_id = $_POST['event_id'];
+        $event = new EventModel();
+
+        if (isset($_GET['id'])) {
+            $event_id = $_GET['id'];
             $event->deleteEvent($event_id);
         }
+        $view = new View("deleteEvent", "back");
+        $view->assign("event_id", $event);
     }
 
     public function editEvent()
@@ -63,5 +66,10 @@ class Event
             $event->save();
             echo "<script>alert('Votre event a bien été mis à jour')</script>";
         }
+        $view = new View("event");
+        $view->assign("event", $event);
+        $event = $event->getEvents();
+        $view->assign("event_data", $event);
+        $view->assign("errors", $errors);
     }
 }

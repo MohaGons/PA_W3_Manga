@@ -1,4 +1,5 @@
 <h1>Les events </h1>
+<a href="/test"> test </a>
 
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 col--flex">
@@ -64,16 +65,13 @@
 <!-- suppréssion d'un event -->
 <?php
 foreach ($event as $key => $value) { ?>
-    <div class="modal" id="modal-delete">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h2>Supprimer un évènement</h2>
-            </div>
-            <div class="modal-body">
-                <button class="control--delete" onclick="window.location.href=" /event?id=<?= $value['id'] ?>'">Supprimer</button>
-            </div>
-        </div>
+
+    <span class="close">&times;</span>
+    <h2>Supprimer un évènement</h2>
+    </div>
+    <a href="deletEvent?id=<?= $event_id ?>">Supprimer </a>
+    <a href="/test"> test </a>
+    </div>
     </div>
 <?php
 }
