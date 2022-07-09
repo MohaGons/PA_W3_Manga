@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap);@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap);@import url(https://fonts.googleapis.com/css2?family=Song+Myung&display=swap);@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap);* {
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap);@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap);@import url(https://fonts.googleapis.com/css2?family=Song+Myung&display=swap);@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap);@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);* {
   box-sizing: border-box;
 }
 
@@ -1602,4 +1602,126 @@ main > .container {
   padding: 2px 16px;
   background-color: #5cb85c;
   color: white;
+}
+
+body {
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.login {
+  width: 420px;
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login:before {
+  content: "";
+  position: absolute;
+  background: transparent;
+  bottom: 45px;
+  right: 40px;
+  width: 55px;
+  height: 55px;
+  z-index: 5;
+  transition: all .6s ease-in-out, background 0s ease;
+}
+
+.login .form {
+  display: block;
+  position: relative;
+}
+
+.login .form h2 {
+  background: #f5f5fa;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 30px 0;
+  padding: 40px;
+  font-weight: 200;
+  color: #9596A2;
+  font-size: 19px;
+}
+
+.login .form .form-field {
+  display: flex;
+  align-items: center;
+  height: 55px;
+  margin: 0 40px 30px 40px;
+  border-bottom: 1px solid #9596A2;
+}
+
+.login .form .form-field label {
+  width: 10px;
+  padding: 0 15px 0 0;
+  color: #9596A2;
+}
+
+.login .form .form-field input {
+  width: 100%;
+  background: transparent;
+  color: #9596A2;
+  padding: 15px;
+  border: 0;
+  margin: 0;
+}
+
+.login .form .form-field input + svg {
+  width: 35px;
+  width: 35px;
+  fill: none;
+  stroke: #00FCD1;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: -100;
+  transition: all .3s ease-in-out;
+}
+
+.login .form .form-field input:valid + svg {
+  stroke-dashoffset: 0;
+}
+
+.login .form .form-field input:focus {
+  outline: none;
+}
+
+.login .form .form-field *::-moz-placeholder {
+  color: #9596A2;
+}
+
+.login .form .form-field *:-ms-input-placeholder {
+  color: #9596A2;
+}
+
+.login .form .form-field *::placeholder {
+  color: #9596A2;
+}
+
+.login .form .button-submit {
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  outline: none;
+  background: purple;
+  box-shadow: white;
+  border-radius: 12px;
+  color: #fff;
+  line-height: 55px;
+  text-align: center;
+  text-transform: uppercase;
 }

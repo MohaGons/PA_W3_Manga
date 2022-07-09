@@ -16,7 +16,7 @@
 /logout:
   controller: user
   action: logout
-  security: [Abonne,Admin,Editeur]
+  security: All
 
 /register:
   controller: user
@@ -26,7 +26,7 @@
 /dashboard:
   controller: admin
   action: home
-  security: [Admin,Abonne,Editeur]
+  security: All
 
 /accueil:
   controller: main
@@ -46,7 +46,7 @@
 /parametre:
   controller: user
   action : parametre
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /deletecompte:
    controller: user
@@ -56,12 +56,12 @@
 /utilisateurs:
    controller: admin
    action : utilisateurs
-   security: [Admin,Editeur,Abonne]
+   security: All
 
 /utilisateurs/update:
   controller: admin
   action: utilisateurs_update
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /categorie:
   controller: user
@@ -71,42 +71,42 @@
 /deleteCategorie:
   controller: user
   action: deleteCategory
-  security: [Admin]
+  security: All
 
 /editCategorie:
   controller: user
   action: editCategory
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /forums:
   controller: user
   action: forums
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /deleteForum:
   controller: user
   action: deleteForum
-  security: [Admin]
+  security: All
 
 /editForum:
   controller: user
   action: editForum
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /forum:
   controller: user
   action: forum
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /manga:
   controller: manga
   action: manga
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /editManga:
   controller: manga
   action: editManga
-  security: [Admin,Editeur,Abonne]
+  security: All
 
 /deleteManga:
   controller: manga
@@ -121,10 +121,10 @@
 /media:
     controller: media
     action: Allmedia
-    security: [Admin,Editeur,Abonne]
+    security: All
 
 /updatepassword:
   controller: user
   action: updatemdp
-  security: [Admin,Editeur,Abonne]
+  security: All
 
