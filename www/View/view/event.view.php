@@ -24,8 +24,8 @@
                         <td><?= $value["date"] ?></td>
                         <td><?= $value["photo"] ?></td>
                         <td>
-                            <button class="control--modify" id="modify-button<?= $value['id'] ?>">Modifier</button>
-                            <button class="control--delete" id="delete-button<?= $value['id'] ?>">Supprimer</button>
+                            <a href="eventEdit?id=<?= $value['id']?>">Update</a>
+                            <button class="control--delete" id="<?= $value['id'] ?>">Supprimer</button>
                         </td>
                     </tr>
                 <?php
@@ -62,7 +62,7 @@ foreach ($event as $key => $value) { ?>
 <?php
 }
 ?>
-<script src="../../Style/dist/deleteEvent.js"></script>
+<script src="../../Style/src/js/deleteEvent.js"></script>
 
 <?php //$this->includePartial("captcha", null);
 ?>

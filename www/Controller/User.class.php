@@ -230,7 +230,6 @@ class User
                 }
                 $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
                 $category->save();
-                //echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
                 header('Location: ./categorie');
             } else {
                 $errors = $result;
@@ -426,5 +425,12 @@ class User
         $view = new View("updatepassword", "back");
         $view->assign("user", $user);
         $view->assign("errors", $errors);
+    }
+
+    public function deleteEvent($event_Id)
+    {
+        $query = $this->pdo->prepare("DELETE FROM mnga_event WHERE id= :id");
+        $query->bindValue(':id', $event_Id);
+        $query->execute();
     }
 }
