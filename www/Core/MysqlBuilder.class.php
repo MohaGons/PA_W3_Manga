@@ -246,11 +246,19 @@ abstract class MysqlBuilder implements QueryBuilder
         return $event_data;
     }
 
-    public function deleteEvent($id)
+    public function getEvent($event_Id)
     {
+        $query = $this->pdo->prepare("SELECT * FROM mnga_event WHERE id= :id");
+        $query->bindValue(':id', $event_Id);
+        $query->execute();
+        $event_data = $query->fetch();
+        return $event_data;
+    }
 
+    public function deleteEvent($event_Id)
+    {
         $query = $this->pdo->prepare("DELETE FROM mnga_event WHERE id= :id");
-        $query->bindValue(':id', $id);
+        $query->bindValue(':id', $event_Id);
         $query->execute();
     }
 }
