@@ -261,4 +261,5 @@ abstract class MysqlBuilder implements QueryBuilder
         $query->bindValue(':id', $event_Id);
         $query->execute();
     }
+    
 }
