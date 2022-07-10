@@ -69,7 +69,7 @@
             <td><?= $user['createdAt'] ?></td>
 
             <td><a href="?action=delete&id=<?= $user['ID'] ?>"><i class="fa-solid fa-trash"></i></a></td>
-            <td><a href="utilisateurs/update?action=update&id=<?= $user['ID'] ?>"><i class="fa-solid fa-pen"></i></a></td>
+            <td><a href="utilisateurs/update/<?= $user['ID'] ?>"><i class="fa-solid fa-pen"></i></a></td>
             <td><a href="?action=contact&id=<?= $user['ID'] ?>"><i class="fa-solid fa-paper-plane"></i></a></td>
         </tr>
         <?php
