@@ -18,8 +18,8 @@
                             <td><?= $value["id_forum"] ?></td>
                             <td><?= $value["commentaire"] ?></td>
                             <td>
-                                <a href="?action=valide&id=<?= $value['id'] ?>">
-                                <button class="control--delete" id="<?= $value['id']?>">Refuser</button>
+                                <a href="?id=<?= $value['id']?>"><button class="control--delete" id="<?= $value['id']?>">Valider</button></a>
+                                <a href="?id=<?= $value['id']?>"><button class="control--delete" id="<?= $value['id']?>">Refuser</button></a>
                             </td>
                         </tr>
                 <?php 

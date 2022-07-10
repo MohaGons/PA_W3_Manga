@@ -84,4 +84,23 @@ class CommentaireForum extends MysqlBuilder
         ];
     }
 
+    public function getAllCommentairesNoValid() {
+        $query = $this->pdo->prepare("SELECT * FROM mnga_forum_commentaire WHERE isValid= 0");
+        $query->execute();
+        $forum_commentaire_data = $query->fetchAll();
+        return $forum_commentaire_data;
+    }
+
+    public function validCommentaire($id) {
+        $query = $this->pdo->prepare("UPDATE mnga_forum_commentaire SET isValid=1 WHERE id=?");
+        $query->execute([$id]);
+        $forum_commentaire_data = $query->fetchAll();
+        return $forum_commentaire_data;
+    }
+
+    public function deleteCommentaire($id) {
+        $query = $this->pdo->prepare("DELETE FROM mnga_forum_commentaire WHERE id=?");
+        $query->execute([$id]);
+    }
+
 }

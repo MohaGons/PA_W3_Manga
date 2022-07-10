@@ -27,8 +27,11 @@ class ForumCommentaire
         }
 
         if (isset($_GET['id'])) {
-            $search = $_GET['commentaire'];
-            $users = $user->validCommentaire($search);
+            $forum_commentaire_data = $forum_commentaire->validCommentaire(htmlspecialchars($_GET['id']));
+        }
+
+        if (isset($_GET['id'])) {
+            $forum_commentaire_data = $forum_commentaire->deleteCommentaire(htmlspecialchars($_GET['id']));
         }
 
         $view = new View("forumcommentaire", "back");
@@ -36,5 +39,10 @@ class ForumCommentaire
 
         $forum_commentaire_data = $forum_commentaire->getAllCommentairesNoValid();
         $view->assign("forum_commentaire_data", $forum_commentaire_data);
+
+        $NbForumCommentaire = count($forum_commentaire->getAllCommentairesNoValid());
+        if (isset($NbForumCommentaire)) {
+            $view->assign("NbForumCommentaire", $NbForumCommentaire);
+        }
     }
 }
