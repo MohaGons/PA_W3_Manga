@@ -55,6 +55,7 @@ class Admin
                 $users = $user->getAllUsers($deb,$fin);
             }
         }
+        $bestPays = $user->getBestPays();
         //$roles = $role->getRole(1);*
         $test= $user->getRoleByEmail('aminecherigui44@gmail.com');
         $Nbusers = count($user->NombreUsers());
@@ -65,6 +66,7 @@ class Admin
         $view->assign("Nbusers", $Nbusers);
         $view->assign("Nbpages", $Nbpages);
         $view->assign("messages", $messages);
+        $view->assign("bestpays", $bestPays);
     }
 
     public function utilisateurs_update(){

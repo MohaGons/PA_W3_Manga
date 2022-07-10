@@ -74,7 +74,10 @@ class User
                 $user->setPassword(htmlspecialchars($_POST["password"]));
                 $user->setGender(htmlspecialchars($_POST["gender"]));
                 $user->setAvatar(htmlspecialchars($_FILES["file"]["name"]));
+                $user->setPays('Pays');
+                $user->setPays('Ville');
                 $user->save();
+
                 $media->setMedia("Avatars",$_POST["email"],"set");
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
                 $session->ensureStarted();
@@ -144,6 +147,7 @@ class User
             $errors[]= "Votre Avatar est mise a jour avec succes";
             header('Location: ./parametre');
         }
+
         $view = new View("parametre", "back");
         $data= array(
             "email"=>$email,

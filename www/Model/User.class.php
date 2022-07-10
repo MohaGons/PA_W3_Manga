@@ -348,6 +348,35 @@ class User extends MysqlBuilder
         return $resultat;
     }
 
+    public function setPays($type){
+        $ip_visiteur = 'X.X.X.X';
+        $ipinfo = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip_visiteur));
+        $Pays = $ipinfo->geoplugin_countryName;
+        $Ville = $ipinfo->geoplugin_city;
+        $Continent = $ipinfo->geoplugin_continentName;
+        if ($type=="Pays"){
+            $this->pays=$Pays;
+        }
+        if ($type=="Ville"){
+            $this->ville=$Ville;
+        }
+        if ($type=="Continent"){
+            $this->continent=$Continent;
+        }
+        else{
+            return NULL;
+        }
+    }
+
+    public function getBestPays(){
+        $q = "SELECT pays, COUNT(*) FROM mnga_user GROUP BY pays ORDER BY COUNT(*) DESC LIMIT 5";
+        $req = $this->pdo->prepare($q);
+        $req->execute();
+        $resultat = $req->fetchAll();
+        return $resultat;
+    }
+
+
     public function getRegisterForm(): array
     {
         return [
@@ -508,7 +537,7 @@ class User extends MysqlBuilder
                     "placeholder"=>"Prénom",
                     "type"=>"text",
                     "id"=>"emailRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "value"=>$data['firstname'],
                     "required"=>false,
                     "min"=>2,
@@ -519,7 +548,7 @@ class User extends MysqlBuilder
                     "placeholder"=>"Nom de famille",
                     "type"=>"text",
                     "id"=>"pwdRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "value"=>$data['lastname'],
                     "required"=>false,
                     "min"=>2,

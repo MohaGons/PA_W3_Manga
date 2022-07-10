@@ -23,6 +23,26 @@
         margin: 8px 0;
         box-sizing: border-box;
     }
+    .graph {
+        position: relative;
+        width: 100%;
+        border: 1px solid black;
+        padding: 12px;
+        background-color: lightgrey
+    }
+
+    .graph .bar {
+        display: block;
+        position: relative;
+        padding: 5px;
+        background: black;
+        color : white;
+        text-align: left;
+        height: 3em;
+        line-height: 1em;
+    }
+    .graph .bar span { position: absolute; left: 1em; }
+
 </style>
 
 <h1><i class="fa-solid fa-user"></i> Nombre d'utilisateurs : <?= $Nbusers ?></h1>
@@ -56,6 +76,7 @@
         <th>Email</th>
         <th>Role</th>
         <th>Date Inscription</th>
+        <th>Adresse</th>
     </tr>
     <?php
     foreach($users as $user){
@@ -67,7 +88,7 @@
             <td><?= $user['email'] ?></td>
             <td><?= $user['role'] ?></td>
             <td><?= $user['createdAt'] ?></td>
-
+            <td> <?= $user['ville']?>, <?= $user['pays']?></td>
             <td><a href="?action=delete&id=<?= $user['ID'] ?>"><i class="fa-solid fa-trash"></i></a></td>
             <td><a href="utilisateurs/update?action=update&id=<?= $user['ID'] ?>"><i class="fa-solid fa-pen"></i></a></td>
             <td><a href="?action=contact&id=<?= $user['ID'] ?>"><i class="fa-solid fa-paper-plane"></i></a></td>
@@ -87,5 +108,37 @@
                 <a href="?page=<?= $page ?>" <?php if (isset($active) && $page==$active){?> class="active" <?php }?>><?= $page ?></a>
         <?php endfor ?>
     </div>
+<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="graph">
+    <h1>Statistiques Utilisateurs</h1><br><br>
+    <?php
+    foreach($bestpays as $pays){
+        ?>
+       <strong class="bar" style="width: <?=($pays['COUNT(*)']/$Nbusers)*100?>%"><?= $pays['pays'] ?> | <?= $pays['COUNT(*)'] ?> Utilisateurs <?=($pays['COUNT(*)']/$Nbusers)*100 ?>%</strong><br>
+        <?php
+    }
+    ?>
+
+</div>
+
+
 
 
