@@ -36,6 +36,55 @@ class Router
     public function checkRouteExist()
     {
         if(empty($this->routes[$this->uri]) || empty($this->routes[$this->uri]["controller"]) || empty($this->routes[$this->uri]["action"])){
+
+            foreach ($this->routesWithParams as $key => $value) {
+                $routesExist = strstr($this->uri, $key  );
+                if ($routesExist != false) {
+                    $limit = strlen($key);
+                    $end_url = substr($this->uri, $limit);
+                    var_dump($end_url);
+                    $params = explode("/", $end_url);
+                    var_dump($params);
+
+                    if(!Security::checkRoute($this->routes["/admin/utilisateurs/update/"])){
+                        die("NotAuthorized");
+                    }
+                    $controller = ucfirst(strtolower($this->routes["/admin/utilisateurs/update/"]["controller"]));
+                    $action = strtolower($this->routes["/admin/utilisateurs/update/"]["action"]);
+
+
+                    $adminController = strpos("/admin/utilisateurs/update/", "/admin");
+                    if ($adminController === false) {
+                        $controllerFile = "Controller/".$controller.".class.php";
+                    }
+                    else {
+                        $controllerFile = "Controller/Admin/".$controller.".class.php";
+                    }
+
+                    if(!file_exists($controllerFile)){
+                        die("Le fichier Controller n'existe pas");
+                    }
+
+                    include $controllerFile;
+
+                    $controller = "App\\Controller\\".$controller;
+                    if( !class_exists($controller)){
+                        die("La classe n'existe pas");
+                    }
+
+                    $objectController = new $controller();
+
+
+                    if(!method_exists($objectController, $action) ){
+                        die("La methode n'existe pas");
+                    }
+
+                    $objectController->$action($params);
+                }
+
+                die();
+            }
+
             echo "<pre>";
             var_dump($this->uri);
             var_dump(strstr($this->uri, "/admin/utilisateurs/update/"));
@@ -45,7 +94,8 @@ class Router
             $other_url = substr($this->uri, $limit);
             $params = explode("/", $other_url);
             var_dump($params);
-            die();
+
+
             die("Page 404");
         }
         else {

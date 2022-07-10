@@ -25,7 +25,11 @@ class User {
         $view->assign("users", $users);
     }
 
-    public function edit(){
+    public function edit($id){
+        if (!empty($id) && is_numeric($id))
+        {
+
+        }
         $user = new UserModel();
         $messages=[];
         $id = $_GET['id'];
