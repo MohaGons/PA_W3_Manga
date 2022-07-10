@@ -253,4 +253,25 @@ abstract class MysqlBuilder implements QueryBuilder
         $query->bindValue(':id', $id);
         $query->execute();
     }
+
+    public function getAllCommentairesNoValid() {
+        $query = $this->pdo->prepare("SELECT * FROM mnga_forum_commentaire WHERE isValid= 0");
+        $query->execute();
+        $forum_commentaire_data = $query->fetchAll();
+        return $forum_commentaire_data;
+    }
+
+    public function validCommentaire() {
+        $query = $this->pdo->prepare("INSERT INTO mnga_forum_commentaire WHERE id= :id isValid= 1");
+        $query->execute();
+        $forum_commentaire_data = $query->fetchAll();
+        return $forum_commentaire_data;
+    }
+
+    public function deleteCommentaire($forum_commentaire_Id){
+        $query = $this->pdo->prepare("DELETE FROM mnga_forum_commentaire WHERE id= :id");
+        $query->bindValue(':id', $forum_commentaire_Id);
+        $query->execute();
+	}
+    
 }

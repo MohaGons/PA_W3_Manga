@@ -58,7 +58,7 @@ class CommentaireForum extends MysqlBuilder
         $this->commentaire = ucwords(strtolower(trim($commentaire)));
     }
 
-    public function getCommentaireForm($categorie_data): array
+    public function getCommentaireForm(): array
     {
         return [
             "config"=>[

@@ -142,3 +142,8 @@
   controller: user
   action: updatemdp
   security: All
+
+/forumcommentaire:
+  controller: forumcommentaire
+  action: forumcommentaire
+  security: [Admin,Editeur,Abonne]
