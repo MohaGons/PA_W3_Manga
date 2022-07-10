@@ -3,6 +3,7 @@ namespace App;
 
 require "conf.inc.php";
 use App\Core\Security;
+use App\Core\Router;
 //E
 
 function myAutoloader( $class )
@@ -21,6 +22,10 @@ function myAutoloader( $class )
 }
 
 spl_autoload_register("App\myAutoloader");
+$routes = new Router($_SERVER["REQUEST_URI"]);
+$tab = $routes->checkRouteExist();
+echo "<pre>";
+die(var_dump($tab));
 
 $fileRoutes = "routes.yml";
 
@@ -37,41 +42,4 @@ if(empty($routes[$uri]) || empty($routes[$uri]["controller"]) || empty($routes[$
 }
 
 
-if(!Security::checkRoute($routes[$uri])){
-    die("NotAuthorized");
-}
 
-$controller = ucfirst(strtolower($routes[$uri]["controller"]));
-$action = strtolower($routes[$uri]["action"]);
-
-// $uri = /login
-// $Controller = User
-// $action = login
-
-$adminController = strpos($uri, "/admin");
-if ($adminController === false) {
-    $controllerFile = "Controller/".$controller.".class.php";
-}
-else {
-    $controllerFile = "Controller/Admin/".$controller.".class.php";
-}
-
-if(!file_exists($controllerFile)){
-    die("Le fichier Controller n'existe pas");
-}
-
-include $controllerFile;
-
-$controller = "App\\Controller\\".$controller;
-if( !class_exists($controller)){
-    die("La classe n'existe pas");
-}
-
-$objectController = new $controller();
-
-
-if(!method_exists($objectController, $action) ){
-    die("La methode n'existe pas");
-}
-
-$objectController->$action();
