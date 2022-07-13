@@ -157,25 +157,25 @@
 /admin/manga:
   controller: manga
   action: index
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: null
 
 /admin/manga/create:
   controller: manga
   action: create
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: null
 
 /admin/manga/edit/:
   controller: manga
   action: edit
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: id
 
 /admin/manga/delete:
   controller: manga
   action: delete
-  security: [Admin]
+  security: [Admin,Editeur]
   params: id
 
 /images:
@@ -196,10 +196,10 @@
   security: All
   params: null
 
-/forumcommentaire:
+/admin/forumcommentaire:
   controller: forumcommentaire
-  action: forumcommentaire
-  security: [Admin,Editeur,Abonne]
+  action: index
+  security: [Admin]
   params: null
 
 /stripe:
@@ -207,3 +207,15 @@
   action: stripe
   security: All
   params: null
+
+/admin/forumcommentaire/edit:
+  controller: forumcommentaire
+  action: edit
+  security: [Admin]
+  params: id
+
+/admin/forumcommentaire/delete:
+  controller: forumcommentaire
+  action: delete
+  security: [Admin]
+  params: id
