@@ -20,7 +20,7 @@
                     <tr>
                         <td><?= $value["name"] ?></td>
                         <td><?= $value["description"] ?></td>
-                        <td><?= $value["price"] ?></td>
+                        <td><?= $value["price"] ?>€</td>
                         <td><?= $value["date"] ?></td>
                         <td><?= $value["photo"] ?></td>
                         <td>
