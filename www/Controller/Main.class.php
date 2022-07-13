@@ -17,5 +17,4 @@ class Main
     {
         $view = new View("contact");
     }
-    
 }

@@ -108,6 +108,11 @@ class Forum extends MysqlBuilder
                     "id"=>"picture",
                     "option"=>$categorie_data,
                     "defaultValue"=>"",
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];
@@ -153,6 +158,11 @@ class Forum extends MysqlBuilder
                     "id"=>"picture",
                     "option"=>$categorie_data,
                     "defaultValue"=>$forum_data['category_id'],
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];

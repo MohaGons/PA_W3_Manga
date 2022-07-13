@@ -77,6 +77,11 @@ class Category extends MysqlBuilder
                     "class"=>"formCategory",
                     "value"=>"",
                     "required"=>false,
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];
@@ -108,6 +113,11 @@ class Category extends MysqlBuilder
                     "class"=>"editFormCategory",
                     "value"=>$categorie_data['description'],
                     "required"=>false,
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];
