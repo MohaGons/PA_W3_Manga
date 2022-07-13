@@ -31,7 +31,7 @@
 /admin:
   controller: main
   action: home
-  security: [Admin,Abonne,Editeur]
+  security: All
   params: null
 
 /accueil:
@@ -94,28 +94,28 @@
   security: [Admin,Editeur,Abonne]
   params: null
 
-/forums:
-  controller: user
-  action: forums
-  security: [Admin,Editeur,Abonne]
+/admin/forums:
+  controller: forums
+  action: create
+  security: All
   params: null
 
-/deleteForum:
-  controller: user
-  action: deleteForum
-  security: [Admin]
+/admin/delete:
+  controller: forums
+  action: delete
+  security: All
   params: null
 
-/editForum:
-  controller: user
-  action: editForum
-  security: [Admin,Editeur,Abonne]
-  params: null
+/admin/forum/edit:
+  controller: forums
+  action: edit
+  security: All
+  params: id
 
-/forum:
+/admin/forum:
   controller: user
   action: forum
-  security: [Admin,Editeur,Abonne]
+  security: All
   params: null
 
 /admin/manga:
