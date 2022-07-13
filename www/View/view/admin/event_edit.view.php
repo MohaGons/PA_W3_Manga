@@ -11,3 +11,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    ClassicEditor
+    .create( document.querySelector( '#descriptionRegister' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>

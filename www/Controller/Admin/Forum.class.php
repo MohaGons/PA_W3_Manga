@@ -53,7 +53,6 @@ class Forum
         $view = new View("admin/forum_create", "back");
         $view->assign("forum", $forum);
         $view->assign("errors", $errors);
-
         $view->assign("categorie_data", $categorie_data);
     }
 
