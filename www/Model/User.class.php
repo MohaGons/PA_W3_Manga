@@ -524,7 +524,7 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
                     "required"=>true,
-                ]
+                ],
             ]
         ];
     }

@@ -29,7 +29,7 @@
                             }
                              ?></td>
                             <td>
-                            <a href="editForum?id=<?= $value['id']?>">Update</a>
+                                <a href="forum/edit/<?= $value['id']?>">Update</a>
                                 <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
                             </td>
                         </tr>
@@ -58,7 +58,7 @@
         </div>
     </div>
 </div> 
-<script src="../../Style/src/js/deleteForum.js"></script>
+<script src="../../../Style/src/js/deleteForum.js"></script>
 <script>
     ClassicEditor
     .create( document.querySelector( '#descriptionForum' ) )

@@ -22,6 +22,8 @@ class Builder
                         }
                         $html .= ">$value</option>";
                     }
+                    
+                    break;
                 case "radio":
                     foreach ($configInput["option"] as $option => $value) {
                         $html .= "<div class='" . $value["class"] . "' id='" . $value["id"] . "'
@@ -57,7 +59,7 @@ class Builder
                                 class='" . $configInput["class"] . "'
                                 name='" . $name . "'
                                 rows='" . $configInput["rows"] . "'
-                                cols='" . $configInput["cols"] . "'> </textarea><br>";
+                                cols='" . $configInput["cols"] . "'>" . $configInput["text"] . "</textarea><br>";
 
                     break;
                 case "file":
@@ -92,9 +94,6 @@ class Builder
                             placeholder='".$configInput["placeholder"]."'
                             type='".$configInput["type"]."'
                             ></div><br>";
-                    break;
-                case "submit":
-                    $html = "<button type='".$configInput["type"]."' class='".$configInput["class"]."'><p>".$configInput["title"]."</p></button><br>";
                     break;
                 default:
                     $html = "<input name='" . $name . "'

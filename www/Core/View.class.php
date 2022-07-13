@@ -52,7 +52,6 @@ class View
 
         extract($this->data);
         include "View/Template/".$this->template.".tpl.php";
-        die("tryuijokp");
 //        die($this->view);
     }
 
