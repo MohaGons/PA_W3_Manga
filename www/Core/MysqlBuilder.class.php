@@ -63,6 +63,13 @@ abstract class MysqlBuilder implements QueryBuilder
         return $this;
     }
 
+    public function delete(): QueryBuilder
+    {
+        $this->reset();
+        $this->query->base = "DELETE FROM " . $this->table;
+        return $this;
+    }
+
     public function insert(array $columns): QueryBuilder
     {
         $this->reset();

@@ -27,4 +27,6 @@ interface QueryBuilder
     public function limit(int $from, int $offset): QueryBuilder;
 
     public function getQuery(): string;
+
+    public function delete(): QueryBuilder;
 }

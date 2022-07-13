@@ -70,10 +70,27 @@ class Builder
                                 name='" . $name . "'
                                 accept='" . $configInput["accept"] . "'></div><br>";
                     break;
+                case "hidden":
+                    $html .= "<div><input type='" . $configInput["type"] . "'
+                                id='" . $configInput["id"] . "'
+                                name='" . $name . "'></div><br>";
+                    break;
                 case "text":
-                    $html = "<input name='".$name."'
+                    $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                    $html .= "<input name='".$name."'
                             class='".$configInput["class"]."'
                             id='".$configInput["id"]."'
+                            placeholder='".$configInput["placeholder"]."'
+                            type='".$configInput["type"]."'
+                            value='".$configInput["value"]."'
+                            ><br>";
+                    break;
+                case "number":
+                    $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                    $html .= "<input type='".$configInput["type"]."'
+                            class='".$configInput["class"]."'
+                            id='".$configInput["id"]."'
+                            name='" . $name . "'
                             placeholder='".$configInput["placeholder"]."'
                             type='".$configInput["type"]."'
                             value='".$configInput["value"]."'
