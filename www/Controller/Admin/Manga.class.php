@@ -12,39 +12,10 @@ class Manga
 
     public function index()
     {
-        $manga = new ModelManga();
         $manga = MangaRepository::all();
-
-        if(!empty($_POST)) {
-
-            $result = Verificator::checkFormRegister($manga->getMangaForm(), $_POST);
-            print_r($result);
-
-            if (empty($result)) {
-                $manga->setTypeManga(htmlspecialchars($_POST["type"]));
-                $manga->setTitleManga(htmlspecialchars($_POST["title"]));
-                $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
-                $manga->setImageManga(htmlspecialchars($_POST["image"]));
-                $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
-                $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
-                $manga->setStatusManga(htmlspecialchars($_POST["status"]));
-                $manga->setCategoryManga(htmlspecialchars($_POST["category"]));
-                $manga->setNbTomesManga(htmlspecialchars($_POST["nbTomes"]));
-                $manga->setNbChaptersManga(htmlspecialchars($_POST["nbChapters"]));
-                $manga->setNbEpisodesManga(htmlspecialchars($_POST["nbEpisodes"]));
-                $manga->setDiffusionManga(htmlspecialchars($_POST["diffusion"]));
-                $manga->setNbSeasonsManga(htmlspecialchars($_POST["nbSeasons"]));
-                $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
-                $manga->save();
-                echo "<script>alert('Votre manga a bien été mis à jour')</script>";
-            }
-        }
         
         $view = new View("admin/manga_index", "back");
         $view->assign("manga", $manga);
-
-//        $manga_data = $manga->getMangas();
-//        $view->assign("manga_data", $manga_data);
     }
 
     public function create()
