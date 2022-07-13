@@ -20,7 +20,7 @@ class Builder
                         if ($option === $configInput["defaultValue"]) {
                             $html .= " selected";
                         }
-                        $html .= ">$value</option>";
+                        $html .= ">$value</option><br>";
                     }
                     
                     break;
@@ -83,6 +83,8 @@ class Builder
                             placeholder='".$configInput["placeholder"]."'
                             type='".$configInput["type"]."'
                             value='".$configInput["value"]."'
+                            min='".$configInput["min"]."'
+                            max='".$configInput["max"]."'
                             ><br>";
                     break;
                 case "number":
