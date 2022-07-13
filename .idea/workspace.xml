@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/www/Controller/Stripe.class.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/View/view/stripe.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/utilisateurs.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/utilisateurs.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controller/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/Event.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/view/event.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/event.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +48,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../wamp64_2/www" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -53,6 +56,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\Model" />
       <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\View\view" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\Controller\Admin" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
