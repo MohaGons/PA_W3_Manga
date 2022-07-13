@@ -8,7 +8,7 @@
         <li><a href="/admin/evenements"><i class="fa-solid fa-champagne-glasses"></i> Evenements</a></li>
         <li><a href="/admin/forumcommentaire"><i class="fa-solid fa-comment-dots"></i> Commentaires <span class="badge"> <?= $NbForumCommentaire ?></span></a></li>
         <li><a href="/admin/utilisateurs"><i class="fa-solid fa-user"></i> Utilisateurs</a></li>
-        <li><a href="/admin/forums"><i class="fa-solid fa-newspaper"></i> Articles</a></li>
+        <li><a href="/admin/forum"><i class="fa-solid fa-newspaper"></i> Articles</a></li>
         <li><a href="/admin/categorie"><i class="fa-solid fa-calendar"></i> Catégories</a></li>
         <li><a href="/admin/parametre"><i class="fa-solid fa-gear"></i> Parametres</a></li>
         <li><a href="/admin/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Deconnexion</a></li>

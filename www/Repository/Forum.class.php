@@ -36,11 +36,17 @@ class Forum {
         return $result;
     }
 
-    public function deleteForum($forum_Id)
+    public function delete($id)
     {
-        $query = $this->pdo->prepare("DELETE FROM mnga_forum WHERE id= :id");
-        $query->bindValue(':id', $forum_Id);
-        $query->execute();
+        $forumModel = new ForumModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $forumModel->delete();
+        $forumModel->where("id", $id, "=");
+        $req = $connectionPDO->pdo->prepare($forumModel->getQuery());
+        $req->execute();
+
+        return header("Location: /admin/forum");
     }
 
 }

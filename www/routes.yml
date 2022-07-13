@@ -94,28 +94,40 @@
   security: [Admin,Editeur,Abonne]
   params: null
 
-/admin/forums:
-  controller: forums
+/admin/forum:
+  controller: forum
+  action: index
+  security: [Admin,Editeur,Abonne]
+  params: null
+
+/admin/forum/create:
+  controller: forum
   action: create
-  security: All
+  security: [Admin,Editeur,Abonne]
   params: null
 
-/admin/delete:
-  controller: forums
+/admin/forum/delete:
+  controller: forum
   action: delete
-  security: All
-  params: null
-
-/admin/forum/edit:
-  controller: forums
-  action: edit
-  security: All
+  security: [Admin,Editeur,Abonne]
   params: id
 
-/admin/forum:
-  controller: user
-  action: forum
-  security: All
+/admin/forum/edit/:
+  controller: forum
+  action: edit
+  security: [Admin,Editeur,Abonne]
+  params: id
+
+/forum/detail:
+  controller: forum
+  action: detail
+  security: [Admin,Editeur,Abonne]
+  params: id
+
+/forum:
+  controller: forum
+  action: index
+  security: [Admin,Editeur,Abonne]
   params: null
 
 /admin/manga:

@@ -87,7 +87,6 @@ class Manga
         if (!empty($manga_Id) && is_numeric($manga_Id))
         {
             $manga_delete = MangaRepository::delete($manga_Id);
-            die(var_dump($manga_delete));
         }
         
     }

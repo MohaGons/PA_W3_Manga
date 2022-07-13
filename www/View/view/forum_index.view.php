@@ -6,9 +6,6 @@
             <thead>
                 <th class="col-xl-4">Titre</th>
                 <th class="col-xl-6">Description</th>
-                <th class="col-xl-2">Contrôles
-                <button class="control--add" id="add-button">Ajouter</button>
-                </th>
             </thead>
             <tbody>
                 <?php 
@@ -28,10 +25,6 @@
                                 echo html_entity_decode($value["description"]);
                             }
                              ?></td>
-                            <td>
-                                <a href="forum/edit/<?= $value['id']?>">Update</a>
-                                <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
-                            </td>
                         </tr>
                 <?php 
                     }
@@ -40,29 +33,3 @@
         </table>
     </div>
 </div>
-
-<!-- ajout d'une catégorie -->
-<div class="modal" id="modal-add">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Ajouter un forum</h2>
-        </div>
-        <div class="modal-body">
-            <?php $this->includePartial("form", $forum->getForumForm($categorie_data));?>
-            <?php if (!empty($errors)) {
-                foreach ($errors as $error) {
-                    echo $error. "<br>";
-                }
-            }?>
-        </div>
-    </div>
-</div> 
-<script src="../../../Style/src/js/deleteForum.js"></script>
-<script>
-    ClassicEditor
-    .create( document.querySelector( '#descriptionForum' ) )
-    .catch( error => {
-        console.error( error );
-    } );
-</script>
