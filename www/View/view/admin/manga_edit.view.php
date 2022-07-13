@@ -7,7 +7,7 @@
             <h2>Editer un manga</h2>
         </div>
         <div class="modal-body">
-            <?php $this->includePartial("form", $manga->getMangaForm());?>
+            <?php $this->includePartial("form", $manga->getMangaForm($mangaInfos));?>
         </div>
     </div>
 </div> 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Model\User as UserModel;
 use App\Model\Role as RoleModel;

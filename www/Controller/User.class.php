@@ -23,6 +23,7 @@ class User
 
     public function login()
     {
+        die("uyiojp");
         $session = new Session();
         $user = new UserModel();
         $errors = [];

@@ -36,6 +36,20 @@ class User {
 
         return $result;
     }
+    public static function findById($id)
+    {
+        $userModel = new UserModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $userModel->select(["*"]);
+        $userModel->where("id", $id, "=");
+        $req = $connectionPDO->pdo->prepare($userModel->getQuery());
+        $req->execute();
+
+        $result = $req->fetch();
+
+        return $result;
+    }
 
     public static function checkLogin($data) {
         $userModel = new UserModel();

@@ -11,23 +11,14 @@ class Router
 
     public function __construct($slug)
     {
+
         $fileRoutes = "routes.yml";
 
         if(file_exists($fileRoutes)){
             $this->routes = yaml_parse_file($fileRoutes);
             $this->routesWithParams = $this->getRouteWithParams();
             $this->uri = $slug;
-//            echo "<pre>";
-//            die(var_dump($this->routesWithParams));
-//            $this->slug = strpos($slug, "/");
-//
-//            var_dump($this->slug);
-//            if (substr($slug, -1) == '/') {
-//                var_dump("yes");
-//                $slug = rtrim($slug, '/');
-//            }
-//
-//            $this->slug = $slug ?: '/';
+
         }else{
             die("Le fichier de routing n'existe pas");
         }
@@ -35,30 +26,34 @@ class Router
 
     public function checkRouteExist()
     {
+
+
         if(empty($this->routes[$this->uri]) || empty($this->routes[$this->uri]["controller"]) || empty($this->routes[$this->uri]["action"])){
 
             foreach ($this->routesWithParams as $key => $value) {
-                $routesExist = strstr($this->uri, $key  );
+                $routesExist = strstr($this->uri, $key);
+
                 if ($routesExist != false) {
                     $limit = strlen($key);
                     $end_url = substr($this->uri, $limit);
-                    var_dump($end_url);
                     $params = explode("/", $end_url);
-                    var_dump($params);
 
-                    if(!Security::checkRoute($this->routes["/admin/utilisateurs/update/"])){
+                    if(!Security::checkRoute($this->routes[$key])){
                         die("NotAuthorized");
                     }
-                    $controller = ucfirst(strtolower($this->routes["/admin/utilisateurs/update/"]["controller"]));
-                    $action = strtolower($this->routes["/admin/utilisateurs/update/"]["action"]);
+
+                    $controller = ucfirst(strtolower($this->routes[$key]["controller"]));
+                    $action = strtolower($this->routes[$key]["action"]);
 
 
-                    $adminController = strpos("/admin/utilisateurs/update/", "/admin");
+                    $adminController = strpos($key, "/admin");
                     if ($adminController === false) {
                         $controllerFile = "Controller/".$controller.".class.php";
+                        $controller = "App\\Controller\\".$controller;
                     }
                     else {
                         $controllerFile = "Controller/Admin/".$controller.".class.php";
+                        $controller = "App\\Controller\\Admin\\".$controller;
                     }
 
                     if(!file_exists($controllerFile)){
@@ -67,7 +62,7 @@ class Router
 
                     include $controllerFile;
 
-                    $controller = "App\\Controller\\".$controller;
+
                     if( !class_exists($controller)){
                         die("La classe n'existe pas");
                     }
@@ -81,22 +76,11 @@ class Router
 
                     $objectController->$action($params);
                 }
-
-                die();
             }
 
-            echo "<pre>";
-            var_dump($this->uri);
-            var_dump(strstr($this->uri, "/admin/utilisateurs/update/"));
-            var_dump(strlen("/admin/utilisateurs/update/"));
-            $limit = strlen("/admin/utilisateurs/update/");
-            var_dump(substr($this->uri, $limit));
-            $other_url = substr($this->uri, $limit);
-            $params = explode("/", $other_url);
-            var_dump($params);
 
 
-            die("Page 404");
+//            die("Page 404");
         }
         else {
 
@@ -111,9 +95,11 @@ class Router
             $adminController = strpos($this->uri, "/admin");
             if ($adminController === false) {
                 $controllerFile = "Controller/".$controller.".class.php";
+                $controller = "App\\Controller\\".$controller;
             }
             else {
                 $controllerFile = "Controller/Admin/".$controller.".class.php";
+                $controller = "App\\Controller\\Admin\\".$controller;
             }
 
             if(!file_exists($controllerFile)){
@@ -122,7 +108,8 @@ class Router
 
             include $controllerFile;
 
-            $controller = "App\\Controller\\".$controller;
+//            die(var_dump($controller));
+
             if( !class_exists($controller)){
                 die("La classe n'existe pas");
             }

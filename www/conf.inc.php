@@ -13,3 +13,9 @@ define("DBPREFIXE", "mnga_");
 define("ADMIN_HOME_ROUTE", "/Admin");
 define("HOME_ROUTE", "/");
 define("LOGIN_VIEW_ROUTE", "/login");
+
+//LIEN CSS
+define("LINK_CSS", "/Style/dist/main.css");
+
+//LIEN CSS
+define("LINK_JS", "/Style/dist/main.js");
