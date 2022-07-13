@@ -216,6 +216,7 @@ class Manga extends MysqlBuilder
                     "rows"=>"5",
                     "cols"=>"40",
                     "value"=>null,
+                    "text"=>null,
                     "required"=>true,
                 ],
                 "releaseDate"=>[
@@ -363,7 +364,7 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "rows"=>"5",
                     "cols"=>"40",
-                    "value"=>$manga[0]["description"],
+                    "text"=>$manga[0]["description"],
                     "required"=>true,
                 ],
                 "releaseDate"=>[
