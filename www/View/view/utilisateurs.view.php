@@ -23,28 +23,27 @@
         margin: 8px 0;
         box-sizing: border-box;
     }
-    .graph {
-        position: relative;
+
+
+    .progressbar-wrapper {
+        background-color: #dfe6e9;
+        color: white;
+        border-radius: 15px;
         width: 100%;
-        border: 1px solid black;
-        padding: 12px;
-        background-color: lightgrey
     }
 
-    .graph .bar {
-        display: block;
-        position: relative;
-        padding: 5px;
-        background: black;
-        color : white;
-        text-align: left;
-        height: 3em;
-        line-height: 1em;
+    .progressbar {
+        background-color: black;
+        color: white;
+        padding: 0.3rem;
+        text-align: right;
+        font-size: 20px;
+        border-radius: 15px;
     }
-    .graph .bar span { position: absolute; left: 1em; }
+
 
 </style>
-
+<div class="container">
 <h1><i class="fa-solid fa-user"></i> Nombre d'utilisateurs : <?= $Nbusers ?></h1>
 <div style="display: flex; justify-content: space-between">
 <div>
@@ -81,7 +80,7 @@
     <?php
     foreach($users as $user){
         ?>
-        <tr style="text-align: center; height:30px;background-color: lightgrey">
+        <tr style="text-align: center; height:30px;background-color: #dfe6e9">
             <td><?= $user['gender'] ?></td>
             <td><?= $user['lastname'] ?></td>
             <td><?= $user['firstname'] ?></td>
@@ -89,9 +88,9 @@
             <td><?= $user['role'] ?></td>
             <td><?= $user['createdAt'] ?></td>
             <td> <?= $user['ville']?>, <?= $user['pays']?></td>
-            <td><a href="?action=delete&id=<?= $user['ID'] ?>"><i class="fa-solid fa-trash"></i></a></td>
-            <td><a href="utilisateurs/update?action=update&id=<?= $user['ID'] ?>"><i class="fa-solid fa-pen"></i></a></td>
-            <td><a href="?action=contact&id=<?= $user['ID'] ?>"><i class="fa-solid fa-paper-plane"></i></a></td>
+            <td><a href="?action=delete&id=<?= $user['id'] ?>"><i class="fa-solid fa-trash"></i></a></td>
+            <td><a href="utilisateurs/update?action=update&id=<?= $user['id'] ?>"><i class="fa-solid fa-pen"></i></a></td>
+            <td><a href="?action=contact&id=<?= $user['id'] ?>"><i class="fa-solid fa-paper-plane"></i></a></td>
         </tr>
         <?php
     }
@@ -108,36 +107,25 @@
                 <a href="?page=<?= $page ?>" <?php if (isset($active) && $page==$active){?> class="active" <?php }?>><?= $page ?></a>
         <?php endfor ?>
     </div>
+</div>
+
 <br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="graph">
-    <h1>Statistiques Utilisateurs</h1><br><br>
+    <div class="container">
+        <h1>Les 5 pays les plus presenté</h1>
     <?php
     foreach($bestpays as $pays){
         ?>
-       <strong class="bar" style="width: <?=($pays['COUNT(*)']/$Nbusers)*100?>%"><?= $pays['pays'] ?> | <?= $pays['COUNT(*)'] ?> Utilisateurs <?=($pays['COUNT(*)']/$Nbusers)*100 ?>%</strong><br>
+        <p><?= $pays['pays'] ?> - <?= $pays['COUNT(*)'] ?></p>
+        <div class="progressbar-wrapper">
+            <div style="width: <?=($pays['COUNT(*)']/$Nbusers)*100?>%" class="progressbar"><?=round(($pays['COUNT(*)']/$Nbusers)*100) ?>%</div>
+        </div>
         <?php
     }
     ?>
+    </div>
 
-</div>
+
+
 
 
 

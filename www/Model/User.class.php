@@ -226,7 +226,7 @@ class User extends MysqlBuilder
 
     public function updateRole($email, $id)
     {
-        $q = "UPDATE mnga_user SET role=? WHERE ID=?";
+        $q = "UPDATE mnga_user SET role=? WHERE id=?";
         $req = $this->pdo->prepare($q);
         $req->execute([$email,$id]);
     }
@@ -295,7 +295,7 @@ class User extends MysqlBuilder
 
     public function deleteuser($id)
     {
-        $q = "DELETE FROM mnga_user WHERE ID = :id";
+        $q = "DELETE FROM mnga_user WHERE id = :id";
         $req = $this->pdo->prepare($q);
         if($req->execute(['id' => $id])){
             return 1;

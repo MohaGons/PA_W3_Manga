@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_21_06_2022_21_02_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_21_06_2022_21_02__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controller/Admin.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controller/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/User.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/View/view/utilisateurs.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/utilisateurs.view.php" afterDir="false" />
     </list>
@@ -86,6 +82,8 @@
       <workItem from="1656876244151" duration="4025000" />
       <workItem from="1657378778326" duration="735000" />
       <workItem from="1657451797982" duration="593000" />
+      <workItem from="1657608739748" duration="98000" />
+      <workItem from="1657713665049" duration="751000" />
     </task>
     <servers />
   </component>
