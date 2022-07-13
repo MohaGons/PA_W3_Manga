@@ -179,6 +179,148 @@ class Manga extends MysqlBuilder
         $this->production_studio = ucwords(strtolower(trim($production_studio)));
     }
 
+    public function getCreateMangaForm(): array
+    {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"formCreateManga",
+                "class"=>"formManga",
+            ],
+            "inputs"=>[
+                "type"=>[
+                    "placeholder"=>"type",
+                    "type"=>"text",
+                    "label"=>"Type: ",
+                    "id"=>"typeCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "title"=>[
+                    "placeholder"=>"titre",
+                    "type"=>"text",
+                    "label"=>"Titre: ",
+                    "id"=>"titleCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "description"=>[
+                    "placeholder"=>"description",
+                    "type"=>"textarea",
+                    "label"=>"Description: ",
+                    "id"=>"descriptionCreateManga",
+                    "class"=>"formManga",
+                    "rows"=>"5",
+                    "cols"=>"40",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "releaseDate"=>[
+                    "placeholder"=>"releaseDate",
+                    "type"=>"date",
+                    "label"=>"Date de sortie: ",
+                    "id"=>"releaseDateCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "author"=>[
+                    "placeholder"=>"auteur",
+                    "type"=>"text",
+                    "label"=>"Auteur: ",
+                    "id"=>"authorCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "status"=>[
+                    "placeholder"=>"status",
+                    "type"=>"text",
+                    "label"=>"Status: ",
+                    "id"=>"statusCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "category"=>[
+                    "placeholder"=>"catégorie",
+                    "type"=>"text",
+                    "label"=>"Catégorie: ",
+                    "id"=>"categoryCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "nbTomes"=>[
+                    "placeholder"=>"nombres de tomes",
+                    "type"=>"number",
+                    "label"=>"Nombres de tomes: ",
+                    "id"=>"nbTomesCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "nbChapters"=>[
+                    "placeholder"=>"nombres de chapitres",
+                    "type"=>"number",
+                    "label"=>"Nombres de chapitres: ",
+                    "id"=>"nbChaptersCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "nbEpisodes"=>[
+                    "placeholder"=>"nombres d'episodes",
+                    "type"=>"number",
+                    "label"=>"Nombres d'épisodes: ",
+                    "id"=>"nbEpisodesCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "diffusion"=>[
+                    "placeholder"=>"diffusion",
+                    "type"=>"text",
+                    "label"=>"Diffusion: ",
+                    "id"=>"diffusionCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "nbSeasons"=>[
+                    "placeholder"=>"nombres de saisons",
+                    "type"=>"number",
+                    "label"=>"Nombres de saisons: ",
+                    "id"=>"nbSeasonsCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "productionStudio"=>[
+                    "placeholder"=>"studio de production",
+                    "type"=>"text",
+                    "label"=>"Studio de production: ",
+                    "id"=>"productionStudioCreateManga",
+                    "class"=>"formManga",
+                    "value"=>null,
+                    "required"=>true,
+                ],
+                "image"=>[
+                    "label"=>"image",
+                    "type"=>"file",
+                    "label"=>"Image: ",
+                    "id"=>"imageCreateManga",
+                    "class"=>"formManga",
+                    "required"=>true,
+                    "accept"=>"image/*",
+                ]
+            ]
+        ];
+    }
+
     public function getMangaForm($manga): array
     {
         return [
@@ -187,12 +329,18 @@ class Manga extends MysqlBuilder
                 "action"=>"",
                 "id"=>"formManga",
                 "class"=>"formManga",
-                "submit"=>"Valider"
             ],
             "inputs"=>[
+                "id"=>[
+                    "type"=>"hidden",
+                    "id"=>"idManga",
+                    "value"=>$manga[0]["id"],
+                    "required"=>true,
+                ],
                 "type"=>[
                     "placeholder"=>"type",
                     "type"=>"text",
+                    "label"=>"Type: ",
                     "id"=>"typeManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["type"],
@@ -201,6 +349,7 @@ class Manga extends MysqlBuilder
                 "title"=>[
                     "placeholder"=>"titre",
                     "type"=>"text",
+                    "label"=>"Titre: ",
                     "id"=>"titleManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["title"],
@@ -209,15 +358,18 @@ class Manga extends MysqlBuilder
                 "description"=>[
                     "placeholder"=>"description",
                     "type"=>"textarea",
-                    "label"=>"Description : ",
+                    "label"=>"Description: ",
                     "id"=>"descriptionManga",
                     "class"=>"formManga",
+                    "rows"=>"5",
+                    "cols"=>"40",
                     "value"=>$manga[0]["description"],
                     "required"=>true,
                 ],
                 "releaseDate"=>[
                     "placeholder"=>"releaseDate",
                     "type"=>"date",
+                    "label"=>"Date de sortie: ",
                     "id"=>"releaseDateManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["release_date"],
@@ -226,6 +378,7 @@ class Manga extends MysqlBuilder
                 "author"=>[
                     "placeholder"=>"auteur",
                     "type"=>"text",
+                    "label"=>"Auteur: ",
                     "id"=>"authorManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["author"],
@@ -234,6 +387,7 @@ class Manga extends MysqlBuilder
                 "status"=>[
                     "placeholder"=>"status",
                     "type"=>"text",
+                    "label"=>"Status: ",
                     "id"=>"statusManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["status"],
@@ -242,6 +396,7 @@ class Manga extends MysqlBuilder
                 "category"=>[
                     "placeholder"=>"catégorie",
                     "type"=>"text",
+                    "label"=>"Catégorie: ",
                     "id"=>"categoryManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["category"],
@@ -249,7 +404,8 @@ class Manga extends MysqlBuilder
                 ],
                 "nbTomes"=>[
                     "placeholder"=>"nombres de tomes",
-                    "type"=>"int",
+                    "type"=>"number",
+                    "label"=>"Nombres de tomes: ",
                     "id"=>"nbTomesManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_tomes"],
@@ -257,7 +413,8 @@ class Manga extends MysqlBuilder
                 ],
                 "nbChapters"=>[
                     "placeholder"=>"nombres de chapitres",
-                    "type"=>"int",
+                    "type"=>"number",
+                    "label"=>"Nombres de chapitres: ",
                     "id"=>"nbChaptersManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_chapters"],
@@ -265,7 +422,8 @@ class Manga extends MysqlBuilder
                 ],
                 "nbEpisodes"=>[
                     "placeholder"=>"nombres d'episodes",
-                    "type"=>"int",
+                    "type"=>"number",
+                    "label"=>"Nombres d'épisodes: ",
                     "id"=>"nbEpisodesManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_episodes"],
@@ -274,6 +432,7 @@ class Manga extends MysqlBuilder
                 "diffusion"=>[
                     "placeholder"=>"diffusion",
                     "type"=>"text",
+                    "label"=>"Diffusion: ",
                     "id"=>"diffusionManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["diffusion"],
@@ -281,7 +440,8 @@ class Manga extends MysqlBuilder
                 ],
                 "nbSeasons"=>[
                     "placeholder"=>"nombres de saisons",
-                    "type"=>"int",
+                    "type"=>"number",
+                    "label"=>"Nombres de saisons: ",
                     "id"=>"nbSeasonsManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_seasons"],
@@ -290,6 +450,7 @@ class Manga extends MysqlBuilder
                 "productionStudio"=>[
                     "placeholder"=>"studio de production",
                     "type"=>"text",
+                    "label"=>"Studio de production: ",
                     "id"=>"productionStudioManga",
                     "class"=>"formManga",
                     "value"=>$manga[0]["production_studio"],
@@ -298,15 +459,11 @@ class Manga extends MysqlBuilder
                 "image"=>[
                     "label"=>"image",
                     "type"=>"file",
+                    "label"=>"Image: ",
                     "id"=>"imageManga",
                     "class"=>"formManga",
                     "required"=>true,
                     "accept"=>"image/*",
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];

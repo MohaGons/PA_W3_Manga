@@ -36,20 +36,17 @@ class Manga {
         return $result;
     }
 
-    public static function findByEmail($email)
+    public function delete($id) 
     {
-        $roleModel = new RoleModel();
+        $mangaModel = new MangaModel();
         $connectionPDO = new ConnectionPDO();
 
-        $roleModel->select(["id"]);
-        $roleModel->where("email", $email, "=");
-        $req = $connectionPDO->pdo->prepare($roleModel->getQuery());
+        $mangaModel->delete();
+        $mangaModel->where("id", $id, "=");
+        $req = $connectionPDO->pdo->prepare($mangaModel->getQuery());
         $req->execute();
 
-        $result = $req->fetchAll();
-
-        return $result;
+        return header("Location: /admin/manga");
     }
-
 
 }

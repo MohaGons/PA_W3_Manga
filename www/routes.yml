@@ -124,17 +124,23 @@
   security: [Admin,Editeur,Abonne]
   params: null
 
+/admin/manga/create:
+  controller: manga
+  action: create
+  security: [Admin,Editeur,Abonne]
+  params: null
+
 /admin/manga/edit/:
   controller: manga
   action: edit
   security: [Admin,Editeur,Abonne]
   params: id
 
-/deleteManga:
-  controller: user
-  action: deleteManga
+/admin/manga/delete:
+  controller: manga
+  action: delete
   security: [Admin]
-  params: null
+  params: id
 
 /images:
   controller: user

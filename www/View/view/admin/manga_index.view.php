@@ -7,7 +7,7 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Contrôles
-                <button class="control--add" id="add-button">Ajouter</button>
+                <a href="manga/create"><button class="control--delete">Ajouter</button></a>
                 </th>
             </thead>
             <tbody>
@@ -18,7 +18,7 @@
                             <td><?= $value["description"] ?></td>
                             <td>
                                 <a href="manga/edit/<?= $value['id']?>">Update</a>
-                                <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
+                                <a href="manga/delete/<?= $value['id']?>"><button class="control--delete">Supprimer</button></a>
                             </td>
                         </tr>
                 <?php 
@@ -29,19 +29,6 @@
     </div>
 </div>
 
-<!-- ajout d'un manga -->
-<div class="modal" id="modal-add">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Ajouter un manga</h2>
-        </div>
-        <div class="modal-body">
-            <?php $this->includePartial("form", $manga->getMangaForm());?>
-        </div>
-    </div>
-</div>
-<script src="../../../Style/src/js/deleteManga.js"></script>
 <script>
 $('.control--add').css('background-color', localStorage.buttonAdd);
 $('.control--delete').css('background-color', localStorage.buttonDelete);
