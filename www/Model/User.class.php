@@ -227,7 +227,7 @@ class User extends MysqlBuilder
 
     public function updateRole($email, $id)
     {
-        $q = "UPDATE mnga_user SET role=? WHERE ID=?";
+        $q = "UPDATE mnga_user SET role=? WHERE id=?";
         $req = $this->pdo->prepare($q);
         $req->execute([$email,$id]);
     }
@@ -296,7 +296,7 @@ class User extends MysqlBuilder
 
     public function deleteuser($id)
     {
-        $q = "DELETE FROM mnga_user WHERE ID = :id";
+        $q = "DELETE FROM mnga_user WHERE id = :id";
         $req = $this->pdo->prepare($q);
         if($req->execute(['id' => $id])){
             return 1;
@@ -348,6 +348,35 @@ class User extends MysqlBuilder
         $resultat = $req->fetchAll();
         return $resultat;
     }
+
+    public function setPays($type){
+        $ip_visiteur = 'X.X.X.X';
+        $ipinfo = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip_visiteur));
+        $Pays = $ipinfo->geoplugin_countryName;
+        $Ville = $ipinfo->geoplugin_city;
+        $Continent = $ipinfo->geoplugin_continentName;
+        if ($type=="Pays"){
+            $this->pays=$Pays;
+        }
+        if ($type=="Ville"){
+            $this->ville=$Ville;
+        }
+        if ($type=="Continent"){
+            $this->continent=$Continent;
+        }
+        else{
+            return NULL;
+        }
+    }
+
+    public function getBestPays(){
+        $q = "SELECT pays, COUNT(*) FROM mnga_user GROUP BY pays ORDER BY COUNT(*) DESC LIMIT 5";
+        $req = $this->pdo->prepare($q);
+        $req->execute();
+        $resultat = $req->fetchAll();
+        return $resultat;
+    }
+
 
     public function getRegisterForm(): array
     {
@@ -515,7 +544,7 @@ class User extends MysqlBuilder
                     "placeholder"=>"Prénom",
                     "type"=>"text",
                     "id"=>"emailRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "value"=>$data['firstname'],
                     "required"=>false,
                     "min"=>2,
@@ -526,7 +555,7 @@ class User extends MysqlBuilder
                     "placeholder"=>"Nom de famille",
                     "type"=>"text",
                     "id"=>"pwdRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "value"=>$data['lastname'],
                     "required"=>false,
                     "min"=>2,
