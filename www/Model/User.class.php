@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
+use App\Repository\Role as RoleRepository;
 use App\Model\Role as RoleModel;
 use PDO;
 
@@ -485,6 +486,7 @@ class User extends MysqlBuilder
                     "type"=>"email",
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
+                    "error"=>"Email incorrect",
                     "required"=>true,
                 ],
                 "password"=>[
@@ -493,11 +495,6 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
                     "required"=>true,
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Se connecter",
                 ]
             ]
         ];
@@ -558,8 +555,9 @@ class User extends MysqlBuilder
 
     public function updateUser(): array
     {
-        $role = new RoleModel();
-        $roles = $role->getAllRoles();
+        $roles = RoleRepository::all();
+
+//        die(var_dump($roles));
 
         return [
             "config"=>[

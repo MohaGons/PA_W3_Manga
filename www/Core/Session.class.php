@@ -4,38 +4,46 @@ namespace App\Core;
 
 class Session
 {
-    public function ensureStarted()
+    public static function start()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-
     }
 
-    public function get(string $key, $default = null)
+    public static function all($default = null)
     {
-        $this->ensureStarted();
+        Session::start();
+        if (!empty($_SESSION)) {
+            return $_SESSION;
+        } else {
+            return $default;
+        }
+    }
+
+    public static function get(string $key, $default = null)
+    {
+        Session::start();
         if (array_key_exists($key, $_SESSION)) {
             return $_SESSION[$key];
         } else {
             return $default;
         }
-
     }
 
-    public function set(string $key, $value = null): void
+    public static function set(string $key, $value = null): void
     {
-        $this->ensureStarted();
+        Session::start();
         $_SESSION[$key] = $value;
     }
 
-    public function delete(string $key): void
+    public static function delete(string $key): void
     {
-        $this->ensureStarted();
+        Session::start();
         unset($_SESSION[$key]);
     }
 
-    public function sessionDestroy(): void
+    public static function destroy(): void
     {
         if (session_status() == PHP_SESSION_ACTIVE) {
             session_destroy();

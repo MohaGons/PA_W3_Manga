@@ -12,7 +12,7 @@ class Admin
 
     public function home()
     {
-        $view = new View("dashboard", "back");
+        $view = new View("home", "back");
     }
 
     public function utilisateurs(){

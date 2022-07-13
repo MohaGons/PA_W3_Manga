@@ -12,12 +12,12 @@
             </thead>
             <tbody>
                 <?php 
-                    foreach ($manga_data as $key => $value){ ?>
+                    foreach ($manga as $key => $value){ ?>
                         <tr>
                             <td><?= $value["title"] ?></td>
                             <td><?= $value["description"] ?></td>
                             <td>
-                                <a href="editManga?id=<?= $value['id']?>">Update</a>
+                                <a href="manga/edit/<?= $value['id']?>">Update</a>
                                 <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
                             </td>
                         </tr>
@@ -41,7 +41,7 @@
         </div>
     </div>
 </div>
-<script src="../../Style/src/js/deleteManga.js"></script>
+<script src="../../../Style/src/js/deleteManga.js"></script>
 <script>
 $('.control--add').css('background-color', localStorage.buttonAdd);
 $('.control--delete').css('background-color', localStorage.buttonDelete);

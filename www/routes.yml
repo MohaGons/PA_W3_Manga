@@ -2,148 +2,160 @@
   controller: main
   action: home
   security: All
+  params: null
 
 /nous-contacter:
   controller: main
   action: contact
   security: All
+  params: null
 
 /login:
-  controller: user
+  controller: authentification
   action: login
-  security: All
+  security : All
+  params: null
 
 /logout:
-  controller: user
+  controller: authentification
   action: logout
-  security: All
+  security: [Abonne,Admin,Editeur]
+  params: null
 
 /register:
-  controller: user
+  controller: authentification
   action: register
   security: All
+  params: null
 
-/event:
-  controller: event
-  action: event
-  security: All
-
-/eventEdit:
-  controller: event
-  action: editEvent
-  security: All
-
-/deleteEvent:
-  controller: user
-  action: deleteEvent
-  security: All
-
-/dashboard:
-  controller: admin
+/admin:
+  controller: main
   action: home
-  security: All
+  security: [Admin,Abonne,Editeur]
+  params: null
 
 /accueil:
   controller: main
   action: home
   security: All
+  params: null
 
 /recuperer_mdp:
-  controller: user
-  action: recuperer_mdp
-  security: All
+  controller : user
+  action     : recuperer_mdp
+  security   : All
+  params: null
 
 /initialiser_mdp:
-  controller: user
-  action: initialiser_mdp
-  security: All
+  controller : user
+  action     : initialiser_mdp
+  security   : All
+  params: null
 
 /parametre:
   controller: user
   action : parametre
-  security: All
+  security: [Admin,Editeur,Abonne]
+  params: null
 
 /deletecompte:
+   controller: user
+   action : deletecompte
+   security: [Admin]
+   params: null
+
+/admin/utilisateurs:
+   controller: user
+   action : index
+   security: [Admin,Editeur,Abonne]
+   params: null
+
+/admin/utilisateurs/edit/:
   controller: user
-  action: deletecompte
-  security: [Admin]
-
-/utilisateurs:
-   controller: admin
-   action : utilisateurs
-   security: All
-
-/utilisateurs/update:
-  controller: admin
-  action: utilisateurs_update
-  security: All
+  action: edit
+  security: [Admin,Editeur,Abonne]
+  params: id
 
 /categorie:
   controller: user
   action: category
   security: All
+  params: null
 
 /deleteCategorie:
   controller: user
   action: deleteCategory
-  security: All
+  security: [Admin]
+  params: null
 
 /editCategorie:
   controller: user
   action: editCategory
-  security: All
+  security: [Admin,Editeur,Abonne]
+  params: null
 
 /forums:
   controller: user
   action: forums
-  security: All
+  security: [Admin,Editeur,Abonne]
+  params: null
 
 /deleteForum:
   controller: user
   action: deleteForum
-  security: All
+  security: [Admin]
+  params: null
 
 /editForum:
   controller: user
   action: editForum
-  security: All
+  security: [Admin,Editeur,Abonne]
+  params: null
 
 /forum:
   controller: user
   action: forum
-  security: All
+  security: [Admin,Editeur,Abonne]
+  params: null
 
-/manga:
+/admin/manga:
   controller: manga
-  action: manga
-  security: All
+  action: index
+  security: [Admin,Editeur,Abonne]
+  params: null
 
-/editManga:
+/admin/manga/edit/:
   controller: manga
-  action: editManga
-  security: All
+  action: edit
+  security: [Admin,Editeur,Abonne]
+  params: id
 
 /deleteManga:
-  controller: manga
+  controller: user
   action: deleteManga
   security: [Admin]
+  params: null
 
 /images:
   controller: user
-  action: images
+  action : images
   security: All
+  params: null
 
 /media:
     controller: media
     action: Allmedia
     security: All
+    params: null
 
 /updatepassword:
   controller: user
   action: updatemdp
   security: All
+  params: null
 
 /forumcommentaire:
   controller: forumcommentaire
   action: forumcommentaire
   security: [Admin,Editeur,Abonne]
+  params: null
