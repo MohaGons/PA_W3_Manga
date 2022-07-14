@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 <?php 
-                    foreach ($forums_data as $key => $value){ ?>
+                    foreach ($get_category_forum as $key => $value){ ?>
                         <tr>
                             <td><?php
                             if (strlen($value["title"]) >= 40) {
@@ -34,7 +34,7 @@
                                 <?= $value["date"]; ?>
                             </td>
                             <td>
-                                <?= $value["category_id"]; ?>
+                                <?= $value["category_name"]; ?>
                             </td>
                             <td>
                                 <a href="forum/edit/<?= $value['id']?>">Update</a>

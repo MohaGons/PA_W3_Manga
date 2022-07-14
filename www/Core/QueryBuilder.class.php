@@ -29,4 +29,6 @@ interface QueryBuilder
     public function getQuery(): string;
 
     public function delete(): QueryBuilder;
+
+    public function orderBy($field, $filter): QueryBuilder;
 }

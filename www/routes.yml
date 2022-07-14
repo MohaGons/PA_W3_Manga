@@ -208,12 +208,6 @@
   security: All
   params: null
 
-/admin/event:
-  controller: event
-  action: Event
-  security: All
-  params: null
-
 /event:
   controller: frontevent
   action: FrontEvent

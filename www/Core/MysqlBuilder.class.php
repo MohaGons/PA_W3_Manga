@@ -99,6 +99,13 @@ abstract class MysqlBuilder implements QueryBuilder
         return $this;
     }
 
+    public function orderBy($field, $filter): QueryBuilder
+    {
+        $this->query->order = " ORDER BY " . $field . " " . $filter;
+
+        return $this;
+    }
+
     public function createTable(array $columns): void
     {
         $showTable = $this->pdo->prepare("SHOW TABLES;");
@@ -163,6 +170,10 @@ abstract class MysqlBuilder implements QueryBuilder
 
         if (!empty($query->where)) {
             $sql .= " WHERE " . implode(' AND ', $query->where);
+        }
+
+        if (isset($query->order)) {
+            $sql .= $query->order;
         }
 
         if (isset($query->limit)) {
