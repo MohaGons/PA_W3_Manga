@@ -423,6 +423,7 @@ class User extends MysqlBuilder
                     "id"=>"firstnameRegister",
                     "class"=>"formRegister",
                     "value"=>"",
+                    "label"=>"Firstname",
                     "min"=>2,
                     "max"=>25,
                     "required"=>true,
@@ -434,6 +435,7 @@ class User extends MysqlBuilder
                     "id"=>"lastnameRegister",
                     "class"=>"formRegister",
                     "value"=>"",
+                    "label"=>"Lasttname",
                     "min"=>2,
                     "max"=>100,
                     "required"=>true,
@@ -489,11 +491,6 @@ class User extends MysqlBuilder
                     "id"=>"file",
                     "class"=>"formRegister",
                     "accept" => ""
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Se connecter",
                 ]
             ]
         ];

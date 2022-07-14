@@ -133,6 +133,7 @@ class Event extends MysqlBuilder
                 "action" => "",
                 "id" => "formEvent",
                 "class" => "formEvent",
+                "enctype"=>"multipart/form-data",
                 "submit" => "Créer un nouvel évènement"
             ],
             "inputs" => [
@@ -181,15 +182,12 @@ class Event extends MysqlBuilder
                     "required" => true,
                     "error" => "Mettre une date correct",
                 ],
-                "photo" => [
-                    "placeholder" => "....",
-                    "label" => "Fichier de l'évènement ",
-                    "type" => "file",
-                    "id" => "photoRegister",
-                    "class" => "formEvent",
-                    //"required" => true,
-                    "error" => "Mettre une photo correct",
-                    "accept" => "image/*"
+                "file"=> [
+                    "type"=> "file",
+                    "label"=> "Avatar : ",
+                    "id"=>"file",
+                    "class"=>"formRegister",
+                    "accept" => ""
                 ]
             ]
         ];
@@ -203,6 +201,7 @@ class Event extends MysqlBuilder
                 "action" => "",
                 "id" => "formEvent",
                 "class" => "formEvent",
+                "enctype"=>"multipart/form-data",
                 "submit" => "Modifier L'evenement"
             ],
             "inputs" => [
@@ -255,16 +254,12 @@ class Event extends MysqlBuilder
                     "value" => $event_data[0]['date'],
                     "error" => "Mettre une date correct",
                 ],
-                "photo" => [
-                    "placeholder" => "....",
-                    "label" => "Fichier de l'évènement ",
-                    "type" => "file",
-                    "id" => "photoRegister",
-                    "class" => "formEvent",
-                    "value" => $event_data[0]['photo'],
-                    //"required" => true,
-                    "error" => "Mettre une photo correct",
-                    "accept" => "image/*"
+                "file"=> [
+                    "type"=> "file",
+                    "label"=> "Avatar : ",
+                    "id"=>"file",
+                    "class"=>"formRegister",
+                    "accept" => ""
                 ]
             ]
         ];

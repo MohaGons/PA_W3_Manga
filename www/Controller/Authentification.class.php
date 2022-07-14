@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;
+use App\Model\Media as MediaModel;
 use App\Core\Mailer;
 use App\Core\Session as Session;
 use App\Repository\User as UserRepository;
@@ -59,10 +60,11 @@ class Authentification {
     public function register()
     {
         $user = new UserModel();
+        $media = new MediaModel();
         $errors = [];
 
         if(!empty($_POST)) {
-            $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
+            //$result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
 
             if (empty($result)) {
                 $userRepository = UserRepository::findByEmail(htmlspecialchars($_POST["email"]));
@@ -73,9 +75,11 @@ class Authentification {
                     $user->setEmail(htmlspecialchars($_POST["email"]));
                     $user->setPassword(htmlspecialchars($_POST["password"]));
                     $user->setGender(htmlspecialchars($_POST["gender"]));
-                    $user->setAvatar(htmlspecialchars($_POST["avatar"]));
+                    $user->setAvatar(htmlspecialchars($_FILES["file"]["name"]));
+                    $user->setPays('Pays');
+                    $user->setPays('Ville');
                     $user->save();
-
+                    $media->setMedia("Avatars",$_POST["email"],"set");
                     echo "<script>alert('Votre profil a bien été mis à jour')</script>";
 
                     Session::set('email',$_POST['email']);

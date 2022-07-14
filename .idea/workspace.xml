@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/www/Controller/Frontevent.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/View/view/front-event.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Controller/Admin/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/Event.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controller/Stripe.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Stripe.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Mailer.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Mailer.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/stripe.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/stripe.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controller/Authentification.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Authentification.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controller/Media.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/Media.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Event.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Media.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Media.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Style/images/Avatars/WhatsApp Image 2022-03-08 at 21.06.58(1).jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/view/admin/media_index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/admin/media_index.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +60,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\Model" />
       <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\View\view" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\Controller\Admin" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
