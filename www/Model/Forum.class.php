@@ -82,6 +82,7 @@ class Forum extends MysqlBuilder
                 "title"=>[
                     "placeholder"=>"Titre",
                     "type"=>"text",
+                    "label"=>"Titre: ",
                     "id"=>"nameForum",
                     "class"=>"formForum",
                     "value"=>"",
@@ -104,15 +105,11 @@ class Forum extends MysqlBuilder
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "categories"=> [
+                    "label"=> "Catégorie: ",
                     "type"=> "select",
                     "id"=>"picture",
                     "option"=>$categorie_data,
                     "defaultValue"=>"",
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];
@@ -132,6 +129,7 @@ class Forum extends MysqlBuilder
                 "editTitle"=>[
                     "placeholder"=>"Titre",
                     "type"=>"text",
+                    "label"=>"Titre: ",
                     "id"=>"nameForum",
                     "class"=>"formForum",
                     "value"=>$forum_data[0]['title'],
@@ -154,15 +152,11 @@ class Forum extends MysqlBuilder
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "categories"=> [
+                    "label"=> "Catégorie: ",
                     "type"=> "select",
                     "id"=>"picture",
                     "option"=>$categorie_data,
                     "defaultValue"=>$forum_data[0]['category_id'],
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];

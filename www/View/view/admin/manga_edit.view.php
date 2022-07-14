@@ -8,6 +8,11 @@
         </div>
         <div class="modal-body">
             <?php $this->includePartial("form", $manga->getMangaForm($mangaInfos));?>
+            <?php if (!empty($errors)) {
+                foreach ($errors as $error) {
+                    echo $error. "<br>";
+                }
+            }?>
         </div>
     </div>
 </div> 

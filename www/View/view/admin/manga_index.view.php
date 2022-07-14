@@ -17,7 +17,7 @@
                             <td><?= $value["title"] ?></td>
                             <td><?= $value["description"] ?></td>
                             <td>
-                                <a href="manga/edit/<?= $value['id']?>">Update</a>
+                                <a href="manga/edit/<?= $value['id']?>"><button class="control--delete">Modifier</button></a>
                                 <a href="manga/delete/<?= $value['id']?>"><button class="control--delete">Supprimer</button></a>
                             </td>
                         </tr>

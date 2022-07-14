@@ -4,14 +4,15 @@ namespace App\Model;
 use App\Core\MysqlBuilder;
 use App\Core\Sql;
 
-class CommentaireForum extends MysqlBuilder
+class ForumCommentaire extends MysqlBuilder
 {
 
     protected $id = null;
-    protected $forum_id = null;
-    protected $user_id = null;
+    protected $id_forum = null;
+    protected $id_user = null;
     protected $commentaire = null;
     protected $date_creation = null;
+    protected $isValid = 0;
 
     public function __construct()
     {
@@ -32,30 +33,50 @@ class CommentaireForum extends MysqlBuilder
 
     public function getForumId(): ?int
     {
-        return $this->forum_id;
+        return $this->id_forum;
     }
 
-    public function setForumId($forum_id){
-        $this->forum_id = $forum_id;
+    public function setForumId($id_forum){
+        $this->id_forum = $id_forum;
     }
 
     public function getUserId(): ?int
     {
-        return $this->user_id;
+        return $this->id_user;
     }
 
-    public function setUserId($user_id){
-        $this->user_id = $user_id;
+    public function setUserId($id_user){
+        $this->id_user = $id_user;
     }
 
     public function getCommentaire(): ?string
     {
-        return $this->desccommentaireription;
+        return $this->commentaire;
     }
 
     public function setCommentaire(?string $commentaire): void
     {
         $this->commentaire = ucwords(strtolower(trim($commentaire)));
+    }
+
+    public function getDateCreation(): ?string
+    {
+        return $this->date_creation;
+    }
+
+    public function setDateCreation(?string $date_creation): void
+    {
+        $this->date_creation = ucwords(strtolower(trim($date_creation)));
+    }
+
+    public function getIsValid(): ?int
+    {
+        return $this->isValid;
+    }
+
+    public function setIsValid(?int $isValid): void
+    {
+        $this->isValid = $isValid;
     }
 
     public function getCommentaireForm(): array

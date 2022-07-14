@@ -8,13 +8,21 @@ use App\Model\Forum as ForumsModel;
 use App\Model\Category;
 use App\Repository\Forum as ForumRepository;
 
-class Forums 
+class Forum
 {
+
+    public function index()
+    {
+        $forums_data = ForumRepository::all();
+        
+        $view = new View("admin/forum_index", "back");
+        $view->assign("forums_data", $forums_data);
+    }
+
     public function create()
     {
         $forum = new ForumsModel();
         $category = new Category();
-        $forum_repository = new ForumRepository();
 
         $errors = [];
         $categorie_data = $category->getCategoryNames();
@@ -36,40 +44,35 @@ class Forums
                 $forum->setUserId(1);
                 $forum->save();
                 echo "<script>alert('Votre forum a bien été mis à jour')</script>";
+                header("Location: /admin/forum");
             } else {
                 $errors = $result;
             }
         }
 
-        $view = new View("admin/forums_index", "back");
+        $view = new View("admin/forum_create", "back");
         $view->assign("forum", $forum);
         $view->assign("errors", $errors);
-
         $view->assign("categorie_data", $categorie_data);
-
-        $forums_data = $forum_repository->all();
-        $view->assign("forums_data", $forums_data);
     }
 
-    public function delete()
+    public function delete($id)
     {
-        $forum = new ForumsModel();
-        if (!empty($_POST['forum_id'])) {
-            $forum_Id = $_POST['forum_id'];
-            $forum->deleteForum($forum_Id);
+        $forum_Id = $id[1];
+        if (!empty($forum_Id) && is_numeric($forum_Id))
+        {
+            $forum_delete = ForumRepository::delete($forum_Id);
         }
     }
 
     public function edit($params)
     {
-        $id = $params[1];
+        $id = $params[0];
 
         if (!empty($id) && is_numeric($id)) {
             $forum = new ForumsModel();
             $category = new Category();
 
-            $view = new View("admin/forum_edit", "back");
-            $view->assign("forum", $forum);
             $categorie_data = $category->getCategoryNames();
             $forum_data = ForumRepository::findById($id);
             $errors = [];
@@ -79,7 +82,7 @@ class Forums
                 $result = Verificator::checkFormRegister($forum->editParamForum($forum_data, $categorie_data), $_POST);
 
                 if (empty($result)) {
-                    $forum->setId($_GET["id"]);
+                    $forum->setId($id);
                     if (!empty($_POST["editTitle"])) {
                         $forum->setTitleForum(htmlspecialchars($_POST["editTitle"]));
                     }
@@ -91,26 +94,18 @@ class Forums
                     }
                     $forum->setUserId(1);
                     $forum->save();
-                    //echo "<script>alert('Votre forum a bien été mis à jour')</script>";
-                    header('Location: ./forums');
+                    echo "<script>alert('Votre forum a bien été mis à jour')</script>";
+                    header("Location: /admin/forum");
                 } else {
                     $errors = $result;
                 }
             }
+            $view = new View("admin/forum_edit", "back");
+            $view->assign("forum", $forum);
+            $view->assign("categorie_data", $categorie_data);
+            $view->assign("errors", $errors);
+            $view->assign("forum_data", $forum_data);
         }
 
-        $view->assign("categorie_data", $categorie_data);
-        $view->assign("errors", $errors);
-        $view->assign("forum_data", $forum_data);
-    }
-
-    public function forum()
-    {
-        $forum = new ForumsModel();
-        $view = new View("admin/forums_index", "front");
-        $view->assign("forum", $forum);
-
-        $forum_data = $forum->findById($_GET["id"]);
-        $view->assign("forum_data", $forum_data);
     }
 }
