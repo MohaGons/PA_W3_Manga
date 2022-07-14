@@ -6,7 +6,7 @@ use App\Core\View;
 class stripe
 {
 
-    public function stripe()
+    public function stripe($prix)
     {
         require ('stripe-php-master/init.php');
         $publishableKey = "pk_test_51LKIrYEf8Ik7LivPyKhufvmPYSZGwb9Wfw7jtnvLt9jNmuqKk8bGTkVvJJbrrl0qhazSdbEq4MzIMZg9v4ghazTj00WzYPHeJ0";
@@ -18,7 +18,7 @@ class stripe
             $token=$_POST['stripeToken'];
 
             $data=\Stripe\Charge::create(array(
-                "amount"=>10000,
+                "amount"=>$prix,
                 "currency"=>"eur",
                 "description"=>"Paiement Evenement Manga",
                 "source"=>$token,

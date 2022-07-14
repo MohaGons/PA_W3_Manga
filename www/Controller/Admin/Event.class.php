@@ -73,4 +73,6 @@ class Event
 
         $view->assign("event_data", $event_data);
     }
+
+
 }
