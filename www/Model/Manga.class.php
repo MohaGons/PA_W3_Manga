@@ -187,6 +187,7 @@ class Manga extends MysqlBuilder
                 "action"=>"",
                 "id"=>"formCreateManga",
                 "class"=>"formManga",
+                "enctype"=>"multipart/form-data",
             ],
             "inputs"=>[
                 "type"=>[
@@ -325,13 +326,11 @@ class Manga extends MysqlBuilder
                     "max"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
-                "image"=>[
-                    "label"=>"image",
+                "file"=>[
                     "type"=>"file",
                     "label"=>"Image: ",
                     "id"=>"imageCreateManga",
                     "class"=>"formManga",
-                    "required"=>true,
                     "accept"=>"image/*",
                 ]
             ]

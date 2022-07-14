@@ -172,7 +172,7 @@
   security: [Admin,Editeur]
   params: id
 
-/admin/manga/delete:
+/admin/manga/delete/:
   controller: manga
   action: delete
   security: [Admin,Editeur]
@@ -224,4 +224,16 @@
   controller: forumcommentaire
   action: delete
   security: [Admin]
+  params: id
+
+/manga:
+  controller: manga
+  action: index
+  security: All
+  params: null
+
+/manga/detail/:
+  controller: manga
+  action: detail
+  security: All
   params: id
