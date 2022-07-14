@@ -5,7 +5,9 @@ namespace App\Controller\Admin;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\Event as EventModel;
+use App\Model\Media as MediaModel;
 use App\Repository\Event as EventRepository;
+use App\Core\Session as Session;
 
 class Event
 {
@@ -21,6 +23,8 @@ class Event
     public function create()
     {
         $event = new EventModel();
+        $media = new MediaModel();
+        $session = new Session();
         $errors = [];
         if (!empty($_POST)) {
 
@@ -31,8 +35,9 @@ class Event
                 $event->setDescription(htmlspecialchars($_POST["description"]));
                 $event->setPrice(htmlspecialchars($_POST["price"]));
                 $event->setDate(htmlspecialchars($_POST["date"]));
-                $event->setPhoto(htmlspecialchars($_POST["photo"]));
+                $event->setPhoto(htmlspecialchars($_FILES["file"]["name"]));
                 $event->save();
+                $media->setMedia("Evenements",$session->get('email'),"set");
                 echo "<script>alert('L'évènement a bien été crée')</script>";
                 header("Location: /admin/event");
             } else {
@@ -58,7 +63,8 @@ class Event
     public function edit($params)
     {
         $id = $params[0];
-
+        $media = new MediaModel();
+        $session = new Session();
         if (!empty($id) && is_numeric($id)) {
             $event = new EventModel();
             $errors = [];
@@ -76,15 +82,17 @@ class Event
                         $event->setDescription(htmlspecialchars($_POST["description"]));
                     }
                     if (!empty($_POST["price"])) {
-                        $event->setDate(htmlspecialchars($_POST["price"]));
+                        $event->setPrice(htmlspecialchars($_POST["price"]));
                     }
                     if (!empty($_POST["date"])) {
-                        $event->setPrice(htmlspecialchars($_POST["date"]));
+                        $event->setDate(htmlspecialchars($_POST["date"]));
                     }
-                    if (!empty($_POST["photo"])) {
-                        $event->setPhoto(htmlspecialchars($_POST["photo"]));
+                    if (!empty($_FILES["file"]["name"])) {
+                        $event->setPhoto(htmlspecialchars($_FILES["file"]["name"]));
                     }
                     $event->save();
+                    $media->updateEvenement($_FILES["file"]["name"], $_POST["name"]);
+                    $media->setMedia('Evenements',$session->get('email'),"" );
                     header('Location: /admin/event');
                 } else {
                     $errors = $result;

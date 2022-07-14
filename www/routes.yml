@@ -184,11 +184,11 @@
   security: All
   params: null
 
-/media:
+/admin/media:
     controller: media
     action: Allmedia
     security: All
-    params: null
+    params: dossier
 
 /updatepassword:
   controller: user
@@ -205,12 +205,6 @@
 /stripe:
   controller: stripe
   action: stripe
-  security: All
-  params: null
-
-/admin/event:
-  controller: event
-  action: Event
   security: All
   params: null
 

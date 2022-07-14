@@ -36,12 +36,6 @@ class Media extends MysqlBuilder{
                             $req->execute([$_FILES["file"]["name"],$categorie,$email]);
                             $messages[] = "Telechargement reussi";
 
-                        if ($action==="update"){
-                            $q = "UPDATE mnga_user SET avatar=? WHERE email=?";
-                            $req = $this->pdo->prepare($q);
-                            $req->execute([$_FILES["file"]["name"],$email]);
-                            $messages=NULL;
-                        }
 
                     } else {
                         $messages[] = "Telechargement failed, ressayer plus tard";
@@ -81,4 +75,11 @@ class Media extends MysqlBuilder{
         $req = $this->pdo->prepare($q);
         $req->execute([$name,$email]);
     }
+
+    public function updateEvenement($name, $nameE){
+        $q = "UPDATE mnga_event SET photo=? WHERE name=?";
+        $req = $this->pdo->prepare($q);
+        $req->execute([$name,$nameE]);
+    }
+
 }

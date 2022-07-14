@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 use App\Core\User as UserClean;
 use App\Core\Verificator;
 use App\Core\PasswordReset;
@@ -22,7 +22,7 @@ class Media
         $session = New Session();
         $media = new MediaModel();
         $messages=[];
-        $medias = $media->getAllMedia($_SESSION['email']);
+        $medias = $media->getAllMedia($session->get('email'));
         if (isset($_POST['submit'])){
             $results = $media->setMedia($_POST['media'],$_SESSION['email'],"set");
         }
@@ -32,7 +32,7 @@ class Media
             $media->deteleMedia($name,$categorie);
             $messages[] ="l'image ".$name." a ete supprimé avec succues.";
         }
-        $view = new View("media", "back");
+        $view = new View("admin/media_index", "back");
         $view->assign("medias", $medias);
         if (!empty($results)){
             $view->assign("results", $results);
