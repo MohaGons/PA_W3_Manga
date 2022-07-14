@@ -13,7 +13,8 @@ class Builder
             $html = "";
             switch ($configInput["type"]) {
                 case "select":
-                    $html = "<select name='" . $name . "'
+                    $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                    $html .= "<select name='" . $name . "'
                      id='" . $configInput["id"] . "'>";
                     foreach ($configInput["option"] as $option => $value) {
                         $html .= "<option value='" . $option . "'";
@@ -22,6 +23,7 @@ class Builder
                         }
                         $html .= ">$value</option><br>";
                     }
+                    $html .= "</select><br>";
                     
                     break;
                 case "radio":

@@ -105,6 +105,7 @@ class Forum extends MysqlBuilder
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "categories"=> [
+                    "label"=> "Catégorie: ",
                     "type"=> "select",
                     "id"=>"picture",
                     "option"=>$categorie_data,
@@ -151,6 +152,7 @@ class Forum extends MysqlBuilder
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "categories"=> [
+                    "label"=> "Catégorie: ",
                     "type"=> "select",
                     "id"=>"picture",
                     "option"=>$categorie_data,
