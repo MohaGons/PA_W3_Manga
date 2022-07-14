@@ -22,6 +22,8 @@ class Manga
     {
         $manga = new ModelManga();
 
+        $errors = [];
+
         if(!empty($_POST)) {
 
             $result = Verificator::checkFormRegister($manga->getCreateMangaForm(), $_POST);
@@ -45,10 +47,13 @@ class Manga
                 $manga->save();
                 echo "<script>alert('Votre manga a bien été mis à jour')</script>";
                 header("Location: /admin/manga");
+            } else {
+                $errors = $result;
             }
         }
 
         $view = new View("admin/manga_create", "back");
+        $view->assign("errors", $errors);
         $view->assign("manga", $manga);
     }
 
@@ -70,6 +75,7 @@ class Manga
         {
             $manga = new ModelManga();
             $mangaInfos = MangaRepository::findById($id);
+            $errors = [];
 
             if(!empty($_POST)){
                 $manga->setId($id);
@@ -90,19 +96,16 @@ class Manga
                 $manga->save();
                 echo "<script>alert('Votre manga a bien été mis à jour')</script>";
                 header("Location: /admin/manga");
+            } else {
+                $errors = $result;
             }
-//
-//            echo "<pre>";
-//            die(var_dump($mangaInfos[0]));
+
             $view = new View("admin/manga_edit", "back");
             $view->assign("manga", $manga);
             $view->assign("mangaInfos", $mangaInfos);
+            $view->assign("errors", $errors);
 
         }
-        else {
-            die("ytuiop");
-        }
-
 
     }
 
