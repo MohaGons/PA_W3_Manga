@@ -6,7 +6,7 @@ interface QueryBuilder
 {
     public function select(array $columns): QueryBuilder;
 
-    public function leftJoin(array $columns): QueryBuilder;
+    public function leftJoin($table, $column_one, $column_two): QueryBuilder;
 
     public function rightJoin(array $columns): QueryBuilder;
 

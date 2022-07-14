@@ -11,7 +11,7 @@ class ForumCommentaire
 {
     public function index()
     {
-        $forum_commentaire = ForumCommentaireRepository::all();
+        $forum_commentaire = ForumCommentaireRepository::getInformationsForumCommentaire();
         
         $view = new View("admin/forumcommentaire_index", "back");
         $view->assign("forum_commentaire", $forum_commentaire);
@@ -19,7 +19,7 @@ class ForumCommentaire
 
     public function edit($id) {
 
-        $forum_commentaire_Id = $id[1];
+        $forum_commentaire_Id = $id[0];
 
         if (!empty($forum_commentaire_Id) && is_numeric($forum_commentaire_Id))
         {
@@ -36,6 +36,7 @@ class ForumCommentaire
 
             $view = new View("forumcommentaire", "back");
             $view->assign("forum_commentaire", $forum_commentaire);
+            header("Location: /admin/forumcommentaire");
         }
 
         // $NbForumCommentaire = count($forum_commentaire->getAllCommentairesNoValid());
@@ -46,11 +47,12 @@ class ForumCommentaire
 
     public function delete($id)
     {
-        $forum_commentaire_Id = $id[1];
+        $forum_commentaire_Id = $id[0];
 
         if (!empty($forum_commentaire_Id) && is_numeric($forum_commentaire_Id))
         {
             $forum_commentaire_delete = ForumCommentaireRepository::delete($forum_commentaire_Id);
+            header("Location: /admin/forumcommentaire");
         }
     }
 }
