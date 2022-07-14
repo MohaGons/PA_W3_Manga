@@ -84,10 +84,11 @@ abstract class MysqlBuilder implements QueryBuilder
         return $this;
     }
 
-    public function leftJoin(array $columns): QueryBuilder
+    public function leftJoin($table, $column_one, $column_two): QueryBuilder
     {
-        $this->reset();
-        $this->query->base = "INSERT INTO " . $this->table . " (" . implode(",", array_keys($columns)) . ") VALUES (:" . implode(",:", array_keys($columns)) . ")";
+        //$this->reset();
+        $this->query->join[] = " LEFT JOIN " . $table . " ON " . $column_one . " = " . $column_two;
+
         return $this;
     }
 
@@ -156,6 +157,10 @@ abstract class MysqlBuilder implements QueryBuilder
 
         $sql = $query->base;
 
+        if (!empty($query->join)) {
+            $sql .= implode(' ', $query->join);
+        }
+
         if (!empty($query->where)) {
             $sql .= " WHERE " . implode(' AND ', $query->where);
         }
@@ -163,6 +168,8 @@ abstract class MysqlBuilder implements QueryBuilder
         if (isset($query->limit)) {
             $sql .= $query->limit;
         }
+
+        //die(var_dump($sql));
 
         return $sql;
     }

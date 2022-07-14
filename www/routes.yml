@@ -208,13 +208,13 @@
   security: All
   params: null
 
-/admin/forumcommentaire/edit:
+/admin/forumcommentaire/edit/:
   controller: forumcommentaire
   action: edit
   security: [Admin]
   params: id
 
-/admin/forumcommentaire/delete:
+/admin/forumcommentaire/delete/:
   controller: forumcommentaire
   action: delete
   security: [Admin]

@@ -14,12 +14,12 @@
                 <?php 
                     foreach ($forum_commentaire as $key => $value){ ?>
                         <tr>
-                            <td><?= $value["id_user"] ?></td>
-                            <td><?= $value["id_forum"] ?></td>
+                            <td><?= $value["user_firstname"] ?></td>
+                            <td><?= $value["forum_title"] ?></td>
                             <td><?= $value["commentaire"] ?></td>
                             <td>
-                                <a href="forumcommentaire/edit/<?= $value['id']?>"><button class="control--delete" id="<?= $value['id']?>">Valider</button></a>
-                                <a href="forumcommentaire/delete/<?= $value['id']?>"><button class="control--delete" id="<?= $value['id']?>">Refuser</button></a>
+                                <a href="forumcommentaire/edit/<?= $value['id']?>"><button class="control--delete">Valider</button></a>
+                                <a href="forumcommentaire/delete/<?= $value['id']?>"><button class="control--delete">Refuser</button></a>
                             </td>
                         </tr>
                 <?php 
