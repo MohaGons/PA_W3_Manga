@@ -12,9 +12,13 @@ class ForumCommentaire
     public function index()
     {
         $forum_commentaire = ForumCommentaireRepository::getInformationsForumCommentaire();
+        $forum_commentaire_valid = ForumCommentaireRepository::getInformationsForumCommentaireValid();
+        $NbForumCommentaire = count(ForumCommentaireRepository::all());
         
         $view = new View("admin/forumcommentaire_index", "back");
         $view->assign("forum_commentaire", $forum_commentaire);
+        $view->assign("forum_commentaire_valid", $forum_commentaire_valid);
+        $view->assign("NbForumCommentaire", $NbForumCommentaire);
     }
 
     public function edit($id) {
@@ -39,10 +43,6 @@ class ForumCommentaire
             header("Location: /admin/forumcommentaire");
         }
 
-        // $NbForumCommentaire = count($forum_commentaire->getAllCommentairesNoValid());
-        // if (isset($NbForumCommentaire)) {
-        //     $view->assign("NbForumCommentaire", $NbForumCommentaire);
-        // }
     }
 
     public function delete($id)
