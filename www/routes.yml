@@ -76,9 +76,9 @@
   security: [Admin,Editeur,Abonne]
   params: id
 
-/categorie:
-  controller: user
-  action: category
+/admin/category:
+  controller: category
+  action: index
   security: All
   params: null
 
@@ -88,11 +88,11 @@
   security: [Admin]
   params: null
 
-/editCategorie:
-  controller: user
-  action: editCategory
+/admin/category/edit/:
+  controller: category
+  action: edit
   security: [Admin,Editeur,Abonne]
-  params: null
+  params: id
 
 /admin/forums:
   controller: forums
@@ -136,7 +136,7 @@
   security: [Admin,Editeur,Abonne]
   params: id
 
-/admin/manga/delete:
+/admin/manga/delete/:
   controller: manga
   action: delete
   security: [Admin]

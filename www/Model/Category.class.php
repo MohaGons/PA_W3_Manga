@@ -103,21 +103,18 @@ class Category extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"editNameCategory",
                     "class"=>"editFormCategory",
-                    "value"=>$categorie_data['name'],
+                    "label"=>"Nom :",
+                    "value"=>$categorie_data[0]['name'],
                     "required"=>true,
                 ],
                 "editDescription"=>[
                     "placeholder"=>"description",
                     "type"=>"text",
                     "id"=>"editDescriptionCategory",
+                    "label"=>"Description :",
                     "class"=>"editFormCategory",
-                    "value"=>$categorie_data['description'],
+                    "value"=>$categorie_data[0]['description'],
                     "required"=>false,
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];
