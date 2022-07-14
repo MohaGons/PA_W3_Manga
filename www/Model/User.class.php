@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
+use App\Repository\Role as RoleRepository;
 use App\Model\Role as RoleModel;
 use PDO;
 
@@ -226,7 +227,7 @@ class User extends MysqlBuilder
 
     public function updateRole($email, $id)
     {
-        $q = "UPDATE mnga_user SET role=? WHERE ID=?";
+        $q = "UPDATE mnga_user SET role=? WHERE id=?";
         $req = $this->pdo->prepare($q);
         $req->execute([$email,$id]);
     }
@@ -295,7 +296,7 @@ class User extends MysqlBuilder
 
     public function deleteuser($id)
     {
-        $q = "DELETE FROM mnga_user WHERE ID = :id";
+        $q = "DELETE FROM mnga_user WHERE id = :id";
         $req = $this->pdo->prepare($q);
         if($req->execute(['id' => $id])){
             return 1;
@@ -347,6 +348,35 @@ class User extends MysqlBuilder
         $resultat = $req->fetchAll();
         return $resultat;
     }
+
+    public function setPays($type){
+        $ip_visiteur = 'X.X.X.X';
+        $ipinfo = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip_visiteur));
+        $Pays = $ipinfo->geoplugin_countryName;
+        $Ville = $ipinfo->geoplugin_city;
+        $Continent = $ipinfo->geoplugin_continentName;
+        if ($type=="Pays"){
+            $this->pays=$Pays;
+        }
+        if ($type=="Ville"){
+            $this->ville=$Ville;
+        }
+        if ($type=="Continent"){
+            $this->continent=$Continent;
+        }
+        else{
+            return NULL;
+        }
+    }
+
+    public function getBestPays(){
+        $q = "SELECT pays, COUNT(*) FROM mnga_user GROUP BY pays ORDER BY COUNT(*) DESC LIMIT 5";
+        $req = $this->pdo->prepare($q);
+        $req->execute();
+        $resultat = $req->fetchAll();
+        return $resultat;
+    }
+
 
     public function getRegisterForm(): array
     {
@@ -459,6 +489,11 @@ class User extends MysqlBuilder
                     "id"=>"file",
                     "class"=>"formRegister",
                     "accept" => ""
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Se connecter",
                 ]
             ]
         ];
@@ -480,6 +515,7 @@ class User extends MysqlBuilder
                     "type"=>"email",
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
+                    "error"=>"Email incorrect",
                     "required"=>true,
                 ],
                 "password"=>[
@@ -488,7 +524,7 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
                     "required"=>true,
-                ]
+                ],
             ]
         ];
     }
@@ -508,7 +544,7 @@ class User extends MysqlBuilder
                     "placeholder"=>"Prénom",
                     "type"=>"text",
                     "id"=>"emailRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "value"=>$data['firstname'],
                     "required"=>false,
                     "min"=>2,
@@ -519,7 +555,7 @@ class User extends MysqlBuilder
                     "placeholder"=>"Nom de famille",
                     "type"=>"text",
                     "id"=>"pwdRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "value"=>$data['lastname'],
                     "required"=>false,
                     "min"=>2,
@@ -536,6 +572,11 @@ class User extends MysqlBuilder
                     "min"=>2,
                     "max"=>100,
                     "error"=>" Votre email doit faire entre 2 et 100 caractères",
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];
@@ -543,8 +584,9 @@ class User extends MysqlBuilder
 
     public function updateUser(): array
     {
-        $role = new RoleModel();
-        $roles = $role->getAllRoles();
+        $roles = RoleRepository::all();
+
+//        die(var_dump($roles));
 
         return [
             "config"=>[
@@ -593,6 +635,11 @@ class User extends MysqlBuilder
                     "option"=> $roles,
                     "defaultValue" =>  ""
                 ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
+                ]
             ]
         ];
     }
@@ -615,6 +662,11 @@ class User extends MysqlBuilder
                     "class"=>"formRegister",
                     "required"=>true,
                 ]
+            ],
+            "submit"=>[
+                "type"=>"submit",
+                "class"=>"button-submit",
+                "title"=>"Confirmer",
             ]
         ];
     }
@@ -643,6 +695,11 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
                     "required"=>true,
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];
@@ -679,6 +736,11 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
                     "required"=>true,
+                ],
+                "submit"=>[
+                    "type"=>"submit",
+                    "class"=>"button-submit",
+                    "title"=>"Confirmer",
                 ]
             ]
         ];

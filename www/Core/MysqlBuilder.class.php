@@ -63,6 +63,13 @@ abstract class MysqlBuilder implements QueryBuilder
         return $this;
     }
 
+    public function delete(): QueryBuilder
+    {
+        $this->reset();
+        $this->query->base = "DELETE FROM " . $this->table;
+        return $this;
+    }
+
     public function insert(array $columns): QueryBuilder
     {
         $this->reset();
@@ -184,14 +191,6 @@ abstract class MysqlBuilder implements QueryBuilder
         $query->execute();
     }
 
-    public function getForums()
-    {
-        $query = $this->pdo->prepare("SELECT * FROM mnga_forum");
-        $query->execute();
-        $forums_data = $query->fetchall();
-        return $forums_data;
-    }
-
     public function getCategoryNames()
     {
         $category_name = [];
@@ -207,21 +206,6 @@ abstract class MysqlBuilder implements QueryBuilder
         return $category_infos;
     }
 
-    public function getForum($forum_Id)
-    {
-        $query = $this->pdo->prepare("SELECT * FROM mnga_forum WHERE id= :id");
-        $query->bindValue(':id', $forum_Id);
-        $query->execute();
-        $forums_data = $query->fetch();
-        return $forums_data;
-    }
-
-    public function deleteForum($forum_Id)
-    {
-        $query = $this->pdo->prepare("DELETE FROM mnga_forum WHERE id= :id");
-        $query->bindValue(':id', $forum_Id);
-        $query->execute();
-    }
     public function getMangas()
     {
         $query = $this->pdo->prepare("SELECT * FROM mnga_manga");
@@ -246,11 +230,20 @@ abstract class MysqlBuilder implements QueryBuilder
         return $event_data;
     }
 
-    public function deleteEvent($id)
+    public function getEvent($event_Id)
     {
+        $query = $this->pdo->prepare("SELECT * FROM mnga_event WHERE id= :id");
+        $query->bindValue(':id', $event_Id);
+        $query->execute();
+        $event_data = $query->fetch();
+        return $event_data;
+    }
 
+    public function deleteEvent($event_Id)
+    {
         $query = $this->pdo->prepare("DELETE FROM mnga_event WHERE id= :id");
-        $query->bindValue(':id', $id);
+        $query->bindValue(':id', $event_Id);
         $query->execute();
     }
+    
 }

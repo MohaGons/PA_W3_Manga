@@ -17,7 +17,7 @@
                             <td><?= $value["name"] ?></td>
                             <td><?= $value["description"] ?></td>
                             <td>
-                            <a href="editCategorie?id=<?= $value['id']?>">Update</a>
+                                <a href="editCategorie?id=<?= $value['id']?>">Update</a>
                                 <button class="control--delete" id="<?= $value['id']?>">Supprimer</button>
                             </td>
                         </tr>

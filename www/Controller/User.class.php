@@ -23,6 +23,7 @@ class User
 
     public function login()
     {
+        die("uyiojp");
         $session = new Session();
         $user = new UserModel();
         $errors = [];
@@ -75,8 +76,10 @@ class User
                 $user->setPassword(htmlspecialchars($_POST["password"]));
                 $user->setGender(htmlspecialchars($_POST["gender"]));
                 $user->setAvatar(htmlspecialchars($_FILES["file"]["name"]));
+                $user->setPays('Pays');
+                $user->setPays('Ville');
                 $user->save();
-                $media->setMedia("Avatars", $_POST["email"], "set");
+                $media->setMedia("Avatars",$_POST["email"],"set");
                 echo "<script>alert('Votre profil a bien été mis à jour')</script>";
                 $session->ensureStarted();
                 $session->set('email', $_POST['email']);
@@ -143,6 +146,7 @@ class User
             $errors[] = "Votre Avatar est mise a jour avec succes";
             header('Location: ./parametre');
         }
+
         $view = new View("parametre", "back");
         $data = array(
             "email" => $email,
@@ -185,7 +189,7 @@ class User
             $result = Verificator::checkFormParam($category->getCategoryForm(), $_POST);
             if (empty($result)) {
                 if (!empty($_POST["name"])) {
-                    $forum->setNameCategory(htmlspecialchars($_POST["name"]));
+                    $category->setNameCategory(htmlspecialchars($_POST["name"]));
                 }
                 $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
                 $category->save();
@@ -230,7 +234,6 @@ class User
                 }
                 $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
                 $category->save();
-                //echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
                 header('Location: ./categorie');
             } else {
                 $errors = $result;
@@ -239,103 +242,6 @@ class User
 
         $view->assign("errors", $errors);
         $view->assign("categorie_data", $categorie_data);
-    }
-
-    public function forums()
-    {
-        $forum = new Forum();
-        $category = new Category();
-        $errors = [];
-        $categorie_data = $category->getCategoryNames();
-
-        if (!empty($_POST)) {
-
-            $result = Verificator::checkFormRegister($forum->getForumForm($categorie_data), $_POST);
-
-            if (empty($result)) {
-                if (!empty($_POST["title"])) {
-                    $forum->setTitleForum(htmlspecialchars($_POST["title"]));
-                }
-                if (!empty($_POST["description"])) {
-                    $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
-                }
-                if (!empty($_POST["categories"])) {
-                    $forum->setCategoryId($_POST["categories"]);
-                }
-                $forum->setUserId(1);
-                $forum->save();
-                echo "<script>alert('Votre forum a bien été mis à jour')</script>";
-            } else {
-                $errors = $result;
-            }
-        }
-
-        $view = new View("forums", "back");
-        $view->assign("forum", $forum);
-        $view->assign("errors", $errors);
-
-        $view->assign("categorie_data", $categorie_data);
-
-        $forums_data = $forum->getForums();
-        $view->assign("forums_data", $forums_data);
-    }
-
-    public function deleteForum()
-    {
-        $forum = new Forum();
-        if (!empty($_POST['forum_id'])) {
-            $forum_Id = $_POST['forum_id'];
-            $forum->deleteForum($forum_Id);
-        }
-    }
-
-    public function editForum()
-    {
-        $forum = new Forum();
-        $category = new Category();
-        $view = new View("edit-forum", "back");
-        $view->assign("forum", $forum);
-        $categorie_data = $category->getCategoryNames();
-        $forum_data = $forum->getForum($_GET["id"]);
-        $errors = [];
-
-        if (!empty($_POST)) {
-
-            $result = Verificator::checkFormRegister($forum->editParamForum($forum_data, $categorie_data), $_POST);
-
-            if (empty($result)) {
-                $forum->setId($_GET["id"]);
-                if (!empty($_POST["editTitle"])) {
-                    $forum->setTitleForum(htmlspecialchars($_POST["editTitle"]));
-                }
-                if (!empty($_POST["editDescription"])) {
-                    $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
-                }
-                if (!empty($_POST["categories"])) {
-                    $forum->setCategoryId($_POST["categories"]);
-                }
-                $forum->setUserId(1);
-                $forum->save();
-                //echo "<script>alert('Votre forum a bien été mis à jour')</script>";
-                header('Location: ./forums');
-            } else {
-                $errors = $result;
-            }
-        }
-
-        $view->assign("categorie_data", $categorie_data);
-        $view->assign("errors", $errors);
-        $view->assign("forum_data", $forum_data);
-    }
-
-    public function forum()
-    {
-        $forum = new Forum();
-        $view = new View("forum", "front");
-        $view->assign("forum", $forum);
-
-        $forum_data = $forum->getForum($_GET["id"]);
-        $view->assign("forum_data", $forum_data);
     }
 
     public function  recuperer_mdp()
@@ -426,5 +332,12 @@ class User
         $view = new View("updatepassword", "back");
         $view->assign("user", $user);
         $view->assign("errors", $errors);
+    }
+
+    public function deleteEvent($event_Id)
+    {
+        $query = $this->pdo->prepare("DELETE FROM mnga_event WHERE id= :id");
+        $query->bindValue(':id', $event_Id);
+        $query->execute();
     }
 }

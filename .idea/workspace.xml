@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/www/Controller/Media.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/View/view/media.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/View/view/updatepassword.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/Controller/Stripe.class.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/View/view/stripe.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controller/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Builder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Builder.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/PasswordReset.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/PasswordReset.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Verificator.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Verificator.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/Media.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Media.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/Password.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Password.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/Template/sidebar.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/Template/sidebar.tpl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/parametre.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/parametre.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controller/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/Event.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/view/event.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/event.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/Avatar" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,7 +48,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../decorator-exo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../wamp64_2/www" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -64,6 +56,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\Model" />
       <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\View\view" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\Controller\Admin" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -89,6 +84,12 @@
       <workItem from="1655820160074" duration="764000" />
       <workItem from="1655994416354" duration="8484000" />
       <workItem from="1656083400874" duration="18264000" />
+      <workItem from="1656530063899" duration="20790000" />
+      <workItem from="1656876244151" duration="4025000" />
+      <workItem from="1657378778326" duration="735000" />
+      <workItem from="1657451797982" duration="593000" />
+      <workItem from="1657608739748" duration="98000" />
+      <workItem from="1657713665049" duration="751000" />
     </task>
     <servers />
   </component>

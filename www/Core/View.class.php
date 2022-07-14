@@ -15,6 +15,7 @@ class View
     {
         $this->setView($view);
         $this->setTemplate($template);
+
     }
 
     public function setView($view):void
@@ -48,8 +49,10 @@ class View
     public function __destruct()
     {
         //$this->data = ["firstname"=>"yves"] -----> $firstname = "yves"
+
         extract($this->data);
         include "View/Template/".$this->template.".tpl.php";
+//        die($this->view);
     }
 
 }
