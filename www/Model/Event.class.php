@@ -139,30 +139,36 @@ class Event extends MysqlBuilder
                 "name" => [
                     "placeholder" => "Nom...",
                     "type" => "text",
+                    "label" => "Nom: ",
                     "id" => "eventRegister",
                     "class" => "formEvent",
                     "value"=>"",
                     "required" => true,
+                    "min"=>2,
+                    "max"=>50,
                     "error" => "Nom de l'évènement incorect",
                     "unicity" => true,
                     "errorUnicity" => "Un évènement existe déjà avec ce nom"
                 ],
                 "description" => [
-                    "label" => "",
+                    "label" => "Description: ",
                     "type" => "textarea",
                     "id" => "descriptionRegister",
                     "class" => "FormEvent",
                     "required" => true,
                     "rows" => 5,
                     "cols" => 20,
+                    "text"=>"",
                     "error" => "Mettre une description correct"
                 ],
                 "price" => [
+                    "label" => "Prix: ",
                     "placeholder" => "....",
                     "type" => "number",
                     "id" => "priceRegister",
                     "class" => "formEvent",
                     "min" => 0,
+                    "value"=>"",
                     "required" => true,
                     "error" => "Mettre un prix correct",
 
@@ -184,11 +190,6 @@ class Event extends MysqlBuilder
                     //"required" => true,
                     "error" => "Mettre une photo correct",
                     "accept" => "image/*"
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];
@@ -206,38 +207,42 @@ class Event extends MysqlBuilder
             ],
             "inputs" => [
                 "name" => [
+                    "label" => "Nom: ",
                     "placeholder" => "test...",
                     "type" => "text",
                     "id" => "eventRegister",
                     "class" => "formEvent",
                     "value"=>"",
                     "required" => true,
+                    "min"=>2,
+                    "max"=>50,
                     "error" => "Nom de l'évènement incorect",
-                    "value" => $event_data['name'],
+                    "value" => $event_data[0]['name'],
                     "unicity" => true,
                     "errorUnicity" => "Un évènement existe déjà avec ce nom"
 
                 ],
                 "description" => [
-                    "label" => "",
+                    "label" => "Description: ",
                     "placeholder" => "Description...",
                     "type" => "textarea",
                     "id" => "descriptionRegister",
                     "class" => "FormEvent",
-                    "value" => $event_data['description'],
+                    "text" => $event_data[0]['description'],
                     "required" => true,
                     "rows" => 5,
                     "cols" => 20,
                     "error" => "Mettre une description correct"
                 ],
                 "price" => [
+                    "label" => "Prix: ",
                     "placeholder" => "....",
                     "type" => "number",
                     "id" => "priceRegister",
                     "class" => "formEvent",
                     "min" => 0,
                     "required" => true,
-                    "value" => $event_data['price'],
+                    "value" => $event_data[0]['price'],
                     "error" => "Mettre un prix correct",
 
                 ],
@@ -247,7 +252,7 @@ class Event extends MysqlBuilder
                     "id" => "dateRegister",
                     "class" => "formEvent",
                     "required" => true,
-                    "value" => $event_data['date'],
+                    "value" => $event_data[0]['date'],
                     "error" => "Mettre une date correct",
                 ],
                 "photo" => [
@@ -256,15 +261,10 @@ class Event extends MysqlBuilder
                     "type" => "file",
                     "id" => "photoRegister",
                     "class" => "formEvent",
-                    "value" => $event_data['photo'],
+                    "value" => $event_data[0]['photo'],
                     //"required" => true,
                     "error" => "Mettre une photo correct",
                     "accept" => "image/*"
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];

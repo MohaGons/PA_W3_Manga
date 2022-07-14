@@ -13,15 +13,17 @@ class Builder
             $html = "";
             switch ($configInput["type"]) {
                 case "select":
-                    $html = "<select name='" . $name . "'
+                    $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                    $html .= "<select name='" . $name . "'
                      id='" . $configInput["id"] . "'>";
                     foreach ($configInput["option"] as $option => $value) {
                         $html .= "<option value='" . $option . "'";
                         if ($option === $configInput["defaultValue"]) {
                             $html .= " selected";
                         }
-                        $html .= ">$value</option>";
+                        $html .= ">$value</option><br>";
                     }
+                    $html .= "</select><br>";
                     
                     break;
                 case "radio":
@@ -83,6 +85,8 @@ class Builder
                             placeholder='".$configInput["placeholder"]."'
                             type='".$configInput["type"]."'
                             value='".$configInput["value"]."'
+                            min='".$configInput["min"]."'
+                            max='".$configInput["max"]."'
                             ><br>";
                     break;
                 case "number":
