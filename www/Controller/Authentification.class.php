@@ -9,7 +9,6 @@ use App\Model\Media as MediaModel;
 use App\Core\Mailer;
 use App\Core\Session as Session;
 use App\Repository\User as UserRepository;
-use App\Model\Media as MediaModel;
 
 class Authentification {
 
