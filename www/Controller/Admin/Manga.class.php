@@ -6,6 +6,7 @@ use App\Core\Verificator;
 use App\Core\View;
 use App\Model\Manga as ModelManga;
 use App\Repository\Manga as MangaRepository;
+use App\Model\Media as MediaModel;
 
 class Manga
 {
@@ -21,19 +22,20 @@ class Manga
     public function create()
     {
         $manga = new ModelManga();
+        $media = new MediaModel();
 
         $errors = [];
 
         if(!empty($_POST)) {
 
-            $result = Verificator::checkFormRegister($manga->getCreateMangaForm(), $_POST);
-            print_r($result);
+            //$result = Verificator::checkFormRegister($manga->getCreateMangaForm(), $_POST);
+            //print_r($result);
 
             if (empty($result)) {
                 $manga->setTypeManga(htmlspecialchars($_POST["type"]));
                 $manga->setTitleManga(htmlspecialchars($_POST["title"]));
                 $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
-                $manga->setImageManga(htmlspecialchars($_POST["image"]));
+                $manga->setImageManga(htmlspecialchars($_FILES["file"]["name"]));
                 $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
                 $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
                 $manga->setStatusManga(htmlspecialchars($_POST["status"]));
@@ -45,6 +47,8 @@ class Manga
                 $manga->setNbSeasonsManga(htmlspecialchars($_POST["nbSeasons"]));
                 $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
                 $manga->save();
+
+                $media->setMedia("Mangas", "", "");
                 echo "<script>alert('Votre manga a bien été mis à jour')</script>";
                 header("Location: /admin/manga");
             } else {
@@ -59,7 +63,7 @@ class Manga
 
     public function delete($id)
     {
-        $manga_Id = $id[1];
+        $manga_Id = $id[0];
         if (!empty($manga_Id) && is_numeric($manga_Id))
         {
             $manga_delete = MangaRepository::delete($manga_Id);
