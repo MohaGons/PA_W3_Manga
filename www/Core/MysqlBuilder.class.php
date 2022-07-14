@@ -169,8 +169,6 @@ abstract class MysqlBuilder implements QueryBuilder
             $sql .= $query->limit;
         }
 
-        //die(var_dump($sql));
-
         return $sql;
     }
 
