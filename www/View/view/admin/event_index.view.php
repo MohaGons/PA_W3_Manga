@@ -1,4 +1,4 @@
-<h1>Les events </h1>
+<h1>Les Évènement</h1>
 
 
 <div class="row">

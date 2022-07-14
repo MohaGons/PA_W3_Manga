@@ -68,6 +68,7 @@ class User {
 
         if (password_verify($password, $result['password'])) {
             Session::set('email', $result['email']);
+            Session::set('id', $result['id']);
             $role = Role::getRoleName($result['role']);
             Session::set('role', $role["role"]);
             return true;

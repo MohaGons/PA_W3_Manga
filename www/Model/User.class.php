@@ -420,6 +420,7 @@ class User extends MysqlBuilder
                 "firstname"=>[
                     "placeholder"=>"Votre prénom ...",
                     "type"=>"text",
+                    "label"=>"Prénom: ",
                     "id"=>"firstnameRegister",
                     "class"=>"formRegister",
                     "value"=>"",
@@ -432,6 +433,7 @@ class User extends MysqlBuilder
                 "lastname"=>[
                     "placeholder"=>"Votre nom ...",
                     "type"=>"text",
+                    "label"=>"Nom de famille: ",
                     "id"=>"lastnameRegister",
                     "class"=>"formRegister",
                     "value"=>"",
@@ -459,32 +461,6 @@ class User extends MysqlBuilder
                     ],
                     "defaultValue" =>  "feminin"
                 ],
-                /*
-                "cgu"=>[
-                    "type"=>"checkbox",
-                    "option"=> [
-                        [
-                            "value"=>"cgu1",
-                            "label"=>"CGU 1",
-                            "id"=>"cgu1",
-                            "class"=>"formRegister",
-                        ],
-                        [
-                            "value"=>"cgu2",
-                            "label"=>"CGU 2",
-                            "id"=>"cgu2",
-                            "class"=>"formRegister",
-                        ],
-                        [
-                            "value"=>"cgu3",
-                            "label"=>"CGU 3",
-                            "id"=>"cgu3",
-                            "class"=>"formRegister",
-                        ]
-                    ],
-                    "defaultValue" =>  "cgu2"
-                ],
-                */
                 "file"=> [
                     "type"=> "file",
                     "label"=> "Avatar : ",

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Session as Session;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\Forum as ForumsModel;
@@ -14,9 +15,11 @@ class Forum
     public function index()
     {
         $forums_data = ForumRepository::all();
+        $get_category_forum = ForumRepository::getCategoryForum();
         
         $view = new View("admin/forum_index", "back");
         $view->assign("forums_data", $forums_data);
+        $view->assign("get_category_forum", $get_category_forum);
     }
 
     public function create()
@@ -38,10 +41,11 @@ class Forum
                 if (!empty($_POST["description"])) {
                     $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
                 }
+                $forum->setDate(date('Y-m-d'));
                 if (!empty($_POST["categories"])) {
                     $forum->setCategoryId($_POST["categories"]);
                 }
-                $forum->setUserId(1);
+                $forum->setUserId(Session::get('id'));
                 $forum->save();
                 echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                 header("Location: /admin/forum");
@@ -89,10 +93,11 @@ class Forum
                     if (!empty($_POST["editDescription"])) {
                         $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
                     }
+                    $forum->setDate(date('Y-m-d'));
                     if (!empty($_POST["categories"])) {
                         $forum->setCategoryId($_POST["categories"]);
                     }
-                    $forum->setUserId(1);
+                    $forum->setUserId(Session::get('id'));
                     $forum->save();
                     echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                     header("Location: /admin/forum");

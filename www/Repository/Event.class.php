@@ -21,6 +21,21 @@ class Event {
         return $result;
     }
 
+    public function getRecentEvent()
+    {
+        $eventModel = new EventModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $eventModel->select(["*"]);
+        $eventModel->limit(0,3);
+        $req = $connectionPDO->pdo->prepare($eventModel->getQuery());
+        $req->execute();
+
+        $result = $req->fetchAll();
+
+        return $result;
+    }
+
     public static function findById($id)
     {
         $eventModel = new EventModel();
