@@ -10,7 +10,7 @@ define("DBPORT", "3306");
 define("DBPREFIXE", "mnga_");
 
 //LIEN VIEW
-define("ADMIN_HOME_ROUTE", "/Admin");
+define("ADMIN_HOME_ROUTE", "/admin");
 define("HOME_ROUTE", "/");
 define("LOGIN_VIEW_ROUTE", "/login");
 
