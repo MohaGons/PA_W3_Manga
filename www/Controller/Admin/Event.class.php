@@ -13,7 +13,7 @@ class Event
     public function index()
     {
         $event_data = EventRepository::all();
-        
+
         $view = new View("admin/event_index", "back");
         $view->assign("event_data", $event_data);
     }
@@ -49,9 +49,12 @@ class Event
     public function delete($id)
     {
         $event_Id = $id[1];
-        if (!empty($event_Id) && is_numeric($event_Id))
-        {
+        if (!empty($event_Id) && is_numeric($event_Id)) {
             $event_delete = EventRepository::delete($event_Id);
+            if ($event_delete) {
+                echo "<script>alert('L'évènement a bien été supprimé')</script>";
+                header("Location: /admin/event");
+            }
         }
     }
 
@@ -76,10 +79,10 @@ class Event
                         $event->setDescription(htmlspecialchars($_POST["description"]));
                     }
                     if (!empty($_POST["price"])) {
-                        $event->setDate(htmlspecialchars($_POST["price"]));
+                        $event->setDate(htmlspecialchars($_POST["date"]));
                     }
                     if (!empty($_POST["date"])) {
-                        $event->setPrice(htmlspecialchars($_POST["date"]));
+                        $event->setPrice(htmlspecialchars($_POST["price"]));
                     }
                     if (!empty($_POST["photo"])) {
                         $event->setPhoto(htmlspecialchars($_POST["photo"]));
