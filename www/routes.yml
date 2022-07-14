@@ -52,7 +52,7 @@
   security   : All
   params: null
 
-/parametre:
+/admin/parametre:
   controller: user
   action : parametre
   security: [Admin,Editeur,Abonne]

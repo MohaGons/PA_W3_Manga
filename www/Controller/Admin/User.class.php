@@ -12,6 +12,7 @@ use App\Model\Category;
 use App\Model\Forum;
 use App\Core\Mailer;
 use App\Core\Session as Session;
+use App\Model\Media as MediaModel;
 use App\Model\Manga;
 use App\Repository\User as UserRepository;
 use function Couchbase\basicEncoderV1;
@@ -79,6 +80,79 @@ class User {
             die("ytuiop");
         }
 
+    }
+
+    public function parametre()
+    {
+        $user = new UserModel();
+        $session = new Session();
+        $media = new MediaModel();
+        $email = $session->get('email', '');
+        $lastname = $user->getLastname($email);
+        $firstname = $user->getFirstname($email);
+        $gender = $user->getGender($email);
+        $avatar = $user->getAvatar($email);
+        if (!empty($_POST)) {
+            if (!empty($result)) {
+                $result = Verificator::checkFormParam($user->getParamForm($data), $_POST);
+            }
+
+            if (empty($result)) {
+                if (!empty($_POST["lastname"])) {
+                    $lastname = $_POST["lastname"];
+                    $user->updateLastname($lastname, $email);
+                }
+                if (!empty($_POST["firstname"])) {
+                    $firstname = $_POST["firstname"];
+                    $user->updateFirstname($firstname, $email);
+                }
+            } else {
+                $errors = $result;
+            }
+        }
+        if (isset($_POST['file'])) {
+            $message = $media->setMedia("Avatars", $_SESSION['email'], "update");
+            $errors = $message;
+            if ($message == NULL) {
+                header('Location: ./parametre');
+            }
+        }
+        if (isset($_GET['avatar'])) {
+            $nom = htmlspecialchars($_GET['avatar']);
+            $media->updateAvatar($nom, $_SESSION['email']);
+            $errors[] = "Votre Avatar est mise a jour avec succes";
+            header('Location: ./parametre');
+        }
+
+        $view = new View("parametre", "back");
+        $data = array(
+            "email" => $email,
+            "lastname" => $lastname,
+            "firstname" => $firstname,
+            "gender" => $gender,
+            "avatar" => $avatar
+        );
+        $view->assign("data", $data);
+        $view->assign("user", $user);
+        if (!empty($errors)) {
+            $view->assign("errors", $errors);
+        }
+    }
+
+    public function deletecompte()
+    {
+        $user = new UserModel;
+        $email = $_GET['email'];
+        if ($email == $_SESSION['email']) {
+            $user->deletecompte($email);
+            if ($user == 1) {
+                echo "<script>alert('Votre compte a bien été supprimer')</script>";
+            } else {
+                echo "<script>alert('Reessayer plus tard')</script>";
+            }
+        } else {
+            header('location:' . LOGIN_VIEW_ROUTE);
+        }
     }
 
 

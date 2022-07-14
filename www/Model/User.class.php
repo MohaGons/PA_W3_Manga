@@ -517,6 +517,7 @@ class User extends MysqlBuilder
                     "placeholder"=>"Prénom",
                     "type"=>"text",
                     "id"=>"emailRegister",
+                    "label"=>"",
                     "class"=>"formparam",
                     "value"=>$data['firstname'],
                     "required"=>false,
@@ -529,6 +530,7 @@ class User extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
+                    "label"=>"",
                     "value"=>$data['lastname'],
                     "required"=>false,
                     "min"=>2,
@@ -540,16 +542,12 @@ class User extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
+                     "label"=>"",
                     "value"=>$data['email'],
                     "required"=>false,
                     "min"=>2,
                     "max"=>100,
                     "error"=>" Votre email doit faire entre 2 et 100 caractères",
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];
