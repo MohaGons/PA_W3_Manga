@@ -21,6 +21,21 @@ class Forum {
         return $result;
     }
 
+    public function getRecentForum()
+    {
+        $forumModel = new ForumModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $forumModel->select(["*"]);
+        $forumModel->limit(0,3);
+        $req = $connectionPDO->pdo->prepare($forumModel->getQuery());
+        $req->execute();
+
+        $result = $req->fetchAll();
+
+        return $result;
+    }
+
     public static function findById($id)
     {
         $forumModel = new ForumModel();

@@ -28,7 +28,7 @@ class Builder
                     break;
                 case "radio":
                     foreach ($configInput["option"] as $option => $value) {
-                        $html .= "<div class='" . $value["class"] . "' id='" . $value["id"] . "'
+                        $html .= "<div><input type='" . $configInput["type"] . "' class='" . $value["class"] . "' id='" . $value["id"] . "'
                             name='" . $name . "'
                             value='" . $value["value"] . "'";
                         if ($value["id"] === $configInput["defaultValue"]) {

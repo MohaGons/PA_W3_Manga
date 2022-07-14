@@ -38,6 +38,7 @@ class Forum
                 if (!empty($_POST["description"])) {
                     $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
                 }
+                $forum->setDate(date('Y-m-d'));
                 if (!empty($_POST["categories"])) {
                     $forum->setCategoryId($_POST["categories"]);
                 }
@@ -89,6 +90,7 @@ class Forum
                     if (!empty($_POST["editDescription"])) {
                         $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
                     }
+                    $forum->setDate(date('Y-m-d'));
                     if (!empty($_POST["categories"])) {
                         $forum->setCategoryId($_POST["categories"]);
                     }

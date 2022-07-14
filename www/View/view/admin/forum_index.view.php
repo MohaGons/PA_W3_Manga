@@ -4,8 +4,10 @@
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col--flex">
         <table class="table-latitude">
             <thead>
-                <th class="col-xl-4">Titre</th>
-                <th class="col-xl-6">Description</th>
+                <th class="col-xl-2">Titre</th>
+                <th class="col-xl-4">Description</th>
+                <th class="col-xl-2">Date</th>
+                <th class="col-xl-2">Catégorie</th>
                 <th class="col-xl-2">Contrôles
                 <a href="forum/create"><button class="control--add">Ajouter</button></a>
                 </th>
@@ -28,6 +30,12 @@
                                 echo html_entity_decode($value["description"]);
                             }
                              ?></td>
+                            <td>
+                                <?= $value["date"]; ?>
+                            </td>
+                            <td>
+                                <?= $value["category_id"]; ?>
+                            </td>
                             <td>
                                 <a href="forum/edit/<?= $value['id']?>">Update</a>
                                 <a href="forum/delete/<?= $value['id']?>"><button class="control--delete">Supprimer</button></a>

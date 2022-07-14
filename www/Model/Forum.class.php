@@ -9,6 +9,7 @@ class Forum extends MysqlBuilder
     protected $id = null;   
     protected $title = null;
     protected $description = null;
+    protected $date = null;
     protected $category_id = null;
     protected $user_id = null;
 
@@ -49,6 +50,16 @@ class Forum extends MysqlBuilder
         $this->description = ucwords(strtolower(trim($description)));
     }
 
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate($date): void
+    {
+        $this->date = $date;
+    }
+    
     public function getCategoryId(): ?int
     {
         return $this->category_id;
@@ -101,8 +112,8 @@ class Forum extends MysqlBuilder
                     "text"=>"",
                     "required"=>true,
                     "min"=>2,
-                    "max"=>25,
-                    "error"=>"Votre titre doit faire entre 2 et 25 caractères",
+                    "max"=>2000,
+                    "error"=>"Votre description doit faire entre 2 et 2000 caractères",
                 ],
                 "categories"=> [
                     "label"=> "Catégorie: ",
@@ -148,8 +159,8 @@ class Forum extends MysqlBuilder
                     "text"=>$forum_data[0]['description'],
                     "required"=>true,
                     "min"=>2,
-                    "max"=>25,
-                    "error"=>"Votre titre doit faire entre 2 et 25 caractères",
+                    "max"=>2000,
+                    "error"=>"Votre description doit faire entre 2 et 2000 caractères",
                 ],
                 "categories"=> [
                     "label"=> "Catégorie: ",
