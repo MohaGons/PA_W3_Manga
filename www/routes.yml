@@ -189,7 +189,7 @@
   controller: user
   action: updatemdp
   security: All
-  params: null
+  params: email
 
 /admin/forumcommentaire:
   controller: forumcommentaire

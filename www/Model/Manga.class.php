@@ -332,6 +332,7 @@ class Manga extends MysqlBuilder
                     "id"=>"imageCreateManga",
                     "class"=>"formManga",
                     "accept"=>"image/*",
+                    "required"=>true,
                 ]
             ]
         ];
@@ -415,7 +416,7 @@ class Manga extends MysqlBuilder
                         "encours"=>"En cours",
                         "termine"=>"Terminé",
                     ],
-                    "defaultValue"=>"$manga[0]['status']",
+                    "defaultValue"=>$manga[0]['status'],
                 ],
                 "category"=>[
                     "placeholder"=>"catégorie",
@@ -489,7 +490,7 @@ class Manga extends MysqlBuilder
                     "max"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
-                "image"=>[
+                "file"=>[
                     "label"=>"image",
                     "type"=>"file",
                     "label"=>"Image: ",

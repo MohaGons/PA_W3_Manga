@@ -4,6 +4,66 @@ namespace App\Model;
 use App\Core\MysqlBuilder;
 use PDO;
 class Media extends MysqlBuilder{
+
+    protected $id = null;
+    protected $name = null;
+    protected $categorie = null;
+    protected $user = null;
+    protected $date = null;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * @return null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName($name){
+        $this->name = $name;
+    }
+
+    public function getCategorie(): ?string
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie($categorie){
+        $this->categorie = $categorie;
+    }
+
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    public function setUser($user){
+        $this->user = $user;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate($date){
+        $this->date = $date;
+    }
+
     public function setMedia($categorie,$email,$action){
         $messages = [];
         if (isset($_FILES)) {

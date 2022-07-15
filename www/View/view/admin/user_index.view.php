@@ -1,6 +1,6 @@
 
 <h1><i class="fa-solid fa-user"></i>Utilisateurs</h1>
-<h2>Nombre d'utilisateurs : </h2>
+<h2>Nombre d'utilisateurs :  <?= $Nbusers ?></h2>
 
 <!--<div style="display: flex; justify-content: space-between">-->
 <!--    <div>-->
@@ -18,13 +18,12 @@
 <!--    </div>-->
 <!--</div>-->
 <hr><br>
-<?php //if (!empty($messages)) {
-//    foreach ($messages as $message) {
-//        echo "<h2 style='color:red'>".$message. "</h2><br>";
-//    }
-//}?>
+<?php if (!empty($messages)) {
+    foreach ($messages as $message) {
+        echo "<h2 style='color:red'>".$message. "</h2><br>";
+    }
+}?>
 
-<div class="row">
     <table id="users_table" style="width: 100%">
         <thead>
             <tr>
@@ -61,7 +60,8 @@
         </tbody>
 
     </table>
-    <hr>
-</div>
+
+
+<script type="text/javascript" src="../Style/src/js/admin/user_idex.js"></script>
 
 

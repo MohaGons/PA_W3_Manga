@@ -29,6 +29,9 @@ use App\Model\Password;
 use App\Model\Role;
 use App\Model\User;
 use App\Model\Manga;
+use App\Model\Event;
+use App\Model\ForumCommentaire;
+use App\Model\Media;
 
 //MIGRATION CREATE TABLE USER
 $user = new User();
@@ -36,17 +39,19 @@ $user = new User();
 $colums = $user->getColums();
 
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-$colums["email"] = "varchar(320) NOT NULL,";
-$colums["password"] = "varchar(255) NOT NULL,";
 $colums["firstname"] = "varchar(25) NOT NULL,";
 $colums["lastname"] = "varchar(100) NOT NULL,";
+$colums["email"] = "varchar(320) NOT NULL,";
 $colums["status"] = "tinyint(4) NOT NULL,";
+$colums["password"] = "varchar(255) NOT NULL,";
 $colums["token"] = "char(255) DEFAULT NULL,";
-$colums["role"] = "int(1) NOT NULL,";
-$colums["gender"] = "varchar(1) NOT NULL,";
 $colums["avatar"] = "varchar(255) NOT NULL,";
+$colums["gender"] = "varchar(1) NOT NULL,";
+$colums["role"] = "int(1) NOT NULL,";
 $colums["createdAt"] = "timestamp NULL DEFAULT NULL,";
 $colums["updatedAt"] = "timestamp NULL DEFAULT NULL";
+$colums["pays"] = "varchar(50) NOT NULL,";
+$colums["ville"] = "varchar(100) NOT NULL,";
 
 $user->createTable($colums);
 
@@ -107,6 +112,7 @@ $colums["description"] = "text,";
 $colums["picture"] = "varchar(255) NOT NULL,";
 $colums["category_id"] = "int(11) NOT NULL,";
 $colums["user_id"] = "int(11) NOT NULL";
+$colums["date"] = "timestamp NULL DEFAULT NULL,";
 
 $forum->createTable($colums);
 
@@ -120,3 +126,47 @@ $colums["name"] = "varchar(100) NOT NULL,";
 $colums["description"] = "text";
 
 $category->createTable($colums);
+
+//MIGRATION CREATE TABLE EVENT
+
+$event = new Event();
+
+$colums = $event->getColums();
+
+$colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["name"] = "varchar(50) NOT NULL,";
+$colums["description"] = "varchar(320) NOT NULL,";
+$colums["date"] = "varchar(50) NOT NULL,";
+$colums["price"] = "int(11) NOT NULL,";
+$colums["photo"] = "varchar(255) NOT NULL,";
+
+$event->createTable($colums);
+
+//MIGRATION CREATE TABLE FORUMCOMMENTAIRE
+
+$forumcommantaire = new ForumCommentaire();
+
+$colums = $forumcommantaire->getColums();
+
+$colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["id_forum"] = "int(11) NOT NULL,";
+$colums["id_user"] = "int(11) NOT NULL,";
+$colums["commentaire"] = "text,";
+$colums["date_creation"] = "timestamp DEFAULT NULL,";
+$colums["isValid"] = "tinyint(1) DEFAULT '0'";
+
+$event->createTable($colums);
+
+//MIGRATION CREATE TABLE MEDIA
+
+$media = new Media();
+
+$colums = $media->getColums();
+
+$colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["nom"] = "varchar(255) NOT NULL,";
+$colums["categorie"] = "varchar(255) NULL,";
+$colums["user"] = "varchar(255) NOT NULL,";
+$colums["date"] = "timestamp DEFAULT NULL,";
+
+$event->createTable($colums);
