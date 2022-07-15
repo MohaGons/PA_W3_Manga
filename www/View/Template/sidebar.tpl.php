@@ -3,7 +3,7 @@
         <li><a href="/admin"><i class="fa-solid fa-house"></i> Dashboard</a></li>
         <li><a href="/admin/media"><i class="fa fa-folder"></i> Medias</a></li>
         <li><a href="/admin/template"><i class="fa-solid fa-file"></i> Template</a></li>
-        <li><a href="/admin/pages"><i class="fa-solid fa-file"></i> Pages</a></li>
+        <li><a href="/admin/page"><i class="fa-solid fa-file"></i> Pages</a></li>
         <li><a href="/admin/manga"><i class="fa-brands fa-napster"></i> Animé/manga</a></li>
         <li><a href="/admin/event"><i class="fa-solid fa-champagne-glasses"></i> Evenements</a></li>
         <li><a href="/admin/forumcommentaire"><i class="fa-solid fa-comment-dots"></i> Commentaires <span class="badge"><?= $NbForumCommentaire ?></span></a></li>
