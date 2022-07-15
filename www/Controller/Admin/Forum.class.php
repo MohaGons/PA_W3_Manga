@@ -105,6 +105,7 @@ class Forum
                     $errors = $result;
                 }
             }
+
             $view = new View("admin/forum_edit", "back");
             $view->assign("forum", $forum);
             $view->assign("categorie_data", $categorie_data);

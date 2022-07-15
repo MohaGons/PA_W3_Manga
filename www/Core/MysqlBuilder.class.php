@@ -35,7 +35,7 @@ abstract class MysqlBuilder implements QueryBuilder
         $this->query = new \stdClass();
     }
 
-    public function save(): void
+    public function save(): bool
     {
         $this->reset();
         $colums = get_object_vars($this);
@@ -53,7 +53,15 @@ abstract class MysqlBuilder implements QueryBuilder
         }
 
         $queryPrepared = $this->pdo->prepare($this->getQuery());
-        $queryPrepared->execute($colums);
+        if ($queryPrepared->execute($colums)) {
+            $result = true;
+        }
+        else {
+            $result = false;
+        }
+
+
+        return $result;
     }
 
     public function select(array $columns): QueryBuilder

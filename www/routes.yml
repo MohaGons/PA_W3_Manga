@@ -4,16 +4,16 @@
   security: All
   params: null
 
-/nous-contacter:
-  controller: main
-  action: contact
-  security: All
-  params: null
-
 /login:
   controller: authentification
   action: login
   security : All
+  params: null
+
+/register:
+  controller: authentification
+  action: register
+  security: All
   params: null
 
 /logout:
@@ -22,11 +22,14 @@
   security: [Abonne,Admin,Editeur]
   params: null
 
-/register:
-  controller: authentification
-  action: register
+/nous-contacter:
+  controller: main
+  action: contact
   security: All
   params: null
+
+
+
 
 /admin:
   controller: main
@@ -73,7 +76,7 @@
 /admin/utilisateurs/edit/:
   controller: user
   action: edit
-  security: [Admin,Editeur,Abonne]
+  security: All
   params: id
 
 /admin/category:

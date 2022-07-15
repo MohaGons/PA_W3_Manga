@@ -17,7 +17,7 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        $result = $req->fetchAll();
+        $result = $req->fetchAll(\PDO::FETCH_ASSOC);
 
         return $result;
     }
@@ -32,7 +32,7 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        $result = $req->fetch();
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
 
         return $result;
     }
@@ -46,7 +46,7 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        $result = $req->fetch();
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
 
         return $result;
     }
@@ -64,12 +64,17 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute($column);
 
-        $result = $req->fetch();
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
 
         if (password_verify($password, $result['password'])) {
+
+            $token = substr(str_shuffle(bin2hex(random_bytes(128)  )), 0, 255);
+            $updateToken = new UserModel();
+            $updateToken->setI
+
             Session::set('email', $result['email']);
             Session::set('id', $result['id']);
-            Session::set('token', $result['token']);
+            Session::set('token', $token);
             $role = Role::getRoleName($result['role']);
             Session::set('role', $role["role"]);
             return true;

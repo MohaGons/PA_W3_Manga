@@ -9,10 +9,3 @@
 } ?>
 
 
-<?php //$this->includePartial("captcha", null);
-?>
-
-
-
-<?php //$this->includePartial("form", $user->getLoginForm());
-?>
