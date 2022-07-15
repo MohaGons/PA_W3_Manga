@@ -36,17 +36,19 @@ $user = new User();
 $colums = $user->getColums();
 
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-$colums["email"] = "varchar(320) NOT NULL,";
-$colums["password"] = "varchar(255) NOT NULL,";
 $colums["firstname"] = "varchar(25) NOT NULL,";
 $colums["lastname"] = "varchar(100) NOT NULL,";
+$colums["email"] = "varchar(320) NOT NULL,";
 $colums["status"] = "tinyint(4) NOT NULL,";
+$colums["password"] = "varchar(255) NOT NULL,";
 $colums["token"] = "char(255) DEFAULT NULL,";
-$colums["role"] = "int(1) NOT NULL,";
-$colums["gender"] = "varchar(1) NOT NULL,";
 $colums["avatar"] = "varchar(255) NOT NULL,";
+$colums["gender"] = "varchar(1) NOT NULL,";
+$colums["role"] = "int(1) NOT NULL,";
 $colums["createdAt"] = "timestamp NULL DEFAULT NULL,";
 $colums["updatedAt"] = "timestamp NULL DEFAULT NULL";
+$colums["pays"] = "varchar(50) NOT NULL,";
+$colums["ville"] = "varchar(100) NOT NULL,";
 
 $user->createTable($colums);
 
