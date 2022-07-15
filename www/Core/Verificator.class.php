@@ -191,6 +191,27 @@ class Verificator
             && preg_match("/[0-9]/",$pwd, $result )
             && preg_match("/[A-Z]/",$pwd, $result );
     }
+
+    public static function checkSelect($option, $select): bool
+    {
+        $option = array_keys($option);
+
+        if(in_array($select, $option)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function checkNumber($number): bool
+    {
+        if(is_numeric($number)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function checkEventFormRegister($config, $data): array
     {
         $errors = [];
@@ -226,7 +247,6 @@ class Verificator
         return $errors;
     }
 
-
     public static function checkDate($date): bool
     {
         if (strtotime($date) > strtotime('now')) {
@@ -234,5 +254,58 @@ class Verificator
         } else {
             return false;
         }
+    }
+
+    public static function checkForm($config, $data): array
+    {
+        $errors = [];
+
+        if( count($config["inputs"]) != count($data)){
+            die("Tentative de hack");
+        }
+        
+        foreach ($config["inputs"] as $name=>$input)
+        {
+            if (!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
+                $errors[]= $name ." ne peut pas être vide";
+            }
+
+            if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]){
+                $errors[]= $input["error"];
+            }
+
+            if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]){
+                $errors[]= $input["error"];
+            }
+        
+            if ($input["type"] == "select" && !self::checkSelect($input["option"], $data[$name])) {
+                $errors[]=$input["Tu pensais nous la mettre dans le select ?!"];
+            }
+
+            if ($input["type"] == "text") {
+                if (!empty($input["minlength"]) && (strlen($data[$name]) < $input["minlength"])) {
+                    $errors[]=$input["error"];
+                }
+                if (!empty($input["maxlength"]) && (strlen($data[$name]) > $input["maxlength"])) {
+                    $errors[]=$input["error"];
+                }
+            }
+
+            if ($input["type"] == "textarea") {
+                if (!empty($input["minlength"]) && (strlen($data[$name]) < $input["minlength"])) {
+                    $errors[]=$input["error"];
+                }
+                if (!empty($input["maxlength"]) && (strlen($data[$name]) > $input["maxlength"])) {
+                    $errors[]=$input["error"];
+                }
+            }
+
+            if ($input["type"] == "number" && !self::checkNumber($data[$name])) {
+                $errors[]=$input["error"];
+            }
+
+        }
+
+        return $errors;
     }
 }
