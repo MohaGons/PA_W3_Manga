@@ -36,6 +36,23 @@ class Category {
         return $result;
     }
 
+    public function delete($id)
+    {
+        $forumModel = new CategoryModel();
+        $connectionPDO = new ConnectionPDO();
 
+        $forumModel->delete();
+        $forumModel->where("id", $id, "=");
+        $req = $connectionPDO->pdo->prepare($forumModel->getQuery());
+        if ($req->execute()) {
+            $result = true;
+        }
+        else {
+            $result = false;
+        }
+
+
+        return $result;
+    }
 
 }

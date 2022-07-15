@@ -16,38 +16,13 @@ class Category
     public function index()
     {
         $categorie_data = CategoryRepository::all();
-//        echo "<pre>";
-//        die(var_dump($categorie_data));
-//        $errors = [];
-//
-//        if (!empty($_POST)) {
-//
-//            $result = Verificator::checkFormParam($category->getCategoryForm(), $_POST);
-//            if (empty($result)) {
-//                if (!empty($_POST["name"])) {
-//                    $category->setNameCategory(htmlspecialchars($_POST["name"]));
-//                }
-//                $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
-//                $category->save();
-//                echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
-//            } else {
-//                $errors = $result;
-//            }
-//        }
 
         $view = new View("admin/category_index", "back");
 
         $view->assign("categorie_data", $categorie_data);
     }
 
-    public function deleteCategory()
-    {
-        $category = new Category();
-        if (!empty($_POST['category_id'])) {
-            $category_Id = $_POST['category_id'];
-            $category->deleteCategory($category_Id);
-        }
-    }
+//    public function create()
 
     public function edit($params)
     {
@@ -58,21 +33,18 @@ class Category
         {
             $category = new CategoryModel();
             $categorie_data = CategoryRepository::findById($id);
-//            echo "<pre>";
-//            die(var_dump($categorie_data));
             $errors = [];
 
             if (!empty($_POST)) {
-                $result = Verificator::checkFormParam($category->editCategoryForm($categorie_data), $_POST);
 
+                $result = Verificator::checkFormParam($category->editCategoryForm($categorie_data), $_POST);
+//                die("yugijnklmù");
                 if (empty($result)) {
-                    $category->setId($_GET["id"]);
-                    if (!empty($_POST["editName"])) {
-                        $category->setNameCategory(htmlspecialchars($_POST["editName"]));
-                    }
+                    $category->setId($id);
+                    $category->setNameCategory(htmlspecialchars($_POST["editName"]));
                     $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
                     $category->save();
-                    header('Location: ./categorie');
+                    header('Location: /admin/category');
                 } else {
                     $errors = $result;
                 }
@@ -83,6 +55,28 @@ class Category
             $view->assign("categorie_data", $categorie_data);
             $view->assign("errors", $errors);
         }
+
+    }
+
+    public function delete($params)
+    {
+//        die("crttyvuijokp");
+        $id = $params[0];
+
+        if (!empty($id) && is_numeric($id))
+        {
+
+            $categorie_delete = CategoryRepository::delete($id);
+
+            if ($categorie_delete == true) {
+                header('Location: /admin/category');
+            }
+
+//            die(var_dump($categorie_delete));
+
+
+        }
+
 
     }
 

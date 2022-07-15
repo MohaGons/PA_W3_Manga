@@ -29,7 +29,6 @@
         </table>
     </div>
 </div>
-<script src="../../Style/src/js/deleteCategory.js"></script>
 <script>
     $('.control--add').css('background-color', localStorage.buttonAdd);
     $('.control--delete').css('background-color', localStorage.buttonDelete);

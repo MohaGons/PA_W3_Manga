@@ -105,16 +105,21 @@ class Category extends MysqlBuilder
                     "class"=>"editFormCategory",
                     "label"=>"Nom :",
                     "value"=>$categorie_data[0]['name'],
+                    "min"=>2,
+                    "max"=>25,
                     "required"=>true,
                 ],
                 "editDescription"=>[
                     "placeholder"=>"description",
-                    "type"=>"text",
+                    "type"=>"textarea",
                     "id"=>"editDescriptionCategory",
                     "label"=>"Description :",
                     "class"=>"editFormCategory",
-                    "value"=>$categorie_data[0]['description'],
+                    "text"=>$categorie_data[0]['description'],
+                    "rows"=>"5",
+                    "cols"=>"33",
                     "required"=>false,
+
                 ]
             ]
         ];

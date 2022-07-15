@@ -82,17 +82,18 @@
   security: All
   params: null
 
-/deleteCategorie:
-  controller: user
-  action: deleteCategory
-  security: [Admin]
-  params: null
-
 /admin/category/edit/:
   controller: category
   action: edit
   security: [Admin,Editeur,Abonne]
   params: id
+
+/admin/category/delete/:
+  controller: category
+  action: delete
+  security: [Admin,Editeur,Abonne]
+  params: id
+
 
 /admin/forum:
   controller: forum
