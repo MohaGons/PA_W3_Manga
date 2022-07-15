@@ -71,10 +71,36 @@ class Verificator
 
     public static function checkFormParam($config, $data): array
     {
+        echo "<pre>";
+        var_dump($config);
+        var_dump($data);
+
         $errors = [];
         foreach ($config["inputs"] as $name=>$input) {
             if (!empty($data[$name])){
+
+                if ($input["required"] == true) {
+
+                    switch ($input["type"]) {
+                        case "text":
+                            var_dump($input["min"]);
+                            var_dump(strlen($data[$name]));
+                        break;
+                        default:
+                            var_dump("ok");
+                        break;
+                    }
+                    var_dump("obligatoite mec");
+                }
+                else {
+                    var_dump("pas obligatoite mec");
+                }
+//                var_dump($name);
+//                var_dump($input["min"]);
+//                var_dump(strlen($data[$name]));
+//                var_dump($data[$name]);
                 if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
+                    var_dump("tyu");
                     $errors[] = $input["error"];
                 }
                 if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]) {
@@ -85,6 +111,7 @@ class Verificator
                 }
             }
         }
+        die();
         return $errors;
     }
 
