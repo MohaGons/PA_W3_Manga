@@ -7,6 +7,36 @@ use PDO;
 class Role extends MysqlBuilder
 {
 
+    protected $id = null;
+    protected $role = null;
+
+    public function __construct()
+    {
+
+        parent::__construct();
+    }
+
+    /**
+     * @return null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole($role){
+        $this->role = $role;
+    }
+
     public function getRole($id)
     {
         $q = "SELECT role FROM roles WHERE id_role = :id";

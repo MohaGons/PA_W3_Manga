@@ -20,6 +20,8 @@ class User extends MysqlBuilder
     protected $avatar = null;
     protected $gender = null;
     protected $role = 1;
+    protected $pays = null;
+    protected $ville = null;
 
     public function __construct()
     {
@@ -280,6 +282,16 @@ class User extends MysqlBuilder
     public function setGender(string $gender): void
     {
         $this->gender = strtolower(trim($gender));
+    }
+
+    public function getVille($ville): string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): void
+    {
+        $this->ville = $ville;
     }
 
    public function deletecompte($email)
