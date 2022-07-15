@@ -74,8 +74,8 @@ class Builder
                     break;
                 case "hidden":
                     $html .= "<div><input type='" . $configInput["type"] . "'
-                                id='" . $configInput["id"] . "'
-                                name='" . $name . "'></div><br>";
+                                name='" . $name . "'
+                                value='" . $configInput["value"] . "'></div><br>";
                     break;
                 case "text":
                     $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";

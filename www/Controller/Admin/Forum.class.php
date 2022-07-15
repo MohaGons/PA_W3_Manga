@@ -32,7 +32,7 @@ class Forum
 
         if (!empty($_POST)) {
 
-            $result = Verificator::checkFormRegister($forum->getForumForm($categorie_data), $_POST);
+            $result = Verificator::checkGeneralForm($forum->getForumForm($categorie_data), $_POST);
 
             if (empty($result)) {
                 if (!empty($_POST["title"])) {

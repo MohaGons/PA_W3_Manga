@@ -63,11 +63,11 @@ class Authentification {
         $errors = [];
 
         if(!empty($_POST)) {
-            //$result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
+            $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
 
             if (empty($result)) {
                 $userRepository = UserRepository::findByEmail(htmlspecialchars($_POST["email"]));
-
+                $token = substr(str_shuffle(bin2hex(random_bytes(128)  )), 0, 255);
                 if (empty($userRepository)) {
                     $user->setFirstname(htmlspecialchars($_POST["firstname"]));
                     $user->setLastname(htmlspecialchars($_POST["lastname"]));
@@ -77,11 +77,13 @@ class Authentification {
                     $user->setAvatar(htmlspecialchars($_FILES["file"]["name"]));
                     $user->setPays('Pays');
                     $user->setPays('Ville');
+                    $user->generateToken($token);
                     $user->save();
                     $media->setMedia("Avatars",$_POST["email"],"set");
                     echo "<script>alert('Votre profil a bien été mis à jour')</script>";
 
                     Session::set('email',$_POST['email']);
+                    Session::set('token', $token);
                     $destinataire = $_POST["email"];
                     $name = $_POST["firstname"];
                     $lastname = $_POST["lastname"];

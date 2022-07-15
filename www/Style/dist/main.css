@@ -2235,6 +2235,18 @@ button, a {
   margin-bottom: 0;
 }
 
+.forum-line {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 8px 0;
+  color: red;
+  opacity: .7;
+}
+
+.forum-line strong {
+  color: black;
+}
+
 .project-boxes {
   margin: 0 -8px;
   overflow-y: auto;

@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Core\Session as Session;
 use App\Core\MysqlBuilder;
 
 class Forum extends MysqlBuilder
@@ -90,6 +91,10 @@ class Forum extends MysqlBuilder
                 "submit"=>"Valider"
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "title"=>[
                     "placeholder"=>"Titre",
                     "type"=>"text",

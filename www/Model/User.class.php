@@ -4,6 +4,7 @@ namespace App\Model;
 use App\Core\MysqlBuilder;
 use App\Repository\Role as RoleRepository;
 use App\Model\Role as RoleModel;
+use App\Core\Session as Session;
 use PDO;
 
 class User extends MysqlBuilder
@@ -203,10 +204,9 @@ class User extends MysqlBuilder
     /**
      * @param null
      */
-    public function generateToken(): void
+    public function generateToken($token): void
     {
-        $bytes = random_bytes(128);
-        $this->token = substr(str_shuffle(bin2hex($bytes)), 0, 255);
+        $this->token = $token;
     }
 
     public function getRole($id)
