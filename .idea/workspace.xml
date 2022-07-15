@@ -21,19 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controller/Admin/Forum.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/Forum.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controller/Authentification.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Authentification.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Controller/Main.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Main.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Builder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Builder.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Core/MysqlBuilder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/MysqlBuilder.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/QueryBuilder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/QueryBuilder.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Router.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Router.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Verificator.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Verificator.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Event.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Repository/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Repository/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/Template/sidebar_front.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/Template/sidebar_front.tpl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/register.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/register.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -119,6 +111,14 @@
       <workItem from="1657713665049" duration="751000" />
       <workItem from="1657781675271" duration="9149000" />
     </task>
+    <task id="LOCAL-00001" summary="fix bug pa">
+      <created>1657909948263</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1657909948263</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,7 +138,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="fix bug pa" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug pa" />
   </component>
   <component name="WindowStateProjectService">
     <state x="729" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1657902011089">
@@ -149,10 +150,10 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="172" y="127" width="1648" height="853" key="DiffContextDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1657898623871" />
-    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1657885648420">
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1657909951852">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1657885648420" />
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1657909951852" />
     <state x="777" y="468" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1657885713028">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
@@ -161,5 +162,9 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="687" y="292" width="618" height="522" key="find.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1657897664309" />
+    <state x="656" y="247" width="669" height="619" key="git4idea.branch.GitSmartOperationDialog" timestamp="1657909986116">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="656" y="247" width="669" height="619" key="git4idea.branch.GitSmartOperationDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1657909986116" />
   </component>
 </project>

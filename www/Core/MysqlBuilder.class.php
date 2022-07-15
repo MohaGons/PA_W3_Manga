@@ -88,6 +88,7 @@ abstract class MysqlBuilder implements QueryBuilder
     public function update(array $columns): QueryBuilder
     {
         $this->reset();
+//        die(var_dump(implode(",", $columns)));
         $this->query->base = "UPDATE " . $this->table . " SET " . implode(",", $columns) . " WHERE id=:id";
         return $this;
     }

@@ -4,6 +4,12 @@
   security: All
   params: null
 
+/accueil:
+  controller: main
+  action: home
+  security: All
+  params: null
+
 /login:
   controller: authentification
   action: login
@@ -22,25 +28,10 @@
   security: [Abonne,Admin,Editeur]
   params: null
 
-/nous-contacter:
-  controller: main
-  action: contact
-  security: All
-  params: null
-
-
-
-
 /admin:
   controller: main
   action: home
-  security: All
-  params: null
-
-/accueil:
-  controller: main
-  action: home
-  security: All
+  security: [Admin,Editeur]
   params: null
 
 /recuperer_mdp:

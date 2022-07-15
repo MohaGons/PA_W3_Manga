@@ -11,7 +11,6 @@ class Main
     public function home()
     {
         $role = Session::get("role");
-//        die(var_dump($_SESSION));
         $view = new View("accueil");
         $view->assign("role", $role);
     }

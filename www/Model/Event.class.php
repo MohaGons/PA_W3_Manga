@@ -21,12 +21,6 @@ class Event extends MysqlBuilder
         parent::__construct();
     }
 
-
-    public function save(): void
-    {
-        parent::save();
-    }
-
     /**
      * @return null
      */

@@ -52,6 +52,14 @@ class User extends MysqlBuilder
     }
 
     /**
+     * @param null id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return null
      */
     public function getFirstname($email): ?string

@@ -69,18 +69,54 @@ class User {
         if (password_verify($password, $result['password'])) {
 
             $token = substr(str_shuffle(bin2hex(random_bytes(128)  )), 0, 255);
-            $updateToken = new UserModel();
-            $updateToken->setI
 
-            Session::set('email', $result['email']);
-            Session::set('id', $result['id']);
-            Session::set('token', $token);
-            $role = Role::getRoleName($result['role']);
-            Session::set('role', $role["role"]);
-            return true;
+            $persist = self::updateToken($token,$result['id']);
+
+//            die(var_dump($persist));
+
+            if ($persist == true) {
+                Session::set('email', $result['email']);
+                Session::set('id', $result['id']);
+                Session::set('token', $token);
+                $role = Role::getRoleName($result['role']);
+                Session::set('role', $role["role"]);
+
+                return true;
+            }
+            else {
+                die("error generate token");
+            }
+
+
+
+
         } else {
             return false;
         }
+    }
+
+    public static function updateToken($token, $id)
+    {
+//        die(var_dump($id));
+        $userModel = new UserModel();
+        $connectionPDO = new ConnectionPDO();
+        $colums = ["token"=> "token"];
+        $update = [];
+        foreach ($colums as $key => $value) {
+            $update[] = $key . "=:" . $key;
+        }
+//        die(var_dump($update));
+        $userModel->update($update);
+//        $userModel->where("id", $id, "=");
+        $req = $connectionPDO->pdo->prepare($userModel->getQuery());
+//        die(var_dump($userModel->getQuery()));
+        if ($req->execute(["token"=>$token, "id"=>$id])) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
 
