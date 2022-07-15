@@ -38,8 +38,8 @@ echo "<a href='/Style/images/Avatars/$img'><img src='/Style/images/Avatars/$img'
 </form>
 
 <br><br><hr><br>
-<br><br><button class="button"><a href="deletecompte?email=<?= $data['email'] ?>">Supprimer mon compte</a></button>
-<br><br><button class="button"><a href="updatepassword?email=<?= $data['email'] ?>">Modifier mot de passe</a></button>
+<br><br><button class="button"><a href="/deletecompte?email=<?= $data['email'] ?>">Supprimer mon compte</a></button>
+<br><br><button class="button"><a href="/updatepassword?email=<?= $data['email'] ?>">Modifier mot de passe</a></button>
 <br><br><hr><br>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 col--flex">

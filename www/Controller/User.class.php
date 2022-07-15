@@ -143,9 +143,10 @@ class User
     {
         $user = new UserModel();
         $mdp = new PasswordModel();
+        $session = new Session();
         $errors = [];
         $email  = $_GET['email'];
-        $Session_email = $_SESSION['email'];
+        $Session_email = $session->get('email');
         if ($email == $Session_email) {
             if (!empty($_POST)) {
                 $oldpassword = htmlspecialchars($_POST['oldpassword']);

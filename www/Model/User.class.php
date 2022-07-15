@@ -707,11 +707,6 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
                     "required"=>true,
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];

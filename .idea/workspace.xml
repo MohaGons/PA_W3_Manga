@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controller/Admin/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/User.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Controller/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/User.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/view/parametre.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/parametre.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
