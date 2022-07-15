@@ -59,7 +59,7 @@ class User {
         $password = htmlspecialchars($data['password']);
         $column["email"] = $email;
 
-        $userModel->select(["id", "email", "password", "role"]);
+        $userModel->select(["id", "email", "password", "role", "token"]);
         $userModel->where("email", $email, "=");
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute($column);
@@ -69,6 +69,7 @@ class User {
         if (password_verify($password, $result['password'])) {
             Session::set('email', $result['email']);
             Session::set('id', $result['id']);
+            Session::set('token', $result['token']);
             $role = Role::getRoleName($result['role']);
             Session::set('role', $role["role"]);
             return true;

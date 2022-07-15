@@ -11,6 +11,6 @@
         <li><a href="/admin/forum"><i class="fa-solid fa-newspaper"></i> Articles</a></li>
         <li><a href="/admin/categorie"><i class="fa-solid fa-calendar"></i> Catégories</a></li>
         <li><a href="/admin/parametre"><i class="fa-solid fa-gear"></i> Parametres</a></li>
-        <li><a href="/admin/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Deconnexion</a></li>
+        <li><a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Deconnexion</a></li>
     </ul>
 </div>

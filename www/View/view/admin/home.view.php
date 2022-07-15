@@ -201,8 +201,9 @@
             </label>
           </div>
         </div>
+        <p class="forum-line"><strong>Forum:</strong> <?= $value["forum_title"]?></p>
         <p class="message-line">
-        <?= $value["commentaire"] ?>
+        <?= utf8_encode($value["commentaire"]) ?>
         </p>
         <p class="message-line time">
             <?= date('F j, Y',strtotime($value["date_creation"])) ?>
