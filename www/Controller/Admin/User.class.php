@@ -22,10 +22,32 @@ class User {
 
     public function index(){
         $users = UserRepository::all();
+        $user = new UserModel();
+        /*$messages = [];
+        if (isset($_GET['action'])){
+            $action = $_GET['action'];
+            $id = $_GET['id'];
+            if($action=='delete'){
+                $res = $user->deleteuser($id);
+                if($res==1){
+                    $messages[]= "l'utilisateur a été bien supprimé !";
+                }
+                else{
+                    $messages[]= "un erreur est survenue, reesayer plus tard";
+                }
+            }
+        }
+*/
 //        die("testADMIN");
         $view = new View("admin/user_index", "back");
 //        die("testADMIN");
         $view->assign("users", $users);
+
+        $Nbusers = count($user->NombreUsers());
+        //$Nbpages = ceil($Nbusers / $pagination);
+        $view->assign("Nbusers", $Nbusers);
+       // $view->assign("Nbpages", $Nbpages);
+        //$view->assign("messages", $messages);
     }
 
     public function edit($params){
