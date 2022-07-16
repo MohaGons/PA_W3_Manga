@@ -32,6 +32,10 @@ class Main
         $view->assign("get_recent_category_forum", $get_recent_category_forum);
         $view->assign("forum_commentaire", $forum_commentaire);
     }
+    public function Template()
+    {
+        $view = new View("admin/template", "back");
+    }
 
 
 }
