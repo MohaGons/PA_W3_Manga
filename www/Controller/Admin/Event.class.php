@@ -26,9 +26,10 @@ class Event
         $media = new MediaModel();
         $session = new Session();
         $errors = [];
-        if (!empty($_POST)) {
+        if(!empty($_POST) && !empty($_FILES)) {
 
-            $result = Verificator::checkFormParam($event->getEventFormRegister(), $_POST);
+            $data = array_merge($_POST, $_FILES);
+            $result = Verificator::checkForm($event->getEventFormRegister(), $data);
 
             if (empty($result)) {
                 $event->setName(htmlspecialchars($_POST["name"]));
@@ -36,6 +37,7 @@ class Event
                 $event->setPrice(htmlspecialchars($_POST["price"]));
                 $event->setDate(htmlspecialchars($_POST["date"]));
                 $event->setPhoto(htmlspecialchars($_FILES["file"]["name"]));
+                $event->setCreatedAt(date("Y-m-d H:i:s"));
                 $event->save();
                 $media->setMedia("Evenements",$session->get('email'),"set");
                 echo "<script>alert('L'évènement a bien été crée')</script>";
@@ -70,8 +72,10 @@ class Event
             $errors = [];
             $event_data = EventRepository::findById($id);
 
-            if (!empty($_POST)) {
-                $result = Verificator::checkFormParam($event->getEventEditFormRegister($event_data), $_POST);
+            if(!empty($_POST) && !empty($_FILES)) {
+
+                $data = array_merge($_POST, $_FILES);
+                $result = Verificator::checkForm($event->getEventEditFormRegister($event_data), $data);
 
                 if (empty($result)) {
                     $event->setId($id);

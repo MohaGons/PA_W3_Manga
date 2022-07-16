@@ -3,6 +3,7 @@ namespace App\Model;
 
 use App\Core\MysqlBuilder;
 use App\Core\Sql;
+use App\Core\Session as Session;
 
 class ForumCommentaire extends MysqlBuilder
 {
@@ -113,6 +114,10 @@ class ForumCommentaire extends MysqlBuilder
                 "submit"=>"Valider"
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "commentaire"=>[
                     "label"=>"Commentaire",
                     "placeholder"=>"Commentaire",

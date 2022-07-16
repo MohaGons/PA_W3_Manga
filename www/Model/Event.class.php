@@ -3,8 +3,7 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
-
-
+use App\Core\Session as Session;
 
 class Event extends MysqlBuilder
 {
@@ -163,6 +162,10 @@ class Event extends MysqlBuilder
                 "submit" => "Créer un nouvel évènement"
             ],
             "inputs" => [
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "name" => [
                     "placeholder" => "Nom...",
                     "type" => "text",
@@ -171,8 +174,8 @@ class Event extends MysqlBuilder
                     "class" => "formEvent",
                     "value"=>"",
                     "required" => true,
-                    "min"=>2,
-                    "max"=>50,
+                    "minlength"=>2,
+                    "maxlength"=>50,
                     "error" => "Nom de l'évènement incorect",
                     "unicity" => true,
                     "errorUnicity" => "Un évènement existe déjà avec ce nom"
@@ -213,7 +216,7 @@ class Event extends MysqlBuilder
                     "label"=> "Avatar : ",
                     "id"=>"file",
                     "class"=>"formRegister",
-                    "accept" => ""
+                    "accept" => "image/*",
                 ]
             ]
         ];
@@ -231,6 +234,10 @@ class Event extends MysqlBuilder
                 "submit" => "Modifier L'evenement"
             ],
             "inputs" => [
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "name" => [
                     "label" => "Nom: ",
                     "placeholder" => "test...",
@@ -239,8 +246,8 @@ class Event extends MysqlBuilder
                     "class" => "formEvent",
                     "value"=>"",
                     "required" => true,
-                    "min"=>2,
-                    "max"=>50,
+                    "minlength"=>2,
+                    "maxlength"=>50,
                     "error" => "Nom de l'évènement incorect",
                     "value" => $event_data[0]['name'],
                     "unicity" => true,
@@ -285,7 +292,7 @@ class Event extends MysqlBuilder
                     "label"=> "Avatar : ",
                     "id"=>"file",
                     "class"=>"formRegister",
-                    "accept" => ""
+                    "accept" => "image/*"
                 ]
             ]
         ];
