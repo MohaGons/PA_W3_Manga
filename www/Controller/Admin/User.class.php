@@ -122,20 +122,13 @@ class User {
         }
     }
 
-    public function deletecompte()
+    public function delete($id)
     {
-        $user = new UserModel;
-        $session = new Session();
-        $email = $_GET['email'];
-        if ($email == $session->get('email')) {
-            $user->deletecompte($email);
-            if ($user == 1) {
-                echo "<script>alert('Votre compte a bien été supprimer')</script>";
-            } else {
-                echo "<script>alert('Reessayer plus tard')</script>";
-            }
-        } else {
-            header('location:' . LOGIN_VIEW_ROUTE);
+        $user_Id = $id[0];
+
+        if (!empty($user_Id) && is_numeric($user_Id))
+        {
+            $manga_delete = UserRepository::delete($user_Id);
         }
     }
 

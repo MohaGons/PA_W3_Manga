@@ -70,6 +70,13 @@
   security: All
   params: id
 
+/admin/utilisateurs/delete/:
+  controller: user
+  action: delete
+  security: All
+  params: id
+
+
 /admin/category:
   controller: category
   action: index
