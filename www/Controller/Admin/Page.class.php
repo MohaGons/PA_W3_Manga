@@ -56,9 +56,12 @@ class Page
     public function delete($id)
     {
         $page_Id = $id[1];
+        $page_data = PageRepository::findById($page_Id);
+        $title = $page_data[0]["title"];
+        $page = $page_data[0]["page"];
         if (!empty($page_Id) && is_numeric($page_Id))
         {
-            $page_Id = PageRepository::delete($page_Id, "");
+            $page_Id = PageRepository::delete($page_Id, $page, $title);
         }
     }
 

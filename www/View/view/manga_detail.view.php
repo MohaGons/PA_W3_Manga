@@ -25,7 +25,7 @@
     }
 </style>
 
-<a href="/manga"><button class="control--delete">Retour</button></a>
+<a href="/<?= strtolower(str_replace(" ", "-", $page_data[0]['title']))  ?>"><button class="control--delete">Retour</button></a>
 
 <?php
         foreach ($manga_data as $key => $value) { ?>

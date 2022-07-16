@@ -5,7 +5,7 @@
         echo "<h2 style='color:green; text-align: center'>".$message. "</h2><br>";
     }
 }?>
-
+<a href="/<?= strtolower(str_replace(" ", "-", $page_data[0]['title']))  ?>"><button class="control--delete">Retour</button></a>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col--flex">
         

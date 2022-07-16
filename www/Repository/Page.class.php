@@ -77,10 +77,12 @@ class Page {
         return $result;
     }
 
-    public function delete($id, $page)
+    public function delete($id, $page, $title)
     {
         $pageModel = new PageModel();
         $connectionPDO = new ConnectionPDO();
+
+        $title_lower = strtolower(str_replace(" ", "-", $title));
 
         $pageModel->delete();
         $pageModel->where("id", $id, "=");
@@ -90,39 +92,100 @@ class Page {
         $content  = file_get_contents('routes.yml');
         switch ($page) {
             case "event":
-                $search = '
-/event:
-    controller: frontevent
-    action: FrontEvent
-    security: All
-    params: null
-';
-                $content = str_replace($search, '', $content);
-                file_put_contents('routes.yml', $content);
+
+                // remove route
+                $search = $title_lower . ': ';
+                $lines = file('routes.yml');
+                $line_number = false;
+
+                while (list($key, $line) = each($lines) and !$line_number) {
+                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
+                }
+
+                $delete_from_line= $line_number - 1;
+                $delete_to_line= $line_number + 6;
+                $filename="routes.yml";
+                
+                exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
+
+                // remove text from sidebar_front
+                $lines  = file('View/Template/sidebar_front.tpl.php');
+                $search = '<li><a href="/' . $title_lower . '">' . $title . '</a></li>';
+
+                $result = '';
+                foreach($lines as $line) {
+                    if(stripos($line, $search) === false) {
+                        $result .= $line;
+                    }
+                }
+                file_put_contents('View/Template/sidebar_front.tpl.php', $result);
+
+                // remove file
+                unlink('View/view/front-event.view.php');
                 break;
             case "forum":
-                $test = [];
-                $file_content = file_get_contents('routes.yml');
-                $string = "/forum:";
-                $content_before_string = strstr($file_content, $string, true);
-                
-                if (!feof($file_content)) {
-                    $line = count(explode(PHP_EOL, $content_before_string));
-                    $test[] = $line;
-                    //die("String $string found at line number: $line");
+
+                // remove route
+                $search = $title_lower . ': ';
+                $lines = file('routes.yml');
+                $line_number = false;
+
+                while (list($key, $line) = each($lines) and !$line_number) {
+                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
                 }
-                die(var_dump($test));
+
+                $delete_from_line= $line_number - 1;
+                $delete_to_line= $line_number + 6;
+                $filename="routes.yml";
+                
+                exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
+
+                // remove text from sidebar_front
+                $lines  = file('View/Template/sidebar_front.tpl.php');
+                $search = '<li><a href="/' . $title_lower . '">' . $title . '</a></li>';
+
+                $result = '';
+                foreach($lines as $line) {
+                    if(stripos($line, $search) === false) {
+                        $result .= $line;
+                    }
+                }
+                file_put_contents('View/Template/sidebar_front.tpl.php', $result);
+
+                // remove file
+                unlink('View/view/front-forum.view.php');
                 break;
             case "manga":
-                $search = '
-/manga:
-    controller: frontmanga
-    action: FrontManga
-    security: All
-    params: null
-';
-                $content = str_replace($search, '', $content);
-                file_put_contents('routes.yml', $content);
+
+                // remove route
+                $search = $title_lower . ': ';
+                $lines = file('routes.yml');
+                $line_number = false;
+
+                while (list($key, $line) = each($lines) and !$line_number) {
+                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
+                }
+
+                $delete_from_line= $line_number - 1;
+                $delete_to_line= $line_number + 6;
+                $filename="routes.yml";
+                
+                exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
+
+                // remove text from sidebar_front
+                $lines  = file('View/Template/sidebar_front.tpl.php');
+                $search = '<li><a href="/' . $title_lower . '">' . $title . '</a></li>';
+
+                $result = '';
+                foreach($lines as $line) {
+                    if(stripos($line, $search) === false) {
+                        $result .= $line;
+                    }
+                }
+                file_put_contents('View/Template/sidebar_front.tpl.php', $result);
+
+                // remove file
+                unlink('View/view/front-manga.view.php');
                 break;
             
         }

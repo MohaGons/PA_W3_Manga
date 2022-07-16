@@ -250,27 +250,9 @@ event/detail/:
   action: delete
   security: [Admin]
   params: id
-
-/manga:
-  controller: manga
-  action: index
-  security: All
-  params: null
-
+  
 /manga/detail/:
-  controller: manga
+  controller: frontmanga
   action: detail
   security: All
   params: id
-
-/evenetzagaz-test:
-  controller: frontevent
-  action: FrontEvent
-  security: All
-  params: null
-
-/forum-fafzafaz:
-  controller: frontforum
-  action: FrontForum
-  security: All
-  params: null

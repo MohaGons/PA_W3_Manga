@@ -37,7 +37,7 @@ class Role extends MysqlBuilder
         $this->role = $role;
     }
 
-    public function getRole($id)
+    public function getRolee($id)
     {
         $q = "SELECT role FROM roles WHERE id_role = :id";
         $req = $this->pdo->prepare($q);

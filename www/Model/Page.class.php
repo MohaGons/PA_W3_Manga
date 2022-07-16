@@ -57,14 +57,21 @@ class Page extends MysqlBuilder
 
     public function setSpecificPage($page, $title): void
     {
-        $title = strtolower(str_replace(" ", "-", $title));
+        $title_lower = strtolower(str_replace(" ", "-", $title));
 
         switch ($page) {
             case "event":
+
+                // create nav menu
+                $fp = fopen('View/Template/sidebar_front.tpl.php', "a+");
+                fwrite($fp, '        <li><a href="/' . $title_lower . '">' . $title . '</a></li>
+        ');
+                fclose($fp);
                 
+                // create route
                 $fp = fopen('routes.yml', "a+");
                 fwrite($fp, '
-/' . $title . ':
+/' . $title_lower . ': 
   controller: frontevent
   action: FrontEvent
   security: All
@@ -72,6 +79,7 @@ class Page extends MysqlBuilder
 ');
                 fclose($fp);
                 
+                // create view
                 $fp = fopen('View/view/front-event.view.php', "a+");
                 fwrite($fp, '<style>
                 h1 ,p{
@@ -167,10 +175,16 @@ class Page extends MysqlBuilder
 
                 break;
             case "forum":
+
+                // create nav menu
+                $fp = fopen('View/Template/sidebar_front.tpl.php', "a+");
+                fwrite($fp, '        <li><a href="/' . $title_lower . '">' . $title . '</a></li>
+        ');
+                fclose($fp);
                
                 $fp = fopen('routes.yml', "a+");
                 fwrite($fp, '
-/' . $title . ':
+/' . $title_lower . ': 
   controller: frontforum
   action: FrontForum
   security: All
@@ -255,9 +269,15 @@ class Page extends MysqlBuilder
                 break;
             case "manga":
 
+                // create nav menu
+                $fp = fopen('View/Template/sidebar_front.tpl.php', "a+");
+                fwrite($fp, '        <li><a href="/' . $title_lower . '">' . $title . '</a></li>
+        ');
+                fclose($fp);
+
                 $fp = fopen('routes.yml', "a+");
                 fwrite($fp, '
-/' . $title . ':
+/' . $title_lower . ': 
   controller: frontmanga
   action: FrontManga
   security: All
@@ -266,7 +286,75 @@ class Page extends MysqlBuilder
                 fclose($fp);
 
                 $fp = fopen('View/view/front-manga.view.php', "a+");
-                fwrite($fp, '');
+                fwrite($fp, '<style>
+                h1 ,p{
+                    text-align: center;
+                }
+                .cards {
+                    width: 30%;
+                }
+            
+                .card {
+                    display: flex;
+                    text-align: center;
+                    padding: 50px;
+                }
+            
+                .card img {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                }
+                .blocs{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+            
+                }
+            </style>
+            <h1><?= $page_data[0]["title"] ?></h1>
+            <p><?= html_entity_decode($page_data[0]["description"]) ?></p>
+            
+            <div class="container">
+              <div class="row">
+                <?php
+                foreach ($manga_data as $key => $value) { ?>
+                <div class="col-md-4">
+                  <div class="card-wrapper">
+                    <div class="thumbnail-container">
+                      <a href="manga/detail/<?= $value["id"] ?>">
+                      <img src="/Style/images/Mangas/<?= $value["image"] ?>" alt="image">
+                      </a>
+                    </div>
+                    <div class="card-details-container">
+                      <div class="card-title">
+                        <h1><?= $value["title"] ?></h1>
+                        <h2><?= $value["type"] ?></h2>
+                      </div>
+                      <div class="card-description">
+                        <span class="price">
+                        <?php 
+                            if ($value["type"] == "Manga") {
+                                echo "Nombre de chapitres: " . $value["nb_chapters"];
+                            } else {
+                            echo "Nombre d\'épisodes: " . $value["nb_episodes"];
+                            }
+                        ?>
+                        </span>
+                      </div>
+                      <div class="card-details-bottom">
+                        <div class="card-author">
+                          <strong><?= $value["author"]?></strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <?php
+                }
+                ?>
+              </div>
+            </div>');
                 fclose($fp);
 
                 break;
