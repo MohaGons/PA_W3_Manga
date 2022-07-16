@@ -37,6 +37,7 @@ class Event
                 $event->setDate(htmlspecialchars($_POST["date"]));
                 $event->setPhoto(htmlspecialchars($_FILES["file"]["name"]));
                 $event->setCreatedAt(date("Y-m-d H:i:s"));
+                $event->setUserId($session->get('id'));
                 $event->save();
                 $media->setMedia("Evenements",$session->get('email'),"set");
                 echo "<script>alert('L'évènement a bien été crée')</script>";
@@ -93,6 +94,7 @@ class Event
                     if (!empty($_FILES["file"]["name"])) {
                         $event->setPhoto(htmlspecialchars($_FILES["file"]["name"]));
                     }
+                    $event->setUserId($session->get('id'));
                     $event->save();
                     $media->updateEvenement($_FILES["file"]["name"], $_POST["name"]);
                     $media->setMedia('Evenements',$session->get('email'),"" );

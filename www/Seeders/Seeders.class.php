@@ -163,7 +163,6 @@ $forum->deleteTable();
 
 $forum->setTitleForum(htmlspecialchars('Titre du forum'));
 $forum->setDescriptionForum(htmlspecialchars('Description du forum'));
-$forum->setPicture(htmlspecialchars('forum.jpg'));
 $forum->setCategoryId(htmlspecialchars('1'));
 $forum->setUserId(htmlspecialchars('1'));
 $forum->setDate(htmlspecialchars('2019-01-01'));
@@ -196,6 +195,7 @@ $event->deleteTable();
 $event_one = new Event();
 $event_two = new Event();
 
+$event_one->setUserId(htmlspecialchars('1'));
 $event_one->setName(htmlspecialchars('Event'));
 $event_one->setDescription(htmlspecialchars('Event'));
 $event_one->setDate(htmlspecialchars('2019-01-01'));
@@ -204,6 +204,7 @@ $event_one->setPhoto(htmlspecialchars('event.jpg'));
 $event_one->setCreatedAt(date("Y-m-d H:i:s"));
 $event_one->save();
 
+$event_two->setUserId(htmlspecialchars('1'));
 $event_two->setName(htmlspecialchars('Film'));
 $event_two->setDescription(htmlspecialchars('Film'));
 $event_two->setDate(htmlspecialchars('2019-01-01'));

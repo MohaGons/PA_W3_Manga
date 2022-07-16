@@ -116,7 +116,6 @@ $colums = $forum->getColums();
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["title"] = "varchar(100) NOT NULL,";
 $colums["description"] = "text,";
-$colums["picture"] = "varchar(255) NOT NULL,";
 $colums["category_id"] = "int(11) NOT NULL,";
 $colums["user_id"] = "int(11) NOT NULL,";
 $colums["date"] = "timestamp NULL DEFAULT NULL,";
@@ -144,6 +143,7 @@ $event = new Event();
 
 $colums = $event->getColums();
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["user_id"] = "int(11) NOT NULL";
 $colums["name"] = "varchar(50) NOT NULL,";
 $colums["description"] = "varchar(320) NOT NULL,";
 $colums["date"] = "TIMESTAMP NULL DEFAULT NULL,";

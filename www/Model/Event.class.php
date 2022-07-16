@@ -8,6 +8,7 @@ use App\Core\Session as Session;
 class Event extends MysqlBuilder
 {
     protected $id = null;
+    protected $user_id = null;
     protected $name = null;
     protected $description = null;
     protected $price = 0;
@@ -35,6 +36,15 @@ class Event extends MysqlBuilder
         $this->id = $id;
     }
 
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
 
     /**
      * @return null
