@@ -76,6 +76,12 @@
   security: All
   params: null
 
+/admin/category/create:
+  controller: category
+  action: create
+  security: [Admin,Editeur,Abonne]
+  params: null
+
 /admin/category/edit/:
   controller: category
   action: edit

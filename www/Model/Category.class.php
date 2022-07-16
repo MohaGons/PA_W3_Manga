@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
+use App\Core\Session as Session;
 
 class Category extends MysqlBuilder
 {
@@ -11,6 +12,7 @@ class Category extends MysqlBuilder
     protected $description = null;
     protected $createdAt = null;
     protected $updatedAt = null;
+    protected $user_id = null;
 
     public function __construct()
     {
@@ -81,6 +83,15 @@ class Category extends MysqlBuilder
         $this->updatedAt = $updatedAt;
     }
 
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId($user_id){
+        $this->user_id = $user_id;
+    }
+
     public function getCategoryForm(): array
     {
         return [
@@ -92,24 +103,32 @@ class Category extends MysqlBuilder
                 "submit"=>"Valider"
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "name"=>[
+                    "label"=>"Nom: ",
                     "placeholder"=>"Nom",
                     "type"=>"text",
                     "id"=>"nameCategory",
                     "class"=>"formCategory",
                     "value"=>"",
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Veuillez mettre au moins mettre le nom (faire entre 2 et 25 caractères)",
                     
                 ],
                 "description"=>[
+                    "label"=>"Description: ",
                     "placeholder"=>"description (facultatif)",
                     "type"=>"text",
                     "id"=>"descriptionCategory",
                     "class"=>"formCategory",
                     "value"=>"",
+                    "minlength"=>'',
+                    "maxlength"=>'',
                     "required"=>false,
                 ],
                 "submit"=>[
@@ -132,26 +151,30 @@ class Category extends MysqlBuilder
                 "submit"=>"Valider"
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "editName"=>[
+                    "label"=>"Nom: ",
                     "placeholder"=>"Nom",
                     "type"=>"text",
                     "id"=>"editNameCategory",
                     "class"=>"editFormCategory",
-                    "label"=>"Nom :",
                     "value"=>$categorie_data[0]['name'],
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "required"=>true,
                 ],
                 "editDescription"=>[
+                    "label"=>"Description: ",
                     "placeholder"=>"description",
-                    "type"=>"textarea",
+                    "type"=>"text",
                     "id"=>"editDescriptionCategory",
-                    "label"=>"Description :",
                     "class"=>"editFormCategory",
-                    "text"=>$categorie_data[0]['description'],
-                    "rows"=>"5",
-                    "cols"=>"33",
+                    "value"=>$categorie_data[0]['description'],
+                    "minlength"=>'',
+                    "maxlength"=>'',
                     "required"=>false,
 
                 ]
