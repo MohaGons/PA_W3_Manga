@@ -4,9 +4,9 @@
   security: All
   params: null
 
-/nous-contacter:
+/accueil:
   controller: main
-  action: contact
+  action: home
   security: All
   params: null
 
@@ -16,28 +16,22 @@
   security : All
   params: null
 
-/logout:
-  controller: authentification
-  action: logout
-  security: [Abonne,Admin,Editeur]
-  params: null
-
 /register:
   controller: authentification
   action: register
   security: All
   params: null
 
+/logout:
+  controller: authentification
+  action: logout
+  security: [Abonne,Admin,Editeur]
+  params: null
+
 /admin:
   controller: main
   action: home
-  security: All
-  params: null
-
-/accueil:
-  controller: main
-  action: home
-  security: All
+  security: [Admin,Editeur]
   params: null
 
 /recuperer_mdp:
@@ -73,7 +67,7 @@
 /admin/utilisateurs/edit/:
   controller: user
   action: edit
-  security: [Admin,Editeur,Abonne]
+  security: All
   params: id
 
 /admin/category:

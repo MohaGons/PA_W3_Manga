@@ -9,6 +9,8 @@ class Category extends MysqlBuilder
     protected $id = null;   
     protected $name = null;
     protected $description = null;
+    protected $createdAt = null;
+    protected $updatedAt = null;
 
     public function __construct()
     {
@@ -45,6 +47,38 @@ class Category extends MysqlBuilder
     public function setDescriptionCategory(?string $description): void
     {
         $this->description = ucwords(strtolower(trim($description)));
+    }
+
+    /**
+     * @return null
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param null $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param null $updatedAt
+     */
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function getCategoryForm(): array

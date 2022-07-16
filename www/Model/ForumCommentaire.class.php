@@ -13,6 +13,8 @@ class ForumCommentaire extends MysqlBuilder
     protected $commentaire = null;
     protected $date_creation = null;
     protected $isValid = 0;
+    protected $createdAt = null;
+    protected $updatedAt = null;
 
     public function __construct()
     {
@@ -77,6 +79,38 @@ class ForumCommentaire extends MysqlBuilder
     public function setIsValid(?int $isValid): void
     {
         $this->isValid = $isValid;
+    }
+
+    /**
+     * @return null
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param null $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param null $updatedAt
+     */
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function getCommentaireForm(): array

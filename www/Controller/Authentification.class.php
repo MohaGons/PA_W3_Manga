@@ -8,6 +8,7 @@ use App\Model\User as UserModel;
 use App\Model\Media as MediaModel;
 use App\Core\Mailer;
 use App\Core\Session as Session;
+use App\Repository\Role as RoleRepository;
 use App\Repository\User as UserRepository;
 
 class Authentification {
@@ -62,13 +63,17 @@ class Authentification {
         $media = new MediaModel();
         $errors = [];
 
-        if(!empty($_POST)) {
-            $result = Verificator::checkFormRegister($user->getRegisterForm(), $_POST);
+        if(!empty($_POST) && !empty($_FILES)) {
+            $data = array_merge($_POST, $_FILES);
+            $result = Verificator::checkFormRegister($user->getRegisterForm(), $data);
+
 
             if (empty($result)) {
                 $userRepository = UserRepository::findByEmail(htmlspecialchars($_POST["email"]));
-                $token = substr(str_shuffle(bin2hex(random_bytes(128)  )), 0, 255);
+
                 if (empty($userRepository)) {
+                    $token = substr(str_shuffle(bin2hex(random_bytes(128)  )), 0, 255);
+
                     $user->setFirstname(htmlspecialchars($_POST["firstname"]));
                     $user->setLastname(htmlspecialchars($_POST["lastname"]));
                     $user->setEmail(htmlspecialchars($_POST["email"]));
@@ -78,24 +83,35 @@ class Authentification {
                     $user->setPays('Pays');
                     $user->setPays('Ville');
                     $user->generateToken($token);
-                    $user->save();
-                    $media->setMedia("Avatars",$_POST["email"],"set");
-                    echo "<script>alert('Votre profil a bien été mis à jour')</script>";
+                    $persist = $user->save();
 
-                    Session::set('email',$_POST['email']);
-                    Session::set('token', $token);
-                    $destinataire = $_POST["email"];
-                    $name = $_POST["firstname"];
-                    $lastname = $_POST["lastname"];
-                    $subject = 'Inscription MangaSite';
-                    $body = 'Bienvenue ' . $name . ' sur MangaSite';
-                    Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+                    if ($persist == true)
+                    {
+                        $media->setMedia("Avatars",$_POST["email"],"set");
+                        echo "<script>alert('Votre profil a bien été crée')</script>";
 
-                    $roleId = $user->getRoleByEmail($_POST['email']);
+                        $id_contact = UserRepository::findByEmail($_POST['email']);
 
-                    $role = $user->getRole($roleId['role']);
-                    Session::set('role',$role['role']);
-                    header('location:'.HOME_ROUTE);
+
+
+                        Session::set('id', $id_contact["id"]);
+                        Session::set('email', $_POST['email']);
+                        Session::set('token', $token);
+                        $role = RoleRepository::getRoleName($user->getRole());
+                        Session::set('role', $role);
+                        $destinataire = $_POST["email"];
+                        $name = $_POST["firstname"];
+                        $lastname = $_POST["lastname"];
+                        $subject = 'Inscription MangaSite';
+                        $body = 'Bienvenue ' . $name . ' sur MangaSite';
+                        Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+
+                        header('location:'.HOME_ROUTE);
+                    }
+                    else {
+                        echo "<script>alert('Votre inscription a echoué')</script>";
+                    }
+
                 }
                 else {
                     $errors[]= "Il existe déjà un compte pour l'adresse mail " .$_POST["email"]. ". Veuillez en renseigner un autre.";
@@ -107,7 +123,7 @@ class Authentification {
             }
         }
 
-        $view = new View("Register");
+        $view = new View("register");
         $view->assign("user", $user);
         $view->assign("errors", $errors);
     }

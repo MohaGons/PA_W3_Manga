@@ -12,36 +12,38 @@ class Verificator
     {
         $errors = [];
 
-        /*
-        if( count($config["inputs"]) != count($_POST)){
+        if( count($config["inputs"]) != count($data)){
             die("Tentative de hack");
         }
-        */
-        
-        foreach ($config["inputs"] as $name=>$input)
-        {
-            if(!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
-                $errors[]= $name ." ne peut pas être vide";
-            }
 
-            if(!empty($input["min"]) && strlen($data[$name]) < $input["min"]){
-                $errors[]= $input["error"];
-            }
+        foreach ($config["inputs"] as $name=>$input) {
+            if ($input["required"] == true) {
 
-            if(!empty($input["max"]) && strlen($data[$name]) > $input["max"]){
-                $errors[]= $input["error"];
-            }
-
-            if($input["type"]=="email" &&  !self::checkEmail($data[$name])) {
-                $errors[]=$input["error"];
-            }
-
-            if($input["type"]=="password" &&  !self::checkPwd($data[$name]) && empty($input["confirm"])) {
-                $errors[]=$input["error"];
-            }
-
-            if( !empty($input["confirm"]) && $data[$name]!=$data[$input["confirm"]]  ){
-                $errors[]=$input["error"];
+                switch ($input["type"]) {
+                    case "email":
+                        if(!self::checkEmail($data[$name])) {
+                            $errors[]=$input["error"];
+                        }
+                    break;
+                    case "text":
+                        if (!empty($input["minlength"]) && (strlen($data[$name]) < $input["minlength"])) {
+                            $errors[]=$input["error"];
+                        }
+                        if (!empty($input["maxlength"]) && (strlen($data[$name]) > $input["maxlength"])) {
+                            $errors[]=$input["error"];
+                        }
+                    break;
+                    case "password":
+                        if(!self::checkPwd($data[$name])) {
+                            if ($name == "passwordConfirm" && ($data["password"] != $data["passwordConfirm"])) {
+                                $errors[]=$input["error"];
+                            }
+                        }
+                        break;
+                    default:
+                        echo "fyugioj";
+                    break;
+                }
             }
         }
 
@@ -51,9 +53,6 @@ class Verificator
     public static function checkFormLogin($config, $data): array
     {
         $errors = [];
-
-        echo "<pre>";
-        var_dump($config["inputs"]);
 
         if( count($config["inputs"]) != count($_POST)){
             die("Tentative de hack");
@@ -95,10 +94,6 @@ class Verificator
                 else {
                     var_dump("pas obligatoite mec");
                 }
-//                var_dump($name);
-//                var_dump($input["min"]);
-//                var_dump(strlen($data[$name]));
-//                var_dump($data[$name]);
                 if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]) {
                     var_dump("tyu");
                     $errors[] = $input["error"];

@@ -21,6 +21,8 @@ class Manga extends MysqlBuilder
     protected $diffusion = null;
     protected $nb_seasons = null;
     protected $production_studio = null;
+    protected $createdAt = null;
+    protected $updatedAt = null;
 
     public function __construct()
     {
@@ -177,6 +179,38 @@ class Manga extends MysqlBuilder
     public function setProductionStudioManga(?string $production_studio): void
     {
         $this->production_studio = ucwords(strtolower(trim($production_studio)));
+    }
+
+    /**
+     * @return null
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param null $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param null $updatedAt
+     */
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function getCreateMangaForm(): array

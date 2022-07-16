@@ -35,7 +35,7 @@ abstract class MysqlBuilder implements QueryBuilder
         $this->query = new \stdClass();
     }
 
-    public function save(): void
+    public function save(): bool
     {
         $this->reset();
         $colums = get_object_vars($this);
@@ -53,7 +53,15 @@ abstract class MysqlBuilder implements QueryBuilder
         }
 
         $queryPrepared = $this->pdo->prepare($this->getQuery());
-        $queryPrepared->execute($colums);
+        if ($queryPrepared->execute($colums)) {
+            $result = true;
+        }
+        else {
+            $result = false;
+        }
+
+
+        return $result;
     }
 
     public function select(array $columns): QueryBuilder
@@ -80,6 +88,7 @@ abstract class MysqlBuilder implements QueryBuilder
     public function update(array $columns): QueryBuilder
     {
         $this->reset();
+//        die(var_dump(implode(",", $columns)));
         $this->query->base = "UPDATE " . $this->table . " SET " . implode(",", $columns) . " WHERE id=:id";
         return $this;
     }
@@ -116,7 +125,7 @@ abstract class MysqlBuilder implements QueryBuilder
 
 
         if (in_array($this->table, $tables)) {
-            $this->deleteTable();
+            $this->dropTable();
             $this->createTable($columns);
         } else {
             $this->reset();
@@ -130,11 +139,21 @@ abstract class MysqlBuilder implements QueryBuilder
         }
     }
 
-    public function deleteTable(): void
+    public function dropTable(): void
     {
         $this->reset();
         $this->query->base = "DROP TABLE " . $this->table . ";";
 
+        $queryPrepared = $this->pdo->prepare($this->getQuery());
+        $queryPrepared->execute();
+    }
+
+    public function deleteTable(): void
+    {
+        $this->reset();
+        $this->query->base = "TRUNCATE TABLE " . $this->table . ";";
+
+//        die($this->getQuery());
         $queryPrepared = $this->pdo->prepare($this->getQuery());
         $queryPrepared->execute();
     }

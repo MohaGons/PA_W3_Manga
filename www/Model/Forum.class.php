@@ -10,9 +10,12 @@ class Forum extends MysqlBuilder
     protected $id = null;   
     protected $title = null;
     protected $description = null;
+    protected $picture = null;
     protected $date = null;
     protected $category_id = null;
     protected $user_id = null;
+    protected $createdAt = null;
+    protected $updatedAt = null;
 
     public function __construct()
     {
@@ -71,6 +74,16 @@ class Forum extends MysqlBuilder
     }
 
 
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture($picture){
+        $this->picture = $picture;
+    }
+
+
     public function getUserId(): ?int
     {
         return $this->user_id;
@@ -78,6 +91,38 @@ class Forum extends MysqlBuilder
 
     public function setUserId($user_id){
         $this->user_id = $user_id;
+    }
+
+    /**
+     * @return null
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param null $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param null $updatedAt
+     */
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function getForumForm($categorie_data): array

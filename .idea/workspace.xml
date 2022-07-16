@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Controller/Admin/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/admin/user_index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/admin/user_index.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Core/MysqlBuilder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/MysqlBuilder.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Core/QueryBuilder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/QueryBuilder.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Migrations/Migration.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Migrations/Migration.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Category.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Category.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Event.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Forum.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Forum.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/ForumCommentaire.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/ForumCommentaire.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Manga.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Manga.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Media.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Media.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Role.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Role.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Seeders/Seeders.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Seeders/Seeders.class.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +116,16 @@
       <workItem from="1657608739748" duration="98000" />
       <workItem from="1657713665049" duration="751000" />
       <workItem from="1657781675271" duration="9149000" />
+      <workItem from="1657967396368" duration="5556000" />
     </task>
+    <task id="LOCAL-00001" summary="fix bug">
+      <created>1657967544405</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1657967544406</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +145,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="172" y="127" width="1648" height="853" key="DiffContextDialog" timestamp="1657970129482">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="172" y="127" width="1648" height="853" key="DiffContextDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1657970129482" />
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1657967550172">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1657967550172" />
+    <state x="777" y="468" width="428" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1657967559615">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="777" y="468" width="428" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1848.1053@72.27.1848.1053" timestamp="1657967559615" />
   </component>
 </project>

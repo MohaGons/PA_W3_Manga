@@ -22,6 +22,8 @@ class User extends MysqlBuilder
     protected $role = 1;
     protected $pays = null;
     protected $ville = null;
+    protected $createdAt = null;
+    protected $updatedAt = null;
 
     public function __construct()
     {
@@ -51,6 +53,14 @@ class User extends MysqlBuilder
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @param null id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
@@ -211,12 +221,9 @@ class User extends MysqlBuilder
         $this->token = $token;
     }
 
-    public function getRole($id)
+    public function getRole()
     {
-        $q = "SELECT role FROM mnga_role WHERE id = :id";
-        $req = $this->pdo->prepare($q);
-        $req->execute(['id' => $id]);
-        return $req->fetch();
+        return $this->role;
     }
 
     public function getRoleByEmail($email)
@@ -292,6 +299,38 @@ class User extends MysqlBuilder
     public function setVille(string $ville): void
     {
         $this->ville = $ville;
+    }
+
+    /**
+     * @return null
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param null $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param null $updatedAt
+     */
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
    public function deletecompte($email)
@@ -407,16 +446,16 @@ class User extends MysqlBuilder
                     "type"=>"email",
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
+                    "label"=>"Email : ",
                     "required"=>true,
                     "error"=>"Email incorrect",
-                    "unicity"=>true,
-                    "errorUnicity"=>"Un compte existe déjà avec cet email"
                 ],
                 "password"=>[
                     "placeholder"=>"Votre mot de passe ...",
                     "type"=>"password",
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
+                    "label"=>"Password : ",
                     "required"=>true,
                     "error"=>"Votre mot de passe doit faire au min 8 caratères avec une majuscule et un chiffre"
                 ],
@@ -425,6 +464,7 @@ class User extends MysqlBuilder
                     "type"=>"password",
                     "id"=>"pwdConfirmRegister",
                     "class"=>"formRegister",
+                    "label"=>"Password confirm : ",
                     "required"=>true,
                     "error"=>"Votre confirmation de mot de passe ne correspond pas",
                     "confirm"=>"password"
@@ -432,41 +472,40 @@ class User extends MysqlBuilder
                 "firstname"=>[
                     "placeholder"=>"Votre prénom ...",
                     "type"=>"text",
-                    "label"=>"Prénom: ",
                     "id"=>"firstnameRegister",
                     "class"=>"formRegister",
                     "value"=>"",
-                    "label"=>"Firstname",
-                    "min"=>2,
-                    "max"=>25,
+                    "label"=>"Firstname : ",
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "required"=>true,
                     "error"=>" Votre prénom doit faire entre 2 et 25 caractères",
                 ],
                 "lastname"=>[
                     "placeholder"=>"Votre nom ...",
                     "type"=>"text",
-                    "label"=>"Nom de famille: ",
                     "id"=>"lastnameRegister",
                     "class"=>"formRegister",
                     "value"=>"",
-                    "label"=>"Lasttname",
-                    "min"=>2,
-                    "max"=>100,
+                    "label"=>"Lastname : ",
+                    "minlength"=>2,
+                    "maxlength"=>100,
                     "required"=>true,
                     "error"=>" Votre nom doit faire entre 2 et 100 caractères",
                 ],
                 "gender"=>[
                     "type"=>"radio",
+                    "required"=>true,
                     "option"=> [
                         [
                             "value"=>"M",
-                            "label"=>"Masculin",
+                            "label"=>"Masculin : ",
                             "id"=>"male",
                             "class"=>"formRegister",
                         ],
                         [
                             "value"=>"F",
-                            "label"=>"Féminin",
+                            "label"=>"Féminin : ",
                             "id"=>"feminin",
                             "class"=>"formRegister",
                         ]
@@ -478,6 +517,7 @@ class User extends MysqlBuilder
                     "label"=> "Avatar : ",
                     "id"=>"file",
                     "class"=>"formRegister",
+                    "required"=>false,
                     "accept" => ""
                 ]
             ]
@@ -500,6 +540,7 @@ class User extends MysqlBuilder
                     "type"=>"email",
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
+                    "label"=>"Email : ",
                     "error"=>"Email incorrect",
                     "required"=>true,
                 ],
@@ -508,6 +549,7 @@ class User extends MysqlBuilder
                     "type"=>"password",
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
+                    "label"=>"Password : ",
                     "required"=>true,
                 ],
             ]

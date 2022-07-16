@@ -9,6 +9,8 @@ class Role extends MysqlBuilder
 
     protected $id = null;
     protected $role = null;
+    protected $createdAt = null;
+    protected $updatedAt = null;
 
     public function __construct()
     {
@@ -37,12 +39,36 @@ class Role extends MysqlBuilder
         $this->role = $role;
     }
 
-    public function getRolee($id)
+    /**
+     * @return null
+     */
+    public function getCreatedAt()
     {
-        $q = "SELECT role FROM roles WHERE id_role = :id";
-        $req = $this->pdo->prepare($q);
-        $req->execute(['id' => $id]);
-        return $req->fetch();
+        return $this->createdAt;
+    }
+
+    /**
+     * @param null $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param null $updatedAt
+     */
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function  getAllRoles()

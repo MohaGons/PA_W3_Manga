@@ -28,22 +28,23 @@ class Builder
                     break;
                 case "radio":
                     foreach ($configInput["option"] as $option => $value) {
-                        $html .= "<div><input type='" . $configInput["type"] . "' class='" . $value["class"] . "' id='" . $value["id"] . "'
+                        $html .= "<div><label for='" . $name . "'>";
+                        $html .= $value["label"];
+                        $html .= "</label>";
+                        $html .= "<input type='" . $configInput["type"] . "' class='" . $value["class"] . "' id='" . $value["id"] . "'
                             name='" . $name . "'
                             value='" . $value["value"] . "'";
                         if ($value["id"] === $configInput["defaultValue"]) {
                             $html .= " checked";
                         }
-                        $html .= "><br>";
-                        $html .= "<label for='" . $name . "'>";
-                        $html .= $value["label"];
-                        $html .= "</label></div>";
+                        $html .= "></div><br>";
                     }
 
                     break;
                 case "checkbox":
                     foreach ($configInput["option"] as $option => $value) {
-                        $html .= "<div><input type='" . $configInput["type"] . "'
+                        $html .= "<div><label for='" . $name . "'>" . $value["label"] . "</label></div>";
+                        $html .= "<input type='" . $configInput["type"] . "'
                                 class='" . $value["class"] . "'
                                 id='" . $value["id"] . "'
                                 name='" . $name . "'
@@ -51,8 +52,7 @@ class Builder
                         if ($value["id"] === $configInput["defaultValue"]) {
                             $html .= " checked";
                         }
-                        $html .= "><br>";
-                        $html .= "<label for='" . $name . "'>" . $value["label"] . "</label></div>";
+                        $html .= "></div><br>";
                     }
                     break;
                 case "textarea":
@@ -85,8 +85,8 @@ class Builder
                             placeholder='".$configInput["placeholder"]."'
                             type='".$configInput["type"]."'
                             value='".$configInput["value"]."'
-                            min='".$configInput["min"]."'
-                            max='".$configInput["max"]."'
+                            minlength='".$configInput["minlength"]."'
+                            maxlength='".$configInput["maxlength"]."'
                             ><br>";
                     break;
                 case "number":
@@ -101,7 +101,8 @@ class Builder
                             ><br>";
                     break;
                 case "email":
-                    $html = "<div class='form-field'><input name='".$name."'
+                    $html .= "<div class='form-field'><label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                    $html .= "<input name='".$name."'
                             class='".$configInput["class"]."'
                             id='".$configInput["id"]."'
                             placeholder='".$configInput["placeholder"]."'
@@ -109,7 +110,8 @@ class Builder
                             ></div><br>";
                     break;
                 case "password":
-                    $html = "<div class='form-field'><input name='".$name."'
+                    $html .= "<div class='form-field'><label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                    $html .= "<input name='".$name."'
                             class='".$configInput["class"]."'
                             id='".$configInput["id"]."'
                             placeholder='".$configInput["placeholder"]."'
@@ -117,12 +119,7 @@ class Builder
                             ></div><br>";
                     break;
                 default:
-                    $html = "<input name='" . $name . "'
-                            class='" . $configInput["class"] . "'
-                            id='" . $configInput["id"] . "'
-                            placeholder='" . $configInput["placeholder"] . "'
-                            type='" . $configInput["type"] . "'
-                            ><br>";
+//                    die(var_dump("ce champ existe pas mec"));
                     break;
             }
 

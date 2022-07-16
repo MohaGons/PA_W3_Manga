@@ -17,7 +17,7 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        $result = $req->fetchAll();
+        $result = $req->fetchAll(\PDO::FETCH_ASSOC);
 
         return $result;
     }
@@ -32,7 +32,7 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        $result = $req->fetch();
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
 
         return $result;
     }
@@ -46,7 +46,7 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        $result = $req->fetch();
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
 
         return $result;
     }
@@ -64,18 +64,56 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute($column);
 
-        $result = $req->fetch();
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
 
         if (password_verify($password, $result['password'])) {
-            Session::set('email', $result['email']);
-            Session::set('id', $result['id']);
-            Session::set('token', $result['token']);
-            $role = Role::getRoleName($result['role']);
-            Session::set('role', $role["role"]);
-            return true;
+
+            $token = substr(str_shuffle(bin2hex(random_bytes(128)  )), 0, 255);
+
+            $persist = self::updateToken($token,$result['id']);
+
+//            die(var_dump($persist));
+
+            if ($persist == true) {
+                Session::set('email', $result['email']);
+                Session::set('id', $result['id']);
+                Session::set('token', $token);
+                $role = Role::getRoleName($result['role']);
+                Session::set('role', $role["role"]);
+
+                return true;
+            }
+            else {
+                die("error generate token");
+            }
+
+
+
+
         } else {
             return false;
         }
+    }
+
+    public static function updateToken($token, $id)
+    {
+        $userModel = new UserModel();
+        $connectionPDO = new ConnectionPDO();
+        $colums = ["token"=> "token"];
+        $update = [];
+        foreach ($colums as $key => $value) {
+            $update[] = $key . "=:" . $key;
+        }
+        $userModel->update($update);
+        $req = $connectionPDO->pdo->prepare($userModel->getQuery());
+
+        if ($req->execute(["token"=>$token, "id"=>$id])) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
 
