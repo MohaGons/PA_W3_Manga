@@ -24,21 +24,24 @@
     <div class="col-xl-12">
         <div class="articles">
             <div class="row">
+                <?php
+                foreach ($recent_event as $key => $value) { ?>
                 <div class="col-xl-4 col--flex flexArticle">
-                    <img class="imgArticle" src="./../Style/images/manga.jpg">
-                    <p>Article</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>
+                    <img class="imgArticle" src="/Style/images/Evenements/<?= $recent_event[0]['photo'] ?>">
+                    <p><?= $recent_event[0]['name'] ?></p>
+                    <p>
+                    <?php
+                    if (strlen($recent_event[0]["description"]) >= 80) {
+                        echo html_entity_decode(substr($recent_event[0]["description"], 0, 80) . "...");
+                    } else {
+                        echo html_entity_decode($recent_event[0]["description"]);
+                    }
+                    ?>
+                    </p>
                 </div>
-                <div class="col-xl-4 col--flex flexArticle">
-                    <img class="imgArticle" src="../../Style/images/journal.jpg">
-                    <p>Article</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>
-                </div>
-                <div class="col-xl-4 col--flex flexArticle">
-                    <img class="imgArticle" src="../../Style/images/journal.jpg">
-                    <p>Article</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu erat leo. In eu hendrerit erat. Nunc sagittis massa id enim</p>
-                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>

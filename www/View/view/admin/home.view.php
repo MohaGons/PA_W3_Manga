@@ -44,7 +44,7 @@
       <div class="projects-section-line">
         <div class="projects-status">
           <div class="item-status">
-            <span class="status-number">45</span>
+            <span class="status-number"><?= count($page_data)?></span>
             <span class="status-type">Pages</span>
           </div>
           <div class="item-status">
@@ -259,4 +259,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.messages-section').classList.remove('show');
   });
 });
+</script>
+<script>
+$('.control--add').css('background-color', localStorage.buttonAdd);
+$('.control--delete').css('background-color', localStorage.buttonDelete);
+$('.button').css('background-color', localStorage.button);
+$('body').css('background-color', localStorage.background);
+$('h1').css('color', localStorage.h1Color);
+$("*").css("font-family", localStorage.font);
 </script>
