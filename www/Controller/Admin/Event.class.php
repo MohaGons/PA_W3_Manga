@@ -26,11 +26,10 @@ class Event
         $media = new MediaModel();
         $session = new Session();
         $errors = [];
-        if(!empty($_POST) && !empty($_FILES)) {
+        if (!empty($_POST) && !empty($_FILES)) {
 
             $data = array_merge($_POST, $_FILES);
             $result = Verificator::checkForm($event->getEventFormRegister(), $data);
-
             if (empty($result)) {
                 $event->setName(htmlspecialchars($_POST["name"]));
                 $event->setDescription(htmlspecialchars($_POST["description"]));
