@@ -35,7 +35,6 @@ class Event extends MysqlBuilder
         $this->id = $id;
     }
 
-
     /**
      * @return null
      */

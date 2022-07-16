@@ -10,7 +10,6 @@ class Forum extends MysqlBuilder
     protected $id = null;   
     protected $title = null;
     protected $description = null;
-    protected $picture = null;
     protected $date = null;
     protected $category_id = null;
     protected $user_id = null;
@@ -72,17 +71,6 @@ class Forum extends MysqlBuilder
     public function setCategoryId($category_id){
         $this->category_id = $category_id;
     }
-
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture($picture){
-        $this->picture = $picture;
-    }
-
 
     public function getUserId(): ?int
     {
@@ -164,13 +152,6 @@ class Forum extends MysqlBuilder
                     "required"=>true,
                     "error"=>"Votre description doit faire entre 2 et 2000 caractères",
                 ],
-                "file"=> [
-                    "type"=> "file",
-                    "label"=> "Image : ",
-                    "id"=>"file",
-                    "class"=>"formRegister",
-                    "accept" => ""
-                ],
                 "categories"=> [
                     "label"=> "Catégorie: ",
                     "type"=> "select",
@@ -221,13 +202,6 @@ class Forum extends MysqlBuilder
                     "text"=>$forum_data[0]['description'],
                     "required"=>true,
                     "error"=>"Votre description doit faire entre 2 et 2000 caractères",
-                ],
-                "editFile"=> [
-                    "type"=> "file",
-                    "label"=> "Image : ",
-                    "id"=>"file",
-                    "class"=>"formRegister",
-                    "accept" => ""
                 ],
                 "categories"=> [
                     "label"=> "Catégorie: ",

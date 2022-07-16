@@ -23,11 +23,12 @@ class User {
     public function index(){
         $users = UserRepository::all();
         $user = new UserModel();
-
+        $bestPays = $user->getBestPays();
         $view = new View("admin/user_index", "back");
         $view->assign("users", $users);
         $Nbusers = count($user->NombreUsers());
         $view->assign("Nbusers", $Nbusers);
+        $view->assign("bestpays", $bestPays);
     }
 
     public function edit($params){

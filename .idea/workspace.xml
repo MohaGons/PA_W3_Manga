@@ -20,16 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_04_2022_14_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_04_2022_14_05__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_38__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_38__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_49__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_04_2022_00_49__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Controller/Admin/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/MysqlBuilder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/MysqlBuilder.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/Template/sidebar_front.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/Template/sidebar_front.tpl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/View/view/admin/user_edit.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/admin/user_edit.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/view/admin/user_index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/admin/user_index.view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +35,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/utilisateurs" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -144,19 +137,5 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="fix bug" />
     <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="172" y="127" width="1648" height="853" key="DiffContextDialog" timestamp="1657970129482">
-      <screen x="72" y="27" width="1848" height="1053" />
-    </state>
-    <state x="172" y="127" width="1648" height="853" key="DiffContextDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1657970129482" />
-    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1657967550172">
-      <screen x="72" y="27" width="1848" height="1053" />
-    </state>
-    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1657967550172" />
-    <state x="777" y="468" width="428" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1657967559615">
-      <screen x="72" y="27" width="1848" height="1053" />
-    </state>
-    <state x="777" y="468" width="428" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1848.1053@72.27.1848.1053" timestamp="1657967559615" />
   </component>
 </project>

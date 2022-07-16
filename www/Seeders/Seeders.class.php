@@ -163,7 +163,6 @@ $forum->deleteTable();
 
 $forum->setTitleForum(htmlspecialchars('Titre du forum'));
 $forum->setDescriptionForum(htmlspecialchars('Description du forum'));
-$forum->setPicture(htmlspecialchars('forum.jpg'));
 $forum->setCategoryId(htmlspecialchars('1'));
 $forum->setUserId(htmlspecialchars('1'));
 $forum->setDate(htmlspecialchars('2019-01-01'));

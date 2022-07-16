@@ -41,7 +41,6 @@ class Forum
                 if (!empty($_POST["description"])) {
                     $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
                 }
-                $forum->setPicture(htmlspecialchars($_FILES["file"]["name"]));
                 $forum->setDate(date('Y-m-d'));
                 if (!empty($_POST["categories"])) {
                     $forum->setCategoryId($_POST["categories"]);
@@ -96,7 +95,6 @@ class Forum
                     if (!empty($_POST["editDescription"])) {
                         $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
                     }
-                    $forum->setPicture(htmlspecialchars($_FILES["editFile"]["name"]));
                     $forum->setDate(date('Y-m-d'));
                     if (!empty($_POST["categories"])) {
                         $forum->setCategoryId($_POST["categories"]);

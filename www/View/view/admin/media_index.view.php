@@ -32,6 +32,7 @@
     <option value="Articles">Article</option>
     <option value="Evenements">Evenement</option>
     <option value="Pages">Page</option>
+    <option value="Mangas">Manga</option>
     </select>
     <input type="submit" name="submit" value="Ajouter">
 </form>
@@ -40,7 +41,8 @@
 <a href="?dossier=Articles" ><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Articles</label></div></a></div>
 <a href="?dossier=Pages" ><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Pages</label></div></a></div>
 <a href="?dossier=Avatars" ><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Avatars</label></div></a></div>
-<a href="?dossier=Evenements"><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Evenements</label></div></a></div></div>
+<a href="?dossier=Evenements"><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Evenements</label></div></a></div>
+<a href="?dossier=Mangas"><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Mangas</label></div></a></div></div>
 <br><br><hr><br>
 
 <?php
@@ -58,16 +60,14 @@ foreach ($medias as $media) {
     if (isset($_GET['dossier'])){
         $dossier = $_GET['dossier'];
         if ($categorie==$dossier){
-            if (isset($_GET['selected'])){
-                echo "<div><a href='./parametre?avatar=$name'><img src='../Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a href='?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i></a></div>";
-            }
-            else{
                 echo "<div><a href='../Style/images/$categorie/$name'><img src='../Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a href='?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i>
-                </a><a href='./parametre?avatar=$name'><i class='fa-solid fa-recycle'></i></a></div>";
-            }
-
+                </a>";
+                if ($dossier=="Avatars"){
+                    echo "<a href='./parametre?avatar=$name'><i class='fa-solid fa-recycle'></i></a></div>";
+                }
         }
-    }
+
+     }
 }
 ?>
     </div>
