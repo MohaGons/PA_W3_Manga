@@ -76,8 +76,7 @@ class Router
                         die("La methode n'existe pas");
                     }
 
-                    die(var_dump($params));
-                    $objectController->$action($params);
+                        $objectController->$action($params);
                 }
             }
         }

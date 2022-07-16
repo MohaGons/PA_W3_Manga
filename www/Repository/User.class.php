@@ -97,7 +97,6 @@ class User {
 
     public static function updateToken($token, $id)
     {
-//        die(var_dump($id));
         $userModel = new UserModel();
         $connectionPDO = new ConnectionPDO();
         $colums = ["token"=> "token"];
@@ -105,11 +104,9 @@ class User {
         foreach ($colums as $key => $value) {
             $update[] = $key . "=:" . $key;
         }
-//        die(var_dump($update));
         $userModel->update($update);
-//        $userModel->where("id", $id, "=");
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
-//        die(var_dump($userModel->getQuery()));
+
         if ($req->execute(["token"=>$token, "id"=>$id])) {
             return true;
         }
