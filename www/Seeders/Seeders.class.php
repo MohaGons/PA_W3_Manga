@@ -247,5 +247,3 @@ $media->setUser(htmlspecialchars('mohagonssaib@gmail.com'));
 $media->setDate(htmlspecialchars('2019-01-01'));
 $media->setCreatedAt(date("Y-m-d H:i:s"));
 $media->save();
-
-die('fhjhfjhfjrhfjr');
