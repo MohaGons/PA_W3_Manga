@@ -79,10 +79,12 @@ class Frontevent
            Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
 
         }
+       $page_data = PageRepository::dataPage("event", Session::get('id'));
        $event_data = EventRepository::findById($event_Id);
        $view = new View("event", "front");
        $view->assign("event_data", $event_data);
        $view->assign("publishableKey", $publishableKey);
+       $view->assign("page_data", $page_data);
        if(isset($messages)){
             $view->assign("messages", $messages);
         }

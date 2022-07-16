@@ -25,9 +25,10 @@ class Frontforum
     {   
         $forum_Id = $id[1];
 
+        $page_data = PageRepository::dataPage("forum", Session::get('id'));
         $forum_data = ForumRepository::findById($forum_Id);
         $view = new View("forum", "front");
-
+        $view->assign("page_data", $page_data);
         $view->assign("forum_data", $forum_data);
     }
 
