@@ -50,7 +50,7 @@
   controller: user
   action : parametre
   security: [Admin,Editeur,Abonne]
-  params: null
+  params: avatar
 
 /deletecompte:
    controller: user

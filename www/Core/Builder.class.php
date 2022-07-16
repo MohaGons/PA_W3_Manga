@@ -119,7 +119,13 @@ class Builder
                             ></div><br>";
                     break;
                 default:
-//                    die(var_dump("ce champ existe pas mec"));
+                    $html = "<input name='".$name."'
+                            class='".$configInput["class"]."'
+                            id='".$configInput["id"]."'
+                            placeholder='".$configInput["placeholder"]."'
+                            type='".$configInput["type"]."'
+                           
+                            ><br>";
                     break;
             }
 

@@ -33,7 +33,7 @@ echo "<a href='/Style/images/Avatars/$img'><img src='/Style/images/Avatars/$img'
     <input type="file" name="file">
     <input type="submit" value="Changer Avatar" name="file">
 </form><br>
-<form action="/media?dossier=Avatars&action=update&selected" method="POST" enctype="multipart/form-data">
+<form action="/admin/media?dossier=Avatars" method="POST" enctype="multipart/form-data">
     <input type="submit" value="Choisir avatar dans les medias" name="upload_media">
 </form>
 

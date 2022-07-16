@@ -50,7 +50,7 @@ if (!empty($messages)) {
     }
 }
 foreach ($medias as $media) {
-    $name = $media["nom"];
+    $name = $media["name"];
     $categorie = $media["categorie"];
     ?>
     <div class="images">
@@ -62,7 +62,8 @@ foreach ($medias as $media) {
                 echo "<div><a href='./parametre?avatar=$name'><img src='../Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a href='?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i></a></div>";
             }
             else{
-                echo "<div><a href='../Style/images/$categorie/$name'><img src='../Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a href='?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i></a></div>";
+                echo "<div><a href='../Style/images/$categorie/$name'><img src='../Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a href='?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i>
+                </a><a href='./parametre?avatar=$name'><i class='fa-solid fa-recycle'></i></a></div>";
             }
 
         }

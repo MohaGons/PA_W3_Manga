@@ -133,7 +133,7 @@ class User {
             }
         }
         if (isset($_POST['file'])) {
-            $message = $media->setMedia("Avatars", $_SESSION['email'], "update");
+            $message = $media->setMedia("Avatars", $email, "updateavatar");
             $errors = $message;
             if ($message == NULL) {
                 header('Location: ./parametre');
@@ -141,7 +141,7 @@ class User {
         }
         if (isset($_GET['avatar'])) {
             $nom = htmlspecialchars($_GET['avatar']);
-            $media->updateAvatar($nom, $_SESSION['email']);
+            $media->updateAvatar($nom, $session->get('email'));
             $errors[] = "Votre Avatar est mise a jour avec succes";
             header('Location: ./parametre');
         }
@@ -164,8 +164,9 @@ class User {
     public function deletecompte()
     {
         $user = new UserModel;
+        $session = new Session();
         $email = $_GET['email'];
-        if ($email == $_SESSION['email']) {
+        if ($email == $session->get('email')) {
             $user->deletecompte($email);
             if ($user == 1) {
                 echo "<script>alert('Votre compte a bien été supprimer')</script>";
