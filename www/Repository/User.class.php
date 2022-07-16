@@ -116,5 +116,18 @@ class User {
 
     }
 
+    public function delete($id)
+    {
+        $userModel = new UserModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $userModel->delete();
+        $userModel->where("id", $id, "=");
+        $req = $connectionPDO->pdo->prepare($userModel->getQuery());
+        $req->execute();
+
+        return header("Location: /admin/utilisateurs");
+    }
+
 
 }

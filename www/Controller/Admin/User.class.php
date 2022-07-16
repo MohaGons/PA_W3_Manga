@@ -23,31 +23,11 @@ class User {
     public function index(){
         $users = UserRepository::all();
         $user = new UserModel();
-        /*$messages = [];
-        if (isset($_GET['action'])){
-            $action = $_GET['action'];
-            $id = $_GET['id'];
-            if($action=='delete'){
-                $res = $user->deleteuser($id);
-                if($res==1){
-                    $messages[]= "l'utilisateur a été bien supprimé !";
-                }
-                else{
-                    $messages[]= "un erreur est survenue, reesayer plus tard";
-                }
-            }
-        }
-*/
-//        die("testADMIN");
-        $view = new View("admin/user_index", "back");
-//        die("testADMIN");
-        $view->assign("users", $users);
 
+        $view = new View("admin/user_index", "back");
+        $view->assign("users", $users);
         $Nbusers = count($user->NombreUsers());
-        //$Nbpages = ceil($Nbusers / $pagination);
         $view->assign("Nbusers", $Nbusers);
-       // $view->assign("Nbpages", $Nbpages);
-        //$view->assign("messages", $messages);
     }
 
     public function edit($params){
@@ -141,20 +121,13 @@ class User {
         }
     }
 
-    public function deletecompte()
+    public function delete($id)
     {
-        $user = new UserModel;
-        $session = new Session();
-        $email = $_GET['email'];
-        if ($email == $session->get('email')) {
-            $user->deletecompte($email);
-            if ($user == 1) {
-                echo "<script>alert('Votre compte a bien été supprimer')</script>";
-            } else {
-                echo "<script>alert('Reessayer plus tard')</script>";
-            }
-        } else {
-            header('location:' . LOGIN_VIEW_ROUTE);
+        $user_Id = $id[0];
+
+        if (!empty($user_Id) && is_numeric($user_Id))
+        {
+            $manga_delete = UserRepository::delete($user_Id);
         }
     }
 

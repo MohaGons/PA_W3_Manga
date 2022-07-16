@@ -50,9 +50,8 @@
                     <td><?= $user['role'] ?></td>
                     <td><?= $user['createdAt'] ?></td>
 
-                    <td><a href="?action=delete&id=<?= $user['id'] ?>"><i class="fa-solid fa-trash"></i></a></td>
+                    <td><a href="utilisateurs/delete/<?= $user['id'] ?>"><i class="fa-solid fa-trash"></i></a></td>
                     <td><a href="utilisateurs/edit/<?= $user['id'] ?>"><i class="fa-solid fa-pen"></i></a></td>
-                    <td><a href="?action=contact&id=<?= $user['id'] ?>"><i class="fa-solid fa-paper-plane"></i></a></td>
                 </tr>
                 <?php
             }
