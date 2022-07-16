@@ -30,18 +30,17 @@
             <div class="container">
               <div class="row">
                 <?php
-                foreach ($event_data as $key => $value) { ?>
+                foreach ($get_category_forum as $key => $value) { ?>
                 <div class="col-md-4">
                   <div class="card-wrapper">
                     <div class="thumbnail-container">
-                      <a href="event/detail/<?= $value["id"] ?>">
+                      <a href="forum/detail/<?= $value["id"] ?>">
                         <img src="https://placekitten.com/g/1000/300" />
                       </a>
                     </div>
                     <div class="card-details-container">
                       <div class="card-title">
-                        <h1><?= $value["name"] ?></h1>
-                        <h2><?= $value["price"] ?>€</h2>
+                        <h1><?= $value["title"] ?></h1>
                       </div>
                       <div class="card-description">
                         <span class="price">
@@ -52,32 +51,14 @@
                                 echo html_entity_decode($value["description"]);
                             }
                         ?>
-                        <br><br>
-                        <!--
-                        <form action="" method="post">
-                            <script
-                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="<?php echo $publishableKey?>"
-                                    data-amount="<?= $value["price"]*100 ?>"
-                                    data-name="Manga paiement"
-                                    data-description="Pairment Evenement Manga"
-                                    data-image="/Style/images/Gambling-school.png"
-                                    data-currency="eur"
-                                    data-email=""
-                            >
-                            </script>
-                            <input type="text" name="prix" value="<?= $value["price"] ?>" hidden>
-                        </form>
-                        -->
                         </span>
                       </div>
                       <div class="card-details-bottom">
                         <div class="card-options">
-                            <p>
                             <?= date("F j, Y",strtotime($value["date"])) ?>
-                        </p>
                         </div>
                         <div class="card-author">
+                          <strong><?= $value["user_firstname"]?> <?= $value["user_lastname"]?></strong>
                         </div>
                       </div>
                     </div>
