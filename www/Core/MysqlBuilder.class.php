@@ -151,7 +151,7 @@ abstract class MysqlBuilder implements QueryBuilder
     public function deleteTable(): void
     {
         $this->reset();
-        $this->query->base = "DELETE FROM " . $this->table . ";";
+        $this->query->base = "TRUNCATE TABLE " . $this->table . ";";
 
 //        die($this->getQuery());
         $queryPrepared = $this->pdo->prepare($this->getQuery());
