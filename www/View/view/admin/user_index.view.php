@@ -1,22 +1,25 @@
+<style>
+    .progressbar-wrapper {
+        background-color: #dfe6e9;
+        color: white;
+        border-radius: 15px;
+        width: 100%;
+    }
 
+    .progressbar {
+        background-color: black;
+        color: white;
+        padding: 0.3rem;
+        text-align: right;
+        font-size: 20px;
+        border-radius: 15px;
+    }
+</style>
+
+<div class="container">
 <h1><i class="fa-solid fa-user"></i>Utilisateurs</h1>
 <h2>Nombre d'utilisateurs :  <?= $Nbusers ?></h2>
 
-<!--<div style="display: flex; justify-content: space-between">-->
-<!--    <div>-->
-<!--        <label>Trier par date </label><a href="?action=date"><i class="fa fa-sort-desc fa-2x" aria-hidden="true"></i></a>-->
-<!--        <label>Trier par Nom </label><a href="?action=nom"><i class="fa fa-sort-desc fa-2x" aria-hidden="true"></i></a>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <form>-->
-<!--            <div>-->
-<!---->
-<!--                <input type="search" name="user" class="searchinput" placeholder="Rechercher un utilisateur…">-->
-<!--                <button><i class="fa fa-search" aria-hidden="true"></i></button>-->
-<!--            </div>-->
-<!--        </form>-->
-<!--    </div>-->
-<!--</div>-->
 <hr><br>
 <?php if (!empty($messages)) {
     foreach ($messages as $message) {
@@ -60,6 +63,21 @@
         </tbody>
 
     </table>
+    </div>
+    <br><br>
+    <div class="container">
+    <h1>Les 5 pays les plus presenté</h1>
+    <?php
+    foreach($bestpays as $pays){
+        ?>
+        <p><?= $pays['pays'] ?> - <?= $pays['COUNT(*)'] ?></p>
+        <div class="progressbar-wrapper">
+            <div style="width: <?=($pays['COUNT(*)']/$Nbusers)*100?>%" class="progressbar"><?=round(($pays['COUNT(*)']/$Nbusers)*100) ?>%</div>
+        </div>
+        <?php
+    }
+    ?>
+    </div>
 
 
 <script type="text/javascript" src="../Style/src/js/admin/user_idex.js"></script>
