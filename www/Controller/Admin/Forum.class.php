@@ -32,7 +32,7 @@ class Forum
 
         if (!empty($_POST)) {
 
-            $result = Verificator::checkGeneralForm($forum->getForumForm($categorie_data), $_POST);
+            $result = Verificator::checkForm($forum->getForumForm($categorie_data), $_POST);
 
             if (empty($result)) {
                 if (!empty($_POST["title"])) {
@@ -41,11 +41,14 @@ class Forum
                 if (!empty($_POST["description"])) {
                     $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
                 }
+                $forum->setPhoto(htmlspecialchars($_FILES["file"]["name"]));
                 $forum->setDate(date('Y-m-d'));
                 if (!empty($_POST["categories"])) {
                     $forum->setCategoryId($_POST["categories"]);
                 }
                 $forum->setUserId(Session::get('id'));
+                $forum->setCreatedAt(date("Y-m-d H:i:s"));
+                $forum->setUpdatedAt(date("Y-m-d H:i:s"));
                 $forum->save();
                 echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                 header("Location: /admin/forum");
@@ -83,7 +86,7 @@ class Forum
 
             if (!empty($_POST)) {
 
-                $result = Verificator::checkFormRegister($forum->editParamForum($forum_data, $categorie_data), $_POST);
+                $result = Verificator::checkForm($forum->editParamForum($forum_data, $categorie_data), $_POST);
 
                 if (empty($result)) {
                     $forum->setId($id);
@@ -93,11 +96,14 @@ class Forum
                     if (!empty($_POST["editDescription"])) {
                         $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
                     }
+                    $forum->setPhoto(htmlspecialchars($_FILES["editFile"]["name"]));
                     $forum->setDate(date('Y-m-d'));
                     if (!empty($_POST["categories"])) {
                         $forum->setCategoryId($_POST["categories"]);
                     }
                     $forum->setUserId(Session::get('id'));
+                    $forum->setCreatedAt($forum_data[0]["createdAt"]);
+                    $forum->setUpdatedAt(date("Y-m-d H:i:s"));
                     $forum->save();
                     echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                     header("Location: /admin/forum");

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Session as Session;
 use App\Model\User as UserModel;
 use App\Model\Role as RoleModel;
 use App\Core\View;
@@ -22,7 +23,35 @@ class Category
         $view->assign("categorie_data", $categorie_data);
     }
 
-//    public function create()
+    public function create()
+    {
+        $category = new CategoryModel();
+        $errors = [];
+
+        if (!empty($_POST)) {
+
+            $result = Verificator::checkForm($category->getCategoryForm(), $_POST);
+
+            if (empty($result)) {
+                if (!empty($_POST["name"])) {
+                    $category->setNameCategory(htmlspecialchars($_POST["name"]));
+                }
+                $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
+                $category->setCreatedAt(date("Y-m-d H:i:s"));
+                $category->setUpdatedAt(date("Y-m-d H:i:s"));
+                $category->setUserId(Session::get('id'));
+                $category->save();
+                echo "<script>alert('Votre catégorie a bien été enregistrée')</script>";
+                header("Location: /admin/category");
+            } else {
+                $errors = $result;
+            }
+        }
+
+        $view = new View("admin/category_create", "back");
+        $view->assign("category", $category);
+        $view->assign("errors", $errors);
+    }
 
     public function edit($params)
     {
@@ -37,12 +66,16 @@ class Category
 
             if (!empty($_POST)) {
 
-                $result = Verificator::checkFormParam($category->editCategoryForm($categorie_data), $_POST);
-//                die("yugijnklmù");
+                $result = Verificator::checkForm($category->editCategoryForm($categorie_data), $_POST);
                 if (empty($result)) {
                     $category->setId($id);
-                    $category->setNameCategory(htmlspecialchars($_POST["editName"]));
+                    if (!empty($_POST["editName"])) {
+                        $category->setNameCategory(htmlspecialchars($_POST["editName"]));
+                    }
                     $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
+                    $category->setCreatedAt($categorie_data[0]["createdAt"]);
+                    $category->setUpdatedAt(date("Y-m-d H:i:s"));
+                    $category->setUserId(Session::get('id'));
                     $category->save();
                     header('Location: /admin/category');
                 } else {
@@ -60,24 +93,15 @@ class Category
 
     public function delete($params)
     {
-//        die("crttyvuijokp");
         $id = $params[0];
 
         if (!empty($id) && is_numeric($id))
         {
-
             $categorie_delete = CategoryRepository::delete($id);
 
             if ($categorie_delete == true) {
                 header('Location: /admin/category');
             }
-
-//            die(var_dump($categorie_delete));
-
-
         }
-
-
     }
-
 }

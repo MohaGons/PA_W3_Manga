@@ -7,7 +7,7 @@
             <th>Nom</th>
             <th>Description</th>
             <th>Contrôles
-                <button class="control--add" id="add-button">Ajouter</button>
+                <a href="category/create"><button class="control--add">Ajouter</button></a>
             </th>
             </thead>
             <tbody>
