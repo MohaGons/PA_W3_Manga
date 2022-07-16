@@ -536,20 +536,20 @@ class User extends MysqlBuilder
             ],
             "inputs"=>[
                 "email"=>[
-                    "placeholder"=>"Votre email ...",
+                    "placeholder"=>"",
                     "type"=>"email",
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
-                    "label"=>"Email : ",
+                    "label"=>"Email",
                     "error"=>"Email incorrect",
                     "required"=>true,
                 ],
                 "password"=>[
-                    "placeholder"=>"Votre mot de passe ...",
+                    "placeholder"=>"",
                     "type"=>"password",
                     "id"=>"pwdRegister",
                     "class"=>"formRegister",
-                    "label"=>"Password : ",
+                    "label"=>"Password",
                     "required"=>true,
                 ],
             ]

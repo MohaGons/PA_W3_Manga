@@ -10,6 +10,7 @@ use MongoDB\BSON\Decimal128;
 use App\Repository\Forum as ForumRepository;
 use App\Repository\Event as EventRepository;
 use App\Repository\User as UserRepository;
+use App\Repository\Page as PageRepository;
 use App\Repository\ForumCommentaire as ForumCommentaireRepository;
 
 class Main
@@ -19,6 +20,7 @@ class Main
     {
         $forums_data = ForumRepository::all();
         $event_data = EventRepository::all();
+        $page_data = PageRepository::all();
         $users = UserRepository::all();
         $recent_event = EventRepository::getRecentEvent();
         $get_recent_category_forum = ForumRepository::getRecentCategoryForum();
@@ -29,6 +31,7 @@ class Main
         $view->assign("event_data", $event_data);
         $view->assign("users", $users);
         $view->assign("recent_event", $recent_event);
+        $view->assign("page_data", $page_data);
         $view->assign("get_recent_category_forum", $get_recent_category_forum);
         $view->assign("forum_commentaire", $forum_commentaire);
     }
