@@ -93,11 +93,15 @@ class Media extends MysqlBuilder{
                 else{
                     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
 
-                            $q = "INSERT INTO mnga_media (nom,categorie,user) VALUES (?,?,?)";
+                            $q = "INSERT INTO mnga_media (name,categorie,user,createdAt) VALUES (?,?,?,?)";
                             $req = $this->pdo->prepare($q);
-                            $req->execute([$_FILES["file"]["name"],$categorie,$email]);
+                            $req->execute([$_FILES["file"]["name"],$categorie,$email,date("Y-m-d H:i:s")]);
                             $messages[] = "Telechargement reussi";
-
+                            if ($action=="updateavatar"){
+                                $q = "UPDATE mnga_user SET avatar=? WHERE email=?";
+                                $req = $this->pdo->prepare($q);
+                                $req->execute([$_FILES["file"]["name"],$email]);
+                            }
 
                     } else {
                         $messages[] = "Telechargement failed, ressayer plus tard";
@@ -128,7 +132,7 @@ class Media extends MysqlBuilder{
         {
             unlink($target_dir);
         }
-        $q = "DELETE FROM mnga_media WHERE nom = :nom AND categorie = :categorie";
+        $q = "DELETE FROM mnga_media WHERE name = :nom AND categorie = :categorie";
         $req = $this->pdo->prepare($q);
         $req->execute(['nom' => $name, 'categorie' => $categorie ]);
     }

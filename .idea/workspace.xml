@@ -21,18 +21,15 @@
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/MysqlBuilder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/MysqlBuilder.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/QueryBuilder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/QueryBuilder.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Migrations/Migration.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Migrations/Migration.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/Category.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Category.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controller/Admin/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/Event.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controller/Admin/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/User.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Core/Builder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Builder.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Model/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Event.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/Forum.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Forum.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/ForumCommentaire.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/ForumCommentaire.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/Manga.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Manga.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Model/Media.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Media.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Model/Role.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Role.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/Model/User.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/User.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Seeders/Seeders.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Seeders/Seeders.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/view/admin/media_index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/admin/media_index.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/view/parametre.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/parametre.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

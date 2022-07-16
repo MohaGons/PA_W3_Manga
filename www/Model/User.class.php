@@ -575,8 +575,8 @@ class User extends MysqlBuilder
                     "class"=>"formparam",
                     "value"=>$data['firstname'],
                     "required"=>false,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>" Votre prénom doit faire entre 2 et 25 caractères",
                 ],
                 "lastname"=>[
@@ -587,8 +587,8 @@ class User extends MysqlBuilder
                     "label"=>"",
                     "value"=>$data['lastname'],
                     "required"=>false,
-                    "min"=>2,
-                    "max"=>100,
+                    "minlength"=>2,
+                    "maxlength"=>100,
                     "error"=>" Votre nom doit faire entre 2 et 100 caractères",
                 ],
                  "email"=>[
@@ -599,8 +599,8 @@ class User extends MysqlBuilder
                      "label"=>"",
                     "value"=>$data['email'],
                     "required"=>false,
-                    "min"=>2,
-                    "max"=>100,
+                    "minlength"=>2,
+                    "maxlength"=>100,
                     "error"=>" Votre email doit faire entre 2 et 100 caractères",
                 ]
             ]
@@ -629,8 +629,8 @@ class User extends MysqlBuilder
                     "class"=>"formRegister",
                     "value"=>"",
                     "required"=>false,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Le prénom doit faire entre 2 et 25 caractères",
                 ],
                 "lastname"=>[
@@ -640,8 +640,8 @@ class User extends MysqlBuilder
                     "class"=>"formRegister",
                     "value"=>"",
                     "required"=>false,
-                    "min"=>2,
-                    "max"=>100,
+                    "minlength"=>2,
+                    "maxlength"=>100,
                     "error"=>"Le nom doit faire entre 2 et 100 caractères",
                 ],
                 "email"=>[
