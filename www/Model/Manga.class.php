@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
+use App\Core\Session as Session;
 
 class Manga extends MysqlBuilder
 {
@@ -224,6 +225,10 @@ class Manga extends MysqlBuilder
                 "enctype"=>"multipart/form-data",
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "type"=>[
                     "type"=>"select",
                     "label"=>"Type: ",
@@ -382,6 +387,10 @@ class Manga extends MysqlBuilder
                 "class"=>"formManga",
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "id"=>[
                     "type"=>"hidden",
                     "id"=>"idManga",

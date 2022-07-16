@@ -261,6 +261,13 @@ class Verificator
         
         foreach ($config["inputs"] as $name=>$input)
         {
+
+            $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+
+            if (!$token || $token !== Session::get('token')) {
+                $errors[]= "Tentative CSRF !";
+            }
+
             if (!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
                 $errors[]= $name ." ne peut pas être vide";
             }
