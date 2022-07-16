@@ -27,7 +27,7 @@ class Page
 
         if (!empty($_POST)) {
 
-            $result = Verificator::checkGeneralForm($page->getPageForm(), $_POST);
+            $result = Verificator::checkForm($page->getPageForm(), $_POST);
 
             if (empty($result)) {
                 if (!empty($_POST["title"])) {
@@ -76,7 +76,7 @@ class Page
 
             if (!empty($_POST)) {
 
-                $result = Verificator::checkFormRegister($page->editParamPage($page_data), $_POST);
+                $result = Verificator::checkForm($page->editParamPage($page_data), $_POST);
 
                 if (empty($result)) {
                     $page->setId($id);
@@ -87,7 +87,7 @@ class Page
                         $page->setDescriptionPage(htmlspecialchars($_POST["description"]));
                     }
                     if (!empty($_POST["page"])) {
-                        $page->setSpecificPage($_POST["page"]);
+                        $page->setSpecificPage($_POST["page"], $_POST["title"]);
                     }
                     $page->setUserId(Session::get('id'));
                     $page->save();
