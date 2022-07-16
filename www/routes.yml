@@ -276,28 +276,3 @@ event/detail/:
   action: Template
   security: [Admin,Editeur,Abonne]
   params: null
-
-
-/evenement: 
-  controller: frontevent
-  action: FrontEvent
-  security: All
-  params: null
-
-/manga: 
-  controller: frontmanga
-  action: FrontManga
-  security: All
-  params: null
-
-/forium: 
-  controller: frontforum
-  action: FrontForum
-  security: All
-  params: null
-
-/evenementee: 
-  controller: frontevent
-  action: FrontEvent
-  security: All
-  params: null
