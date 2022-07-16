@@ -265,11 +265,11 @@ class Verificator
                 $errors[]= $name ." ne peut pas être vide";
             }
 
-            if (!empty($input["min"]) && strlen($data[$name]) < $input["min"]){
+            if (!empty($input["minlenght"]) && strlen($data[$name]) < $input["minlenght"]){
                 $errors[]= $input["error"];
             }
 
-            if (!empty($input["max"]) && strlen($data[$name]) > $input["max"]){
+            if (!empty($input["maxlenght"]) && strlen($data[$name]) > $input["maxlenght"]){
                 $errors[]= $input["error"];
             }
         
@@ -278,19 +278,10 @@ class Verificator
             }
 
             if ($input["type"] == "text") {
-                if (!empty($input["minlength"]) && (strlen($data[$name]) < $input["minlength"])) {
+                if (!empty($input["minlenght"]) && (strlen($data[$name]) < $input["minlenght"])) {
                     $errors[]=$input["error"];
                 }
-                if (!empty($input["maxlength"]) && (strlen($data[$name]) > $input["maxlength"])) {
-                    $errors[]=$input["error"];
-                }
-            }
-
-            if ($input["type"] == "textarea") {
-                if (!empty($input["minlength"]) && (strlen($data[$name]) < $input["minlength"])) {
-                    $errors[]=$input["error"];
-                }
-                if (!empty($input["maxlength"]) && (strlen($data[$name]) > $input["maxlength"])) {
+                if (!empty($input["maxlenght"]) && (strlen($data[$name]) > $input["maxlenght"])) {
                     $errors[]=$input["error"];
                 }
             }

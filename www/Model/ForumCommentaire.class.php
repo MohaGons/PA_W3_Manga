@@ -11,7 +11,6 @@ class ForumCommentaire extends MysqlBuilder
     protected $id_forum = null;
     protected $id_user = null;
     protected $commentaire = null;
-    protected $date_creation = null;
     protected $isValid = 0;
     protected $createdAt = null;
     protected $updatedAt = null;
@@ -61,16 +60,6 @@ class ForumCommentaire extends MysqlBuilder
         $this->commentaire = ucwords(strtolower(trim($commentaire)));
     }
 
-    public function getDateCreation(): ?string
-    {
-        return $this->date_creation;
-    }
-
-    public function setDateCreation(?string $date_creation): void
-    {
-        $this->date_creation = ucwords(strtolower(trim($date_creation)));
-    }
-
     public function getIsValid(): ?int
     {
         return $this->isValid;
@@ -113,7 +102,7 @@ class ForumCommentaire extends MysqlBuilder
         $this->updatedAt = $updatedAt;
     }
 
-    public function getCommentaireForm(): array
+    public function getCreateCommentaireForm(): array
     {
         return [
             "config"=>[
@@ -125,37 +114,19 @@ class ForumCommentaire extends MysqlBuilder
             ],
             "inputs"=>[
                 "commentaire"=>[
+                    "label"=>"Commentaire",
                     "placeholder"=>"Commentaire",
                     "type"=>"textarea",
                     "id"=>"commentaire",
                     "class"=>"formForum",
-                    "value"=>"",
+                    "rows"=>"5",
+                    "cols"=>"50",
+                    "text"=>null,
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>100,
-                    "error"=>"Votre titre doit faire entre 2 et 100 caractères",
+                    "error"=>"Votre commentaire doit faire entre 2 et 100 caractères",
                 ],
             ]
         ];
-    }
-
-    public function getAllCommentairesNoValid() {
-        $query = $this->pdo->prepare("SELECT * FROM mnga_forum_commentaire WHERE isValid= 0");
-        $query->execute();
-        $forum_commentaire_data = $query->fetchAll();
-        return $forum_commentaire_data;
-    }
-
-    public function validCommentaire($id) {
-        $query = $this->pdo->prepare("UPDATE mnga_forum_commentaire SET isValid=1 WHERE id=?");
-        $query->execute([$id]);
-        $forum_commentaire_data = $query->fetchAll();
-        return $forum_commentaire_data;
-    }
-
-    public function deleteCommentaire($id) {
-        $query = $this->pdo->prepare("DELETE FROM mnga_forum_commentaire WHERE id=?");
-        $query->execute([$id]);
     }
 
 }

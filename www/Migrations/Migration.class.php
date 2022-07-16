@@ -32,6 +32,7 @@ use App\Model\Manga;
 use App\Model\Event;
 use App\Model\ForumCommentaire;
 use App\Model\Media;
+use App\Model\Page;
 
 //MIGRATION CREATE TABLE USER
 $user = new User();
@@ -164,7 +165,6 @@ $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["id_forum"] = "int(11) NOT NULL,";
 $colums["id_user"] = "int(11) NOT NULL,";
 $colums["commentaire"] = "text,";
-$colums["date_creation"] = "timestamp NULL DEFAULT NULL,";
 $colums["isValid"] = "tinyint(1) DEFAULT '0',";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
 $colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
@@ -187,3 +187,16 @@ $colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
 $media->createTable($colums);
 
+//MIGRATION CREATE TABLE PAGE
+
+$page = new Page();
+
+$colums = $page->getColums();
+
+$colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["title"] = "varchar(100) NOT NULL,";
+$colums["description"] = "text,";
+$colums["page"] = "varchar(50) NOT NULL,";
+$colums["user_id"] = "int(11) NOT NULL";
+
+$page->createTable($colums);
