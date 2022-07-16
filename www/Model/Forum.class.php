@@ -141,6 +141,7 @@ class Forum extends MysqlBuilder
                     "value"=> Session::get('token'),
                 ],
                 "title"=>[
+                    "label"=>"Titre: ",
                     "placeholder"=>"Titre",
                     "type"=>"text",
                     "label"=>"Titre: ",
@@ -162,6 +163,13 @@ class Forum extends MysqlBuilder
                     "text"=>"",
                     "required"=>true,
                     "error"=>"Votre description doit faire entre 2 et 2000 caractères",
+                ],
+                "file"=> [
+                    "type"=> "file",
+                    "label"=> "Image : ",
+                    "id"=>"file",
+                    "class"=>"formRegister",
+                    "accept" => ""
                 ],
                 "categories"=> [
                     "label"=> "Catégorie: ",
@@ -185,7 +193,12 @@ class Forum extends MysqlBuilder
                 "submit"=>"Valider"
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "editTitle"=>[
+                    "label"=>"Titre: ",
                     "placeholder"=>"Titre",
                     "type"=>"text",
                     "label"=>"Titre: ",
@@ -207,6 +220,13 @@ class Forum extends MysqlBuilder
                     "text"=>$forum_data[0]['description'],
                     "required"=>true,
                     "error"=>"Votre description doit faire entre 2 et 2000 caractères",
+                ],
+                "editFile"=> [
+                    "type"=> "file",
+                    "label"=> "Image : ",
+                    "id"=>"file",
+                    "class"=>"formRegister",
+                    "accept" => ""
                 ],
                 "categories"=> [
                     "label"=> "Catégorie: ",

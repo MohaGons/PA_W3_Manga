@@ -18,8 +18,8 @@ class Builder
                      id='" . $configInput["id"] . "'>";
                     foreach ($configInput["option"] as $option => $value) {
                         $html .= "<option value='" . $option . "'";
-                        if ($option === $configInput["defaultValue"]) {
-                            $html .= " selected";
+                        if ($option == $configInput["defaultValue"]) {
+                            $html .= " selected='selected'";
                         }
                         $html .= ">$value</option><br>";
                     }
