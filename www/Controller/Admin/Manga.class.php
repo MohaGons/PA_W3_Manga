@@ -47,6 +47,7 @@ class Manga
                 $manga->setDiffusionManga(htmlspecialchars($_POST["diffusion"]));
                 $manga->setNbSeasonsManga(htmlspecialchars($_POST["nbSeasons"]));
                 $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
+                $manga->setCreatedAt(date("Y-m-d H:i:s"));
             }
 
             $manga->save();

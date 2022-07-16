@@ -250,3 +250,9 @@ event/detail/:
   action: detail
   security: All
   params: id
+
+/createcommentaire/:
+  controller: frontforum
+  action: create
+  security: [Admin,Editeur,Abonne]
+  params: id

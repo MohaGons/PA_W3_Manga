@@ -34,7 +34,7 @@ class ForumCommentaire
             $forum_commentaire->setForumId($forum_commentaire_data[0]["id_forum"]);
             $forum_commentaire->setUserId($forum_commentaire_data[0]["id_user"]);
             $forum_commentaire->setCommentaire($forum_commentaire_data[0]["commentaire"]);
-            $forum_commentaire->setDateCreation($forum_commentaire_data[0]["date_creation"]);
+            $forum_commentaire->setCreatedAt(date("Y-m-d H:i:s"));
             $forum_commentaire->setIsValid(1);
             $forum_commentaire->save();
 
@@ -55,4 +55,5 @@ class ForumCommentaire
             header("Location: /admin/forumcommentaire");
         }
     }
+
 }

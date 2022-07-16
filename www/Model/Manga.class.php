@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
+use App\Core\Session as Session;
 
 class Manga extends MysqlBuilder
 {
@@ -224,6 +225,10 @@ class Manga extends MysqlBuilder
                 "enctype"=>"multipart/form-data",
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "type"=>[
                     "type"=>"select",
                     "label"=>"Type: ",
@@ -242,8 +247,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "description"=>[
@@ -274,8 +279,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "status"=>[
@@ -296,8 +301,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "nbTomes"=>[
@@ -335,8 +340,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "nbSeasons"=>[
@@ -356,8 +361,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "file"=>[
@@ -382,6 +387,10 @@ class Manga extends MysqlBuilder
                 "class"=>"formManga",
             ],
             "inputs"=>[
+                "token"=> [
+                    "type"=> "hidden",
+                    "value"=> Session::get('token'),
+                ],
                 "id"=>[
                     "type"=>"hidden",
                     "id"=>"idManga",
@@ -406,8 +415,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>$manga[0]["title"],
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "description"=>[
@@ -438,8 +447,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>$manga[0]["author"],
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "status"=>[
@@ -460,8 +469,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>$manga[0]["category"],
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "nbTomes"=>[
@@ -499,8 +508,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>$manga[0]["diffusion"],
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "nbSeasons"=>[
@@ -520,8 +529,8 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>$manga[0]["production_studio"],
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "file"=>[
