@@ -125,7 +125,7 @@ abstract class MysqlBuilder implements QueryBuilder
 
 
         if (in_array($this->table, $tables)) {
-            $this->deleteTable();
+            $this->dropTable();
             $this->createTable($columns);
         } else {
             $this->reset();
@@ -139,11 +139,21 @@ abstract class MysqlBuilder implements QueryBuilder
         }
     }
 
-    public function deleteTable(): void
+    public function dropTable(): void
     {
         $this->reset();
         $this->query->base = "DROP TABLE " . $this->table . ";";
 
+        $queryPrepared = $this->pdo->prepare($this->getQuery());
+        $queryPrepared->execute();
+    }
+
+    public function deleteTable(): void
+    {
+        $this->reset();
+        $this->query->base = "DELETE FROM " . $this->table . ";";
+
+//        die($this->getQuery());
         $queryPrepared = $this->pdo->prepare($this->getQuery());
         $queryPrepared->execute();
     }

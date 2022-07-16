@@ -10,6 +10,8 @@ class Media extends MysqlBuilder{
     protected $categorie = null;
     protected $user = null;
     protected $date = null;
+    protected $createdAt = null;
+    protected $updatedAt = null;
 
     public function __construct()
     {
@@ -140,6 +142,38 @@ class Media extends MysqlBuilder{
         $q = "UPDATE mnga_event SET photo=? WHERE name=?";
         $req = $this->pdo->prepare($q);
         $req->execute([$name,$nameE]);
+    }
+
+    /**
+     * @return null
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param null $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param null $updateAt
+     */
+    public function setUpdatedAt($updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
 }
