@@ -102,7 +102,13 @@
                 <p class="box-content-subheader"><?= $value["price"] ?>€</p>
             </div>
             <div class="box-progress-wrapper">
-                <p><?= $value["description"] ?></p>
+                <p><?php
+                    if (strlen($value["description"]) >= 80) {
+                        echo html_entity_decode(substr($value["description"], 0, 80) . "...");
+                    } else {
+                        echo html_entity_decode($value["description"]);
+                    }
+                    ?></p>
             </div>
             <div class="project-box-footer">
                 <div class="participants">

@@ -205,6 +205,7 @@ class Event extends MysqlBuilder
                 "date" => [
                     "placeholder" => "...",
                     "type" => "date",
+                    "label"=>"date : ",
                     "id" => "dateRegister",
                     "class" => "formEvent",
                     "required" => true,
@@ -282,6 +283,7 @@ class Event extends MysqlBuilder
                     "id" => "dateRegister",
                     "class" => "formEvent",
                     "required" => true,
+                    "label" => "date : ",
                     "value" => $event_data[0]['date'],
                     "error" => "Mettre une date correct",
                 ],

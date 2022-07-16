@@ -258,7 +258,7 @@ class Verificator
         if( count($config["inputs"]) != count($data)){
             die("Tentative de hack");
         }
-        
+
         foreach ($config["inputs"] as $name=>$input)
         {
 
