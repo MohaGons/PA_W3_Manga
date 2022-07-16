@@ -32,6 +32,7 @@
     <option value="Articles">Article</option>
     <option value="Evenements">Evenement</option>
     <option value="Pages">Page</option>
+    <option value="Mangas">Manga</option>
     </select>
     <input type="submit" name="submit" value="Ajouter">
 </form>
@@ -40,7 +41,8 @@
 <a href="?dossier=Articles" ><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Articles</label></div></a></div>
 <a href="?dossier=Pages" ><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Pages</label></div></a></div>
 <a href="?dossier=Avatars" ><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Avatars</label></div></a></div>
-<a href="?dossier=Evenements"><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Evenements</label></div></a></div></div>
+<a href="?dossier=Evenements"><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Evenements</label></div></a></div>
+<a href="?dossier=Mangas"><div><div><i class="fa-solid fa-folder fa-6x"></i></div><div><label>Mangas</label></div></a></div></div>
 <br><br><hr><br>
 
 <?php

@@ -291,7 +291,7 @@ class Manga extends MysqlBuilder
                     "id"=>"statusCreateManga",
                     "option"=>[
                         "encours"=>"En cours",
-                        "termine"=>"Terminé",
+                        "termine"=>"Termine",
                     ],
                     "defaultValue"=>"En cours",
                 ],
@@ -387,6 +387,7 @@ class Manga extends MysqlBuilder
                 "action"=>"",
                 "id"=>"formManga",
                 "class"=>"formManga",
+                "enctype"=>"multipart/form-data",
             ],
             "inputs"=>[
                 "token"=> [
@@ -408,7 +409,7 @@ class Manga extends MysqlBuilder
                         "manga"=>"Manga",
                         "anime"=>"Anime",
                     ],
-                    "defaultValue"=>$manga[0]['type'],
+                    "defaultValue"=>strtolower($manga[0]['type']),
                 ],
                 "title"=>[
                     "placeholder"=>"titre",
@@ -461,9 +462,9 @@ class Manga extends MysqlBuilder
                     "id"=>"statusManga",
                     "option"=>[
                         "encours"=>"En cours",
-                        "termine"=>"Terminé",
+                        "termine"=>"Termine",
                     ],
-                    "defaultValue"=>$manga[0]['status'],
+                    "defaultValue"=>strtolower($manga[0]['status']),
                 ],
                 "category"=>[
                     "placeholder"=>"catégorie",
