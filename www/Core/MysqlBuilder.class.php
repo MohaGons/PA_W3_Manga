@@ -47,7 +47,12 @@ abstract class MysqlBuilder implements QueryBuilder
         } else {
             $update = [];
             foreach ($colums as $key => $value) {
-                $update[] = $key . "=:" . $key;
+                if (!empty($value)){
+                    $update[] = $key . "=:" . $key;
+                }
+                else{
+                    unset($colums[$key]);
+                }
             }
             $this->update($update);
         }
