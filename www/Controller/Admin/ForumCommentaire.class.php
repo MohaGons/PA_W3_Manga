@@ -55,4 +55,25 @@ class ForumCommentaire
             header("Location: /admin/forumcommentaire");
         }
     }
+
+    public function create()
+    {
+        $forum_commentaire = new ForumCommentaireModel();
+        $errors = [];
+
+        if(!empty($_POST)) {
+
+            $result = Verificator::checkForm($manga->getCommentaireForm(), $_POST);
+
+            if (empty($result)) {
+                $forum_commentaire->setCommentaire(htmlspecialchars($_POST["commentaire"]));
+                $forum_commentaire->setCreatedAt(date("Y-m-d H:i:s"));
+            }
+
+            $forum_commentaire->save();
+
+            echo "<script>alert('Votre commentaire a bien été ajouté')</script>";
+            header("Location: /admin/forum");
+        }
+    }
 }
