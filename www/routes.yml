@@ -262,3 +262,11 @@ event/detail/:
   action: create
   security: [Admin,Editeur,Abonne]
   params: id
+  controller: frontevent
+  action: FrontEvent
+  security: All
+  params: null
+  controller: frontforum
+  action: FrontForum
+  security: All
+  params: null

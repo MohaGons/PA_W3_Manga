@@ -130,11 +130,6 @@ class Category extends MysqlBuilder
                     "minlength"=>'',
                     "maxlength"=>'',
                     "required"=>false,
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];

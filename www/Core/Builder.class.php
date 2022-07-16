@@ -15,9 +15,12 @@ class Builder
                 case "select":
                     $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
                     $html .= "<select name='" . $name . "'
-                     id='" . $configInput["id"] . "'>";
+                     id='" . $configInput["id"] . "'";
+                    if (($configInput["disabled"]) == true) {
+                        $html .= " disabled";
+                    }
                     foreach ($configInput["option"] as $option => $value) {
-                        $html .= "<option value='" . $option . "'";
+                        $html .= "><option value='" . $option . "'";
                         if ($option == $configInput["defaultValue"]) {
                             $html .= " selected='selected'";
                         }
