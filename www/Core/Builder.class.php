@@ -22,7 +22,7 @@ class Builder
                     foreach ($configInput["option"] as $option => $value) {
                         $html .= "><option value='" . $option . "'";
                         if ($option == $configInput["defaultValue"]) {
-                            $html .= " selected='selected'";
+                            $html .= " readonly='readonly'";
                         }
                         $html .= ">$value</option><br>";
                     }

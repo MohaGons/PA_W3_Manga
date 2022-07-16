@@ -118,7 +118,7 @@ class Page extends MysqlBuilder
                   <div class="card-wrapper">
                     <div class="thumbnail-container">
                       <a href="event/detail/<?= $value["id"] ?>">
-                        <img src="https://placekitten.com/g/1000/300" />
+                        <img src="/Style/images/Evenements/<?= $value[\'photo\']?>" />
                       </a>
                     </div>
                     <div class="card-details-container">
@@ -461,12 +461,8 @@ class Page extends MysqlBuilder
                     "error"=>"Votre description doit faire entre 2 et 2000 caractères",
                 ],
                 "page"=> [
-                    "label"=> "Page: ",
-                    "type"=> "select",
-                    "id"=>"page",
-                    "disabled"=>true,
-                    "option"=>["event"=>"evenement", "forum"=>"forum", "manga"=>"manga"],
-                    "defaultValue"=>$page_data[0]['page']
+                    "type"=> "hidden",
+                    "value"=>$page_data[0]['page']
                 ]
             ]
         ];
