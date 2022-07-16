@@ -16,6 +16,31 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-12 content">
                     <h2>Commentaire</h2>
+                    <a href="/createcommentaire/<?= $forum_data[0]['id']?>"><button class="control--delete">Ajouter</button></a>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 col--flex">
+                            <table class="table-latitude">
+                                <thead>
+                                    <th>User</th>
+                                    <th>Commentaire</th>
+                                    <th>Date</th>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        foreach ($forum_commentaire_valid as $key => $value){ ?>
+                                            <tr>
+                                                <td><?= $value["user_firstname"]?> <?= $value["user_lastname"]?></td>
+                                                <td><?= $value["commentaire"] ?></td>
+                                                <td><?= $value["createdAt"] ?></td>
+                                            </tr>
+                                    <?php 
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <p>Apparitions dans les recherches internet</p>
                 </div>
             </div>

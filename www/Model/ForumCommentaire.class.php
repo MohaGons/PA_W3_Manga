@@ -102,7 +102,7 @@ class ForumCommentaire extends MysqlBuilder
         $this->updatedAt = $updatedAt;
     }
 
-    public function getCommentaireForm(): array
+    public function getCreateCommentaireForm(): array
     {
         return [
             "config"=>[
@@ -114,11 +114,14 @@ class ForumCommentaire extends MysqlBuilder
             ],
             "inputs"=>[
                 "commentaire"=>[
+                    "label"=>"Commentaire",
                     "placeholder"=>"Commentaire",
                     "type"=>"textarea",
                     "id"=>"commentaire",
                     "class"=>"formForum",
-                    "value"=>"",
+                    "rows"=>"5",
+                    "cols"=>"50",
+                    "text"=>null,
                     "required"=>true,
                     "error"=>"Votre commentaire doit faire entre 2 et 100 caractères",
                 ],

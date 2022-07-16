@@ -148,8 +148,8 @@ class Forum extends MysqlBuilder
                     "class"=>"formForum",
                     "value"=>"",
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "description"=>[
@@ -161,8 +161,6 @@ class Forum extends MysqlBuilder
                     "cols"=>"33",
                     "text"=>"",
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>2000,
                     "error"=>"Votre description doit faire entre 2 et 2000 caractères",
                 ],
                 "categories"=> [
@@ -195,8 +193,8 @@ class Forum extends MysqlBuilder
                     "class"=>"formForum",
                     "value"=>$forum_data[0]['title'],
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>25,
+                    "minlength"=>2,
+                    "maxlength"=>25,
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "editDescription"=>[
@@ -208,8 +206,6 @@ class Forum extends MysqlBuilder
                     "cols"=>"33",
                     "text"=>$forum_data[0]['description'],
                     "required"=>true,
-                    "min"=>2,
-                    "max"=>2000,
                     "error"=>"Votre description doit faire entre 2 et 2000 caractères",
                 ],
                 "categories"=> [

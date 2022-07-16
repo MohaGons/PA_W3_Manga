@@ -84,4 +84,23 @@ class ForumCommentaire {
         return $result;
     }
 
+    public static function getInformationsForumCommentaireValidFront($id)
+    {
+        $forumCommentaireModel = new ForumCommentaireModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $forumCommentaireModel->select(["mnga_forumcommentaire.id", "mnga_forumcommentaire.commentaire", "mnga_forumcommentaire.createdAt", "mnga_forum.title as forum_title", "mnga_user.firstname as user_firstname", "mnga_user.lastname as user_lastname"]);
+        $forumCommentaireModel->leftJoin("mnga_forum", "mnga_forumcommentaire.id_forum", "mnga_forum.id");
+        $forumCommentaireModel->leftJoin("mnga_user", "mnga_forumcommentaire.id_user", "mnga_user.id");
+        $forumCommentaireModel->where("isValid", 1 , "=");
+        $forumCommentaireModel->where("id_forum", $id, "=");
+        $forumCommentaireModel->orderBy("mnga_forumcommentaire.createdAt", "DESC");
+        $req = $connectionPDO->pdo->prepare($forumCommentaireModel->getQuery());
+        $req->execute();
+
+        $result = $req->fetchAll();
+
+        return $result;
+    }
+
 }
