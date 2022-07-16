@@ -262,10 +262,3 @@ event/detail/:
   action: create
   security: [Admin,Editeur,Abonne]
   params: id
-
-
-/evenement-test-page: 
-  controller: frontevent
-  action: FrontEvent
-  security: All
-  params: null
