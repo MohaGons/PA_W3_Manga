@@ -50,7 +50,7 @@
   controller: user
   action : parametre
   security: [Admin,Editeur,Abonne]
-  params: avatar
+  params: null
 
 /deletecompte:
    controller: user
@@ -74,12 +74,6 @@
   controller: category
   action: index
   security: All
-  params: null
-
-/admin/category/create:
-  controller: category
-  action: create
-  security: [Admin,Editeur,Abonne]
   params: null
 
 /admin/category/edit/:
@@ -263,3 +257,20 @@ event/detail/:
   security: [Admin,Editeur,Abonne]
   params: id
 
+/forum: 
+  controller: frontforum
+  action: FrontForum
+  security: All
+  params: null
+
+/forum: 
+  controller: frontforum
+  action: FrontForum
+  security: All
+  params: null
+
+/forum: 
+  controller: frontforum
+  action: FrontForum
+  security: All
+  params: null
