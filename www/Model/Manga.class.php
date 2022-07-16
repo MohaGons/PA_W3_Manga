@@ -231,6 +231,7 @@ class Manga extends MysqlBuilder
                 ],
                 "type"=>[
                     "type"=>"select",
+                    "disabled"=>false,
                     "label"=>"Type: ",
                     "id"=>"typeCreateManga",
                     "option"=>[
@@ -285,6 +286,7 @@ class Manga extends MysqlBuilder
                 ],
                 "status"=>[
                     "type"=>"select",
+                    "disabled"=>false,
                     "label"=>"Status: ",
                     "id"=>"statusCreateManga",
                     "option"=>[
@@ -399,6 +401,7 @@ class Manga extends MysqlBuilder
                 ],
                 "type"=>[
                     "type"=>"select",
+                    "disabled"=>false,
                     "label"=>"Type: ",
                     "id"=>"typeManga",
                     "option"=>[
@@ -453,6 +456,7 @@ class Manga extends MysqlBuilder
                 ],
                 "status"=>[
                     "type"=>"select",
+                    "disabled"=>false,
                     "label"=>"Status: ",
                     "id"=>"statusManga",
                     "option"=>[

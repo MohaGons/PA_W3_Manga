@@ -206,7 +206,7 @@
         <?= utf8_encode($value["commentaire"]) ?>
         </p>
         <p class="message-line time">
-            <?= date('F j, Y',strtotime($value["date_creation"])) ?>
+            <?= date('F j, Y',strtotime($value["createdAt"])) ?>
         </p>
       </div>
     </div>

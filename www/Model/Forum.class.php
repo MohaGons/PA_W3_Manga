@@ -174,6 +174,7 @@ class Forum extends MysqlBuilder
                 "categories"=> [
                     "label"=> "Catégorie: ",
                     "type"=> "select",
+                    "disabled"=>false,
                     "id"=>"picture",
                     "option"=>$categorie_data,
                     "defaultValue"=>"",
@@ -231,6 +232,7 @@ class Forum extends MysqlBuilder
                 "categories"=> [
                     "label"=> "Catégorie: ",
                     "type"=> "select",
+                    "disabled"=>false,
                     "id"=>"picture",
                     "option"=>$categorie_data,
                     "defaultValue"=>$forum_data[0]['category_id'],

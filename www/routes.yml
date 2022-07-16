@@ -263,8 +263,3 @@ event/detail/:
   security: [Admin,Editeur,Abonne]
   params: id
 
-/page-1: 
-  controller: frontevent
-  action: FrontEvent
-  security: All
-  params: null

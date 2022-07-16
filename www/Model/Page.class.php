@@ -413,6 +413,7 @@ class Page extends MysqlBuilder
                 "page"=> [
                     "label"=> "Page: ",
                     "type"=> "select",
+                    "disabled"=>false,
                     "id"=>"page",
                     "option"=>["event"=>"evenement", "forum"=>"forum", "manga"=>"manga"],
                     "defaultValue"=>"",
@@ -463,6 +464,7 @@ class Page extends MysqlBuilder
                     "label"=> "Page: ",
                     "type"=> "select",
                     "id"=>"page",
+                    "disabled"=>true,
                     "option"=>["event"=>"evenement", "forum"=>"forum", "manga"=>"manga"],
                     "defaultValue"=>$page_data[0]['page']
                 ]

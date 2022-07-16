@@ -657,6 +657,7 @@ class User extends MysqlBuilder
                 ],
                 "role"=>[
                     "type"=>"select",
+                    "disabled"=>false,
                     "label"=>"",
                     "id"=>"select",
                     "option"=>  [
