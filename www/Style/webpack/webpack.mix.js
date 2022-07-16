@@ -15,6 +15,7 @@ mix.setPublicPath('../dist');
 
 mix.babel([
  '../src/js/jquery-3.5.1.min.js',
+ '../src/js/admin/user_index.js',
  '../src/js/main.js'
 ], '../dist/main.js');
 

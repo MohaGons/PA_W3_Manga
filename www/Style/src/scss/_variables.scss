@@ -1,15 +1,33 @@
 $white: #FFF;
 $grey: #AAA;
-$light-grey: #F2F2F2;
+$light-grey: #F1F1F1;
 $dark-grey: #444;
 $red: #ce0a0a;
 $green: #31aa66;
+$button-primary-color: #AA4DC8;
+$button-secondary-color: #6c757d;
+$button-warning-color: #ffc107;
+$button-info-color: #17a2b8;
+$button-light-color: #f8f9fa;
+$button-dark-color: #343a40;
+
+//header
+$header-height: 80px;
+$header-background-color: #161B21;
+
+//sidebar
+$sidebar-width: 350px;
+$sidebar-padding-top: 50px;
 
 //grid
-
 $container-width: 1200px;
 $gutter-width: 30px;
 $col-nb: 12;
 $sm-width: 576px;
 $md-width: 768px;
 $lg-width: 992px;
+$xl-width: 1200px;
+$max-sm-width: 540px;
+$max-md-width: 720px;
+$max-lg-width: 960px;
+$max-xl-width: 1140px;

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/www/Style/images/Avatars/test33.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/View/view/front-forum.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/View/view/front-manga.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/routes.yml.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Controller/Admin/ForumCommentaire.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Controller/Admin/ForumCommentaire.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Core/Builder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Builder.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Core/Verificator.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Verificator.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Event.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Event.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Model/Page.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Model/Page.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Repository/Page.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Repository/Page.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/Template/sidebar_front.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/Template/sidebar_front.tpl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/View/view/admin/home.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/View/view/admin/home.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/routes.yml" beforeDir="false" afterPath="$PROJECT_DIR$/www/routes.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
+  <component name="ProjectId" id="25eSBojIVZOE4c6MUsn3XWg5y1K" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\Model" />
+      <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\View\view" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Amine\Desktop\PA_W3_Manga\www\Controller\Admin" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="" />
+      <created>1645885925559</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645885925559</updated>
+      <workItem from="1645885927000" duration="253000" />
+      <workItem from="1645886261202" duration="1395000" />
+      <workItem from="1645888039146" duration="8407000" />
+      <workItem from="1650192376143" duration="14551000" />
+      <workItem from="1652983957614" duration="10651000" />
+      <workItem from="1653132779484" duration="7647000" />
+      <workItem from="1653292612995" duration="3127000" />
+      <workItem from="1653469224521" duration="15037000" />
+      <workItem from="1655030619256" duration="15265000" />
+      <workItem from="1655409753670" duration="8497000" />
+      <workItem from="1655711519977" duration="171000" />
+      <workItem from="1655799035351" duration="1252000" />
+      <workItem from="1655820160074" duration="764000" />
+      <workItem from="1655994416354" duration="8484000" />
+      <workItem from="1656083400874" duration="18264000" />
+      <workItem from="1656530063899" duration="20790000" />
+      <workItem from="1656876244151" duration="4025000" />
+      <workItem from="1657378778326" duration="735000" />
+      <workItem from="1657451797982" duration="593000" />
+      <workItem from="1657608739748" duration="98000" />
+      <workItem from="1657713665049" duration="751000" />
+      <workItem from="1657781675271" duration="9149000" />
+      <workItem from="1657967396368" duration="5556000" />
+    </task>
+    <task id="LOCAL-00001" summary="fix bug">
+      <created>1657967544405</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1657967544406</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <MESSAGE value="fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="172" y="127" width="1648" height="853" key="DiffContextDialog" timestamp="1657970129482">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="172" y="127" width="1648" height="853" key="DiffContextDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1657970129482" />
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1657967550172">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1657967550172" />
+    <state x="777" y="468" width="428" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1657967559615">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="777" y="468" width="428" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1848.1053@72.27.1848.1053" timestamp="1657967559615" />
+  </component>
+</project>

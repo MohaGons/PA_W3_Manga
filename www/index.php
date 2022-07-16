@@ -1,10 +1,14 @@
 <?php
 namespace App;
 
+//die(__DIR__."/Style");
 require "conf.inc.php";
-
+use App\Core\Security;
+use App\Core\Session as Session;
+use App\Core\Router;
 //E
 
+//Permet de charger les classes appellés
 function myAutoloader( $class )
 {
     // $class -> "Core\Security" "Model\User
@@ -22,57 +26,10 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\myAutoloader");
 
-use App\Core\Security;
-
-$fileRoutes = "routes.yml";
-
-if(file_exists($fileRoutes)){
-    $routes = yaml_parse_file($fileRoutes);
-}else{
-    die("Le fichier de routing n'existe pas");
-}
-
-
-
-$uri = $_SERVER["REQUEST_URI"];
-
-if(empty($routes[$uri]) || empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])){
-    die("Page 404");
-}
-
-
-if(!Security::checkRoute($routes[$uri])){
-    die("NotAuthorized");
-}
-
-
-$controller = ucfirst(strtolower($routes[$uri]["controller"]));
-$action = strtolower($routes[$uri]["action"]);
+//Vérifier si la route appelé existe
+$routes = new Router($_SERVER["REQUEST_URI"]);
+$tab = $routes->checkRouteExist();
 
 
 
 
-// $uri = /login
-// $Controller = User
-// $action = login
-
-$controllerFile = "Controller/".$controller.".class.php";
-if(!file_exists($controllerFile)){
-    die("Le fichier Controller n'existe pas");
-}
-
-include $controllerFile;
-
-$controller = "App\\Controller\\".$controller;
-if( !class_exists($controller)){
-    die("La classe n'existe pas");
-}
-
-$objectController = new $controller();
-
-
-if( !method_exists($objectController, $action) ){
-    die("La methode n'existe pas");
-}
-
-$objectController->$action();
