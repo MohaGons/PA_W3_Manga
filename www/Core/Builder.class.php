@@ -122,7 +122,8 @@ class Builder
                             ></div><br>";
                     break;
                 default:
-                $html = "<input name='".$name."'
+                $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
+                $html .= "<input name='".$name."'
                         class='".$configInput["class"]."'
                         id='".$configInput["id"]."'
                         placeholder='".$configInput["placeholder"]."'

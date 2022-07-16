@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Session as Session;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\Manga as ModelManga;
@@ -51,7 +52,7 @@ class Manga
             }
 
             $manga->save();
-            $media->setMedia("Mangas", "", "");
+            $media->setMedia("Mangas", Session::get('email'), "");
 
             echo "<script>alert('Votre manga a bien été mis à jour')</script>";
             header("Location: /admin/manga");
@@ -81,6 +82,8 @@ class Manga
         if (!empty($id) && is_numeric($id))
         {
             $manga = new ModelManga();
+            $media = new MediaModel();
+
             $mangaInfos = MangaRepository::findById($id);
             $errors = [];
 
@@ -94,7 +97,7 @@ class Manga
                     $manga->setTypeManga(htmlspecialchars($_POST["type"]));
                     $manga->setTitleManga(htmlspecialchars($_POST["title"]));
                     $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
-                    $manga->setImageManga(htmlspecialchars($_POST["image"]));
+                    $manga->setImageManga(htmlspecialchars($_FILES["file"]["name"]));
                     $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
                     $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
                     $manga->setStatusManga(htmlspecialchars($_POST["status"]));
@@ -106,14 +109,13 @@ class Manga
                     $manga->setNbSeasonsManga(htmlspecialchars($_POST["nbSeasons"]));
                     $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
                     $manga->save();
+                    $media->setMedia("Mangas", Session::get('email'), "");
                     echo "<script>alert('Votre manga a bien été mis à jour')</script>";
                     header("Location: /admin/manga");
                 } else {
                     $errors = $result;
                 }
 
-            } else {
-                $errors = $result;
             }
 
             $view = new View("admin/manga_edit", "back");
