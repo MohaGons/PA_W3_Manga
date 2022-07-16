@@ -130,6 +130,7 @@ $category = new Category();
 $colums = $category->getColums();
 
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+$colums["user_id"] = "int(11) NOT NULL,";
 $colums["name"] = "varchar(100) NOT NULL,";
 $colums["description"] = "text,";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
@@ -180,7 +181,6 @@ $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["name"] = "varchar(255) NOT NULL,";
 $colums["categorie"] = "varchar(255) NULL,";
 $colums["user"] = "varchar(255) NOT NULL,";
-$colums["date"] = "TIMESTAMP NULL DEFAULT NULL,";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
 $colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
