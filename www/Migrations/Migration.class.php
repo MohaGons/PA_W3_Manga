@@ -143,7 +143,6 @@ $event = new Event();
 
 $colums = $event->getColums();
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-$colums["user_id"] = "int(11) NOT NULL";
 $colums["name"] = "varchar(50) NOT NULL,";
 $colums["description"] = "varchar(320) NOT NULL,";
 $colums["date"] = "TIMESTAMP NULL DEFAULT NULL,";
