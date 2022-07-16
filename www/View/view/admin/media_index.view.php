@@ -58,16 +58,14 @@ foreach ($medias as $media) {
     if (isset($_GET['dossier'])){
         $dossier = $_GET['dossier'];
         if ($categorie==$dossier){
-            if (isset($_GET['selected'])){
-                echo "<div><a href='./parametre?avatar=$name'><img src='../Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a href='?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i></a></div>";
-            }
-            else{
                 echo "<div><a href='../Style/images/$categorie/$name'><img src='../Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a href='?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i>
-                </a><a href='./parametre?avatar=$name'><i class='fa-solid fa-recycle'></i></a></div>";
-            }
-
+                </a>";
+                if ($dossier=="Avatars"){
+                    echo "<a href='./parametre?avatar=$name'><i class='fa-solid fa-recycle'></i></a></div>";
+                }
         }
-    }
+
+     }
 }
 ?>
     </div>

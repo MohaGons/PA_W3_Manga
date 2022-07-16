@@ -17,6 +17,7 @@
             <div class="row card--content">
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-12 content">
                     <h2>Description</h2>
+                    <img style="object-fit: cover;width: 100%;height: 100%;max-height: 300px;" src="/Style/images/Evenements/<?= $event_data[0]['photo'] ?>" />
                     <p><?= html_entity_decode($event_data[0]['description']) ?></p>
                 </div>
                 <form action="" method="post">
