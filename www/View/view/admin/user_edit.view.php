@@ -1,4 +1,13 @@
-<a href="../utilisateurs"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></a>
+<style>
+    .formparam{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+</style>
+<a href="/admin/utilisateurs"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></a>
 <?php
 if (!empty($messages)) {
     foreach ($messages as $message) {

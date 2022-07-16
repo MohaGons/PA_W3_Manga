@@ -611,8 +611,6 @@ class User extends MysqlBuilder
     {
         $roles = RoleRepository::all();
 
-//        die(var_dump($roles));
-
         return [
             "config"=>[
                 "method"=>"POST",
@@ -626,7 +624,7 @@ class User extends MysqlBuilder
                     "placeholder"=>'New Firstname',
                     "type"=>"text",
                     "id"=>"emailRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "label"=>"",
                     "value"=>"",
                     "required"=>false,
@@ -638,7 +636,7 @@ class User extends MysqlBuilder
                     "placeholder"=>'New Lastname',
                     "type"=>"text",
                     "id"=>"pwdRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "label"=>"",
                     "value"=>"",
                     "required"=>false,
@@ -650,7 +648,7 @@ class User extends MysqlBuilder
                     "placeholder"=>"New email",
                     "type"=>"email",
                     "id"=>"emailRegister",
-                    "class"=>"formRegister",
+                    "class"=>"formparam",
                     "label"=>"",
                     "required"=>true,
                     "error"=>"Email incorrect",
@@ -659,14 +657,14 @@ class User extends MysqlBuilder
                 ],
                 "role"=>[
                     "type"=>"select",
+                    "label"=>"",
                     "id"=>"select",
-                    "option"=> $roles,
+                    "option"=>  [
+                        "1"=>"Abonne",
+                        "2"=>"Editeur",
+                        "3"=>"Admin",
+                    ],
                     "defaultValue" =>  ""
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];

@@ -52,54 +52,34 @@ class User {
 
     public function edit($params){
         $id = $params[0];
-//        die(var_dump($id));
+
         if (!empty($id) && is_numeric($id))
         {
             $user = new UserModel();
-            $user->setFirstname();
-            $user->setLastname();
-            $user->setRole();
-            $user->setFirstname();
-            $user->setFirstname();
             $userData = UserRepository::findById($id);
-            if (!empty($user)) {
-//                echo "<pre>";
-//                die(var_dump($user));
-                $messages=[];
-//            if(!empty($_POST)) {
-//                $result = Verificator::checkupdateUser($user->updateUser(), $_POST);
-//                if (empty($result)){
-//                    if(!empty($_POST["firstname"])){
-//                        $user->updateFirstnameId( $_POST['firstname'],$id);
-//                    }
-//                    if(!empty($_POST["lastname"])){
-//                        $user->updateLastnameId($_POST['lastname'],$id);
-//                    }
-//                    if(!empty($_POST["email"])){
-//                        $user->updateEmailId($_POST['email'],$id);
-//                    }
-//                    if(!empty($_POST["role"])){
-//                        $user->updateRole($_POST['role'],$id);
-//                    }
-//                    $messages[] = 'la modification a été faite !';
-//                }
-//                else{
-//                    $messages = $result;
-//                }
-//            }
-                $view = new View("admin/user_edit", "back");
-
-                $view->assign("user", $user);
-                $view->assign("userData", $userData);
-                $view->assign("messages", $messages);
+            $messages=[];
+            if(!empty($_POST)) {
+                $result = Verificator::checkupdateUser($user->updateUser(), $_POST);
+                if (empty($result)){
+                    $user->setId($id);
+                    $user->setLastname(htmlspecialchars($_POST['lastname']));
+                    $user->setFirstname(htmlspecialchars($_POST['firstname']));
+                    $user->setEmail(htmlspecialchars($_POST['email']));
+                    $user->setRole(htmlspecialchars($_POST['role']));
+                    $user->save();
+                    $messages[] = 'la modification a été faite !';
+                }
+               else{
+                   $messages = $result;
+                }
             }
-            else{
-                die("l'user existe pas");
-            }
-
+            $view = new View("admin/user_edit", "back");
+            $view->assign("user", $user);
+            $view->assign("userData", $userData);
+            $view->assign("messages", $messages);
         }
-        else {
-            die("ytuiop");
+        else{
+             die("l'user existe pas");
         }
 
     }
