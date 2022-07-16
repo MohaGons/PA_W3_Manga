@@ -269,3 +269,10 @@ event/detail/:
   action: FrontEvent
   security: All
   params: null
+
+
+/admin/template:
+  controller: main
+  action: Template
+  security: [Admin,Editeur,Abonne]
+  params: null
