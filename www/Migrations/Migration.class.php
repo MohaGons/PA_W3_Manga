@@ -48,10 +48,10 @@ $colums["token"] = "char(255) DEFAULT NULL,";
 $colums["avatar"] = "varchar(255) NOT NULL,";
 $colums["gender"] = "varchar(1) NOT NULL,";
 $colums["role"] = "int(1) NOT NULL,";
-$colums["createdAt"] = "timestamp NULL DEFAULT NULL,";
-$colums["updatedAt"] = "timestamp NULL DEFAULT NULL";
 $colums["pays"] = "varchar(50) NOT NULL,";
 $colums["ville"] = "varchar(100) NOT NULL,";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
 $user->createTable($colums);
 
@@ -74,7 +74,9 @@ $colums["nb_chapters"] = "int(11) NOT NULL,";
 $colums["nb_episodes"] = "int(11) NOT NULL,";
 $colums["diffusion"] = "varchar(100) NOT NULL,";
 $colums["nb_seasons"] = "int(11) NOT NULL,";
-$colums["production_studio"] = "varchar(50) NOT NULL";
+$colums["production_studio"] = "varchar(50) NOT NULL,";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
 $manga->createTable($colums);
 
@@ -87,7 +89,9 @@ $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["email"] = "varchar(255) NOT NULL,";
 $colums["date_demande"] = "int(11) NOT NULL,";
 $colums["token"] = "varchar(255) NOT NULL,";
-$colums["statut"] = "int(11) NOT NULL DEFAULT '0'";
+$colums["statut"] = "int(11) NOT NULL DEFAULT '0',";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
 $password->createTable($colums);
 
@@ -97,7 +101,9 @@ $role = new Role();
 $colums = $role->getColums();
 
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-$colums["role"] = "varchar(50) DEFAULT 'abonné'";
+$colums["role"] = "varchar(50) DEFAULT 'abonné',";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
 $role->createTable($colums);
 
@@ -111,8 +117,10 @@ $colums["title"] = "varchar(100) NOT NULL,";
 $colums["description"] = "text,";
 $colums["picture"] = "varchar(255) NOT NULL,";
 $colums["category_id"] = "int(11) NOT NULL,";
-$colums["user_id"] = "int(11) NOT NULL";
+$colums["user_id"] = "int(11) NOT NULL,";
 $colums["date"] = "timestamp NULL DEFAULT NULL,";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
 $forum->createTable($colums);
 
@@ -123,7 +131,9 @@ $colums = $category->getColums();
 
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["name"] = "varchar(100) NOT NULL,";
-$colums["description"] = "text";
+$colums["description"] = "text,";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
 $category->createTable($colums);
 
@@ -132,13 +142,15 @@ $category->createTable($colums);
 $event = new Event();
 
 $colums = $event->getColums();
-
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["name"] = "varchar(50) NOT NULL,";
 $colums["description"] = "varchar(320) NOT NULL,";
-$colums["date"] = "varchar(50) NOT NULL,";
+$colums["date"] = "TIMESTAMP NULL DEFAULT NULL,";
 $colums["price"] = "int(11) NOT NULL,";
 $colums["photo"] = "varchar(255) NOT NULL,";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+
 
 $event->createTable($colums);
 
@@ -152,10 +164,12 @@ $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["id_forum"] = "int(11) NOT NULL,";
 $colums["id_user"] = "int(11) NOT NULL,";
 $colums["commentaire"] = "text,";
-$colums["date_creation"] = "timestamp DEFAULT NULL,";
-$colums["isValid"] = "tinyint(1) DEFAULT '0'";
+$colums["date_creation"] = "timestamp NULL DEFAULT NULL,";
+$colums["isValid"] = "tinyint(1) DEFAULT '0',";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
-$event->createTable($colums);
+$forumcommantaire->createTable($colums);
 
 //MIGRATION CREATE TABLE MEDIA
 
@@ -164,9 +178,12 @@ $media = new Media();
 $colums = $media->getColums();
 
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-$colums["nom"] = "varchar(255) NOT NULL,";
+$colums["name"] = "varchar(255) NOT NULL,";
 $colums["categorie"] = "varchar(255) NULL,";
 $colums["user"] = "varchar(255) NOT NULL,";
-$colums["date"] = "timestamp DEFAULT NULL,";
+$colums["date"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
+$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
 
-$event->createTable($colums);
+$media->createTable($colums);
+

@@ -35,6 +35,12 @@ use App\Model\Media;
 
 //MIGRATION CREATE TABLE USER
 
+
+
+$user = new User();
+
+$user->deleteTable();
+
 $user_one = new User();
 $user_two = new User();
 
@@ -46,8 +52,10 @@ $user_one->setPassword(htmlspecialchars('Test1234'));
 $user_one->setAvatar(htmlspecialchars('avatar.png'));
 $user_one->setGender(htmlspecialchars('m'));
 $user_one->setRole(htmlspecialchars('3'));
-$user_one->setPays(htmlspecialchars('France'));
-$user_one->setVille(htmlspecialchars('Paris'));
+$user_one->setPays('Pays');
+$user_one->setPays('Ville');
+$user_one->setCreatedAt(date("Y-m-d H:i:s"));
+$user_one->save();
 
 $user_two->setFirstname(htmlspecialchars('John'));
 $user_two->setLastname(htmlspecialchars('Doe'));
@@ -57,10 +65,15 @@ $user_two->setPassword(htmlspecialchars('Test1234'));
 $user_two->setAvatar(htmlspecialchars('avatar.png'));
 $user_two->setGender(htmlspecialchars('m'));
 $user_two->setRole(htmlspecialchars('1'));
-$user_two->setPays(htmlspecialchars('France'));
-$user_two->setVille(htmlspecialchars('Paris'));
+$user_two->setPays('Pays');
+$user_two->setPays('Ville');
+$user_two->setCreatedAt(date("Y-m-d H:i:s"));
+$user_two->save();
 
 //MIGRATION CREATE TABLE MANGA
+
+$manga = new Manga();
+$manga->deleteTable();
 
 $manga_one = new Manga();
 $manga_two = new Manga();
@@ -80,6 +93,7 @@ $manga_one->setNbEpisodesManga(htmlspecialchars('10'));
 $manga_one->setDiffusionManga(htmlspecialchars('2019-01-01'));
 $manga_one->setNbSeasonsManga(htmlspecialchars('10'));
 $manga_one->setProductionStudioManga(htmlspecialchars('Konami'));
+$manga_one->setCreatedAt(date("Y-m-d H:i:s"));
 $manga_one->save();
 
 $manga_two->setTypeManga(htmlspecialchars('Manga'));
@@ -96,6 +110,7 @@ $manga_two->setNbEpisodesManga(htmlspecialchars('10'));
 $manga_two->setDiffusionManga(htmlspecialchars('2019-01-01'));
 $manga_two->setNbSeasonsManga(htmlspecialchars('10'));
 $manga_two->setProductionStudioManga(htmlspecialchars('Konami'));
+$manga_two->setCreatedAt(date("Y-m-d H:i:s"));
 $manga_two->save();
 
 $manga_three->setTypeManga(htmlspecialchars('Manga'));
@@ -112,6 +127,7 @@ $manga_three->setNbEpisodesManga(htmlspecialchars('10'));
 $manga_three->setDiffusionManga(htmlspecialchars('2019-01-01'));
 $manga_three->setNbSeasonsManga(htmlspecialchars('10'));
 $manga_three->setProductionStudioManga(htmlspecialchars('Konami'));
+$manga_three->setCreatedAt(date("Y-m-d H:i:s"));
 $manga_three->save();
 
 //MIGRATION CREATE TABLE PASSWORD
@@ -120,14 +136,25 @@ $password = new Password();
 
 //MIGRATION CREATE TABLE ROLE
 
+$role = new Role();
+$role->deleteTable();
+
 $role_one = new Role();
 $role_two = new Role();
 $role_three = new Role();
 
-$role->setRole(htmlspecialchars('Abonne'));
-$role_two->setRole(htmlspecialchars('Editeur'));
-$role_three->setRole(htmlspecialchars('Admin'));
+$role_one->setRole(htmlspecialchars('Abonne'));
+$role_one->setCreatedAt(date("Y-m-d H:i:s"));
+$role_one->save();
 
+$role_two->setRole(htmlspecialchars('Editeur'));
+$role_two->setCreatedAt(date("Y-m-d H:i:s"));
+$role_two->save();
+
+$role_three->setRole(htmlspecialchars('Admin'));
+$role_three->setCreatedAt(date("Y-m-d H:i:s"));
+$role_three->save();
+die("mec");
 //MIGRATION CREATE TABLE FORUM
 
 $forum = new Forum();

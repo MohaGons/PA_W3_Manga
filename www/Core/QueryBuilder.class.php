@@ -16,11 +16,13 @@ interface QueryBuilder
 
     public function createTable(array $columns): void;
 
+    public function dropTable(): void;
+
     public function deleteTable(): void;
 
     public function alterTable(array $columns): QueryBuilder;
 
-    public function save(): void;
+    public function save(): bool;
 
     public function where(string $column, string $value, string $operator = "="): QueryBuilder;
 
