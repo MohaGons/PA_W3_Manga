@@ -8,7 +8,6 @@ use App\Core\Security;
 use App\Core\Session as Session;
 use App\Core\Router;
 //E
-die("lalala");
 //Permet de charger les classes appellés
 function myAutoloader( $class )
 {
@@ -24,7 +23,7 @@ function myAutoloader( $class )
         include $class.".class.php";
     }
 }
-
+die("ahahahah");
 spl_autoload_register("App\myAutoloader");
 
 //Vérifier si la route appelé existe
