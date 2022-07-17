@@ -3,12 +3,12 @@ namespace App;
 
 //die(__DIR__."/Style");
 require "conf.inc.php";
+
 use App\Core\Security;
 use App\Core\Session as Session;
 use App\Core\Router;
 use App\Core\Install;
 //E
-
 //Permet de charger les classes appellés
 function myAutoloader( $class )
 {

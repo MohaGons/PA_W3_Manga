@@ -76,7 +76,6 @@
   security: All
   params: id
 
-
 /admin/category:
   controller: category
   action: index
@@ -100,7 +99,6 @@
   action: delete
   security: [Admin,Editeur,Abonne]
   params: id
-
 
 /admin/forum:
   controller: forum
@@ -270,9 +268,9 @@ event/detail/:
   security: [Admin,Editeur,Abonne]
   params: id
 
-
 /admin/template:
   controller: main
   action: Template
   security: [Admin,Editeur,Abonne]
   params: null
+

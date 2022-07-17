@@ -36,7 +36,7 @@ class Manga {
         return $result;
     }
 
-    public function delete($id) 
+    public static function delete($id) 
     {
         $mangaModel = new MangaModel();
         $connectionPDO = new ConnectionPDO();
