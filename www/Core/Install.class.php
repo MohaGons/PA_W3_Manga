@@ -281,15 +281,13 @@ class Install
             "EMAIL_SMTP_PORT" => $data['EMAIL_SMTP_PORT']
         ];
 
-        $defaultEnvFile = ".env";
-        $databaseEnvFile =  ".env.db";
-        $SMTPEnvFile =  ".env.smtp";
+        $defaultEnvFile = "conf.inc.php";
 
         Env::writeEnvData($defaultEnv, $defaultEnvFile);
-        Env::writeEnvData($databaseEnv, $databaseEnvFile);
-        Env::writeEnvData($mailingEnv, $SMTPEnvFile);
+        Env::writeEnvData($databaseEnv, $defaultEnvFile);
+        Env::writeEnvData($mailingEnv, $defaultEnvFile);
 
-        $envFiles = [$defaultEnvFile, $databaseEnvFile, $SMTPEnvFile];
+        $envFiles = [$defaultEnvFile, $defaultEnvFile, $defaultEnvFile];
         foreach ($envFiles as $file) {
             if (!file_exists($file)) {
                 die("Erreur ENV-W001");
@@ -306,6 +304,7 @@ class Install
 
     public static function migrate()
     {
+//        var_dump(DB_HOST);
         die("vuybijnkl");
     }
 }

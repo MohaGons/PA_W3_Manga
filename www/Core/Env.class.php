@@ -23,7 +23,7 @@ class Env
         return $data;
     }
 
-    public static function writeEnvData($data, $envFile)
+    public static function writeConfData($data, $envFile)
     {
         $dataString = "";
         foreach ($data as $key => $value) {

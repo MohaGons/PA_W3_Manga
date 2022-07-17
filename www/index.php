@@ -3,7 +3,8 @@ namespace App;
 
 //die(__DIR__."/Style");
 require "conf.inc.php";
-
+var_dump($_ENV);
+die("iuoij");
 use App\Core\Security;
 use App\Core\Session as Session;
 use App\Core\Router;
