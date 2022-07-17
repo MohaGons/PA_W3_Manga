@@ -1,6 +1,4 @@
 <?php
-
-die('testttt');
 namespace App;
 
 //die(__DIR__."/Style");
@@ -31,7 +29,3 @@ spl_autoload_register("App\myAutoloader");
 //Vérifier si la route appelé existe
 $routes = new Router($_SERVER["REQUEST_URI"]);
 $tab = $routes->checkRouteExist();
-
-
-
-
