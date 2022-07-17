@@ -78,14 +78,14 @@ class Install
                 $data["EMAIL_SMTP_PORT"] = htmlspecialchars($_POST["EMAIL_SMTP_PORT"]);
                 $errors = Install::execute($data);
 
-                echo "<pre>";
-                die(var_dump($errors));
+                if (empty($errors)) {
+                    Install::migrate();
+                }
 
             }
             else {
                 $errors = $result;
             }
-//            die(var_dump($result));
         }
 
         $view = new View("installer/install", "install");
@@ -306,13 +306,6 @@ class Install
 
     public static function migrate()
     {
-        new ConstantManager();
-
-        $database = new Database();
-        $id = $database->migrate();
-
-        Security::initSession($id);
-
-        Helpers::redirect("/bo");
+        die("vuybijnkl");
     }
 }
