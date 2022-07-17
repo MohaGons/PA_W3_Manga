@@ -27,7 +27,7 @@ class PasswordReset extends Sql
             $name = '';
             $lastname = '';
             $subject = 'Reinitialisation mot de passe';
-            $body ="Bonjour,<br>Cliquer sur le lien pour modifier votre mot de passe : <a href='localhost/initialiser_mdp?token=".$results[1]."&email=".$data["email"]."'>Initialiser mot de passe</a>";
+            $body ="Bonjour,<br>Cliquer sur le lien pour modifier votre mot de passe : <a href=".$_SERVER['HTTP_HOST']."localhost/initialiser_mdp/".$data["email"]."/".$results[1]."'>Initialiser mot de passe</a>";
 
             if(Mailer::sendMail($destinataire, $name, $lastname, $subject, $body)){
                 $errors[] = "Un email a ete envoyé a l'adresse : <strong>".$email."</strong><br>Le lien de recuperation de mot de passe est validé pour 1h";
