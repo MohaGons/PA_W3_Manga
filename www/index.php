@@ -29,10 +29,11 @@ spl_autoload_register("App\myAutoloader");
 
 
 if (!Install::check()) {
-    $start = Install::start();
-    if ($start == true){
+    $admin = Install::start();
+    if (!empty($admin)){
         require "conf.inc.php";
-        return;
+        Install::createUserAdmin($admin["WEBSITE_ADMIN"], $admin["WEBSITE_PASSWORD"]);
+        return header("Location: /login");
     }
     return;
 }

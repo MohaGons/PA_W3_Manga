@@ -6,6 +6,7 @@ use App\Core\Session as Session;
 use App\Core\View as View;
 use App\Core\Env as Env;
 use App\Core\Security;
+use App\Repository\User as UserRepository;
 
 class Install
 {
@@ -49,9 +50,14 @@ class Install
                 $data["EMAIL_SMTP_ADMIN"] = htmlspecialchars($_POST["EMAIL_SMTP_ADMIN"]);
                 $data["EMAIL_SMTP_PASSWORD"] = htmlspecialchars($_POST["EMAIL_SMTP_PASSWORD"]);
                 $data["EMAIL_SMTP_PORT"] = htmlspecialchars($_POST["EMAIL_SMTP_PORT"]);
-                $errors = Install::execute($data);
+                $install = Install::execute($data);
 
-                return true;
+                $colums = [];
+
+                $colums["WEBSITE_ADMIN"] = $data["WEBSITE_ADMIN"];
+                $colums["WEBSITE_PASSWORD"] = $data["WEBSITE_PASSWORD"];
+
+                return $colums;
 
             }
             else {
@@ -103,7 +109,7 @@ class Install
 
                 "WEBSITE_ADMIN" => [
                     "id" => "websiteAdminInstall",
-                        "type" => "email",
+                    "type" => "email",
                     'class' => 'formRegister',
                     "label" => "Admin du site : ",
                     "placeholder" => "Choisissez un identifiant pour le super-admin",
@@ -314,9 +320,9 @@ class Install
         return true;
     }
 
-    public static function migrate()
+    public static function createUserAdmin($admin, $password)
     {
-//        var_dump(DB_HOST);
-        die("vuybijnkl");
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        UserRepository::createUserAdmin($admin, $password);
     }
 }

@@ -23,7 +23,7 @@ class Mailer
             $mail->Host       = EMAIL_SMTP_HOST;                       //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->Username   = EMAIL_SMTP_ADMIN;              //SMTP username
-            $mail->Password   = EMAIL_SMTP_PASSWORD;                       //SMTP password
+            $mail->Password   = EMAIL_SMTP_PASSWORD;                       //SMTP password namvkbbhnlpokjqr
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = EMAIL_SMTP_PORT;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
