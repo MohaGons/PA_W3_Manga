@@ -273,3 +273,4 @@ event/detail/:
   action: Template
   security: [Admin,Editeur,Abonne]
   params: null
+
