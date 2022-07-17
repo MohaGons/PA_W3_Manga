@@ -40,11 +40,11 @@
   security   : All
   params: null
 
-/initialiser_mdp:
+/initialiser_mdp/:
   controller : user
   action     : initialiser_mdp
   security   : All
-  params: null
+  params: id
 
 /admin/parametre:
   controller: user

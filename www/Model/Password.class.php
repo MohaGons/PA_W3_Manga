@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Core\MysqlBuilder;
+use App\Model\User as UserModel;
 use PDO;
 
 class Password extends MysqlBuilder
@@ -27,6 +28,22 @@ class Password extends MysqlBuilder
         } else {
             return false;
         }
+
+    }
+
+    public function checkPassword($data)
+    {
+        $user = new UserModel();
+        $email = $data['email'];
+        $date = time();
+        $string = implode('',array_merge(range('A','Z'), range('a','z'), range('0','9')));
+        $token = substr(str_shuffle($string),0,20);
+        //$token = $user->generateToken();
+        $q = "INSERT INTO mnga_password(email,date_demande,token) VALUES  (?,?,?)";
+        $req = $this->pdo->prepare($q);
+        $req->execute( [$email, $date ,$token] );
+        $results = $req->fetch();
+        return [$results,$token];
 
     }
 
