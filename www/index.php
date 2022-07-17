@@ -1,4 +1,6 @@
 <?php
+
+die('testttt');
 namespace App;
 
 //die(__DIR__."/Style");
