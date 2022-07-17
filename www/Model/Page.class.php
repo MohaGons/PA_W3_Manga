@@ -7,7 +7,7 @@ use App\Core\MysqlBuilder;
 class Page extends MysqlBuilder
 {
 
-    protected $id = null;   
+    protected $id = null;
     protected $title = null;
     protected $description = null;
     protected $page = null;
@@ -67,7 +67,7 @@ class Page extends MysqlBuilder
                 fwrite($fp, '        <li><a href="/' . $title_lower . '">' . $title . '</a></li>
         ');
                 fclose($fp);
-                
+
                 // create route
                 $fp = fopen('routes.yml', "a+");
                 fwrite($fp, '
@@ -78,7 +78,7 @@ class Page extends MysqlBuilder
   params: null
 ');
                 fclose($fp);
-                
+
                 // create view
                 $fp = fopen('View/view/front-event.view.php', "a+");
                 fwrite($fp, '<style>
@@ -189,7 +189,7 @@ $("*").css("font-family", localStorage.font);
                 fwrite($fp, '        <li><a href="/' . $title_lower . '">' . $title . '</a></li>
         ');
                 fclose($fp);
-               
+
                 $fp = fopen('routes.yml', "a+");
                 fwrite($fp, '
 /' . $title_lower . ': 
@@ -280,7 +280,7 @@ $("body").css("background-color", localStorage.background);
 $("h1").css("color", localStorage.h1Color);
 $("*").css("font-family", localStorage.font);
 </script>');
-                fclose($fp);                
+                fclose($fp);
 
                 break;
             case "manga":

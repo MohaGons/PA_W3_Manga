@@ -14,7 +14,7 @@ class Page
     public function index()
     {
         $page_data = PageRepository::all();
-        
+
         $view = new View("admin/page_index", "back");
         $view->assign("page_data", $page_data);
     }
