@@ -62,7 +62,7 @@ class User {
         $userModel->select(["id", "email", "password", "role", "token"]);
         $userModel->where("email", $email, "=");
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
-        $req->execute($column);
+        $req->execute();
 
         $result = $req->fetch(\PDO::FETCH_ASSOC);
 

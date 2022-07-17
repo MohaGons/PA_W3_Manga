@@ -28,3 +28,4 @@ $('body').css('background-color', localStorage.background);
 $('h1').css('color', localStorage.h1Color);
 $("*").css("font-family", localStorage.font);
 </script>
+

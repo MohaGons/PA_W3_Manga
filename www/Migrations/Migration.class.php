@@ -52,7 +52,7 @@ $colums["role"] = "int(1) NOT NULL,";
 $colums["pays"] = "varchar(50) NOT NULL,";
 $colums["ville"] = "varchar(100) NOT NULL,";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
 
 $user->createTable($colums);
 
@@ -77,7 +77,7 @@ $colums["diffusion"] = "varchar(100) NOT NULL,";
 $colums["nb_seasons"] = "int(11) NOT NULL,";
 $colums["production_studio"] = "varchar(50) NOT NULL,";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
 
 $manga->createTable($colums);
 
@@ -92,7 +92,7 @@ $colums["date_demande"] = "int(11) NOT NULL,";
 $colums["token"] = "varchar(255) NOT NULL,";
 $colums["statut"] = "int(11) NOT NULL DEFAULT '0',";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
 
 $password->createTable($colums);
 
@@ -104,7 +104,7 @@ $colums = $role->getColums();
 $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
 $colums["role"] = "varchar(50) DEFAULT 'abonné',";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
 
 $role->createTable($colums);
 
@@ -118,11 +118,12 @@ $colums["title"] = "varchar(100) NOT NULL,";
 $colums["description"] = "text,";
 $colums["category_id"] = "int(11) NOT NULL,";
 $colums["user_id"] = "int(11) NOT NULL,";
-$colums["date"] = "timestamp NULL DEFAULT NULL,";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
 
 $forum->createTable($colums);
+
+die(var_dump($forum->getColums()));
 
 //MIGRATION CREATE TABLE CATEGORY
 $category = new Category();
@@ -134,7 +135,7 @@ $colums["user_id"] = "int(11) NOT NULL,";
 $colums["name"] = "varchar(100) NOT NULL,";
 $colums["description"] = "text,";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
 
 $category->createTable($colums);
 
@@ -167,7 +168,7 @@ $colums["id_user"] = "int(11) NOT NULL,";
 $colums["commentaire"] = "text,";
 $colums["isValid"] = "tinyint(1) DEFAULT '0',";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
 
 $forumcommantaire->createTable($colums);
 
@@ -182,7 +183,7 @@ $colums["name"] = "varchar(255) NOT NULL,";
 $colums["categorie"] = "varchar(255) NULL,";
 $colums["user"] = "varchar(255) NOT NULL,";
 $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-$colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+$colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
 
 $media->createTable($colums);
 

@@ -725,11 +725,6 @@ class User extends MysqlBuilder
                     "label"=>"",
                     "class"=>"formRegister",
                     "required"=>true,
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];

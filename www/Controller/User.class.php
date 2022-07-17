@@ -88,6 +88,7 @@ class User
 
     public function  recuperer_mdp()
     {
+//        die("ytvubiojihph");
         $user = new UserModel();
         $errors = [];
         if (!empty($_POST)) {
@@ -99,41 +100,32 @@ class User
         $view->assign("errors", $errors);
     }
 
-    public function initialiser_mdp()
+    public function initialiser_mdp($params)
     {
         $user = new UserModel();
         $mdp = new PasswordModel();
         $errors = [];
-        $token  = $_GET['token'];
-        $email  = $_GET['email'];
-        if (isset($token)) {
+        $token  = $params[1];
+        $email  = $params[0];
+        if (!empty($token) && !empty($email)) {
+            if (!empty($_POST)) {
+                $result = PasswordReset::checkFormPasswordInit($user->getPasswordInitForm(), $_POST);
 
-            $result = PasswordReset::checkFormPasswordInit($user->getPasswordInitForm(), $_POST);
-            if ($result[0] === 1) {
-                echo "<script>alert('Vous avez depassé 1h pour reinitialiser votre Mot de passe')</script>";
-                //header('location:'.LOGIN_VIEW_ROUTE);
-            }
-            if ($result[0] === 0) {
-                echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
-                //header('location:'.LOGIN_VIEW_ROUTE);
-            } else {
-                if (!empty($_POST)) {
-                    $password = $_POST["password"];
-                    $password_c = $_POST["confirm_password"];
-                    if ($password == $password_c) {
-                        //$user->setPassword($password);
-                        $password = password_hash($password, PASSWORD_DEFAULT);
-                        $mdp->NewPassword($password, $email);
-                        $mdp->UpdateStatut(1, $email);
-                        $errors[] = "<br>Votre mot de passe est modefié<br><a href='login'>Se connecter</a>";
-                    } else {
-                        $errors[] = "<br>Verifier que vous avez mis le meme password dans les deux champs";
-                    }
+                $password = $_POST["password"];
+                $password_c = $_POST["confirm_password"];
+                if ($password == $password_c) {
+                    $password = password_hash($password, PASSWORD_DEFAULT);
+                    $mdp->NewPassword($password, $email);
+                    $mdp->UpdateStatut(1, $email);
+                    $errors[] = "<br>Votre mot de passe est modifié<br><a href='login'>Se connecter</a>";
+                    header("Location: /login");
+                } else {
+                    $errors[] = "<br>Verifier que vous avez mis le meme password dans les deux champs";
                 }
-                $view = new View("mot_passe_initier");
-                $view->assign("user", $user);
-                $view->assign("errors", $errors);
             }
+            $view = new View("mot_passe_initier");
+            $view->assign("user", $user);
+            $view->assign("errors", $errors);
         } else {
             echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
         }

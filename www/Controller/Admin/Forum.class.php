@@ -47,7 +47,6 @@ class Forum
                 }
                 $forum->setUserId(Session::get('id'));
                 $forum->setCreatedAt(date("Y-m-d H:i:s"));
-                $forum->setUpdatedAt(date("Y-m-d H:i:s"));
                 $forum->save();
                 echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                 header("Location: /admin/forum");
