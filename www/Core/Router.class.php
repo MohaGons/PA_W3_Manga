@@ -11,7 +11,7 @@ class Router
 
     public function __construct($slug)
     {
-
+        die('routterr');
         $fileRoutes = "routes.yml";
         //Vérifier si le fichier routes.yml existe
         if(file_exists($fileRoutes)){
