@@ -20,16 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d7b2d99-d076-4f9c-8fc8-ec635a2da11d" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/www/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/Core/Install.class.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/View/Partial/install.partial.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/View/Template/install.tpl.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/View/view/installer/install.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/Core/Env.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Builder.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Builder.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/Core/Verificator.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Verificator.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/.env" beforeDir="false" afterPath="$PROJECT_DIR$/www/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/Core/Install.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/Core/Install.class.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

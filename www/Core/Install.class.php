@@ -2,9 +2,9 @@
 
 namespace App\Core;
 
-use App\Core\EnvironmentManager as Env;
 use App\Core\Session as Session;
 use App\Core\View as View;
+use App\Core\Env as Env;
 use App\Core\Security;
 
 class Install
@@ -82,15 +82,15 @@ class Install
                 die(var_dump($errors));
 
             }
-            $data = Helpers::cleanInputs($_POST);
-            $errors = InstallWizard::execute($data);
-            if (empty($errors)) {
-                InstallWizard::migrate();
+            else {
+                $errors = $result;
             }
+//            die(var_dump($result));
         }
 
         $view = new View("installer/install", "install");
         $view->assign("install", $install);
+        $view->assign("errors", $errors);
 
     }
 
