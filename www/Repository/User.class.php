@@ -116,6 +116,28 @@ class User {
 
     }
 
+    public static function createUserAdmin($admin, $password)
+    {
+
+        var_dump($admin);
+        var_dump($password);
+        $user = new UserModel();
+        $user->setFirstname(htmlspecialchars('Admin'));
+        $user->setLastname(htmlspecialchars('Super'));
+        $user->setEmail(htmlspecialchars($admin));
+        $user->setStatus(htmlspecialchars('0'));
+        $user->setPassword(htmlspecialchars($password));
+        $user->setAvatar(htmlspecialchars('avatar.png'));
+        $user->setGender(htmlspecialchars('m'));
+        $user->setRole(htmlspecialchars('3'));
+        $user->setPays('Pays');
+        $user->setPays('Ville');
+        $user->setCreatedAt(date("Y-m-d H:i:s"));
+        $user->save();
+
+//        return header("Location: /login");
+    }
+
     public static function delete($id)
     {
         $userModel = new UserModel();

@@ -2,11 +2,12 @@
 namespace App;
 
 //die(__DIR__."/Style");
-require "conf.inc.php";
+require "conf.css.php";
 
 use App\Core\Security;
 use App\Core\Session as Session;
 use App\Core\Router;
+use App\Core\Install;
 //E
 //Permet de charger les classes appellés
 function myAutoloader( $class )
@@ -26,7 +27,28 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\myAutoloader");
 
+
+if (!Install::check()) {
+    $admin = Install::start();
+    if (!empty($admin)){
+        require "conf.inc.php";
+        Install::createUserAdmin($admin["WEBSITE_ADMIN"], $admin["WEBSITE_PASSWORD"]);
+        return header("Location: /login");
+    }
+    return;
+}
+else {
+    require "conf.inc.php";
+}
+
 //Vérifier si la route appelé existe
 $routes = new Router($_SERVER["REQUEST_URI"]);
 $tab = $routes->checkRouteExist();
+
+
+
+
+
+
+
 
