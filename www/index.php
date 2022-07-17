@@ -23,8 +23,10 @@ function myAutoloader( $class )
         include $class.".class.php";
     }
 }
-die("ahahahah");
+
 spl_autoload_register("App\myAutoloader");
+
+die("hohohoh");
 
 //Vérifier si la route appelé existe
 $routes = new Router($_SERVER["REQUEST_URI"]);
