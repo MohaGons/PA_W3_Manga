@@ -9,14 +9,14 @@ class ConnectionPDO {
     public $pdo;
 
     // Simulate Environnement Variables
-    private $database = DBDRIVER.':port='.DBPORT.';:dbname='.DBNAME.';host='.DBHOST;
-    private $username = DBUSER;
-    private $password = DBPWD;
+    private $database = DB_DRIVER.':port='.DB_PORT.';:dbname='.DB_NAME.';host='.DB_HOST;
+    private $username = DB_USER;
+    private $password = DB_PASSWORD;
 
     public function __construct()
     {
         try {
-            $this->pdo = new PDO( DBDRIVER.":host=".DBHOST.";port=".DBPORT.";dbname=".DBNAME , DBUSER , DBPWD
+            $this->pdo = new PDO( DB_DRIVER.":host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME , DB_USER , DB_PASSWORD
                 , [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING]);
         }
         catch(\Exception $e){

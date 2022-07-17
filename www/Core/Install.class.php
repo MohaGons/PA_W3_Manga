@@ -9,46 +9,16 @@ use App\Core\Security;
 
 class Install
 {
-    //il va verifier s'il y a un point .env
-    //dans point .env il faut
-    //define("DBDRIVER", "mysql");
-    //define("DBUSER", "root");
-    //define("DBPWD", "password");
-    //define("DBHOST", "database");
-    //define("DBNAME", "pa_database");
-    //define("DBPORT", "3306");
-    //define("DBPREFIXE", "mnga_");
-    //EMAIL_SOURCE_NAME=
-    //EMAIL_SOURCE_ADDRESS=
-    //EMAIL_SMTP_HOST=
-    //EMAIL_SMTP_ADMIN=
-    //EMAIL_SMTP_PASSWORD=
-    //EMAIL_SMTP_PORT=
-    //
-    //
-    //
-    //
-    //
     public static function check(): bool
     {
-        $fileName = ".env";
-        if (!file_exists($fileName))
+        $fileName = "conf.inc.php";
+        if (!file_exists($fileName)){
             return false;
-
-        $file = fopen($fileName, 'r');
-        $envPattern = "/([^=]*)=([^#]*)/";
-        $envPairs = [];
-
-        while (!feof($file)) {
-            $line = fgets($file);
-            preg_match($envPattern, $line, $results);
-            if (!empty($results[1]) && !empty($results[2]))
-                $envPairs[mb_strtoupper($results[1])] = trim($results[2]);
+        }
+        else {
+            return true;
         }
 
-        if (!isset($envPairs['WEBSITE_NAME']))
-            return false;
-        return true;
     }
 
     public static function start()
@@ -71,6 +41,9 @@ class Install
                 $data["DB_NAME"] = htmlspecialchars($_POST["DB_NAME"]);
                 $data["DB_USER"] = htmlspecialchars($_POST["DB_USER"]);
                 $data["DB_PASSWORD"] = htmlspecialchars($_POST["DB_PASSWORD"]);
+                $data["DB_PREFIXE"] = htmlspecialchars($_POST["DB_PREFIXE"]);
+                $data["DB_DRIVER"] = htmlspecialchars($_POST["DB_DRIVER"]);
+                $data["DB_PORT"] = htmlspecialchars($_POST["DB_PORT"]);
                 $data["EMAIL_SOURCE_NAME"] = htmlspecialchars($_POST["EMAIL_SOURCE_NAME"]);
                 $data["EMAIL_SMTP_HOST"] = htmlspecialchars($_POST["EMAIL_SMTP_HOST"]);
                 $data["EMAIL_SMTP_ADMIN"] = htmlspecialchars($_POST["EMAIL_SMTP_ADMIN"]);
@@ -78,9 +51,7 @@ class Install
                 $data["EMAIL_SMTP_PORT"] = htmlspecialchars($_POST["EMAIL_SMTP_PORT"]);
                 $errors = Install::execute($data);
 
-                if (empty($errors)) {
-                    Install::migrate();
-                }
+                return true;
 
             }
             else {
@@ -163,6 +134,28 @@ class Install
                     "required"=>true,
                     "value" => "database"
                 ],
+                "DB_DRIVER" => [
+                    "id" => "dbDriverInstall",
+                    "type" => "text",
+                    'class' => 'formRegister',
+                    "label" => "Driver de base de données : ",
+                    "placeholder" => "Driver de base de données",
+                    "minlength"=>"",
+                    "maxlength"=>"",
+                    "required"=>true,
+                    "value" => "mysql"
+                ],
+                "DB_PORT" => [
+                    "id" => "dbDriverInstall",
+                    "type" => "text",
+                    'class' => 'formRegister',
+                    "label" => "Port de base de données : ",
+                    "placeholder" => "Port de base de données",
+                    "minlength"=>"",
+                    "maxlength"=>"",
+                    "required"=>true,
+                    "value" => "3306"
+                ],
                 "DB_NAME" => [
                     "id" => "dbNametInstall",
                     "type" => "text",
@@ -173,6 +166,17 @@ class Install
                     "maxlength"=>"",
                     "required"=>true,
                     "value" => "pa_database"
+                ],
+                "DB_PREFIXE" => [
+                    "id" => "dbDriverInstall",
+                    "type" => "text",
+                    'class' => 'formRegister',
+                    "label" => "Préfixe table en base : ",
+                    "placeholder" => "Préfixe table en base : ",
+                    "minlength"=>"",
+                    "maxlength"=>"",
+                    "required"=>true,
+                    "value" => "mnga_"
                 ],
                 "DB_USER" => [
                     "id" => "dbUserInstall",
@@ -257,49 +261,57 @@ class Install
 
     public static function execute($data)
     {
-        $defaultEnv = [
-            'WEBSITE_NAME' => $data['WEBSITE_NAME'],
-            'WEBSITE_CONTACT_ADDRESS' => $data['WEBSITE_CONTACT_ADDRESS'],
-            'ENV' => 'prod'
-        ];
+        $configFile = fopen("conf.inc.php", "w");
+        fwrite($configFile, "\n");
+        fwrite($configFile, "<?php");
+        fwrite($configFile, "\n");
+        $config = 'define("WEBSITE_NAME","' . $data["WEBSITE_NAME"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("WEBSITE_CONTACT_ADDRESS","' . $data["WEBSITE_CONTACT_ADDRESS"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("ENV","prod");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("DB_HOST","' . $data["DB_HOST"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("DB_DRIVER","' . $data["DB_DRIVER"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("DB_PORT","' . $data["DB_PORT"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("DB_NAME","' . $data["DB_NAME"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("DB_PREFIXE","' . $data["DB_PREFIXE"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("DB_USER","' . $data["DB_USER"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("DB_PASSWORD","' . $data["DB_PASSWORD"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("EMAIL_SOURCE_NAME","' . $data["EMAIL_SOURCE_NAME"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("EMAIL_SMTP_HOST","' . $data["EMAIL_SMTP_HOST"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("EMAIL_SMTP_ADMIN","' . $data["EMAIL_SMTP_ADMIN"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("EMAIL_SMTP_PASSWORD","' . $data["EMAIL_SMTP_PASSWORD"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
+        $config = 'define("EMAIL_SMTP_PORT","' . $data["EMAIL_SMTP_PORT"] . '");';
+        fwrite($configFile, $config);
+        fwrite($configFile, "\n");
 
-        $databaseEnv = [
-            'DB_HOST' => $data['DB_HOST'],
-            'DB_DRIVER' => "mysql",
-            'DB_PORT' => 3306,
-            'DB_NAME' => $data['DB_NAME'],
-            'DB_PREFIXE' => "faman_",
-            'DB_USER' => $data['DB_USER'],
-            'DB_PASSWORD' => $data['DB_PASSWORD']
-        ];
-
-        $mailingEnv = [
-            "EMAIL_SOURCE_NAME" => $data['EMAIL_SOURCE_NAME'],
-            "EMAIL_SMTP_HOST" => $data['EMAIL_SMTP_HOST'],
-            "EMAIL_SMTP_ADMIN" => $data['EMAIL_SMTP_ADMIN'],
-            "EMAIL_SMTP_PASSWORD" => $data['EMAIL_SMTP_PASSWORD'],
-            "EMAIL_SMTP_PORT" => $data['EMAIL_SMTP_PORT']
-        ];
-
-        $defaultEnvFile = "conf.inc.php";
-
-        Env::writeEnvData($defaultEnv, $defaultEnvFile);
-        Env::writeEnvData($databaseEnv, $defaultEnvFile);
-        Env::writeEnvData($mailingEnv, $defaultEnvFile);
-
-        $envFiles = [$defaultEnvFile, $defaultEnvFile, $defaultEnvFile];
-        foreach ($envFiles as $file) {
-            if (!file_exists($file)) {
-                die("Erreur ENV-W001");
-            }
-        }
-
-        $_SESSION["WIZARD_ADMIN_CREDENTIALS"] = [
-            'email' => $data["WEBSITE_ADMIN"],
-            'password' => $data["WEBSITE_PASSWORD"],
-        ];
-
-        return [];
+        return true;
     }
 
     public static function migrate()

@@ -2,9 +2,8 @@
 namespace App;
 
 //die(__DIR__."/Style");
-require "conf.inc.php";
-var_dump($_ENV);
-die("iuoij");
+require "conf.css.php";
+
 use App\Core\Security;
 use App\Core\Session as Session;
 use App\Core\Router;
@@ -30,9 +29,15 @@ spl_autoload_register("App\myAutoloader");
 
 
 if (!Install::check()) {
-//    die("tcfygvuhbijnolpmù:");
-    Install::start();
+    $start = Install::start();
+    if ($start == true){
+        require "conf.inc.php";
+        return;
+    }
     return;
+}
+else {
+    require "conf.inc.php";
 }
 
 //Vérifier si la route appelé existe
