@@ -14,7 +14,6 @@ class Router
         $fileRoutes = "routes.yml";
         //Vérifier si le fichier routes.yml existe
         if(file_exists($fileRoutes)){
-            die('dieeeeeee');
             $this->routes = yaml_parse_file($fileRoutes);
             $this->routesWithParams = $this->getRouteWithParams(); //Permet de récupérer les routes possédant un paramètre
             $this->uri = $slug;
@@ -124,7 +123,8 @@ class Router
     }
 
     public function getRouteWithParams()
-    {
+    {   
+        die('getroutewithparams');
         foreach ($this->routes as $key => $value) {
             if ($value["params"] != null)
             {
