@@ -275,3 +275,9 @@ event/detail/:
   params: null
 
 
+
+/event: 
+  controller: frontevent
+  action: FrontEvent
+  security: All
+  params: null

@@ -23,10 +23,6 @@
                 <p>Manga-site</p>
             </div>
 
-            <div class="photoAndMenu">
-                <button id="menu-button">    </button>
-                <img class="img-logo" src="/Style/images/unsplash_K5TfhhrNs20.png">
-            </div>
             <?php include "View/Template/sidebar.tpl.php";?>
 
         </header>
