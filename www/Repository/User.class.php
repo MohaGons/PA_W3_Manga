@@ -116,7 +116,7 @@ class User {
 
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         $userModel = new UserModel();
         $connectionPDO = new ConnectionPDO();

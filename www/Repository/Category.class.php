@@ -36,7 +36,7 @@ class Category {
         return $result;
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         $forumModel = new CategoryModel();
         $connectionPDO = new ConnectionPDO();

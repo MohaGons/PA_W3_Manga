@@ -7,7 +7,7 @@ use App\Core\ConnectionPDO;
 
 class Page {
 
-    public function all()
+    public static function all()
     {
         $pageModel = new PageModel();
         $connectionPDO = new ConnectionPDO();
@@ -77,7 +77,7 @@ class Page {
         return $result;
     }
 
-    public function delete($id, $page, $title)
+    public static function delete($id, $page, $title)
     {
         $pageModel = new PageModel();
         $connectionPDO = new ConnectionPDO();

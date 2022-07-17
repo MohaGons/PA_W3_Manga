@@ -7,7 +7,7 @@ use App\Core\ConnectionPDO;
 
 class Forum {
 
-    public function all()
+    public static function all()
     {
         $forumModel = new ForumModel();
         $connectionPDO = new ConnectionPDO();
@@ -36,7 +36,7 @@ class Forum {
         return $result;
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         $forumModel = new ForumModel();
         $connectionPDO = new ConnectionPDO();

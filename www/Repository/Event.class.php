@@ -7,7 +7,7 @@ use App\Core\ConnectionPDO;
 
 class Event {
 
-    public function all()
+    public static function all()
     {
         $eventModel = new EventModel();
         $connectionPDO = new ConnectionPDO();
@@ -21,7 +21,7 @@ class Event {
         return $result;
     }
 
-    public function getRecentEvent()
+    public static function getRecentEvent()
     {
         $eventModel = new EventModel();
         $connectionPDO = new ConnectionPDO();
@@ -51,7 +51,7 @@ class Event {
         return $result;
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         $eventModel = new EventModel();
         $connectionPDO = new ConnectionPDO();
