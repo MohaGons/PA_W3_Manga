@@ -26,8 +26,8 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\myAutoloader");
 
-die("hohohoh");
-
 //Vérifier si la route appelé existe
 $routes = new Router($_SERVER["REQUEST_URI"]);
 $tab = $routes->checkRouteExist();
+
+die("zzzzzzz");
