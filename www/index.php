@@ -1,6 +1,6 @@
 <?php
 namespace App;
-die('moha');
+
 //die(__DIR__."/Style");
 require "conf.inc.php";
 use App\Core\Security;
