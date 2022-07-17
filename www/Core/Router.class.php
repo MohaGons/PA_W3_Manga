@@ -10,11 +10,11 @@ class Router
     private $uri = "";
 
     public function __construct($slug)
-    {
-        die('routterr');
+    {   
         $fileRoutes = "routes.yml";
         //Vérifier si le fichier routes.yml existe
         if(file_exists($fileRoutes)){
+            die('dieeeeeee');
             $this->routes = yaml_parse_file($fileRoutes);
             $this->routesWithParams = $this->getRouteWithParams(); //Permet de récupérer les routes possédant un paramètre
             $this->uri = $slug;
@@ -26,7 +26,6 @@ class Router
 
     public function checkRouteExist()
     {
-
         //Si la route n'existe pas et/ou ne possède pas de controller ou action
         if(empty($this->routes[$this->uri]) || empty($this->routes[$this->uri]["controller"]) || empty($this->routes[$this->uri]["action"])){
 
