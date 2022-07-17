@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Core;
-
+use App\Core\Security;
 
 class Router
 {
