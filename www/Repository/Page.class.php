@@ -99,13 +99,13 @@ class Page {
                 $line_number = false;
 
                 while (list($key, $line) = each($lines) and !$line_number) {
-                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
+                    $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
                 }
 
                 $delete_from_line= $line_number - 1;
                 $delete_to_line= $line_number + 6;
                 $filename="routes.yml";
-                
+
                 exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
 
                 // remove text from sidebar_front
@@ -131,13 +131,13 @@ class Page {
                 $line_number = false;
 
                 while (list($key, $line) = each($lines) and !$line_number) {
-                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
+                    $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
                 }
 
                 $delete_from_line= $line_number - 1;
                 $delete_to_line= $line_number + 6;
                 $filename="routes.yml";
-                
+
                 exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
 
                 // remove text from sidebar_front
@@ -163,13 +163,13 @@ class Page {
                 $line_number = false;
 
                 while (list($key, $line) = each($lines) and !$line_number) {
-                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
+                    $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
                 }
 
                 $delete_from_line= $line_number - 1;
                 $delete_to_line= $line_number + 6;
                 $filename="routes.yml";
-                
+
                 exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
 
                 // remove text from sidebar_front
@@ -187,7 +187,7 @@ class Page {
                 // remove file
                 unlink('View/view/front-manga.view.php');
                 break;
-            
+
         }
 
         return header("Location: /admin/page");
