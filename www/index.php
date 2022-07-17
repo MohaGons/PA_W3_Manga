@@ -28,6 +28,5 @@ spl_autoload_register("App\myAutoloader");
 
 //Vérifier si la route appelé existe
 $routes = new Router($_SERVER["REQUEST_URI"]);
-die("gggggggg");
 $tab = $routes->checkRouteExist();
 

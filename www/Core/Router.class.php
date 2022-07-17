@@ -124,7 +124,6 @@ class Router
 
     public function getRouteWithParams()
     {   
-        die('getroutewithparams');
         foreach ($this->routes as $key => $value) {
             if ($value["params"] != null)
             {
