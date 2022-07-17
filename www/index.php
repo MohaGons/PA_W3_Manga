@@ -6,6 +6,7 @@ require "conf.inc.php";
 use App\Core\Security;
 use App\Core\Session as Session;
 use App\Core\Router;
+use App\Core\Install;
 //E
 
 //Permet de charger les classes appellés
@@ -26,9 +27,20 @@ function myAutoloader( $class )
 
 spl_autoload_register("App\myAutoloader");
 
+
+if (!Install::check()) {
+//    die("tcfygvuhbijnolpmù:");
+    Install::start();
+    return;
+}
+
 //Vérifier si la route appelé existe
 $routes = new Router($_SERVER["REQUEST_URI"]);
 $tab = $routes->checkRouteExist();
+
+
+
+
 
 
 

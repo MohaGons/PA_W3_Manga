@@ -264,7 +264,7 @@ class Verificator
 
             $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
 
-            if (!$token || $token !== Session::get('token')) {
+            if (!empty($input["token"]) && !$token || $token !== Session::get('token')) {
                 $errors[]= "Tentative CSRF !";
             }
 
