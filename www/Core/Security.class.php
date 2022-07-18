@@ -13,9 +13,9 @@ class Security
         if ($security === 'All'){
         return true;
         }
-        Session::get("role");
-        if(!empty($_SESSION['role'])){
-            $role = $_SESSION['role'];
+
+        if(!empty(Session::get("role"))){
+            $role = Session::get("role");
             if (in_array($role, $security))
             {
                 return true;

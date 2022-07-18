@@ -61,7 +61,7 @@ class Role {
         $req = $connectionPDO->pdo->prepare($roleModel->getQuery());
         $req->execute();
 
-        $result = $req->fetch();
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
 
         return $result;
     }

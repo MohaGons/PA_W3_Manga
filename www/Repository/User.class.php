@@ -79,7 +79,7 @@ class User {
                 Session::set('id', $result['id']);
                 Session::set('token', $token);
                 $role = Role::getRoleName($result['role']);
-                Session::set('role', $role["role"]);
+                Session::set('role', $role);
 
                 return true;
             }
