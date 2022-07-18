@@ -98,7 +98,7 @@ class Authentification {
                         Session::set('email', $_POST['email']);
                         Session::set('token', $token);
                         $role = RoleRepository::getRoleName($user->getRole());
-                        Session::set('role', $role);
+                        Session::set('role', $role['role']);
                         $destinataire = $_POST["email"];
                         $name = $_POST["firstname"];
                         $lastname = $_POST["lastname"];
