@@ -88,46 +88,71 @@ class User
 
     public function  recuperer_mdp()
     {
-//        die("ytvubiojihph");
-        $user = new UserModel();
-        $errors = [];
-        if (!empty($_POST)) {
-            $result = PasswordReset::checkFormPasswordReset($user->getPasswordResetForm(), $_POST);
-            $errors = $result;
+        if (!empty(Session::get("role")))
+        {
+            switch (Session::get("role")){
+                case "Abonne":
+                    header('location:'.HOME_ROUTE);
+                    break;
+                default:
+                    header('location:'.ADMIN_HOME_ROUTE);
+                    break;
+            }
         }
-        $view = new View("mot_passe_oublier");
-        $view->assign("user", $user);
-        $view->assign("errors", $errors);
+        else {
+            $user = new UserModel();
+            $errors = [];
+            if (!empty($_POST)) {
+                $result = PasswordReset::checkFormPasswordReset($user->getPasswordResetForm(), $_POST);
+                $errors = $result;
+            }
+            $view = new View("mot_passe_oublier");
+            $view->assign("user", $user);
+            $view->assign("errors", $errors);
+        }
     }
 
     public function initialiser_mdp($params)
     {
-        $user = new UserModel();
-        $mdp = new PasswordModel();
-        $errors = [];
-        $token  = $params[1];
-        $email  = $params[0];
-        if (!empty($token) && !empty($email)) {
-            if (!empty($_POST)) {
-                $result = PasswordReset::checkFormPasswordInit($user->getPasswordInitForm(), $_POST);
-
-                $password = $_POST["password"];
-                $password_c = $_POST["confirm_password"];
-                if ($password == $password_c) {
-                    $password = password_hash($password, PASSWORD_DEFAULT);
-                    $mdp->NewPassword($password, $email);
-                    $mdp->UpdateStatut(1, $email);
-                    $errors[] = "<br>Votre mot de passe est modifié<br><a href='login'>Se connecter</a>";
-                    header("Location: /login");
-                } else {
-                    $errors[] = "<br>Verifier que vous avez mis le meme password dans les deux champs";
-                }
+        if (!empty(Session::get("role")))
+        {
+            switch (Session::get("role")){
+                case "Abonne":
+                    header('location:'.HOME_ROUTE);
+                    break;
+                default:
+                    header('location:'.ADMIN_HOME_ROUTE);
+                    break;
             }
-            $view = new View("mot_passe_initier");
-            $view->assign("user", $user);
-            $view->assign("errors", $errors);
-        } else {
-            echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
+        }
+        else {
+            $user = new UserModel();
+            $mdp = new PasswordModel();
+            $errors = [];
+            $token  = $params[1];
+            $email  = $params[0];
+            if (!empty($token) && !empty($email)) {
+                if (!empty($_POST)) {
+                    $result = PasswordReset::checkFormPasswordInit($user->getPasswordInitForm(), $_POST);
+
+                    $password = $_POST["password"];
+                    $password_c = $_POST["confirm_password"];
+                    if ($password == $password_c) {
+                        $password = password_hash($password, PASSWORD_DEFAULT);
+                        $mdp->NewPassword($password, $email);
+                        $mdp->UpdateStatut(1, $email);
+                        $errors[] = "<br>Votre mot de passe est modifié<br><a href='login'>Se connecter</a>";
+                        header("Location: /login");
+                    } else {
+                        $errors[] = "<br>Verifier que vous avez mis le meme password dans les deux champs";
+                    }
+                }
+                $view = new View("mot_passe_initier");
+                $view->assign("user", $user);
+                $view->assign("errors", $errors);
+            } else {
+                echo "<script>alert('Vous n\'avez effectuer aucun demande d\'initialisation du mot de passe')</script>";
+            }
         }
     }
 

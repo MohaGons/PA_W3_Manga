@@ -31,22 +31,6 @@ class User extends MysqlBuilder
         parent::__construct();
     }
 
-    public function checkLogin($data)
-    {
-        $email = htmlspecialchars($data['email']);
-        $password = htmlspecialchars($data['password']);
-        $q = "SELECT ID, email, password FROM mnga_user WHERE email = :email";
-        $req = $this->pdo->prepare($q);
-        $req->execute(['email' => $email]);
-        $results = $req->fetch();
-        if (password_verify($password, $results['password'])) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
     /**
      * @return null
      */
@@ -66,7 +50,7 @@ class User extends MysqlBuilder
     /**
      * @return null
      */
-    public function getFirstname($email): ?string
+        public function getFirstname($email): ?string
     {
         $q = "SELECT firstname FROM mnga_user WHERE email = :email";
         $req = $this->pdo->prepare($q);
