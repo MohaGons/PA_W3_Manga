@@ -36,7 +36,7 @@
 /admin/parametre:
   controller: user
   action : parametre
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /deletecompte:
@@ -47,7 +47,7 @@
 /admin/utilisateurs:
    controller: user
    action : index
-   security: [Admin,Editeur,Abonne]
+   security: [Admin,Editeur]
 
 /admin/utilisateurs/edit/:
   controller: user
@@ -69,40 +69,40 @@
 /admin/category/create:
   controller: category
   action: create
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
 
 /admin/category/edit/:
   controller: category
   action: edit
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /admin/category/delete/:
   controller: category
   action: delete
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /admin/forum:
   controller: forum
   action: index
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
 
 /admin/forum/create:
   controller: forum
   action: create
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
 
 /admin/forum/delete:
   controller: forum
   action: delete
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /admin/forum/edit/:
   controller: forum
   action: edit
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /forum/detail:
@@ -114,45 +114,45 @@
 /admin/page:
   controller: page
   action: index
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
 
 /admin/page/create:
   controller: page
   action: create
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
 
 /admin/page/edit/:
   controller: page
   action: edit
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /admin/page/delete:
   controller: page
   action: delete
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /admin/event:
   controller: event
   action: index
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
 
 /admin/event/create:
   controller: event
   action: create
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
 
 /admin/event/delete:
   controller: event
   action: delete
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /admin/event/edit/:
   controller: event
   action: edit
-  security: [Admin,Editeur,Abonne]
+  security: [Admin,Editeur]
   params: true
 
 /event/detail/:

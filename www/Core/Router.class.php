@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Core\Security as Security;
+use App\Core\Session as Session;
 
 class Router
 {
@@ -27,6 +28,8 @@ class Router
     {
         //Si la route n'existe pas et/ou ne possède pas de controller ou action
         if(empty($this->routes[$this->uri]) || empty($this->routes[$this->uri]["controller"]) || empty($this->routes[$this->uri]["action"])){
+
+            $routeFound = false;
 
             //Vérifier pour chaque route avec un parametre
             foreach ($this->routesWithParams as $key => $value) {
@@ -80,14 +83,28 @@ class Router
                         Security::returnHttpResponseCode(404);
                     }
 
-                        $objectController->$action($params);
+                    $objectController->$action($params);
+
+                    $routeFound = true;
                 }
             }
+
+            if ($routeFound == false) {
+                Security::returnHttpResponseCode(404);
+            }
+
         }
         else {
 
             if(!Security::checkRoute($this->routes[$this->uri])){
-                Security::returnHttpResponseCode(401);
+                if (!empty(Session::get("role")))
+                {
+                    Security::returnHttpResponseCode(403);
+                }
+                else {
+                    Security::returnHttpResponseCode(401);
+                }
+
             }
 
             $controller = ucfirst(strtolower($this->routes[$this->uri]["controller"]));
@@ -110,7 +127,6 @@ class Router
 
             include $controllerFile;
 
-//            die(var_dump($controller));
 
             if( !class_exists($controller)){
                 die("La classe n'existe pas");
