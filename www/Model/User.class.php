@@ -694,16 +694,18 @@ class User extends MysqlBuilder
                     "placeholder"=>"Nouveau Password",
                     "type"=>"password",
                     "id"=>"pwdRegister",
-                    "label"=>"",
+                    "label"=>"Password",
                     "class"=>"formRegister",
+                    "error"=>"Votre mot de passe doit faire au min 8 caratères avec une majuscule et un chiffre",
                     "required"=>true,
                 ],
                 "confirm_password"=>[
                     "placeholder"=>"Confirmer Password",
                     "type"=>"password",
                     "id"=>"pwdRegister",
-                    "label"=>"",
+                    "label"=>"Confirm password",
                     "class"=>"formRegister",
+                    "error"=>"Votre confirmation de mot de passe ne correspond pas",
                     "required"=>true,
                 ]
             ]

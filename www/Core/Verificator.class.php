@@ -265,7 +265,7 @@ class Verificator
             }
 
             if (!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
-                $errors[]= $name ." ne peut pas être vide";
+                $errors[]= $input["label"] ." ne peut pas être vide";
             }
 
             if (!empty($input["minlenght"]) && strlen($data[$name]) < $input["minlenght"]){
@@ -280,6 +280,14 @@ class Verificator
                 $errors[]=$input["Tu pensais nous la mettre dans le select ?!"];
             }
             if($input["type"] == "email" && !self::checkEmail($data[$name])) {
+                $errors[]=$input["error"];
+            }
+
+            if($input["type"]=="password" &&  !self::checkPwd($data[$name]) && empty($input["confirm"])) {
+                $errors[]=$input["error"];
+            }
+
+            if( !empty($input["confirm"]) && $data[$name]!=$data[$input["confirm"]]  ){
                 $errors[]=$input["error"];
             }
 
