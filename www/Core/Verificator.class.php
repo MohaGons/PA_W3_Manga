@@ -70,10 +70,6 @@ class Verificator
 
     public static function checkFormParam($config, $data): array
     {
-        echo "<pre>";
-        var_dump($config);
-        var_dump($data);
-
         $errors = [];
         foreach ($config["inputs"] as $name=>$input) {
             if (!empty($data[$name])){
@@ -106,7 +102,7 @@ class Verificator
                 }
             }
         }
-        die();
+
         return $errors;
     }
 
@@ -282,6 +278,9 @@ class Verificator
         
             if ($input["type"] == "select" && !self::checkSelect($input["option"], $data[$name])) {
                 $errors[]=$input["Tu pensais nous la mettre dans le select ?!"];
+            }
+            if($input["type"] == "email" && !self::checkEmail($data[$name])) {
+                $errors[]=$input["error"];
             }
 
             if ($input["type"] == "text") {

@@ -2,19 +2,17 @@
 
 namespace App\Controller;
 
+use App\Core\Mailer;
 use App\Core\User as UserClean;
 use App\Core\Verificator;
 use App\Core\PasswordReset;
 use App\Core\View;
 use App\Model\User as UserModel;
 use App\Model\Password as PasswordModel;
-use App\Model\Media as MediaModel;
 use App\Model\Category;
-use App\Model\Forum;
-use App\Core\Mailer;
 use App\Core\Session as Session;
-use App\Model\Manga;
-use App\Model\Event as EventModel;
+use App\Repository\User as UserRepository;
+
 
 
 
@@ -58,35 +56,7 @@ class User
         }
     }
 
-    public function editCategory()
-    {
-        $category = new Category();
-        $view = new View("edit-category", "back");
-        $view->assign("category", $category);
-        $errors = [];
-        $categorie_data = $category->getCategory($_GET["id"]);
-
-        if (!empty($_POST)) {
-            $result = Verificator::checkFormParam($category->editCategoryForm($categorie_data), $_POST);
-
-            if (empty($result)) {
-                $category->setId($_GET["id"]);
-                if (!empty($_POST["editName"])) {
-                    $category->setNameCategory(htmlspecialchars($_POST["editName"]));
-                }
-                $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
-                $category->save();
-                header('Location: ./categorie');
-            } else {
-                $errors = $result;
-            }
-        }
-
-        $view->assign("errors", $errors);
-        $view->assign("categorie_data", $categorie_data);
-    }
-
-    public function  recuperer_mdp()
+    public function recuperer_mdp()
     {
         if (!empty(Session::get("role")))
         {
@@ -101,10 +71,43 @@ class User
         }
         else {
             $user = new UserModel();
+            $password = new PasswordModel();
             $errors = [];
+
             if (!empty($_POST)) {
-                $result = PasswordReset::checkFormPasswordReset($user->getPasswordResetForm(), $_POST);
-                $errors = $result;
+                $result = Verificator::checkForm($user->getPasswordResetForm(), $_POST);
+
+                if (empty($result)) {
+                    $userEmail = UserRepository::findByEmail($_POST["email"]);
+                    if (!empty($userEmail)){
+                        $token = substr(str_shuffle(bin2hex(random_bytes(128)  )), 0, 255);
+                        $expiresAt = date("Y-m-d H:i:s", strtotime('+24 hours'));
+                        $password->setEmail($_POST["email"]);
+                        $password->setToken($token);
+                        $password->setStatut(0);
+                        $password->setExpiresAt($expiresAt);
+                        $password->setCreatedAt(date("Y-m-d H:i:s"));
+                        $password->save();
+
+                        $destinataire = $_POST['email'];
+                        $name = '';
+                        $lastname = '';
+                        $subject = 'Reinitialisation mot de passe';
+                        $body ="Bonjour,<br>Cliquer sur le lien pour modifier votre mot de passe : <a href=".$_SERVER['HTTP_HOST']."/initialiser_mdp/".$_POST["email"]."/".$token."'>Initialiser mot de passe</a><br><br>Le lien est disponible pendant une heure. ";
+
+                        if(Mailer::sendMail($destinataire, $name, $lastname, $subject, $body)){
+                            $errors[] = "Un email a ete envoyé a l'adresse : <strong>".$_POST["email"]."</strong><br>Le lien de recuperation de mot de passe est valide pour 1h";
+                        }
+
+                    }
+                    else{
+                        $errors[] = "<br>Votre Email n'existe pas ";
+                    }
+                }
+                else{
+                    $errors = $result;
+                }
+
             }
             $view = new View("mot_passe_oublier");
             $view->assign("user", $user);
@@ -126,12 +129,14 @@ class User
             }
         }
         else {
-            $user = new UserModel();
-            $mdp = new PasswordModel();
-            $errors = [];
-            $token  = $params[1];
             $email  = $params[0];
+            $token  = $params[1];
+
             if (!empty($token) && !empty($email)) {
+                $user = new UserModel();
+                $mdp = new PasswordModel();
+
+                $errors = [];
                 if (!empty($_POST)) {
                     $result = PasswordReset::checkFormPasswordInit($user->getPasswordInitForm(), $_POST);
 
