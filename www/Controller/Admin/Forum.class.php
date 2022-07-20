@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Session as Session;
 use App\Core\Verificator;
 use App\Core\View;
@@ -68,6 +69,9 @@ class Forum
         {
             $forum_delete = ForumRepository::delete($forum_Id);
         }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
     }
 
     public function edit($params)
@@ -114,6 +118,9 @@ class Forum
             $view->assign("categorie_data", $categorie_data);
             $view->assign("errors", $errors);
             $view->assign("forum_data", $forum_data);
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
 
     }

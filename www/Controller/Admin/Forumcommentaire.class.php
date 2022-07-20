@@ -2,12 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\ForumCommentaire as ForumCommentaireModel;
 use App\Repository\ForumCommentaire as ForumCommentaireRepository;
 
-class ForumCommentaire
+class Forumcommentaire
 {
     public function index()
     {
@@ -42,6 +43,9 @@ class ForumCommentaire
             $view->assign("forum_commentaire", $forum_commentaire);
             header("Location: /admin/forumcommentaire");
         }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
 
     }
 
@@ -53,6 +57,9 @@ class ForumCommentaire
         {
             $forum_commentaire_delete = ForumCommentaireRepository::delete($forum_commentaire_Id);
             header("Location: /admin/forumcommentaire");
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
     }
 

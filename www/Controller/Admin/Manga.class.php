@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Session as Session;
 use App\Core\Verificator;
 use App\Core\View;
@@ -72,6 +73,9 @@ class Manga
         {
             $manga_delete = MangaRepository::delete($manga_Id);
         }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
         
     }
 
@@ -123,6 +127,9 @@ class Manga
             $view->assign("mangaInfos", $mangaInfos);
             $view->assign("errors", $errors);
 
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
 
     }

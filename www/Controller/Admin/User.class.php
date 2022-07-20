@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\User as UserClean;
 use App\Core\Verificator;
 use App\Core\PasswordReset;
@@ -59,8 +60,8 @@ class User {
             $view->assign("userData", $userData);
             $view->assign("messages", $messages);
         }
-        else{
-             die("l'user existe pas");
+        else {
+            Security::returnHttpResponseCode(404);
         }
 
     }
@@ -129,6 +130,9 @@ class User {
         if (!empty($user_Id) && is_numeric($user_Id))
         {
             $manga_delete = UserRepository::delete($user_Id);
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
     }
 

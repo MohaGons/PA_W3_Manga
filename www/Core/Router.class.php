@@ -83,7 +83,13 @@ class Router
                         Security::returnHttpResponseCode(404);
                     }
 
-                    $objectController->$action($params);
+                    if (!empty($params)) {
+                        $objectController->$action($params);
+                    }
+                    else {
+                        Security::returnHttpResponseCode(404);
+                    }
+
 
                     $routeFound = true;
                 }
@@ -139,7 +145,13 @@ class Router
                 die("La methode n'existe pas");
             }
 
-            $objectController->$action();
+            if (!empty($this->routes[$this->uri]["params"])) {
+                Security::returnHttpResponseCode(404);
+            }
+            else {
+                $objectController->$action();
+            }
+
         }
     }
 
