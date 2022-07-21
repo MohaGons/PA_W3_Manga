@@ -3,8 +3,11 @@ namespace App\Model;
 
 use App\Core\MysqlBuilder;
 use App\Core\Session as Session;
+use App\Core\SplSubject;
+use App\Repository\Newsletter as NewsletterRepository;
+use App\Model\User;
 
-class Manga extends MysqlBuilder
+class Manga extends MysqlBuilder implements SplSubject
 {
     
     protected $id = null;   
@@ -212,6 +215,16 @@ class Manga extends MysqlBuilder
     public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function notify(): void
+    {
+        $userModel = new User();
+        $users = NewsletterRepository::all(NEWSLETTER_MANGA);
+
+        foreach ($users as $user) {
+            $userModel->updateNewsletter($this, $user);
+        }
     }
 
     public function getCreateMangaForm(): array

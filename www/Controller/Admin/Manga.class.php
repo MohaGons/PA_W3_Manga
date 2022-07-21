@@ -53,6 +53,7 @@ class Manga
             }
 
             $manga->save();
+            $manga->notify();
             $media->setMedia("Mangas", Session::get('email'), "");
 
             echo "<script>alert('Votre manga a bien été mis à jour')</script>";

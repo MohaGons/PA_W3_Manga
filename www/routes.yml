@@ -233,5 +233,10 @@
 /admin/template:
   controller: main
   action: Template
+  security: [Admin,Editeur]
+
+/newsletter:
+  controller: newsletter
+  action: index
   security: [Admin,Editeur,Abonne]
 

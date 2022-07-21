@@ -1,13 +1,17 @@
 <?php
 namespace App\Model;
 
+use App\Core\Mailer;
 use App\Core\MysqlBuilder;
+use App\Core\SplObserver;
+use App\Core\SplSubject;
 use App\Repository\Role as RoleRepository;
+use App\Repository\Newsletter as NewsletterRepository;
 use App\Model\Role as RoleModel;
 use App\Core\Session as Session;
 use PDO;
 
-class User extends MysqlBuilder
+class User extends MysqlBuilder implements SplObserver
 {
 
     protected $id = null;
@@ -315,6 +319,18 @@ class User extends MysqlBuilder
     public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+
+    public function updateNewsletter(Manga $manga, Array $userInfo): void
+    {
+        $destinataire = $userInfo["email"];
+        $name = $userInfo["firstname"];
+        $lastname = $userInfo["lastname"];
+        $subject = 'Newsletter sortie manga';
+        $body = 'Un nouveau manga/anime a été ajouté sur le site du nom de : '.$manga->getTitleManga();
+        Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+
     }
 
    public function deletecompte($email)
