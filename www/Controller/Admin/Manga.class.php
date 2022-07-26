@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Session as Session;
 use App\Core\Verificator;
 use App\Core\View;
@@ -52,6 +53,7 @@ class Manga
             }
 
             $manga->save();
+            $manga->notify();
             $media->setMedia("Mangas", Session::get('email'), "");
 
             echo "<script>alert('Votre manga a bien été mis à jour')</script>";
@@ -71,6 +73,9 @@ class Manga
         if (!empty($manga_Id) && is_numeric($manga_Id))
         {
             $manga_delete = MangaRepository::delete($manga_Id);
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
         
     }
@@ -123,6 +128,9 @@ class Manga
             $view->assign("mangaInfos", $mangaInfos);
             $view->assign("errors", $errors);
 
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
 
     }

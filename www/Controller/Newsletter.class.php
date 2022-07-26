@@ -9,7 +9,7 @@ use App\Core\Verificator;
 use App\Core\PasswordReset;
 use App\Core\View;
 use App\Model\User as UserModel;
-use App\Model\Password as PasswordModel;
+use App\Model\Newsletter as NewsletterModel;
 use App\Model\Category;
 use App\Core\Session as Session;
 use App\Repository\User as UserRepository;
@@ -17,35 +17,45 @@ use App\Repository\Password as PasswordRepository;
 
 
 
-class User
+class Newsletter
 {
 
-    public function category()
+    public function index()
     {
-        $category = new Category();
+        $newsletter = new NewsletterModel();
+
         $errors = [];
 
-        if (!empty($_POST)) {
+        if(!empty($_POST)) {
 
-            $result = Verificator::checkFormParam($category->getCategoryForm(), $_POST);
+
+            $result = Verificator::checkForm($newsletter->getNewsletterForm(), $_POST);
+
             if (empty($result)) {
-                if (!empty($_POST["name"])) {
-                    $category->setNameCategory(htmlspecialchars($_POST["name"]));
+                if (!empty($_POST["manga"]) && $_POST["manga"] == "yes"){
+                    $newsletterManga = new NewsletterModel();
+                    $newsletterManga->setIdUser(Session::get("id"));
+                    $newsletterManga->setIdSubject(NEWSLETTER_MANGA);
+                    $newsletterManga->setCreatedAt(date("Y-m-d H:i:s"));
+                    $newsletterManga->save();
                 }
-                $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
-                $category->save();
-                echo "<script>alert('Votre catégorie a bien été mis à jour')</script>";
-            } else {
-                $errors = $result;
+
+                if (!empty($_POST["evenement"]) && $_POST["evenement"] == "yes"){
+                    $newsletterEvenement = new NewsletterModel();
+                    $newsletterEvenement->setIdUser(Session::get("id"));
+                    $newsletterEvenement->setIdSubject(NEWSLETTER_EVENEMENT);
+                    $newsletterEvenement->setCreatedAt(date("Y-m-d H:i:s"));
+                    $newsletterEvenement->save();
+                }
             }
+
+
+            header("Location: /");
         }
 
-        $view = new View("category", "back");
-        $view->assign("category", $category);
+        $view = new View("newsletter", "front");
         $view->assign("errors", $errors);
-
-        $categorie_data = $category->getCategories();
-        $view->assign("categorie_data", $categorie_data);
+        $view->assign("newsletter", $newsletter);
     }
 
     public function deleteCategory()

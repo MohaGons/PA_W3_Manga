@@ -19,3 +19,12 @@ define("LINK_CSS", "/Style/dist/main.css");
 
 //LIEN CSS
 define("LINK_JS", "/Style/dist/main.js");
+
+//LIEN IMG
+define("LINK_IMG_ERROR_401", "/Style/images/Error/itachi_bandeau.jpg");
+define("LINK_IMG_ERROR_404", "/Style/images/Error/zoro_lost.jpeg");
+
+
+//NEWSLETTER
+define("NEWSLETTER_MANGA", 1);
+define("NEWSLETTER_EVENEMENT", 2);

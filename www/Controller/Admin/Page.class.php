@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Session as Session;
 use App\Core\Verificator;
 use App\Core\View;
@@ -63,6 +64,9 @@ class Page
         {
             $page_Id = PageRepository::delete($page_Id, $page, $title);
         }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
     }
 
     public function edit($params)
@@ -101,6 +105,9 @@ class Page
             $view->assign("page", $page);
             $view->assign("errors", $errors);
             $view->assign("page_data", $page_data);
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
 
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\Event as EventModel;
@@ -59,6 +60,9 @@ class Event
         {
             $event_delete = EventRepository::delete($event_Id);
         }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
     }
 
     public function edit($params)
@@ -104,6 +108,9 @@ class Event
             $view = new View("admin/event_edit", "back");
             $view->assign("event", $event);
             $view->assign("event_data", $event_data);
+        }
+        else{
+            Security::returnHttpResponseCode(404);
         }
     }
 

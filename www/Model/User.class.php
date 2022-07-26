@@ -1,13 +1,17 @@
 <?php
 namespace App\Model;
 
+use App\Core\Mailer;
 use App\Core\MysqlBuilder;
+use App\Core\SplObserver;
+use App\Core\SplSubject;
 use App\Repository\Role as RoleRepository;
+use App\Repository\Newsletter as NewsletterRepository;
 use App\Model\Role as RoleModel;
 use App\Core\Session as Session;
 use PDO;
 
-class User extends MysqlBuilder
+class User extends MysqlBuilder implements SplObserver
 {
 
     protected $id = null;
@@ -31,22 +35,6 @@ class User extends MysqlBuilder
         parent::__construct();
     }
 
-    public function checkLogin($data)
-    {
-        $email = htmlspecialchars($data['email']);
-        $password = htmlspecialchars($data['password']);
-        $q = "SELECT ID, email, password FROM mnga_user WHERE email = :email";
-        $req = $this->pdo->prepare($q);
-        $req->execute(['email' => $email]);
-        $results = $req->fetch();
-        if (password_verify($password, $results['password'])) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
     /**
      * @return null
      */
@@ -66,7 +54,7 @@ class User extends MysqlBuilder
     /**
      * @return null
      */
-    public function getFirstname($email): ?string
+        public function getFirstname($email): ?string
     {
         $q = "SELECT firstname FROM mnga_user WHERE email = :email";
         $req = $this->pdo->prepare($q);
@@ -331,6 +319,18 @@ class User extends MysqlBuilder
     public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+
+    public function updateNewsletter(Manga $manga, Array $userInfo): void
+    {
+        $destinataire = $userInfo["email"];
+        $name = $userInfo["firstname"];
+        $lastname = $userInfo["lastname"];
+        $subject = 'Newsletter sortie manga';
+        $body = 'Un nouveau manga/anime a été ajouté sur le site du nom de : '.$manga->getTitleManga();
+        Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+
     }
 
    public function deletecompte($email)
@@ -688,13 +688,9 @@ class User extends MysqlBuilder
                     "id"=>"emailRegister",
                     "label"=>"",
                     "class"=>"formRegister",
+                    "error"=>"formRegister",
                     "required"=>true,
                 ]
-            ],
-            "submit"=>[
-                "type"=>"submit",
-                "class"=>"button-submit",
-                "title"=>"Confirmer",
             ]
         ];
     }
@@ -714,16 +710,18 @@ class User extends MysqlBuilder
                     "placeholder"=>"Nouveau Password",
                     "type"=>"password",
                     "id"=>"pwdRegister",
-                    "label"=>"",
+                    "label"=>"Password",
                     "class"=>"formRegister",
+                    "error"=>"Votre mot de passe doit faire au min 8 caratères avec une majuscule et un chiffre",
                     "required"=>true,
                 ],
                 "confirm_password"=>[
                     "placeholder"=>"Confirmer Password",
                     "type"=>"password",
                     "id"=>"pwdRegister",
-                    "label"=>"",
+                    "label"=>"Confirm password",
                     "class"=>"formRegister",
+                    "error"=>"Votre confirmation de mot de passe ne correspond pas",
                     "required"=>true,
                 ]
             ]

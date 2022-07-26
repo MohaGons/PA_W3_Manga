@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Session as Session;
 use App\Model\User as UserModel;
 use App\Model\Role as RoleModel;
@@ -88,6 +89,9 @@ class Category
             $view->assign("categorie_data", $categorie_data);
             $view->assign("errors", $errors);
         }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
 
     }
 
@@ -102,6 +106,9 @@ class Category
             if ($categorie_delete == true) {
                 header('Location: /admin/category');
             }
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
     }
 }

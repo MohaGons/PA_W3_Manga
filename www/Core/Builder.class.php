@@ -30,6 +30,7 @@ class Builder
 
                     break;
                 case "radio":
+                    $html .= "<label for='" . $name . "'>" . $configInput["label"] . "</label>";
                     foreach ($configInput["option"] as $option => $value) {
                         $html .= "<div><label for='" . $name . "'>";
                         $html .= $value["label"];
