@@ -53,7 +53,7 @@ class Frontevent
 
    public function detail($id)
    {   
-        $messages=[];
+       $messages=[];
        $event_Id = $id[1];
        require ('stripe-php-master/init.php');
        $publishableKey = "pk_test_51LKIrYEf8Ik7LivPyKhufvmPYSZGwb9Wfw7jtnvLt9jNmuqKk8bGTkVvJJbrrl0qhazSdbEq4MzIMZg9v4ghazTj00WzYPHeJ0";

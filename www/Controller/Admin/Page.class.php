@@ -76,6 +76,8 @@ class Page
         if (!empty($id) && is_numeric($id)) {
             $page = new PageModel();
             $page_data = PageRepository::findById($id);
+            $edit_title = $page_data[0]["title"];
+            $edit_page = $page_data[0]["page"];
             $errors = [];
 
             if (!empty($_POST)) {
@@ -90,10 +92,8 @@ class Page
                     if (!empty($_POST["description"])) {
                         $page->setDescriptionPage(htmlspecialchars($_POST["description"]));
                     }
-                    if (!empty($_POST["page"])) {
-                        $page->setSpecificPage($_POST["page"], $_POST["title"]);
-                    }
                     $page->setUserId(Session::get('id'));
+                    PageRepository::edit($edit_page, $edit_title, $_POST["title"]);
                     $page->save();
                     echo "<script>alert('Votre page a bien été mise à jour')</script>";
                     header("Location: /admin/page");

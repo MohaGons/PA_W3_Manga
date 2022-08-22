@@ -61,23 +61,14 @@ class Page extends MysqlBuilder
 
         switch ($page) {
             case "event":
-
-                // create nav menu
-                $fp = fopen('View/Template/sidebar_front.tpl.php', "a+");
-                fwrite($fp, '        <li><a href="/' . $title_lower . '">' . $title . '</a></li>
-        ');
-                fclose($fp);
-
                 // create route
-                $fp = fopen('routes.yml', "a+");
-                fwrite($fp, '
-/' . $title_lower . ': 
-  controller: frontevent
-  action: FrontEvent
-  security: All
-  params: null
-');
-                fclose($fp);
+                $content = file_get_contents('routes.yml');
+                $content .= "\n\n/" . $title_lower . ': ';
+                $content .= "\n  controller: frontevent";
+                $content .= "\n  action: FrontEvent";
+                $content .= "\n  security: [Admin,Editeur,Abonne]";
+                $content .= "\n  params: null";
+                file_put_contents('routes.yml', $content);
 
                 // create view
                 $fp = fopen('View/view/front-event.view.php', "a+");
@@ -184,21 +175,14 @@ $("*").css("font-family", localStorage.font);
                 break;
             case "forum":
 
-                // create nav menu
-                $fp = fopen('View/Template/sidebar_front.tpl.php', "a+");
-                fwrite($fp, '        <li><a href="/' . $title_lower . '">' . $title . '</a></li>
-        ');
-                fclose($fp);
-
-                $fp = fopen('routes.yml', "a+");
-                fwrite($fp, '
-/' . $title_lower . ': 
-  controller: frontforum
-  action: FrontForum
-  security: All
-  params: null
-');
-                fclose($fp);
+                // create route
+                $content = file_get_contents('routes.yml');
+                $content .= "\n\n/" . $title_lower . ': ';
+                $content .= "\n  controller: frontforum";
+                $content .= "\n  action: FrontForum";
+                $content .= "\n  security: [Admin,Editeur,Abonne]";
+                $content .= "\n  params: null";
+                file_put_contents('routes.yml', $content);
 
                 $fp = fopen('View/view/front-forum.view.php', "a+");
                 fwrite($fp, '<style>
@@ -285,21 +269,14 @@ $("*").css("font-family", localStorage.font);
                 break;
             case "manga":
 
-                // create nav menu
-                $fp = fopen('View/Template/sidebar_front.tpl.php', "a+");
-                fwrite($fp, '        <li><a href="/' . $title_lower . '">' . $title . '</a></li>
-        ');
-                fclose($fp);
-
-                $fp = fopen('routes.yml', "a+");
-                fwrite($fp, '
-/' . $title_lower . ': 
-  controller: frontmanga
-  action: FrontManga
-  security: All
-  params: null
-');
-                fclose($fp);
+                // create route
+                $content = file_get_contents('routes.yml');
+                $content .= "\n\n/" . $title_lower . ': ';
+                $content .= "\n  controller: frontmanga";
+                $content .= "\n  action: FrontManga";
+                $content .= "\n  security: [Admin,Editeur,Abonne]";
+                $content .= "\n  params: null";
+                file_put_contents('routes.yml', $content);
 
                 $fp = fopen('View/view/front-manga.view.php', "a+");
                 fwrite($fp, '<style>

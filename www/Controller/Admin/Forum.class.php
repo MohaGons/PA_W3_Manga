@@ -31,6 +31,34 @@ class Forum
         $errors = [];
         $categorie_data = $category->getCategoryNames();
 
+        /*
+        if (!empty($_POST) && !empty($_FILES)) {
+
+            $data = array_merge($_POST, $_FILES);
+            $result = Verificator::checkForm($forum->getForumForm($categorie_data), $data);
+            if (empty($result)) {
+                if (!empty($_POST["title"])) {
+                    $forum->setTitleForum(htmlspecialchars($_POST["title"]));
+                }
+                if (!empty($_POST["description"])) {
+                    $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
+                }
+                $forum->setPicture(htmlspecialchars($_FILES["file"]["name"]));
+                $forum->setDate(date('Y-m-d'));
+                if (!empty($_POST["categories"])) {
+                    $forum->setCategoryId($_POST["categories"]);
+                }
+                $forum->setUserId(Session::get('id'));
+                $forum->setCreatedAt(date("Y-m-d H:i:s"));  
+                $forum->save();
+                echo "<script>alert('Votre forum a bien été mis à jour')</script>";
+                header("Location: /admin/forum");
+            } else {
+                $errors = $result;
+            }
+        }
+        */
+
         if (!empty($_POST)) {
 
             $result = Verificator::checkForm($forum->getForumForm($categorie_data), $_POST);
@@ -42,6 +70,7 @@ class Forum
                 if (!empty($_POST["description"])) {
                     $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
                 }
+                $forum->setPicture(htmlspecialchars($_POST["file"]));
                 $forum->setDate(date('Y-m-d'));
                 if (!empty($_POST["categories"])) {
                     $forum->setCategoryId($_POST["categories"]);
@@ -98,6 +127,7 @@ class Forum
                     if (!empty($_POST["editDescription"])) {
                         $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
                     }
+                    $forum->setPicture(htmlspecialchars($_POST["file"]));
                     $forum->setDate(date('Y-m-d'));
                     if (!empty($_POST["categories"])) {
                         $forum->setCategoryId($_POST["categories"]);

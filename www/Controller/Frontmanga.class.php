@@ -23,8 +23,7 @@ class Frontmanga
 
     public function detail($id)
     {   
-        $manga_Id = $id[0];
-
+        $manga_Id = $id[1];
         $manga = new MangaModel();
         $page_data = PageRepository::dataPage("manga", Session::get('id'));
         $manga_data = MangaRepository::findById($manga_Id);
