@@ -495,6 +495,7 @@ class User extends MysqlBuilder implements SplObserver
                 ],
                 "gender"=>[
                     "type"=>"radio",
+                    "label"=> "Sexe",
                     "required"=>true,
                     "option"=> [
                         [
