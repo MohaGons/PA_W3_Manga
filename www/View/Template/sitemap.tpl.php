@@ -1,0 +1,1 @@
+<?php include "View/view/" . $this->view . ".view.php"; ?>
