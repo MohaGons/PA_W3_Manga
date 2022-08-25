@@ -107,6 +107,7 @@ class Authentification {
                         $user->setAvatar(htmlspecialchars($_FILES["file"]["name"]));
                         $user->setPays('Pays');
                         $user->setPays('Ville');
+                        $user->setCreatedAt(date("Y-m-d H:i:s"));
                         $user->generateToken($token);
                         $persist = $user->save();
 

@@ -519,7 +519,7 @@ class User extends MysqlBuilder implements SplObserver
                     "id"=>"file",
                     "class"=>"formRegister",
                     "required"=>false,
-                    "accept" => ""
+                    "accept" => "image/*"
                 ]
             ]
         ];
