@@ -12,7 +12,6 @@ class Category extends MysqlBuilder
     protected $description = null;
     protected $createdAt = null;
     protected $updatedAt = null;
-    protected $user_id = null;
 
     public function __construct()
     {
@@ -81,15 +80,6 @@ class Category extends MysqlBuilder
     public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId($user_id){
-        $this->user_id = $user_id;
     }
 
     public function getCategoryForm(): array

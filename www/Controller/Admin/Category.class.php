@@ -39,8 +39,6 @@ class Category
                 }
                 $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
                 $category->setCreatedAt(date("Y-m-d H:i:s"));
-                $category->setUpdatedAt(date("Y-m-d H:i:s"));
-                $category->setUserId(Session::get('id'));
                 $category->save();
                 echo "<script>alert('Votre catégorie a bien été enregistrée')</script>";
                 header("Location: /admin/category");
@@ -74,9 +72,7 @@ class Category
                         $category->setNameCategory(htmlspecialchars($_POST["editName"]));
                     }
                     $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
-                    $category->setCreatedAt($categorie_data[0]["createdAt"]);
                     $category->setUpdatedAt(date("Y-m-d H:i:s"));
-                    $category->setUserId(Session::get('id'));
                     $category->save();
                     header('Location: /admin/category');
                 } else {
