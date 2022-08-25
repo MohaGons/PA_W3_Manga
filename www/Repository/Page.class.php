@@ -200,7 +200,6 @@ class Page {
                 $content .= "\n\n/" . $new_title_lower . ': ';
                 $content .= "\n  controller: frontevent";
                 $content .= "\n  action: FrontEvent";
-                $content .= "\n  security: [Admin,Editeur,Abonne]";
                 $content .= "\n  params: null";
                 file_put_contents('routes.yml', $content);
 
@@ -231,7 +230,6 @@ class Page {
                 $content .= "\n\n/" . $new_title_lower . ': ';
                 $content .= "\n  controller: frontforum";
                 $content .= "\n  action: FrontForum";
-                $content .= "\n  security: [Admin,Editeur,Abonne]";
                 $content .= "\n  params: null";
                 file_put_contents('routes.yml', $content);
 
@@ -262,7 +260,6 @@ class Page {
                 $content .= "\n\n/" . $new_title_lower . ': ';
                 $content .= "\n  controller: frontmanga";
                 $content .= "\n  action: FrontManga";
-                $content .= "\n  security: [Admin,Editeur,Abonne]";
                 $content .= "\n  params: null";
                 file_put_contents('routes.yml', $content);
 

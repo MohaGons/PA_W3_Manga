@@ -66,7 +66,6 @@ class Page extends MysqlBuilder
                 $content .= "\n\n/" . $title_lower . ': ';
                 $content .= "\n  controller: frontevent";
                 $content .= "\n  action: FrontEvent";
-                $content .= "\n  security: [Admin,Editeur,Abonne]";
                 $content .= "\n  params: null";
                 file_put_contents('routes.yml', $content);
 
@@ -180,7 +179,6 @@ $("*").css("font-family", localStorage.font);
                 $content .= "\n\n/" . $title_lower . ': ';
                 $content .= "\n  controller: frontforum";
                 $content .= "\n  action: FrontForum";
-                $content .= "\n  security: [Admin,Editeur,Abonne]";
                 $content .= "\n  params: null";
                 file_put_contents('routes.yml', $content);
 
@@ -274,7 +272,6 @@ $("*").css("font-family", localStorage.font);
                 $content .= "\n\n/" . $title_lower . ': ';
                 $content .= "\n  controller: frontmanga";
                 $content .= "\n  action: FrontManga";
-                $content .= "\n  security: [Admin,Editeur,Abonne]";
                 $content .= "\n  params: null";
                 file_put_contents('routes.yml', $content);
 

@@ -108,7 +108,6 @@
 /forum/detail:
   controller: frontforum
   action: detail
-  security: [Admin,Editeur,Abonne]
   params: true
 
 /admin/page:
@@ -158,7 +157,6 @@
 /event/detail:
   controller: frontevent
   action: detail
-  security: [Admin,Editeur,Abonne]
   params: true
 
 /admin/manga:
@@ -243,23 +241,15 @@
 /sitemap:
   controller: sitemap
   action: index
-  security: [Admin,Editeur,Abonne]
 
 
-/event: 
-  controller: frontevent
-  action: FrontEvent
-  security: [Admin,Editeur,Abonne]
-  params: null
 
-/mangas: 
-  controller: frontmanga
-  action: FrontManga
-  security: [Admin,Editeur,Abonne]
-  params: null
-
-/forums: 
+/forum: 
   controller: frontforum
   action: FrontForum
-  security: [Admin,Editeur,Abonne]
+  params: null
+
+/events: 
+  controller: frontevent
+  action: FrontEvent
   params: null
