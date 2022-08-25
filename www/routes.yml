@@ -242,14 +242,3 @@
   controller: sitemap
   action: index
 
-
-
-/forum: 
-  controller: frontforum
-  action: FrontForum
-  params: null
-
-/events: 
-  controller: frontevent
-  action: FrontEvent
-  params: null
