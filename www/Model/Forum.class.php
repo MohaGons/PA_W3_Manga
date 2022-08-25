@@ -132,6 +132,7 @@ class Forum extends MysqlBuilder
                 "action"=>"",
                 "id"=>"formForum",
                 "class"=>"formForum",
+                "enctype"=>"multipart/form-data",
                 "submit"=>"Valider"
             ],
             "inputs"=>[
@@ -190,6 +191,7 @@ class Forum extends MysqlBuilder
                 "action"=>"",
                 "id"=>"formForum",
                 "class"=>"formForum",
+                "enctype"=>"multipart/form-data",
                 "submit"=>"Valider"
             ],
             "inputs"=>[

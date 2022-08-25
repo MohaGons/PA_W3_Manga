@@ -220,7 +220,7 @@ $("*").css("font-family", localStorage.font);
                   <div class="card-wrapper">
                     <div class="thumbnail-container">
                       <a href="forum/detail/<?= $value["id"] ?>">
-                        <img src="https://placekitten.com/g/1000/300" />
+                        <img src="/Style/images/Forums/<?= $value[\'picture\']?>" />
                       </a>
                     </div>
                     <div class="card-details-container">

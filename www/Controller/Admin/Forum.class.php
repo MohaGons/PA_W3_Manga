@@ -7,6 +7,7 @@ use App\Core\Session as Session;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\Forum as ForumsModel;
+use App\Model\Media as MediaModel;
 use App\Model\Category;
 use App\Repository\Forum as ForumRepository;
 
@@ -27,11 +28,12 @@ class Forum
     {
         $forum = new ForumsModel();
         $category = new Category();
-
+        $media = new MediaModel();
+        $session = new Session();
+        
         $errors = [];
         $categorie_data = $category->getCategoryNames();
 
-        /*
         if (!empty($_POST) && !empty($_FILES)) {
 
             $data = array_merge($_POST, $_FILES);
@@ -51,33 +53,7 @@ class Forum
                 $forum->setUserId(Session::get('id'));
                 $forum->setCreatedAt(date("Y-m-d H:i:s"));  
                 $forum->save();
-                echo "<script>alert('Votre forum a bien été mis à jour')</script>";
-                header("Location: /admin/forum");
-            } else {
-                $errors = $result;
-            }
-        }
-        */
-
-        if (!empty($_POST)) {
-
-            $result = Verificator::checkForm($forum->getForumForm($categorie_data), $_POST);
-
-            if (empty($result)) {
-                if (!empty($_POST["title"])) {
-                    $forum->setTitleForum(htmlspecialchars($_POST["title"]));
-                }
-                if (!empty($_POST["description"])) {
-                    $forum->setDescriptionForum(htmlspecialchars($_POST["description"]));
-                }
-                $forum->setPicture(htmlspecialchars($_POST["file"]));
-                $forum->setDate(date('Y-m-d'));
-                if (!empty($_POST["categories"])) {
-                    $forum->setCategoryId($_POST["categories"]);
-                }
-                $forum->setUserId(Session::get('id'));
-                $forum->setCreatedAt(date("Y-m-d H:i:s"));
-                $forum->save();
+                $media->setMedia("Forums",$session->get('email'),"set");
                 echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                 header("Location: /admin/forum");
             } else {
@@ -106,6 +82,8 @@ class Forum
     public function edit($params)
     {
         $id = $params[0];
+        $media = new MediaModel();
+        $session = new Session();
 
         if (!empty($id) && is_numeric($id)) {
             $forum = new ForumsModel();
@@ -115,9 +93,10 @@ class Forum
             $forum_data = ForumRepository::findById($id);
             $errors = [];
 
-            if (!empty($_POST)) {
+            if(!empty($_POST) && !empty($_FILES)) {
 
-                $result = Verificator::checkForm($forum->editParamForum($forum_data, $categorie_data), $_POST);
+                $data = array_merge($_POST, $_FILES);
+                $result = Verificator::checkForm($forum->editParamForum($forum_data, $categorie_data), $data);
 
                 if (empty($result)) {
                     $forum->setId($id);
@@ -127,15 +106,15 @@ class Forum
                     if (!empty($_POST["editDescription"])) {
                         $forum->setDescriptionForum(htmlspecialchars($_POST["editDescription"]));
                     }
-                    $forum->setPicture(htmlspecialchars($_POST["file"]));
+                    $forum->setPicture(htmlspecialchars($_FILES["file"]["name"]));
                     $forum->setDate(date('Y-m-d'));
                     if (!empty($_POST["categories"])) {
                         $forum->setCategoryId($_POST["categories"]);
                     }
                     $forum->setUserId(Session::get('id'));
-                    $forum->setCreatedAt($forum_data[0]["createdAt"]);
                     $forum->setUpdatedAt(date("Y-m-d H:i:s"));
                     $forum->save();
+                    $media->setMedia("Forums",$session->get('email'),"set");
                     echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                     header("Location: /admin/forum");
                 } else {
