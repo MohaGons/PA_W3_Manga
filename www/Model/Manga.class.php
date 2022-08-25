@@ -82,7 +82,7 @@ class Manga extends MysqlBuilder implements SplSubject
 
     public function setImageManga(?string $image): void
     {
-        $this->image = ucwords(strtolower(trim($image)));
+        $this->image = $image;
     }
 
     public function getReleaseDateManga(): ?string
