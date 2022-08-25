@@ -26,6 +26,7 @@ class Manga
 
         $manga = new ModelManga();
         $media = new MediaModel();
+        $session = new Session();
 
         $errors = [];
 
@@ -54,7 +55,7 @@ class Manga
 
             $manga->save();
             $manga->notify();
-            $media->setMedia("Mangas", Session::get('email'), "");
+            $media->setMedia("Mangas", $session->get('email'),"set");
 
             echo "<script>alert('Votre manga a bien été mis à jour')</script>";
             header("Location: /admin/manga");
