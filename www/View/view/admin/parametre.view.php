@@ -15,7 +15,7 @@
 
 </style>
 
-<h1>Bonjour <?= $data['gender'] ?>.<?= $data['firstname'] ?> <?= $data['lastname'] ?></h1>
+<h1>Bonjour <?= strtoupper($data['gender']) ?>.<?= $data['firstname'] ?> <?= $data['lastname'] ?></h1>
 <h2>Nom : MonSitedeouf</h2>
 <?php if (!empty($errors)) {
     foreach ($errors as $error) {
@@ -29,7 +29,7 @@ $img =$data['avatar'];
 echo "<a href='/Style/images/Avatars/$img'><img src='/Style/images/Avatars/$img' class='avatar' /></a> ";
 ?>
 <br><br>
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="/admin/parametre/file" method="POST" enctype="multipart/form-data">
     <input type="file" name="file">
     <input type="submit" value="Changer Avatar" name="file">
 </form><br>
@@ -38,7 +38,7 @@ echo "<a href='/Style/images/Avatars/$img'><img src='/Style/images/Avatars/$img'
 </form>
 
 <br><br><hr><br>
-<br><br><button class="button"><a href="/deletecompte?email=<?= $data['email'] ?>">Supprimer mon compte</a></button>
+<br><br><button class="button"><a href="/admin/parametre/deletecompte/<?= $data['email'] ?>">Supprimer mon compte</a></button>
 <br><br><button class="button"><a href="/updatepassword?email=<?= $data['email'] ?>">Modifier mot de passe</a></button>
 
 <script>

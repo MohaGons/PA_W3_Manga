@@ -34,15 +34,31 @@
   params: true
 
 /admin/parametre:
-  controller: user
-  action : parametre
+  controller: setting
+  action : index
+  security: [Admin,Editeur]
+
+/admin/parametre/info:
+  controller: setting
+  action : edit_info
+  security: [Admin,Editeur]
+
+/admin/parametre/avatar/:
+  controller: setting
+  action : edit_avatar
   security: [Admin,Editeur]
   params: true
 
-/deletecompte:
-   controller: user
+/admin/parametre/file:
+  controller: setting
+  action : edit_file
+  security: [Admin,Editeur]
+
+/admin/parametre/deletecompte/:
+   controller: setting
    action : deletecompte
-   security: [Admin]
+   security: [Admin,Editeur]
+   params: true
 
 /admin/utilisateurs:
    controller: user
