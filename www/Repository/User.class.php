@@ -148,7 +148,8 @@ class User {
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        return header("Location: /admin/utilisateurs");
+        Session::destroy();
+        return header('location:'.LOGIN_VIEW_ROUTE);;
     }
 
 

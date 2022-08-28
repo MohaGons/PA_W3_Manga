@@ -108,7 +108,7 @@ class User {
             header('Location: ./parametre');
         }
 
-        $view = new View("parametre", "back");
+        $view = new View("admin/parametre", "back");
         $data = array(
             "email" => $email,
             "lastname" => $lastname,

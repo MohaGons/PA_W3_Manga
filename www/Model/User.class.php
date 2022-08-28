@@ -562,7 +562,7 @@ class User extends MysqlBuilder implements SplObserver
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"",
+                "action"=>"/admin/parametre/info",
                 "id"=>"formLogin",
                 "class"=>"formLogin",
                 "submit"=>"Valider"
