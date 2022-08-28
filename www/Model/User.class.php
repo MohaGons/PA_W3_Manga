@@ -155,7 +155,7 @@ class User extends MysqlBuilder implements SplObserver
 
     public function updateEmailId(string $email, $id): void
     {
-        $email = strtoupper(trim($email));
+        $email = strtolower(trim($email));
         $q = "UPDATE mnga_user SET email=? WHERE ID=?";
         $stmt= $this->pdo->prepare($q);
         $stmt->execute([$email,$id]);

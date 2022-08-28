@@ -79,6 +79,3 @@
     </div>
 
 
-<script type="text/javascript" src="../Style/src/js/admin/user_idex.js"></script>
-
-

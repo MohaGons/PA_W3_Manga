@@ -4040,10 +4040,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return C.$ === S && (C.$ = Qt), e && C.jQuery === S && (C.jQuery = Yt), S;
   }, "undefined" == typeof e && (C.jQuery = C.$ = S), S;
 });
-$(document).ready(function () {
-  console.log("test");
-  $('#users_table').DataTable();
-});
+
 var modal_add = $("#modal-add");
 var modal_edit = $("#modal-edit"); //var modal_delete = $("#modal-delete");
 // Get the button that opens the modal

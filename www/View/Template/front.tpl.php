@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../../Style/dist/main.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/8995af73d5.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -33,8 +34,6 @@
             <?php include "View/view/" . $this->view . ".view.php"; ?>
         </div>
     </main>
-
-    <script src="../../Style/dist/main.js"></script>
 
 </body>
 

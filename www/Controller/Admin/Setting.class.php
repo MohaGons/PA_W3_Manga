@@ -6,6 +6,7 @@ use App\Core\Security as Security;
 use App\Core\Verificator;
 use App\Core\View;
 use App\Model\User as UserModel;
+use App\Core\ConnectionPDO;
 
 use App\Core\Session as Session;
 use App\Model\Media as MediaModel;
@@ -51,12 +52,19 @@ class Setting {
     public function edit_info()
     {
         $user = new UserModel();
+        $connectionPDO = new ConnectionPDO();
         $session = new Session();
         $email = $session->get('email', '');
         if (!empty($_POST)) {
             if (!empty($result)) {
                 $result = Verificator::checkFormParam($user->getParamForm($data), $_POST);
             }
+
+            $user->select(["id"]);
+            $user->where("email", $email, "=");
+            $reqt = $connectionPDO->pdo->prepare($user->getQuery());
+            $reqt->execute();
+            $user_id = $reqt->fetchAll();
 
             if (empty($result)) {
                 if (!empty($_POST["lastname"])) {
@@ -66,6 +74,11 @@ class Setting {
                 if (!empty($_POST["firstname"])) {
                     $firstname = $_POST["firstname"];
                     $user->updateFirstname($firstname, $email);
+                }
+                if (!empty($_POST["email"])) {
+                    $email = $_POST["email"];
+                    $user->updateEmailId($email, $user_id[0]['id']);
+                    Session::set('email', $_POST['email']);
                 }
 
                 header("Location: /admin/parametre");

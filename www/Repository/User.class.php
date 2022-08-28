@@ -143,13 +143,23 @@ class User {
         $userModel = new UserModel();
         $connectionPDO = new ConnectionPDO();
 
+        $userModel->select(["email"]);
+        $userModel->where("id", $id, "=");
+        $reqt = $connectionPDO->pdo->prepare($userModel->getQuery());
+        $reqt->execute();
+        $result = $reqt->fetchAll();
+
         $userModel->delete();
         $userModel->where("id", $id, "=");
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        Session::destroy();
-        return header('location:'.LOGIN_VIEW_ROUTE);;
+        if ($result[0]['email'] == Session::get('email')) {
+            Session::destroy();
+            return header('location:'.LOGIN_VIEW_ROUTE);
+        } else {
+            return header("Location: /admin/utilisateurs");
+        }
     }
 
 

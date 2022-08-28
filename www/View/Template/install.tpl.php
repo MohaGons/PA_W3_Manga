@@ -36,7 +36,5 @@
 
 </main>
 
-<!--        <script src="../../Style/src/js/admin/user_index.js"></script>-->
-
 </body>
 </html>
