@@ -118,9 +118,6 @@ class User {
 
     public static function createUserAdmin($admin, $password)
     {
-
-        var_dump($admin);
-        var_dump($password);
         $user = new UserModel();
         $user->setFirstname(htmlspecialchars('Admin'));
         $user->setLastname(htmlspecialchars('Super'));

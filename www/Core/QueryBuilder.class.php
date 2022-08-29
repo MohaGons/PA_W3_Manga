@@ -16,6 +16,8 @@ interface QueryBuilder
 
     public function createTable(array $columns): void;
 
+    public function createDatabase($dbName): void;
+
     public function dropTable(): void;
 
     public function deleteTable(): void;

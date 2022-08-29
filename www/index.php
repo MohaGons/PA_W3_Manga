@@ -30,14 +30,14 @@ spl_autoload_register("App\myAutoloader");
 if (!Install::check()) {
     $admin = Install::start();
     if (!empty($admin)){
-        require "conf.inc.php";
+        require "conf.inc.php.php";
         Install::createUserAdmin($admin["WEBSITE_ADMIN"], $admin["WEBSITE_PASSWORD"]);
         return header("Location: /login");
     }
     return;
 }
 else {
-    require "conf.inc.php";
+    require "conf.inc.php.php";
 }
 
 //Vérifier si la route appelé existe
@@ -48,7 +48,9 @@ $tab = $routes->checkRouteExist();
 namespace App;
 
 //die(__DIR__."/Style");
-require "conf.inc.php";
+require "conf.css.php";
+
+use App\Core\Install;
 use App\Core\Security;
 use App\Core\Session as Session;
 use App\Core\Router;
@@ -71,6 +73,20 @@ function myAutoloader( $class )
 }
 
 spl_autoload_register("App\myAutoloader");
+
+if (!Install::check()) {
+    $admin = Install::start();
+    if (!empty($admin)){
+        require "conf.inc.php";
+        Install::createDatabaseAndTable($admin["DB_NAME"], $admin["DB_PREFIXE"]);
+        Install::createUserAdmin($admin["WEBSITE_ADMIN"], $admin["WEBSITE_PASSWORD"]);
+        return header("Location: /login");
+    }
+    return;
+}
+else {
+    require "conf.inc.php";
+}
 
 //Vérifier si la route appelé existe
 $routes = new Router($_SERVER["REQUEST_URI"]);
