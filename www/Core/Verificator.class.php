@@ -308,4 +308,68 @@ class Verificator
 
         return $errors;
     }
+
+    public static function checkFormInstaller($config, $data): array
+    {
+        $errors = [];
+
+        if( count($config["inputs"]) != count($data)){
+            die("Tentative de hack");
+        }
+
+        foreach ($config["inputs"] as $name=>$input)
+        {
+
+            $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+
+            if (!empty($input["token"]) && (!$token || $token !== Session::get('token'))) {
+                $errors[]= "Tentative CSRF !";
+            }
+
+            if (!empty($input["required"]) && $input["required"] == true && empty($data[$name])){
+                $errors[]= $input["label"] ." ne peut pas être vide";
+            }
+
+            if (!empty($input["minlenght"]) && strlen($data[$name]) < $input["minlenght"]){
+                $errors[]= $input["error"];
+            }
+
+            if (!empty($input["maxlenght"]) && strlen($data[$name]) > $input["maxlenght"]){
+                $errors[]= $input["error"];
+            }
+
+            if ($input["type"] == "select" && !self::checkSelect($input["option"], $data[$name])) {
+                $errors[]=$input["Tu pensais nous la mettre dans le select ?!"];
+            }
+            if($input["type"] == "email" && !self::checkEmail($data[$name])) {
+                $errors[]=$input["error"];
+            }
+
+            if($input["type"]=="password" &&  !self::checkPwd($data[$name]) && empty($input["confirm"])) {
+                if ($name == "WEBSITE_PASSWORD") {
+                    $errors[]=$input["error"];
+                }
+            }
+
+            if( !empty($input["confirm"]) && $data[$name]!=$data[$input["confirm"]]  ){
+                $errors[]=$input["error"];
+            }
+
+            if ($input["type"] == "text") {
+                if (!empty($input["minlenght"]) && (strlen($data[$name]) < $input["minlenght"])) {
+                    $errors[]=$input["error"];
+                }
+                if (!empty($input["maxlenght"]) && (strlen($data[$name]) > $input["maxlenght"])) {
+                    $errors[]=$input["error"];
+                }
+            }
+
+            if ($input["type"] == "number" && !self::checkNumber($data[$name])) {
+                $errors[]=$input["error"];
+            }
+
+        }
+
+        return $errors;
+    }
 }
