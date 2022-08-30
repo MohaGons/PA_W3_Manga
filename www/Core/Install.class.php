@@ -51,12 +51,26 @@ class Install extends MysqlBuilder
 
             $data = [];
             if (empty($result)) {
+
+                $dbDriver = "mysql";
+                $dbPort = "3306";
+                $dbHost = "database";
+                $dbUser = "root";
+                $dbPassword = "password";
+                $dbName = "pa_database";
+                $dbPrefix = "mnga_";
+
                 $data["WEBSITE_NAME"] = htmlspecialchars($_POST["WEBSITE_NAME"]);
                 $data["WEBSITE_CONTACT_ADDRESS"] = htmlspecialchars($_POST["WEBSITE_CONTACT_ADDRESS"]);
                 $data["WEBSITE_ADMIN"] = htmlspecialchars($_POST["WEBSITE_ADMIN"]);
                 $data["WEBSITE_PASSWORD"] = htmlspecialchars($_POST["WEBSITE_PASSWORD"]);
-                $data["DB_NAME"] = htmlspecialchars($_POST["DB_NAME"]);
-                $data["DB_PREFIXE"] = htmlspecialchars($_POST["DB_PREFIXE"]);
+                $data["DB_HOST"] = $dbHost;
+                $data["DB_DRIVER"] = $dbDriver;
+                $data["DB_PORT"] = $dbPort;
+                $data["DB_NAME"] = $dbName;
+                $data["DB_PREFIXE"] = $dbPrefix;
+                $data["DB_USER"] = $dbUser;
+                $data["DB_PASSWORD"] = $dbPassword;
                 $data["EMAIL_SOURCE_NAME"] = htmlspecialchars($_POST["EMAIL_SOURCE_NAME"]);
                 $data["EMAIL_SMTP_HOST"] = htmlspecialchars($_POST["EMAIL_SMTP_HOST"]);
                 $data["EMAIL_SMTP_ADMIN"] = htmlspecialchars($_POST["EMAIL_SMTP_ADMIN"]);
@@ -64,14 +78,10 @@ class Install extends MysqlBuilder
                 $data["EMAIL_SMTP_PORT"] = htmlspecialchars($_POST["EMAIL_SMTP_PORT"]);
                 $install = Install::execute($data);
 
-                $colums = [];
+                $data["DB_NAME"] = htmlspecialchars($_POST["DB_NAME"]);
+                $data["DB_PREFIXE"] = htmlspecialchars($_POST["DB_PREFIXE"]);
 
-                $colums["WEBSITE_ADMIN"] = $data["WEBSITE_ADMIN"];
-                $colums["WEBSITE_PASSWORD"] = $data["WEBSITE_PASSWORD"];
-                $colums["DB_NAME"] = $data["DB_NAME"];
-                $colums["DB_PREFIXE"] = $data["DB_PREFIXE"];
-
-                return $colums;
+                return $data;
 
             }
             else {
@@ -226,14 +236,6 @@ class Install extends MysqlBuilder
 
     public static function execute($data)
     {
-        $dbDriver = "mysql";
-        $dbPort = "3306";
-        $dbHost = "database";
-        $dbUser = "root";
-        $dbPassword = "password";
-        $dbName = "pa_database";
-        $dbPrefix = "mnga_";
-
         $configFile = fopen("conf.inc.php", "w");
         fwrite($configFile, "\n");
         fwrite($configFile, "<?php");
@@ -247,25 +249,25 @@ class Install extends MysqlBuilder
         $config = 'define("ENV","prod");';
         fwrite($configFile, $config);
         fwrite($configFile, "\n");
-        $config = 'define("DB_HOST","' . $dbHost . '");';
+        $config = 'define("DB_HOST","' . $data["DB_HOST"] . '");';
         fwrite($configFile, $config);
         fwrite($configFile, "\n");
-        $config = 'define("DB_DRIVER","' . $dbDriver . '");';
+        $config = 'define("DB_DRIVER","' . $data["DB_DRIVER"] . '");';
         fwrite($configFile, $config);
         fwrite($configFile, "\n");
-        $config = 'define("DB_PORT","' . $dbPort . '");';
+        $config = 'define("DB_PORT","' . $data["DB_PORT"] . '");';
         fwrite($configFile, $config);
         fwrite($configFile, "\n");
-        $config = 'define("DB_NAME","' . $dbName . '");';
+        $config = 'define("DB_NAME","' . $data["DB_NAME"] . '");';
         fwrite($configFile, $config);
         fwrite($configFile, "\n");
-        $config = 'define("DB_PREFIXE","' . $dbPrefix . '");';
+        $config = 'define("DB_PREFIXE","' . $data["DB_PREFIXE"] . '");';
         fwrite($configFile, $config);
         fwrite($configFile, "\n");
-        $config = 'define("DB_USER","' . $dbUser . '");';
+        $config = 'define("DB_USER","' . $data["DB_USER"] . '");';
         fwrite($configFile, $config);
         fwrite($configFile, "\n");
-        $config = 'define("DB_PASSWORD","' . $dbPassword . '");';
+        $config = 'define("DB_PASSWORD","' . $data["DB_PASSWORD"]  . '");';
         fwrite($configFile, $config);
         fwrite($configFile, "\n");
         $config = 'define("EMAIL_SOURCE_NAME","' . $data["EMAIL_SOURCE_NAME"] . '");';
@@ -287,185 +289,119 @@ class Install extends MysqlBuilder
         return true;
     }
 
-    public static function createDatabaseAndTable($dbName, $dbPrefix)
+    public static function createDatabaseAndTable($data)
     {
         $userModel = new UserModel();
-        $userModel->createDatabase($dbName);
+        $userModel->createDatabase($data["DB_NAME"]);
 
-        $content = file_get_contents('conf.inc.php');
-        $content = explode('define', $content);
+        Install::execute($data);
 
-        $content[7] = 'define("DB_NAME","' . $dbName . '");';
-        $content[8] = 'define("DB_PREFIXE","' . $dbPrefix . '");';
-
-        $new_content  = implode("\n", $content);
-
-        $conf = file_put_contents('conf.inc.php', $new_content);
-
-        //MIGRATION CREATE TABLE USER
-        $user = new User();
-
-        $colums = $user->getColums();
-
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["firstname"] = "varchar(25) NOT NULL,";
-        $colums["lastname"] = "varchar(100) NOT NULL,";
-        $colums["email"] = "varchar(320) NOT NULL,";
-        $colums["status"] = "tinyint(4) NOT NULL,";
-        $colums["password"] = "varchar(255) NOT NULL,";
-        $colums["token"] = "char(255) DEFAULT NULL,";
-        $colums["avatar"] = "varchar(255) NOT NULL,";
-        $colums["gender"] = "varchar(1) NOT NULL,";
-        $colums["role"] = "int(1) NOT NULL,";
-        $colums["pays"] = "varchar(50) NOT NULL,";
-        $colums["ville"] = "varchar(100) NOT NULL,";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
-
-        $user->createTable($colums);
-
-        //MIGRATION CREATE TABLE MANGA
-        $manga = new Manga();
-
-        $colums = $manga->getColums();
-
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["type"] = "varchar(10) NOT NULL,";
-        $colums["title"] = "varchar(255) NOT NULL,";
-        $colums["description"] = "varchar(400) NOT NULL,";
-        $colums["image"] = "varchar(100) NOT NULL,";
-        $colums["release_date"] = "date NOT NULL,";
-        $colums["author"] = "varchar(50) NOT NULL,";
-        $colums["status"] = "varchar(20) NOT NULL,";
-        $colums["category"] = "varchar(20) NOT NULL,";
-        $colums["nb_tomes"] = "int(11) NOT NULL,";
-        $colums["nb_chapters"] = "int(11) NOT NULL,";
-        $colums["nb_episodes"] = "int(11) NOT NULL,";
-        $colums["diffusion"] = "varchar(100) NOT NULL,";
-        $colums["nb_seasons"] = "int(11) NOT NULL,";
-        $colums["production_studio"] = "varchar(50) NOT NULL,";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
-
-        $manga->createTable($colums);
-
-        //MIGRATION CREATE TABLE PASSWORD
-        $password = new Password();
-
-        $colums = $password->getColums();
-
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["email"] = "varchar(255) NOT NULL,";
-        $colums["date_demande"] = "int(11) NOT NULL,";
-        $colums["token"] = "varchar(255) NOT NULL,";
-        $colums["statut"] = "int(11) NOT NULL DEFAULT '0',";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
-
-        $password->createTable($colums);
-
-        //MIGRATION CREATE TABLE ROLE
-        $role = new Role();
-
-        $colums = $role->getColums();
-
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["role"] = "varchar(50) DEFAULT 'abonné',";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
-
-        $role->createTable($colums);
-
-        //MIGRATION CREATE TABLE FORUM
-        $forum = new Forum();
-
-        $colums = $forum->getColums();
-
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["title"] = "varchar(100) NOT NULL,";
-        $colums["description"] = "text,";
-        $colums["category_id"] = "int(11) NOT NULL,";
-        $colums["user_id"] = "int(11) NOT NULL,";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
-
-        $forum->createTable($colums);
-
-        //MIGRATION CREATE TABLE CATEGORY
-        $category = new Category();
-
-        $colums = $category->getColums();
-
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["user_id"] = "int(11) NOT NULL,";
-        $colums["name"] = "varchar(100) NOT NULL,";
-        $colums["description"] = "text,";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
-
-        $category->createTable($colums);
-
-        //MIGRATION CREATE TABLE EVENT
-
-        $event = new Event();
-
-        $colums = $event->getColums();
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["name"] = "varchar(50) NOT NULL,";
-        $colums["description"] = "varchar(320) NOT NULL,";
-        $colums["date"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["price"] = "int(11) NOT NULL,";
-        $colums["photo"] = "varchar(255) NOT NULL,";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP";
+        $connection_pdo = new \PDO(DB_DRIVER.":host=".DB_HOST.";port=".DB_PORT.";dbname=".$data["DB_NAME"] , DB_USER , DB_PASSWORD
+            , [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING]);
 
 
-        $event->createTable($colums);
 
-        //MIGRATION CREATE TABLE FORUMCOMMENTAIRE
+        //MIGRATION CREATE TABLE event
+        $q = "CREATE TABLE `".$data["DB_PREFIXE"]."event` (
+              `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+              `name` varchar(50) NOT NULL,
+              `description` varchar(320) NOT NULL,
+              `price` int(11) NOT NULL,
+              `date` timestamp NULL DEFAULT NULL,
+              `photo` varchar(255) NOT NULL,
+              `createdAt` timestamp NULL DEFAULT NULL,
+              `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        $stmt= $connection_pdo->prepare($q);
+        $stmt->execute();
 
-        $forumcommantaire = new ForumCommentaire();
+        //MIGRATION CREATE TABLE forumcommentaire
+        $q = "CREATE TABLE `".$data["DB_PREFIXE"]."forumcommentaire` (
+              `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+              `id_forum` int(11) NOT NULL,
+              `id_user` int(11) NOT NULL,
+              `commentaire` text,
+              `isValid` tinyint(1) DEFAULT '0',
+              `createdAt` timestamp NULL DEFAULT NULL,
+              `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        $stmt= $connection_pdo->prepare($q);
+        $stmt->execute();
 
-        $colums = $forumcommantaire->getColums();
+        //MIGRATION CREATE TABLE manga
+        $q = "CREATE TABLE `".$data["DB_PREFIXE"]."manga` (
+              `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+              `type` varchar(10) NOT NULL,
+              `title` varchar(255) NOT NULL,
+              `description` varchar(400) NOT NULL,
+              `image` varchar(100) NOT NULL,
+              `release_date` date NOT NULL,
+              `author` varchar(50) NOT NULL,
+              `status` varchar(20) NOT NULL,
+              `category` varchar(20) NOT NULL,
+              `nb_tomes` int(11) NOT NULL,
+              `nb_chapters` int(11) NOT NULL,
+              `nb_episodes` int(11) NOT NULL,
+              `diffusion` varchar(100) NOT NULL,
+              `nb_seasons` int(11) NOT NULL,
+              `production_studio` varchar(50) NOT NULL,
+              `createdAt` timestamp NULL DEFAULT NULL,
+              `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        $stmt= $connection_pdo->prepare($q);
+        $stmt->execute();
 
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["id_forum"] = "int(11) NOT NULL,";
-        $colums["id_user"] = "int(11) NOT NULL,";
-        $colums["commentaire"] = "text,";
-        $colums["isValid"] = "tinyint(1) DEFAULT '0',";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
+        //MIGRATION CREATE TABLE newsletter
+        $q = "CREATE TABLE `".$data["DB_PREFIXE"]."newsletter` (
+              `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+              `id_user` int(11) NOT NULL,
+              `id_subject` int(11) NOT NULL,
+              `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+              `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        $stmt= $connection_pdo->prepare($q);
+        $stmt->execute();
 
-        $forumcommantaire->createTable($colums);
+        //MIGRATION CREATE TABLE page
+        $q = "CREATE TABLE `".$data["DB_PREFIXE"]."page` (
+              `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+              `title` varchar(100) NOT NULL,
+              `description` text,
+              `page` varchar(50) NOT NULL,
+              `user_id` int(11) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        $stmt= $connection_pdo->prepare($q);
+        $stmt->execute();
 
-        //MIGRATION CREATE TABLE MEDIA
+        //MIGRATION CREATE TABLE role
+        $q = "CREATE TABLE `".$data["DB_PREFIXE"]."role` (
+              `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+              `role` varchar(50) DEFAULT 'abonnÃ©',
+              `createdAt` timestamp NULL DEFAULT NULL,
+              `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        $stmt= $connection_pdo->prepare($q);
+        $stmt->execute();
 
-        $media = new Media();
-
-        $colums = $media->getColums();
-
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["name"] = "varchar(255) NOT NULL,";
-        $colums["categorie"] = "varchar(255) NULL,";
-        $colums["user"] = "varchar(255) NOT NULL,";
-        $colums["createdAt"] = "TIMESTAMP NULL DEFAULT NULL,";
-        $colums["updatedAt"] = "TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP";
-
-        $media->createTable($colums);
-
-        //MIGRATION CREATE TABLE PAGE
-
-        $page = new Page();
-
-        $colums = $page->getColums();
-
-        $colums["id"] = "int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
-        $colums["title"] = "varchar(100) NOT NULL,";
-        $colums["description"] = "text,";
-        $colums["page"] = "varchar(50) NOT NULL,";
-        $colums["user_id"] = "int(11) NOT NULL";
-
-        $page->createTable($colums);
+        //MIGRATION CREATE TABLE user
+        $q = "CREATE TABLE `".$data["DB_PREFIXE"]."user` (
+              `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+              `firstname` varchar(25) NOT NULL,
+              `lastname` varchar(100) NOT NULL,
+              `email` varchar(320) NOT NULL,
+              `status` tinyint(4) NOT NULL,
+              `password` varchar(255) NOT NULL,
+              `token` char(255) DEFAULT NULL,
+              `avatar` varchar(255) NOT NULL,
+              `gender` varchar(1) NOT NULL,
+              `role` int(1) NOT NULL,
+              `pays` varchar(50) NOT NULL,
+              `ville` varchar(100) NOT NULL,
+              `createdAt` timestamp NULL DEFAULT NULL,
+              `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        $stmt= $connection_pdo->prepare($q);
+        $stmt->execute();
 
 
     }

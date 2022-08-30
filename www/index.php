@@ -78,7 +78,7 @@ if (!Install::check()) {
     $admin = Install::start();
     if (!empty($admin)){
         require "conf.inc.php";
-        Install::createDatabaseAndTable($admin["DB_NAME"], $admin["DB_PREFIXE"]);
+        Install::createDatabaseAndTable($admin);
         Install::createUserAdmin($admin["WEBSITE_ADMIN"], $admin["WEBSITE_PASSWORD"]);
         return header("Location: /login");
     }
