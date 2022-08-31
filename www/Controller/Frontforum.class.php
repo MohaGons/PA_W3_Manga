@@ -64,7 +64,7 @@ class Frontforum
                 }
 
             } else {
-                $errors = [];
+                $errors = $result;
             }
 
             $view = new View("forum_commentaire", "front");
