@@ -63,6 +63,8 @@ class Frontforum
                     header("Location: /forum/detail/".$forum_Id);
                 }
 
+            } else {
+                $errors = [];
             }
 
             $view = new View("forum_commentaire", "front");

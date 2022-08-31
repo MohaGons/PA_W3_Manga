@@ -58,7 +58,7 @@ class ForumCommentaire extends MysqlBuilder
 
     public function setCommentaire(?string $commentaire): void
     {
-        $this->commentaire = ucwords(strtolower(trim($commentaire)));
+        $this->commentaire = $commentaire;
     }
 
     public function getIsValid(): ?int
