@@ -447,6 +447,7 @@ class User extends MysqlBuilder implements SplObserver
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
                     "label"=>"Email : ",
+                    "value"=>"",
                     "required"=>true,
                     "error"=>"Email incorrect",
                 ],
@@ -542,6 +543,7 @@ class User extends MysqlBuilder implements SplObserver
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
                     "label"=>"Email",
+                    "value"=>"",
                     "error"=>"Email incorrect",
                     "required"=>true,
                 ],
@@ -597,7 +599,7 @@ class User extends MysqlBuilder implements SplObserver
                     "type"=>"text",
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
-                     "label"=>"",
+                    "label"=>"",
                     "value"=>$data['email'],
                     "required"=>false,
                     "minlength"=>2,
@@ -608,7 +610,7 @@ class User extends MysqlBuilder implements SplObserver
         ];
     }
 
-    public function updateUser(): array
+    public function updateUser($userData): array
     {
         $roles = RoleRepository::all();
 
@@ -627,7 +629,7 @@ class User extends MysqlBuilder implements SplObserver
                     "id"=>"emailRegister",
                     "class"=>"formparam",
                     "label"=>"",
-                    "value"=>"",
+                    "value"=>$userData['firstname'],
                     "required"=>false,
                     "minlength"=>2,
                     "maxlength"=>25,
@@ -639,7 +641,7 @@ class User extends MysqlBuilder implements SplObserver
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
                     "label"=>"",
-                    "value"=>"",
+                    "value"=>$userData['lastname'],
                     "required"=>false,
                     "minlength"=>2,
                     "maxlength"=>100,
@@ -651,6 +653,7 @@ class User extends MysqlBuilder implements SplObserver
                     "id"=>"emailRegister",
                     "class"=>"formparam",
                     "label"=>"",
+                    "value"=>$userData['email'],
                     "required"=>true,
                     "error"=>"Email incorrect",
                     "unicity"=>true,
@@ -664,9 +667,9 @@ class User extends MysqlBuilder implements SplObserver
                     "option"=>  [
                         "1"=>"Abonne",
                         "2"=>"Editeur",
-                        "3"=>"Admin",
+                        "3"=>"Admin"
                     ],
-                    "defaultValue" =>  ""
+                    "defaultValue" =>$userData['role'],
                 ]
             ]
         ];
@@ -688,6 +691,7 @@ class User extends MysqlBuilder implements SplObserver
                     "type"=>"email",
                     "id"=>"emailRegister",
                     "label"=>"",
+                    "value"=>"",
                     "class"=>"formRegister",
                     "error"=>"formRegister",
                     "required"=>true,

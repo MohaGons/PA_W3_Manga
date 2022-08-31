@@ -41,7 +41,7 @@ class User {
             $userData = UserRepository::findById($id);
             $messages=[];
             if(!empty($_POST)) {
-                $result = Verificator::checkupdateUser($user->updateUser(), $_POST);
+                $result = Verificator::checkupdateUser($user->updateUser($userData), $_POST);
                 if (empty($result)){
                     $user->setId($id);
                     $user->setLastname(htmlspecialchars($_POST['lastname']));
@@ -50,6 +50,7 @@ class User {
                     $user->setRole(htmlspecialchars($_POST['role']));
                     $user->save();
                     $messages[] = 'la modification a été faite !';
+                    header("Location: /admin/utilisateurs");
                 }
                else{
                    $messages = $result;

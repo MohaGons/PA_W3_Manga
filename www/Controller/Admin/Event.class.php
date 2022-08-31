@@ -89,7 +89,7 @@ class Event
                         $event->setDescription(htmlspecialchars($_POST["description"]));
                     }
                     if (!empty($_POST["price"])) {
-                        $event->setPrice(htmlspecialchars($_POST["price"]));
+                        $event->setPrice($_POST["price"]);
                     }
                     if (!empty($_POST["date"])) {
                         $event->setDate(htmlspecialchars($_POST["date"]));

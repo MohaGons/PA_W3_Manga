@@ -328,6 +328,7 @@ class Manga extends MysqlBuilder implements SplSubject
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
+                    "error" => "",
                 ],
                 "nbChapters"=>[
                     "placeholder"=>"nombres de chapitres",
@@ -337,6 +338,7 @@ class Manga extends MysqlBuilder implements SplSubject
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
+                    "error" => "",
                 ],
                 "nbEpisodes"=>[
                     "placeholder"=>"nombres d'episodes",
@@ -346,6 +348,7 @@ class Manga extends MysqlBuilder implements SplSubject
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
+                    "error" => "",
                 ],
                 "diffusion"=>[
                     "placeholder"=>"diffusion",
@@ -367,6 +370,7 @@ class Manga extends MysqlBuilder implements SplSubject
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
+                    "error" => "",
                 ],
                 "productionStudio"=>[
                     "placeholder"=>"studio de production",
@@ -499,6 +503,7 @@ class Manga extends MysqlBuilder implements SplSubject
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_tomes"],
                     "required"=>true,
+                    "error" => "",
                 ],
                 "nbChapters"=>[
                     "placeholder"=>"nombres de chapitres",
@@ -508,6 +513,7 @@ class Manga extends MysqlBuilder implements SplSubject
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_chapters"],
                     "required"=>true,
+                    "error" => "",
                 ],
                 "nbEpisodes"=>[
                     "placeholder"=>"nombres d'episodes",
@@ -517,6 +523,7 @@ class Manga extends MysqlBuilder implements SplSubject
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_episodes"],
                     "required"=>true,
+                    "error" => "",
                 ],
                 "diffusion"=>[
                     "placeholder"=>"diffusion",
@@ -531,13 +538,14 @@ class Manga extends MysqlBuilder implements SplSubject
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "nbSeasons"=>[
-                    "placeholder"=>"nombres de saisons",
-                    "type"=>"number",
-                    "label"=>"Nombres de saisons: ",
-                    "id"=>"nbSeasonsManga",
-                    "class"=>"formManga",
+                    "label" => "nombres de saisons: ",
+                    "placeholder" => "nombres de saisons",
+                    "type" => "number",
+                    "id" => "nbSeasonsManga",
+                    "class" => "formManga",
                     "value"=>$manga[0]["nb_seasons"],
-                    "required"=>true,
+                    "required" => true,
+                    "error" => "",
                 ],
                 "productionStudio"=>[
                     "placeholder"=>"studio de production",

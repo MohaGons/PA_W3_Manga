@@ -14,5 +14,5 @@ if (!empty($messages)) {
         echo "<h2 style='color:red'>" . $message . "</h2><br>";
     }
 }
-$this->includePartial("form", $user->updateUser());
+$this->includePartial("form", $user->updateUser($userData));
 ?>

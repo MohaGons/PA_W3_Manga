@@ -19,10 +19,11 @@ class Builder
                     if (($configInput["disabled"]) == true) {
                         $html .= " disabled";
                     }
+                    $html .= ">";
                     foreach ($configInput["option"] as $option => $value) {
-                        $html .= "><option value='" . $option . "'";
+                        $html .= "<option value='" . $option . "'";
                         if ($option == $configInput["defaultValue"]) {
-                            $html .= " readonly='readonly'";
+                            $html .= " selected='selected'";
                         }
                         $html .= ">$value</option><br>";
                     }
@@ -110,6 +111,7 @@ class Builder
                             class='".$configInput["class"]."'
                             id='".$configInput["id"]."'
                             placeholder='".$configInput["placeholder"]."'
+                            value='".$configInput["value"]."'
                             type='".$configInput["type"]."'
                             ></div><br>";
                     break;
@@ -152,10 +154,11 @@ class Builder
                     if (($configInput["disabled"]) == true) {
                         $html .= " disabled";
                     }
+                    $html .= ">";
                     foreach ($configInput["option"] as $option => $value) {
-                        $html .= "><option value='" . $option . "'";
+                        $html .= "<option value='" . $option . "'";
                         if ($option == $configInput["defaultValue"]) {
-                            $html .= " readonly='readonly'";
+                            $html .= " selected='selected'";
                         }
                         $html .= ">$value</option><br>";
                     }

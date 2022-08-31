@@ -17,9 +17,6 @@
 
         <div class="container">
             <div class="logoAndName logoAndName--front">
-                <a href="#">
-                    <img class="img-logo" src="../../Style/images/Gambling-school.png">
-                </a>
                 <p>Manga-site</p>
             </div>
             <div class="photoAndMenu">

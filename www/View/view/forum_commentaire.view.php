@@ -1,5 +1,7 @@
 <h1>Ajouter un commentaire</h1>
 
+<a href="/forum/detail/<?= $forum_data[0]['id'] ?>"><button class="control--delete">Retour</button></a>
+
 <div class="modal-body">
     <?php $this->includePartial("form", $forum_commentaire->getCreateCommentaireForm());?>
     <?php if (!empty($errors)) {

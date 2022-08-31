@@ -196,7 +196,6 @@ class Event extends MysqlBuilder
                     "type" => "number",
                     "id" => "priceRegister",
                     "class" => "formEvent",
-                    "minlength" => 0,
                     "value"=>"",
                     "required" => true,
                     "error" => "Mettre un prix correct",
