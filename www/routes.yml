@@ -199,7 +199,17 @@
 
 /admin/media:
   controller: media
-  action: Allmedia
+  action: index
+  security: [Admin,Editeur]
+
+/admin/media/create:
+  controller: media
+  action: create
+  security: [Admin,Editeur]
+
+/admin/media/dossier/:
+  controller: media
+  action: dossier
   security: [Admin,Editeur]
   params: true
 
@@ -262,17 +272,6 @@
 
 
 
-
-
-/ff: 
-  controller: frontforum
-  action: FrontForum
-  params: null
-
-/events: 
-  controller: frontevent
-  action: FrontEvent
-  params: null
 
 
 

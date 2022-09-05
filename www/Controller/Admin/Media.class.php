@@ -43,4 +43,51 @@ class Media
 
 
     }
+
+    public function index(){
+        $user = new UserModel();
+        $session = New Session();
+        $media = new MediaModel();
+        $messages=[];
+        $medias = $media->getAllMedia($session->get('email'));
+
+        $view = new View("admin/media_index", "back");
+        $view->assign("medias", $medias);
+
+
+    }
+
+    public function create(){
+        $media = new MediaModel();
+
+        if(!empty($_POST)) {
+
+            $results = $media->setMedia($_POST['media'],$_SESSION['email'],"set");
+
+            header("Location: /admin/media");
+        }
+    }
+
+    public function dossier($params){
+
+        $dossier = $params[0];
+
+        if (!empty($dossier))
+        {
+            $user = new UserModel();
+            $session = New Session();
+            $media = new MediaModel();
+            $messages=[];
+            $medias = $media->getAllMedia($session->get('email'));
+
+            $view = new View("admin/media_index", "back");
+            $view->assign("medias", $medias);
+            $view->assign("dossier", $dossier);
+
+        }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
+    }
+
 }
