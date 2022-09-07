@@ -390,7 +390,6 @@ class Manga extends MysqlBuilder implements SplSubject
                     "id"=>"imageCreateManga",
                     "class"=>"formManga",
                     "accept"=>"image/*",
-                    "required"=>true,
                 ]
             ]
         ];
@@ -565,7 +564,6 @@ class Manga extends MysqlBuilder implements SplSubject
                     "label"=>"Image: ",
                     "id"=>"imageManga",
                     "class"=>"formManga",
-                    "required"=>true,
                     "accept"=>"image/*",
                 ]
             ]

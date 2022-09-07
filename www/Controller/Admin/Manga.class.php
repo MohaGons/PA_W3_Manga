@@ -29,13 +29,15 @@ class Manga
         $session = new Session();
 
         $errors = [];
+        $errors_media = [];
 
         if(!empty($_POST) && !empty($_FILES)) {
 
             $data = array_merge($_POST, $_FILES);
             $result = Verificator::checkForm($manga->getCreateMangaForm(), $data);
+            $errors_media = $media->setMedia("Mangas", $session->get('email'),"set");
 
-            if (empty($result)) {
+            if (empty($result) && empty($errors_media)) {
                 if (!empty($_POST["type"])) {
                     $manga->setTypeManga($_POST["type"]);
                 }
@@ -82,12 +84,11 @@ class Manga
 
                 $manga->save();
                 $manga->notify();
-                $media->setMedia("Mangas", $session->get('email'),"set");
 
                 echo "<script>alert('Votre manga a bien été mis à jour')</script>";
                 header("Location: /admin/manga");
             } else {
-                $errors = $result;
+                $errors = array_merge($result, $errors_media);
             }
         }
 
@@ -123,13 +124,15 @@ class Manga
 
             $mangaInfos = MangaRepository::findById($id);
             $errors = [];
+            $errors_media = [];
 
             if(!empty($_POST) && !empty($_FILES)) {
 
                 $data = array_merge($_POST, $_FILES);
                 $result = Verificator::checkForm($manga->getMangaForm($mangaInfos), $data);
+                $errors_media = $media->setEditMedia("Mangas", $session->get('email'),"set");
 
-                if (empty($result)) {
+                if (empty($result) && empty($errors_media)) {
                     $manga->setId($id);
                     if (!empty($_POST["type"])) {
                         $manga->setTypeManga($_POST["type"]);
@@ -174,11 +177,10 @@ class Manga
                         $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
                     }
                     $manga->save();
-                    $media->setMedia("Mangas", $session->get('email'),"set");
                     echo "<script>alert('Votre manga a bien été mis à jour')</script>";
                     header("Location: /admin/manga");
                 } else {
-                    $errors = $result;
+                    $errors = array_merge($result, $errors_media);
                 }
 
             }

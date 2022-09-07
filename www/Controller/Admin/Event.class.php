@@ -27,11 +27,14 @@ class Event
         $media = new MediaModel();
         $session = new Session();
         $errors = [];
+        $errors_media = [];
         if (!empty($_POST) && !empty($_FILES)) {
 
             $data = array_merge($_POST, $_FILES);
             $result = Verificator::checkForm($event->getEventFormRegister(), $data);
-            if (empty($result)) {
+            $errors_media = $media->setMedia("Evenements",$session->get('email'),"set");
+
+            if (empty($result) && empty($errors_media)) {
                 $event->setName(htmlspecialchars($_POST["name"]));
                 $event->setDescription(htmlspecialchars($_POST["description"]));
                 $event->setPrice(htmlspecialchars($_POST["price"]));
@@ -39,11 +42,10 @@ class Event
                 $event->setPhoto(htmlspecialchars($_FILES["file"]["name"]));
                 $event->setCreatedAt(date("Y-m-d H:i:s"));
                 $event->save();
-                $media->setMedia("Evenements",$session->get('email'),"set");
                 echo "<script>alert('L'évènement a bien été crée')</script>";
                 header("Location: /admin/event");
             } else {
-                $errors = $result;
+                $errors = array_merge($result, $errors_media);
             }
         }
 
@@ -73,14 +75,16 @@ class Event
         if (!empty($id) && is_numeric($id)) {
             $event = new EventModel();
             $errors = [];
+            $errors_media = [];
             $event_data = EventRepository::findById($id);
 
             if(!empty($_POST) && !empty($_FILES)) {
 
                 $data = array_merge($_POST, $_FILES);
                 $result = Verificator::checkForm($event->getEventEditFormRegister($event_data), $data);
+                $errors_media = $media->setEditMedia('Evenements',$session->get('email'),"" );
 
-                if (empty($result)) {
+                if (empty($result) && empty($errors_media)) {
                     $event->setId($id);
                     if (!empty($_POST["name"])) {
                         $event->setName(htmlspecialchars($_POST["name"]));
@@ -99,14 +103,14 @@ class Event
                     }
                     $event->save();
                     $media->updateEvenement($_FILES["file"]["name"], $_POST["name"]);
-                    $media->setMedia('Evenements',$session->get('email'),"" );
                     header('Location: /admin/event');
                 } else {
-                    $errors = $result;
+                    $errors = array_merge($result, $errors_media);
                 }
             }
             $view = new View("admin/event_edit", "back");
             $view->assign("event", $event);
+            $view->assign("errors", $errors);
             $view->assign("event_data", $event_data);
         }
         else{

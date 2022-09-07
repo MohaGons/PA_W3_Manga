@@ -87,13 +87,14 @@ class Authentification {
             $user = new UserModel();
             $media = new MediaModel();
             $errors = [];
+            $errors_media = [];
 
             if(!empty($_POST) && !empty($_FILES)) {
                 $data = array_merge($_POST, $_FILES);
                 $result = Verificator::checkFormRegister($user->getRegisterForm(), $data);
+                $errors_media = $media->setMedia("Avatars",$_POST["email"],"set");
 
-
-                if (empty($result)) {
+                if (empty($result) && empty($errors_media)) {
                     $userRepository = UserRepository::findByEmail(htmlspecialchars($_POST["email"]));
 
                     if (empty($userRepository)) {
@@ -113,7 +114,6 @@ class Authentification {
 
                         if ($persist == true)
                         {
-                            $media->setMedia("Avatars",$_POST["email"],"set");
                             echo "<script>alert('Votre profil a bien été crée')</script>";
 
                             $id_contact = UserRepository::findByEmail($_POST['email']);
@@ -145,7 +145,7 @@ class Authentification {
 
                 }
                 else {
-                    $errors = $result;
+                    $errors = array_merge($result, $errors_media);
                 }
             }
 

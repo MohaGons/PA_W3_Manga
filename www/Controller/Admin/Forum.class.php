@@ -32,13 +32,15 @@ class Forum
         $session = new Session();
         
         $errors = [];
+        $errors_media = [];
         $categorie_data = $category->getCategoryNames();
 
         if (!empty($_POST) && !empty($_FILES)) {
 
             $data = array_merge($_POST, $_FILES);
             $result = Verificator::checkForm($forum->getForumForm($categorie_data), $data);
-            if (empty($result)) {
+            $errors_media = $media->setMedia("Forums",$session->get('email'),"set");
+            if (empty($result) && empty($errors_media)) {
                 if (!empty($_POST["title"])) {
                     $forum->setTitleForum(htmlspecialchars($_POST["title"]));
                 }
@@ -53,11 +55,10 @@ class Forum
                 $forum->setUserId(Session::get('id'));
                 $forum->setCreatedAt(date("Y-m-d H:i:s"));  
                 $forum->save();
-                $media->setMedia("Forums",$session->get('email'),"set");
                 echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                 header("Location: /admin/forum");
             } else {
-                $errors = $result;
+                $errors = array_merge($result, $errors_media);
             }
         }
 
@@ -92,13 +93,15 @@ class Forum
             $categorie_data = $category->getCategoryNames();
             $forum_data = ForumRepository::findById($id);
             $errors = [];
+            $errors_media = [];
 
             if(!empty($_POST) && !empty($_FILES)) {
 
                 $data = array_merge($_POST, $_FILES);
                 $result = Verificator::checkForm($forum->editParamForum($forum_data, $categorie_data), $data);
+                $errors_media = $media->setEditMedia("Forums",$session->get('email'),"set");
 
-                if (empty($result)) {
+                if (empty($result) && empty($errors_media)) {
                     $forum->setId($id);
                     if (!empty($_POST["editTitle"])) {
                         $forum->setTitleForum(htmlspecialchars($_POST["editTitle"]));
@@ -114,11 +117,10 @@ class Forum
                     $forum->setUserId(Session::get('id'));
                     $forum->setUpdatedAt(date("Y-m-d H:i:s"));
                     $forum->save();
-                    $media->setMedia("Forums",$session->get('email'),"set");
                     echo "<script>alert('Votre forum a bien été mis à jour')</script>";
                     header("Location: /admin/forum");
                 } else {
-                    $errors = $result;
+                    $errors = array_merge($result, $errors_media);
                 }
             }
 

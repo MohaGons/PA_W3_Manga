@@ -17,6 +17,7 @@ use App\Model\Manga;
 class Media
 {
 
+    /*
     public function Allmedia(){
         $user = new UserModel();
         $session = New Session();
@@ -43,6 +44,7 @@ class Media
 
 
     }
+    */
 
     public function index(){
         $user = new UserModel();
@@ -60,12 +62,19 @@ class Media
     public function create(){
         $media = new MediaModel();
 
+        $results = [];
+        $errors_media = [];
+
         if(!empty($_POST)) {
 
-            $results = $media->setMedia($_POST['media'],$_SESSION['email'],"set");
+            $errors_media = $media->setAllMedia($_POST['media'],$_SESSION['email'],"set");
 
             header("Location: /admin/media");
+        } else {
+            $results = $errors_media;
         }
+        $view = new View("admin/media_index", "back");
+        $view->assign("results", $results);
     }
 
     public function dossier($params){

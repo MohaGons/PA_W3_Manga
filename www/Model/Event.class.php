@@ -183,7 +183,7 @@ class Event extends MysqlBuilder
                     "label" => "Description: ",
                     "type" => "textarea",
                     "id" => "descriptionRegister",
-                    "class" => "FormEvent",
+                    "class" => "formEvent",
                     "required" => true,
                     "rows" => 5,
                     "cols" => 20,
@@ -214,7 +214,7 @@ class Event extends MysqlBuilder
                     "type"=> "file",
                     "label"=> "Avatar : ",
                     "id"=>"file",
-                    "class"=>"formRegister",
+                    "class"=>"formEvent",
                     "accept" => "image/*",
                 ]
             ]
@@ -257,7 +257,7 @@ class Event extends MysqlBuilder
                     "placeholder" => "Description...",
                     "type" => "textarea",
                     "id" => "descriptionRegister",
-                    "class" => "FormEvent",
+                    "class" => "formEvent",
                     "text" => $event_data[0]['description'],
                     "required" => true,
                     "rows" => 5,
@@ -290,7 +290,7 @@ class Event extends MysqlBuilder
                     "type"=> "file",
                     "label"=> "Avatar : ",
                     "id"=>"file",
-                    "class"=>"formRegister",
+                    "class"=>"formEvent",
                     "accept" => "image/*"
                 ]
             ]
