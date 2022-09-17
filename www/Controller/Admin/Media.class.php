@@ -61,20 +61,25 @@ class Media
 
     public function create(){
         $media = new MediaModel();
-
+        $session = New Session();
         $results = [];
         $errors_media = [];
+        $medias = $media->getAllMedia($session->get('email'));
 
-        if(!empty($_POST)) {
+        if(!empty($_POST && !empty($_FILES))) {
 
-            $errors_media = $media->setAllMedia($_POST['media'],$_SESSION['email'],"set");
-
-            header("Location: /admin/media");
-        } else {
-            $results = $errors_media;
+            $errors_media = $media->setMedia($_POST['media'],$_SESSION['email'],"set");
+            if (empty($errors_media)) {
+                header("Location: /admin/media");
+            } else {
+                $results = $errors_media;
+                $view = new View("admin/media_index", "back");
+                $view->assign("results", $results); 
+                $view->assign("medias", $medias);     
+            }
+            
         }
-        $view = new View("admin/media_index", "back");
-        $view->assign("results", $results);
+        
     }
 
     public function dossier($params){

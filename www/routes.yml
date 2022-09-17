@@ -279,3 +279,18 @@
 
 
 
+
+
+
+
+
+
+/events: 
+  controller: frontevent
+  action: FrontEvent
+  params: null
+
+/forums: 
+  controller: frontforum
+  action: FrontForum
+  params: null
