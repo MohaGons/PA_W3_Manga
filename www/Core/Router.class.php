@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Core\Security as Security;
+use App\Core\Session as Session;
 
 class Router
 {
@@ -11,14 +13,12 @@ class Router
 
     public function __construct($slug)
     {
-
         $fileRoutes = "routes.yml";
         //Vérifier si le fichier routes.yml existe
         if(file_exists($fileRoutes)){
             $this->routes = yaml_parse_file($fileRoutes);
             $this->routesWithParams = $this->getRouteWithParams(); //Permet de récupérer les routes possédant un paramètre
             $this->uri = $slug;
-
         }else{
             die("Le fichier de routing n'existe pas");
         }
@@ -26,9 +26,10 @@ class Router
 
     public function checkRouteExist()
     {
-
         //Si la route n'existe pas et/ou ne possède pas de controller ou action
         if(empty($this->routes[$this->uri]) || empty($this->routes[$this->uri]["controller"]) || empty($this->routes[$this->uri]["action"])){
+
+            $routeFound = false;
 
             //Vérifier pour chaque route avec un parametre
             foreach ($this->routesWithParams as $key => $value) {
@@ -41,7 +42,13 @@ class Router
                     $params = explode("/", $end_url);
 
                     if(!Security::checkRoute($this->routes[$key])){
-                        die("NotAuthorized");
+                        if (!empty(Session::get("role"))) {
+                            Security::returnHttpResponseCode(403);
+                        }
+                        else {
+                            Security::returnHttpResponseCode(401);
+                        }
+
                     }
 
                     $controller = ucfirst(strtolower($this->routes[$key]["controller"]));
@@ -59,31 +66,51 @@ class Router
                     }
 
                     if(!file_exists($controllerFile)){
-                        die("Le fichier Controller n'existe pas");
+                        Security::returnHttpResponseCode(404);
                     }
 
                     include $controllerFile;
 
 
-                    if( !class_exists($controller)){
-                        die("La classe n'existe pas");
+                    if(!class_exists($controller)){
+                        Security::returnHttpResponseCode(404);
                     }
 
                     $objectController = new $controller();
 
 
                     if(!method_exists($objectController, $action) ){
-                        die("La methode n'existe pas");
+                        Security::returnHttpResponseCode(404);
                     }
 
+                    if (!empty($params)) {
                         $objectController->$action($params);
+                    }
+                    else {
+                        Security::returnHttpResponseCode(404);
+                    }
+
+
+                    $routeFound = true;
                 }
             }
+
+            if ($routeFound == false) {
+                Security::returnHttpResponseCode(404);
+            }
+
         }
         else {
 
             if(!Security::checkRoute($this->routes[$this->uri])){
-                die("NotAuthorized");
+                if (!empty(Session::get("role")))
+                {
+                    Security::returnHttpResponseCode(403);
+                }
+                else {
+                    Security::returnHttpResponseCode(401);
+                }
+
             }
 
             $controller = ucfirst(strtolower($this->routes[$this->uri]["controller"]));
@@ -106,7 +133,6 @@ class Router
 
             include $controllerFile;
 
-//            die(var_dump($controller));
 
             if( !class_exists($controller)){
                 die("La classe n'existe pas");
@@ -119,23 +145,25 @@ class Router
                 die("La methode n'existe pas");
             }
 
-            $objectController->$action();
-        }
-
-    }
-
-    public function getRouteWithParams()
-    {
-        foreach ($this->routes as $key => $value) {
-            if ($value["params"] != null)
-            {
-                $this->routesWithParams[$key] = $value;
+            if (!empty($this->routes[$this->uri]["params"])) {
+                Security::returnHttpResponseCode(404);
+            }
+            else {
+                $objectController->$action();
             }
 
         }
-
-        return $this->routesWithParams;
-
     }
 
+    public function getRouteWithParams()
+    {   
+        foreach ($this->routes as $key => $value) {
+            if (!empty($value["params"]))
+            {
+                $this->routesWithParams[$key] = $value;
+            }
+        }
+
+        return $this->routesWithParams;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\User as UserClean;
 use App\Core\Verificator;
 use App\Core\PasswordReset;
@@ -40,7 +41,7 @@ class User {
             $userData = UserRepository::findById($id);
             $messages=[];
             if(!empty($_POST)) {
-                $result = Verificator::checkupdateUser($user->updateUser(), $_POST);
+                $result = Verificator::checkupdateUser($user->updateUser($userData), $_POST);
                 if (empty($result)){
                     $user->setId($id);
                     $user->setLastname(htmlspecialchars($_POST['lastname']));
@@ -49,6 +50,7 @@ class User {
                     $user->setRole(htmlspecialchars($_POST['role']));
                     $user->save();
                     $messages[] = 'la modification a été faite !';
+                    header("Location: /admin/utilisateurs");
                 }
                else{
                    $messages = $result;
@@ -59,8 +61,8 @@ class User {
             $view->assign("userData", $userData);
             $view->assign("messages", $messages);
         }
-        else{
-             die("l'user existe pas");
+        else {
+            Security::returnHttpResponseCode(404);
         }
 
     }
@@ -107,7 +109,7 @@ class User {
             header('Location: ./parametre');
         }
 
-        $view = new View("parametre", "back");
+        $view = new View("admin/parametre", "back");
         $data = array(
             "email" => $email,
             "lastname" => $lastname,
@@ -129,6 +131,9 @@ class User {
         if (!empty($user_Id) && is_numeric($user_Id))
         {
             $manga_delete = UserRepository::delete($user_Id);
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
     }
 

@@ -1,2 +1,4 @@
 db_data
 /www/Style/webpack/node_modules/
+.idea
+.idea/workspace.xml

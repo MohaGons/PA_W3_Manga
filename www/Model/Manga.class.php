@@ -3,8 +3,11 @@ namespace App\Model;
 
 use App\Core\MysqlBuilder;
 use App\Core\Session as Session;
+use App\Core\SplSubject;
+use App\Repository\Newsletter as NewsletterRepository;
+use App\Model\User;
 
-class Manga extends MysqlBuilder
+class Manga extends MysqlBuilder implements SplSubject
 {
     
     protected $id = null;   
@@ -79,7 +82,7 @@ class Manga extends MysqlBuilder
 
     public function setImageManga(?string $image): void
     {
-        $this->image = ucwords(strtolower(trim($image)));
+        $this->image = $image;
     }
 
     public function getReleaseDateManga(): ?string
@@ -214,6 +217,16 @@ class Manga extends MysqlBuilder
         $this->updatedAt = $updatedAt;
     }
 
+    public function notify(): void
+    {
+        $userModel = new User();
+        $users = NewsletterRepository::all(NEWSLETTER_MANGA);
+
+        foreach ($users as $user) {
+            $userModel->updateNewsletter($this, $user);
+        }
+    }
+
     public function getCreateMangaForm(): array
     {
         return [
@@ -315,6 +328,7 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
+                    "error" => "",
                 ],
                 "nbChapters"=>[
                     "placeholder"=>"nombres de chapitres",
@@ -324,6 +338,7 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
+                    "error" => "",
                 ],
                 "nbEpisodes"=>[
                     "placeholder"=>"nombres d'episodes",
@@ -333,6 +348,7 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
+                    "error" => "",
                 ],
                 "diffusion"=>[
                     "placeholder"=>"diffusion",
@@ -354,6 +370,7 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>null,
                     "required"=>true,
+                    "error" => "",
                 ],
                 "productionStudio"=>[
                     "placeholder"=>"studio de production",
@@ -373,7 +390,6 @@ class Manga extends MysqlBuilder
                     "id"=>"imageCreateManga",
                     "class"=>"formManga",
                     "accept"=>"image/*",
-                    "required"=>true,
                 ]
             ]
         ];
@@ -486,6 +502,7 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_tomes"],
                     "required"=>true,
+                    "error" => "",
                 ],
                 "nbChapters"=>[
                     "placeholder"=>"nombres de chapitres",
@@ -495,6 +512,7 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_chapters"],
                     "required"=>true,
+                    "error" => "",
                 ],
                 "nbEpisodes"=>[
                     "placeholder"=>"nombres d'episodes",
@@ -504,6 +522,7 @@ class Manga extends MysqlBuilder
                     "class"=>"formManga",
                     "value"=>$manga[0]["nb_episodes"],
                     "required"=>true,
+                    "error" => "",
                 ],
                 "diffusion"=>[
                     "placeholder"=>"diffusion",
@@ -518,13 +537,14 @@ class Manga extends MysqlBuilder
                     "error"=>"Votre titre doit faire entre 2 et 25 caractères",
                 ],
                 "nbSeasons"=>[
-                    "placeholder"=>"nombres de saisons",
-                    "type"=>"number",
-                    "label"=>"Nombres de saisons: ",
-                    "id"=>"nbSeasonsManga",
-                    "class"=>"formManga",
+                    "label" => "nombres de saisons: ",
+                    "placeholder" => "nombres de saisons",
+                    "type" => "number",
+                    "id" => "nbSeasonsManga",
+                    "class" => "formManga",
                     "value"=>$manga[0]["nb_seasons"],
-                    "required"=>true,
+                    "required" => true,
+                    "error" => "",
                 ],
                 "productionStudio"=>[
                     "placeholder"=>"studio de production",
@@ -544,7 +564,6 @@ class Manga extends MysqlBuilder
                     "label"=>"Image: ",
                     "id"=>"imageManga",
                     "class"=>"formManga",
-                    "required"=>true,
                     "accept"=>"image/*",
                 ]
             ]

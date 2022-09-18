@@ -7,7 +7,7 @@ use App\Core\ConnectionPDO;
 
 class Forum {
 
-    public function all()
+    public static function all()
     {
         $forumModel = new ForumModel();
         $connectionPDO = new ConnectionPDO();
@@ -36,7 +36,7 @@ class Forum {
         return $result;
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         $forumModel = new ForumModel();
         $connectionPDO = new ConnectionPDO();
@@ -54,7 +54,7 @@ class Forum {
         $forumModel = new ForumModel();
         $connectionPDO = new ConnectionPDO();
 
-        $forumModel->select(["mnga_forum.id", "mnga_forum.title", "mnga_forum.description", "mnga_forum.date", "mnga_category.name as category_name", "mnga_user.firstname as user_firstname", "mnga_user.lastname as user_lastname"]);
+        $forumModel->select(["mnga_forum.id", "mnga_forum.title", "mnga_forum.description", "mnga_forum.picture", "mnga_forum.date", "mnga_category.name as category_name", "mnga_user.firstname as user_firstname", "mnga_user.lastname as user_lastname"]);
         $forumModel->leftJoin("mnga_category", "mnga_forum.category_id", "mnga_category.id");
         $forumModel->leftJoin("mnga_user", "mnga_forum.user_id", "mnga_user.id");
         $req = $connectionPDO->pdo->prepare($forumModel->getQuery());

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Session as Session;
 use App\Core\Verificator;
 use App\Core\View;
@@ -25,37 +26,70 @@ class Manga
 
         $manga = new ModelManga();
         $media = new MediaModel();
+        $session = new Session();
 
         $errors = [];
+        $errors_media = [];
 
         if(!empty($_POST) && !empty($_FILES)) {
 
             $data = array_merge($_POST, $_FILES);
             $result = Verificator::checkForm($manga->getCreateMangaForm(), $data);
+            $errors_media = $media->setMedia("Mangas", $session->get('email'),"set");
 
-            if (empty($result)) {
-                $manga->setTypeManga(htmlspecialchars($_POST["type"]));
-                $manga->setTitleManga(htmlspecialchars($_POST["title"]));
-                $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
-                $manga->setImageManga(htmlspecialchars($_FILES["file"]["name"]));
-                $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
-                $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
-                $manga->setStatusManga(htmlspecialchars($_POST["status"]));
-                $manga->setCategoryManga(htmlspecialchars($_POST["category"]));
-                $manga->setNbTomesManga(htmlspecialchars($_POST["nbTomes"]));
-                $manga->setNbChaptersManga(htmlspecialchars($_POST["nbChapters"]));
-                $manga->setNbEpisodesManga(htmlspecialchars($_POST["nbEpisodes"]));
-                $manga->setDiffusionManga(htmlspecialchars($_POST["diffusion"]));
-                $manga->setNbSeasonsManga(htmlspecialchars($_POST["nbSeasons"]));
-                $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
+            if (empty($result) && empty($errors_media)) {
+                if (!empty($_POST["type"])) {
+                    $manga->setTypeManga($_POST["type"]);
+                }
+                if (!empty($_POST["title"])) {
+                    $manga->setTitleManga(htmlspecialchars($_POST["title"]));
+                }
+                if (!empty($_POST["description"])) {
+                    $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
+                }
+                //if (!empty($_POST["type"])) {
+                    $manga->setImageManga(htmlspecialchars($_FILES["file"]["name"]));
+                //}
+                if (!empty($_POST["releaseDate"])) {
+                    $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
+                }
+                if (!empty($_POST["author"])) {
+                    $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
+                }
+                if (!empty($_POST["status"])) {
+                    $manga->setStatusManga(htmlspecialchars($_POST["status"]));
+                }
+                if (!empty($_POST["category"])) {
+                    $manga->setCategoryManga(htmlspecialchars($_POST["category"]));
+                }
+                if (!empty($_POST["nbTomes"])) {
+                    $manga->setNbTomesManga($_POST["nbTomes"]);
+                }
+                if (!empty($_POST["nbChapters"])) {
+                    $manga->setNbChaptersManga($_POST["nbChapters"]);
+                }
+                if (!empty($_POST["nbEpisodes"])) {
+                    $manga->setNbEpisodesManga($_POST["nbEpisodes"]);
+                }
+                if (!empty($_POST["diffusion"])) {
+                    $manga->setDiffusionManga(htmlspecialchars($_POST["diffusion"]));
+                }
+                if (!empty($_POST["nbSeasons"])) {
+                    $manga->setNbSeasonsManga($_POST["nbSeasons"]);
+                }
+                if (!empty($_POST["productionStudio"])) {
+                    $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
+                }
                 $manga->setCreatedAt(date("Y-m-d H:i:s"));
+
+                $manga->save();
+                $manga->notify();
+
+                echo "<script>alert('Votre manga a bien été mis à jour')</script>";
+                header("Location: /admin/manga");
+            } else {
+                $errors = array_merge($result, $errors_media);
             }
-
-            $manga->save();
-            $media->setMedia("Mangas", Session::get('email'), "");
-
-            echo "<script>alert('Votre manga a bien été mis à jour')</script>";
-            header("Location: /admin/manga");
         }
 
         $view = new View("admin/manga_create", "back");
@@ -72,6 +106,9 @@ class Manga
         {
             $manga_delete = MangaRepository::delete($manga_Id);
         }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
         
     }
 
@@ -83,37 +120,67 @@ class Manga
         {
             $manga = new ModelManga();
             $media = new MediaModel();
+            $session = new Session();
 
             $mangaInfos = MangaRepository::findById($id);
             $errors = [];
+            $errors_media = [];
 
             if(!empty($_POST) && !empty($_FILES)) {
 
                 $data = array_merge($_POST, $_FILES);
                 $result = Verificator::checkForm($manga->getMangaForm($mangaInfos), $data);
+                $errors_media = $media->setEditMedia("Mangas", $session->get('email'),"set");
 
-                if (empty($result)) {
+                if (empty($result) && empty($errors_media)) {
                     $manga->setId($id);
-                    $manga->setTypeManga(htmlspecialchars($_POST["type"]));
-                    $manga->setTitleManga(htmlspecialchars($_POST["title"]));
-                    $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
-                    $manga->setImageManga(htmlspecialchars($_FILES["file"]["name"]));
-                    $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
-                    $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
-                    $manga->setStatusManga(htmlspecialchars($_POST["status"]));
-                    $manga->setCategoryManga(htmlspecialchars($_POST["category"]));
-                    $manga->setNbTomesManga(htmlspecialchars($_POST["nbTomes"]));
-                    $manga->setNbChaptersManga(htmlspecialchars($_POST["nbChapters"]));
-                    $manga->setNbEpisodesManga(htmlspecialchars($_POST["nbEpisodes"]));
-                    $manga->setDiffusionManga(htmlspecialchars($_POST["diffusion"]));
-                    $manga->setNbSeasonsManga(htmlspecialchars($_POST["nbSeasons"]));
-                    $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
+                    if (!empty($_POST["type"])) {
+                        $manga->setTypeManga($_POST["type"]);
+                    }
+                    if (!empty($_POST["title"])) {
+                        $manga->setTitleManga(htmlspecialchars($_POST["title"]));
+                    }
+                    if (!empty($_POST["description"])) {
+                        $manga->setDescriptionManga(htmlspecialchars($_POST["description"]));
+                    }
+                    //if (!empty($_POST["type"])) {
+                        $manga->setImageManga(htmlspecialchars($_FILES["file"]["name"]));
+                    //}
+                    if (!empty($_POST["releaseDate"])) {
+                        $manga->setReleaseDateManga(htmlspecialchars($_POST["releaseDate"]));
+                    }
+                    if (!empty($_POST["author"])) {
+                        $manga->setAuthorManga(htmlspecialchars($_POST["author"]));
+                    }
+                    if (!empty($_POST["status"])) {
+                        $manga->setStatusManga(htmlspecialchars($_POST["status"]));
+                    }
+                    if (!empty($_POST["category"])) {
+                        $manga->setCategoryManga(htmlspecialchars($_POST["category"]));
+                    }
+                    if (!empty($_POST["nbTomes"])) {
+                        $manga->setNbTomesManga($_POST["nbTomes"]);
+                    }
+                    if (!empty($_POST["nbChapters"])) {
+                        $manga->setNbChaptersManga($_POST["nbChapters"]);
+                    }
+                    if (!empty($_POST["nbEpisodes"])) {
+                        $manga->setNbEpisodesManga($_POST["nbEpisodes"]);
+                    }
+                    if (!empty($_POST["diffusion"])) {
+                        $manga->setDiffusionManga(htmlspecialchars($_POST["diffusion"]));
+                    }
+                    if (!empty($_POST["nbSeasons"])) {
+                        $manga->setNbSeasonsManga($_POST["nbSeasons"]);
+                    }
+                    if (!empty($_POST["productionStudio"])) {
+                        $manga->setProductionStudioManga(htmlspecialchars($_POST["productionStudio"]));
+                    }
                     $manga->save();
-                    $media->setMedia("Mangas", Session::get('email'), "");
                     echo "<script>alert('Votre manga a bien été mis à jour')</script>";
                     header("Location: /admin/manga");
                 } else {
-                    $errors = $result;
+                    $errors = array_merge($result, $errors_media);
                 }
 
             }
@@ -123,6 +190,9 @@ class Manga
             $view->assign("mangaInfos", $mangaInfos);
             $view->assign("errors", $errors);
 
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
 
     }

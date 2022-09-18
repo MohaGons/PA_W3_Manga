@@ -27,14 +27,14 @@
                 <?php
                 foreach ($recent_event as $key => $value) { ?>
                 <div class="col-xl-4 col--flex flexArticle">
-                    <img class="imgArticle" src="/Style/images/Evenements/<?= $recent_event[0]['photo'] ?>">
-                    <p><?= $recent_event[0]['name'] ?></p>
+                    <img class="imgArticle" src="/Style/images/Evenements/<?= $value['photo'] ?>">
+                    <p><?= $value['name'] ?></p>
                     <p>
                     <?php
-                    if (strlen($recent_event[0]["description"]) >= 80) {
-                        echo html_entity_decode(substr($recent_event[0]["description"], 0, 80) . "...");
+                    if (strlen($value["description"]) >= 80) {
+                        echo html_entity_decode(substr($value["description"], 0, 80) . "...");
                     } else {
-                        echo html_entity_decode($recent_event[0]["description"]);
+                        echo html_entity_decode($value["description"]);
                     }
                     ?>
                     </p>
@@ -46,3 +46,12 @@
         </div>
     </div>
 </div>
+<script src="../../Style/dist/main.js"></script>
+<script>
+$(".control--add").css("background-color", localStorage.buttonAdd);
+$(".control--delete").css("background-color", localStorage.buttonDelete);
+$(".button").css("background-color", localStorage.button);
+$("body").css("background-color", localStorage.background);
+$("h1").css("color", localStorage.h1Color);
+$("*").css("font-family", localStorage.font);
+</script>

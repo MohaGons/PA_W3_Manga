@@ -8,6 +8,11 @@
         </div>
         <div class="modal-body">
             <?php $this->includePartial("form", $event->getEventEditFormRegister($event_data)); ?>
+            <?php if (!empty($errors)) {
+                foreach ($errors as $error) {
+                    echo $error. "<br>";
+                }
+            }?>
         </div>
     </div>
 </div>

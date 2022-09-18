@@ -19,7 +19,7 @@ abstract class MysqlBuilder implements QueryBuilder
         $this->pdo = $connectionPDO->pdo;
 
         $getCalledClassExploded = explode("\\", strtolower(get_called_class())); // App\Model\User
-        $this->table = DBPREFIXE . end($getCalledClassExploded);
+        $this->table = DB_PREFIXE . end($getCalledClassExploded);
     }
 
     public function getColums()

@@ -17,6 +17,7 @@ use App\Model\Manga;
 class Media
 {
 
+    /*
     public function Allmedia(){
         $user = new UserModel();
         $session = New Session();
@@ -43,4 +44,64 @@ class Media
 
 
     }
+    */
+
+    public function index(){
+        $user = new UserModel();
+        $session = New Session();
+        $media = new MediaModel();
+        $messages=[];
+        $medias = $media->getAllMedia($session->get('email'));
+
+        $view = new View("admin/media_index", "back");
+        $view->assign("medias", $medias);
+
+
+    }
+
+    public function create(){
+        $media = new MediaModel();
+        $session = New Session();
+        $results = [];
+        $errors_media = [];
+        $medias = $media->getAllMedia($session->get('email'));
+
+        if(!empty($_POST) && !empty($_FILES)) {
+
+            $errors_media = $media->setCreateMedia($_POST['media'],$_SESSION['email'],"set");
+            if (empty($errors_media)) {
+                header("Location: /admin/media");
+            } else {
+                $results = $errors_media;
+                $view = new View("admin/media_index", "back");
+                $view->assign("results", $results); 
+                $view->assign("medias", $medias);     
+            }
+            
+        }
+        
+    }
+
+    public function dossier($params){
+
+        $dossier = $params[0];
+
+        if (!empty($dossier))
+        {
+            $user = new UserModel();
+            $session = New Session();
+            $media = new MediaModel();
+            $messages=[];
+            $medias = $media->getAllMedia($session->get('email'));
+
+            $view = new View("admin/media_index", "back");
+            $view->assign("medias", $medias);
+            $view->assign("dossier", $dossier);
+
+        }
+        else {
+            Security::returnHttpResponseCode(404);
+        }
+    }
+
 }

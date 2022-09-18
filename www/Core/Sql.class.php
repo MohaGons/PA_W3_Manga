@@ -19,7 +19,7 @@ abstract class Sql
         }
 
         $getCalledClassExploded = explode("\\", strtolower(get_called_class())); // App\Model\User
-        $this->table = DBPREFIXE.end($getCalledClassExploded);
+        $this->table = DB_PREFIXE.end($getCalledClassExploded);
     }
     
     public function save(): void

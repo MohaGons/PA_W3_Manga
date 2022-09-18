@@ -1,13 +1,17 @@
 <?php
 namespace App\Model;
 
+use App\Core\Mailer;
 use App\Core\MysqlBuilder;
+use App\Core\SplObserver;
+use App\Core\SplSubject;
 use App\Repository\Role as RoleRepository;
+use App\Repository\Newsletter as NewsletterRepository;
 use App\Model\Role as RoleModel;
 use App\Core\Session as Session;
 use PDO;
 
-class User extends MysqlBuilder
+class User extends MysqlBuilder implements SplObserver
 {
 
     protected $id = null;
@@ -31,22 +35,6 @@ class User extends MysqlBuilder
         parent::__construct();
     }
 
-    public function checkLogin($data)
-    {
-        $email = htmlspecialchars($data['email']);
-        $password = htmlspecialchars($data['password']);
-        $q = "SELECT ID, email, password FROM mnga_user WHERE email = :email";
-        $req = $this->pdo->prepare($q);
-        $req->execute(['email' => $email]);
-        $results = $req->fetch();
-        if (password_verify($password, $results['password'])) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
     /**
      * @return null
      */
@@ -66,7 +54,7 @@ class User extends MysqlBuilder
     /**
      * @return null
      */
-    public function getFirstname($email): ?string
+        public function getFirstname($email): ?string
     {
         $q = "SELECT firstname FROM mnga_user WHERE email = :email";
         $req = $this->pdo->prepare($q);
@@ -167,7 +155,7 @@ class User extends MysqlBuilder
 
     public function updateEmailId(string $email, $id): void
     {
-        $email = strtoupper(trim($email));
+        $email = strtolower(trim($email));
         $q = "UPDATE mnga_user SET email=? WHERE ID=?";
         $stmt= $this->pdo->prepare($q);
         $stmt->execute([$email,$id]);
@@ -333,6 +321,18 @@ class User extends MysqlBuilder
         $this->updatedAt = $updatedAt;
     }
 
+
+    public function updateNewsletter(Manga $manga, Array $userInfo): void
+    {
+        $destinataire = $userInfo["email"];
+        $name = $userInfo["firstname"];
+        $lastname = $userInfo["lastname"];
+        $subject = 'Newsletter sortie manga';
+        $body = 'Un nouveau manga/anime a été ajouté sur le site du nom de : '.$manga->getTitleManga();
+        Mailer::sendMail($destinataire, $name, $lastname, $subject, $body);
+
+    }
+
    public function deletecompte($email)
    {
        $q = "DELETE FROM mnga_user WHERE email = :email";
@@ -447,6 +447,7 @@ class User extends MysqlBuilder
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
                     "label"=>"Email : ",
+                    "value"=>"",
                     "required"=>true,
                     "error"=>"Email incorrect",
                 ],
@@ -495,6 +496,7 @@ class User extends MysqlBuilder
                 ],
                 "gender"=>[
                     "type"=>"radio",
+                    "label"=> "Sexe",
                     "required"=>true,
                     "option"=> [
                         [
@@ -518,7 +520,7 @@ class User extends MysqlBuilder
                     "id"=>"file",
                     "class"=>"formRegister",
                     "required"=>false,
-                    "accept" => ""
+                    "accept" => "image/*"
                 ]
             ]
         ];
@@ -541,6 +543,7 @@ class User extends MysqlBuilder
                     "id"=>"emailRegister",
                     "class"=>"formRegister",
                     "label"=>"Email",
+                    "value"=>"",
                     "error"=>"Email incorrect",
                     "required"=>true,
                 ],
@@ -561,7 +564,7 @@ class User extends MysqlBuilder
         return [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"",
+                "action"=>"/admin/parametre/info",
                 "id"=>"formLogin",
                 "class"=>"formLogin",
                 "submit"=>"Valider"
@@ -596,7 +599,7 @@ class User extends MysqlBuilder
                     "type"=>"text",
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
-                     "label"=>"",
+                    "label"=>"",
                     "value"=>$data['email'],
                     "required"=>false,
                     "minlength"=>2,
@@ -607,7 +610,7 @@ class User extends MysqlBuilder
         ];
     }
 
-    public function updateUser(): array
+    public function updateUser($userData): array
     {
         $roles = RoleRepository::all();
 
@@ -626,7 +629,7 @@ class User extends MysqlBuilder
                     "id"=>"emailRegister",
                     "class"=>"formparam",
                     "label"=>"",
-                    "value"=>"",
+                    "value"=>$userData['firstname'],
                     "required"=>false,
                     "minlength"=>2,
                     "maxlength"=>25,
@@ -638,7 +641,7 @@ class User extends MysqlBuilder
                     "id"=>"pwdRegister",
                     "class"=>"formparam",
                     "label"=>"",
-                    "value"=>"",
+                    "value"=>$userData['lastname'],
                     "required"=>false,
                     "minlength"=>2,
                     "maxlength"=>100,
@@ -650,6 +653,7 @@ class User extends MysqlBuilder
                     "id"=>"emailRegister",
                     "class"=>"formparam",
                     "label"=>"",
+                    "value"=>$userData['email'],
                     "required"=>true,
                     "error"=>"Email incorrect",
                     "unicity"=>true,
@@ -663,9 +667,9 @@ class User extends MysqlBuilder
                     "option"=>  [
                         "1"=>"Abonne",
                         "2"=>"Editeur",
-                        "3"=>"Admin",
+                        "3"=>"Admin"
                     ],
-                    "defaultValue" =>  ""
+                    "defaultValue" =>$userData['role'],
                 ]
             ]
         ];
@@ -687,14 +691,11 @@ class User extends MysqlBuilder
                     "type"=>"email",
                     "id"=>"emailRegister",
                     "label"=>"",
+                    "value"=>"",
                     "class"=>"formRegister",
+                    "error"=>"formRegister",
                     "required"=>true,
                 ]
-            ],
-            "submit"=>[
-                "type"=>"submit",
-                "class"=>"button-submit",
-                "title"=>"Confirmer",
             ]
         ];
     }
@@ -714,22 +715,19 @@ class User extends MysqlBuilder
                     "placeholder"=>"Nouveau Password",
                     "type"=>"password",
                     "id"=>"pwdRegister",
-                    "label"=>"",
+                    "label"=>"Password",
                     "class"=>"formRegister",
+                    "error"=>"Votre mot de passe doit faire au min 8 caratères avec une majuscule et un chiffre",
                     "required"=>true,
                 ],
                 "confirm_password"=>[
                     "placeholder"=>"Confirmer Password",
                     "type"=>"password",
                     "id"=>"pwdRegister",
-                    "label"=>"",
+                    "label"=>"Confirm password",
                     "class"=>"formRegister",
+                    "error"=>"Votre confirmation de mot de passe ne correspond pas",
                     "required"=>true,
-                ],
-                "submit"=>[
-                    "type"=>"submit",
-                    "class"=>"button-submit",
-                    "title"=>"Confirmer",
                 ]
             ]
         ];

@@ -44,14 +44,6 @@
         </table>
     </div>
 </div>
-
-<script>
-    ClassicEditor
-    .create( document.querySelector( '#descriptionForum' ) )
-    .catch( error => {
-        console.error( error );
-    } );
-</script>
 <script>
 $('.control--add').css('background-color', localStorage.buttonAdd);
 $('.control--delete').css('background-color', localStorage.buttonDelete);

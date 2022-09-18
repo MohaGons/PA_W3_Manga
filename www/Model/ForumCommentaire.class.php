@@ -58,7 +58,7 @@ class ForumCommentaire extends MysqlBuilder
 
     public function setCommentaire(?string $commentaire): void
     {
-        $this->commentaire = ucwords(strtolower(trim($commentaire)));
+        $this->commentaire = $commentaire;
     }
 
     public function getIsValid(): ?int
@@ -119,16 +119,15 @@ class ForumCommentaire extends MysqlBuilder
                     "value"=> Session::get('token'),
                 ],
                 "commentaire"=>[
-                    "label"=>"Commentaire",
-                    "placeholder"=>"Commentaire",
+                    "label"=> "Commentaire: ",
                     "type"=>"textarea",
                     "id"=>"commentaire",
                     "class"=>"formForum",
                     "rows"=>"5",
-                    "cols"=>"50",
-                    "text"=>null,
+                    "cols"=>"33",
+                    "text"=>"",
                     "required"=>true,
-                    "error"=>"Votre commentaire doit faire entre 2 et 100 caractères",
+                    "error"=>"Votre description doit faire entre 2 et 100 caractères",
                 ],
             ]
         ];

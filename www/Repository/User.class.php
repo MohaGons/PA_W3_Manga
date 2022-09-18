@@ -62,7 +62,7 @@ class User {
         $userModel->select(["id", "email", "password", "role", "token"]);
         $userModel->where("email", $email, "=");
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
-        $req->execute($column);
+        $req->execute();
 
         $result = $req->fetch(\PDO::FETCH_ASSOC);
 
@@ -79,7 +79,7 @@ class User {
                 Session::set('id', $result['id']);
                 Session::set('token', $token);
                 $role = Role::getRoleName($result['role']);
-                Session::set('role', $role["role"]);
+                Session::set('role', $role['role']);
 
                 return true;
             }
@@ -116,17 +116,50 @@ class User {
 
     }
 
-    public function delete($id)
+    public static function createUserAdmin($admin, $password)
+    {
+
+        var_dump($admin);
+        var_dump($password);
+        $user = new UserModel();
+        $user->setFirstname(htmlspecialchars('Admin'));
+        $user->setLastname(htmlspecialchars('Super'));
+        $user->setEmail(htmlspecialchars($admin));
+        $user->setStatus(htmlspecialchars('0'));
+        $user->setPassword(htmlspecialchars($password));
+        $user->setAvatar(htmlspecialchars('avatar.png'));
+        $user->setGender(htmlspecialchars('m'));
+        $user->setRole(htmlspecialchars('3'));
+        $user->setPays('Pays');
+        $user->setPays('Ville');
+        $user->setCreatedAt(date("Y-m-d H:i:s"));
+        $user->save();
+
+//        return header("Location: /login");
+    }
+
+    public static function delete($id)
     {
         $userModel = new UserModel();
         $connectionPDO = new ConnectionPDO();
+
+        $userModel->select(["email"]);
+        $userModel->where("id", $id, "=");
+        $reqt = $connectionPDO->pdo->prepare($userModel->getQuery());
+        $reqt->execute();
+        $result = $reqt->fetchAll();
 
         $userModel->delete();
         $userModel->where("id", $id, "=");
         $req = $connectionPDO->pdo->prepare($userModel->getQuery());
         $req->execute();
 
-        return header("Location: /admin/utilisateurs");
+        if ($result[0]['email'] == Session::get('email')) {
+            Session::destroy();
+            return header('location:'.LOGIN_VIEW_ROUTE);
+        } else {
+            return header("Location: /admin/utilisateurs");
+        }
     }
 
 

@@ -7,7 +7,7 @@ use App\Core\ConnectionPDO;
 
 class Page {
 
-    public function all()
+    public static function all()
     {
         $pageModel = new PageModel();
         $connectionPDO = new ConnectionPDO();
@@ -61,14 +61,13 @@ class Page {
         return $result;
     }
 
-    public static function dataPage($page, $user_id)
+    public static function dataPage($page)
     {
         $pageModel = new PageModel();
         $connectionPDO = new ConnectionPDO();
 
         $pageModel->select(["*"]);
         $pageModel->where("page", $page, "=");
-        $pageModel->where("user_id", $user_id, "=");
         $req = $connectionPDO->pdo->prepare($pageModel->getQuery());
         $req->execute();
 
@@ -77,7 +76,7 @@ class Page {
         return $result;
     }
 
-    public function delete($id, $page, $title)
+    public static function delete($id, $page, $title)
     {
         $pageModel = new PageModel();
         $connectionPDO = new ConnectionPDO();
@@ -88,37 +87,27 @@ class Page {
         $pageModel->where("id", $id, "=");
         $req = $connectionPDO->pdo->prepare($pageModel->getQuery());
         $req->execute();
-
-        $content  = file_get_contents('routes.yml');
+        
         switch ($page) {
             case "event":
-
                 // remove route
-                $search = $title_lower . ': ';
-                $lines = file('routes.yml');
-                $line_number = false;
+                $content = file_get_contents('routes.yml');
+                $arrayContent = explode('/', $content);
 
-                while (list($key, $line) = each($lines) and !$line_number) {
-                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
-                }
-
-                $delete_from_line= $line_number - 1;
-                $delete_to_line= $line_number + 6;
-                $filename="routes.yml";
-                
-                exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
-
-                // remove text from sidebar_front
-                $lines  = file('View/Template/sidebar_front.tpl.php');
-                $search = '<li><a href="/' . $title_lower . '">' . $title . '</a></li>';
-
-                $result = '';
-                foreach($lines as $line) {
-                    if(stripos($line, $search) === false) {
-                        $result .= $line;
+                $output = [];
+                for ($i = 1; $i < count($arrayContent); $i++) {
+                    // si la chaine existe et contient un '/'
+                    if (strstr($arrayContent[$i], $title_lower . ": ") == false && $arrayContent[$i] != '') {
+                        // on ajoute la chaine au tableau
+                        $output[] = '/' . $arrayContent[$i];
                     }
                 }
-                file_put_contents('View/Template/sidebar_front.tpl.php', $result);
+                $content = file_get_contents('routes.yml');
+                $content = '';
+                for ($i = 0; $i < count($output); $i++) {
+                    $content .= $output[$i];
+                }
+                file_put_contents('routes.yml', $content);
 
                 // remove file
                 unlink('View/view/front-event.view.php');
@@ -126,73 +115,160 @@ class Page {
             case "forum":
 
                 // remove route
-                $search = $title_lower . ': ';
-                $lines = file('routes.yml');
-                $line_number = false;
+                $content = file_get_contents('routes.yml');
+                $arrayContent = explode('/', $content);
 
-                while (list($key, $line) = each($lines) and !$line_number) {
-                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
-                }
-
-                $delete_from_line= $line_number - 1;
-                $delete_to_line= $line_number + 6;
-                $filename="routes.yml";
-                
-                exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
-
-                // remove text from sidebar_front
-                $lines  = file('View/Template/sidebar_front.tpl.php');
-                $search = '<li><a href="/' . $title_lower . '">' . $title . '</a></li>';
-
-                $result = '';
-                foreach($lines as $line) {
-                    if(stripos($line, $search) === false) {
-                        $result .= $line;
+                $output = [];
+                for ($i = 1; $i < count($arrayContent); $i++) {
+                    // si la chaine existe et contient un '/'
+                    if (strstr($arrayContent[$i], $title_lower . ": ") == false && $arrayContent[$i] != '') {
+                        // on ajoute la chaine au tableau
+                        $output[] = '/' . $arrayContent[$i];
                     }
                 }
-                file_put_contents('View/Template/sidebar_front.tpl.php', $result);
-
+                $content = file_get_contents('routes.yml');
+                $content = '';
+                for ($i = 0; $i < count($output); $i++) {
+                    $content .= $output[$i];
+                }
+                file_put_contents('routes.yml', $content);
+                
                 // remove file
                 unlink('View/view/front-forum.view.php');
                 break;
             case "manga":
 
                 // remove route
-                $search = $title_lower . ': ';
-                $lines = file('routes.yml');
-                $line_number = false;
+                $content = file_get_contents('routes.yml');
+                $arrayContent = explode('/', $content);
 
-                while (list($key, $line) = each($lines) and !$line_number) {
-                $line_number = (strpos($line, $search) !== FALSE) ? $key + 1 : $line_number;
-                }
-
-                $delete_from_line= $line_number - 1;
-                $delete_to_line= $line_number + 6;
-                $filename="routes.yml";
-                
-                exec('sed -i.bak ' . $delete_from_line . ',' . $delete_to_line . 'd ' . $filename);
-
-                // remove text from sidebar_front
-                $lines  = file('View/Template/sidebar_front.tpl.php');
-                $search = '<li><a href="/' . $title_lower . '">' . $title . '</a></li>';
-
-                $result = '';
-                foreach($lines as $line) {
-                    if(stripos($line, $search) === false) {
-                        $result .= $line;
+                $output = [];
+                for ($i = 1; $i < count($arrayContent); $i++) {
+                    // si la chaine existe et contient un '/'
+                    if (strstr($arrayContent[$i], $title_lower . ": ") == false && $arrayContent[$i] != '') {
+                        // on ajoute la chaine au tableau
+                        $output[] = '/' . $arrayContent[$i];
                     }
                 }
-                file_put_contents('View/Template/sidebar_front.tpl.php', $result);
+                $content = file_get_contents('routes.yml');
+                $content = '';
+                for ($i = 0; $i < count($output); $i++) {
+                    $content .= $output[$i];
+                }
+                file_put_contents('routes.yml', $content);
 
                 // remove file
                 unlink('View/view/front-manga.view.php');
                 break;
-            
+
         }
 
         return header("Location: /admin/page");
     }
 
+    public static function edit($page, $title, $new_title)
+    {
+        $pageModel = new PageModel();
+        $connectionPDO = new ConnectionPDO();
+
+        $title_lower = strtolower(str_replace(" ", "-", $title));
+        $new_title_lower = strtolower(str_replace(" ", "-", $new_title));
+
+        switch ($page) {
+            case "event":
+                // remove route
+                $content = file_get_contents('routes.yml');
+                $arrayContent = explode('/', $content);
+
+                $output = [];
+                for ($i = 1; $i < count($arrayContent); $i++) {
+                    // si la chaine existe et contient un '/'
+                    if (strstr($arrayContent[$i], $title_lower . ": ") == false && $arrayContent[$i] != '') {
+                        // on ajoute la chaine au tableau
+                        $output[] = '/' . $arrayContent[$i];
+                    }
+                }
+                $content = file_get_contents('routes.yml');
+                $content = '';
+                for ($i = 0; $i < count($output); $i++) {
+                    $content .= $output[$i];
+                }
+                file_put_contents('routes.yml', $content);
+
+                // create route
+                $content = file_get_contents('routes.yml');
+                $content .= "\n\n/" . $new_title_lower . ': ';
+                $content .= "\n  controller: frontevent";
+                $content .= "\n  action: FrontEvent";
+                $content .= "\n  params: null";
+                file_put_contents('routes.yml', $content);
+
+                break;
+            case "forum":
+
+                // remove route
+                $content = file_get_contents('routes.yml');
+                $arrayContent = explode('/', $content);
+
+                $output = [];
+                for ($i = 1; $i < count($arrayContent); $i++) {
+                    // si la chaine existe et contient un '/'
+                    if (strstr($arrayContent[$i], $title_lower . ": ") == false && $arrayContent[$i] != '') {
+                        // on ajoute la chaine au tableau
+                        $output[] = '/' . $arrayContent[$i];
+                    }
+                }
+                $content = file_get_contents('routes.yml');
+                $content = '';
+                for ($i = 0; $i < count($output); $i++) {
+                    $content .= $output[$i];
+                }
+                file_put_contents('routes.yml', $content);
+                
+                // create route
+                $content = file_get_contents('routes.yml');
+                $content .= "\n\n/" . $new_title_lower . ': ';
+                $content .= "\n  controller: frontforum";
+                $content .= "\n  action: FrontForum";
+                $content .= "\n  params: null";
+                file_put_contents('routes.yml', $content);
+
+                break;
+            case "manga":
+
+                // remove route
+                $content = file_get_contents('routes.yml');
+                $arrayContent = explode('/', $content);
+
+                $output = [];
+                for ($i = 1; $i < count($arrayContent); $i++) {
+                    // si la chaine existe et contient un '/'
+                    if (strstr($arrayContent[$i], $title_lower . ": ") == false && $arrayContent[$i] != '') {
+                        // on ajoute la chaine au tableau
+                        $output[] = '/' . $arrayContent[$i];
+                    }
+                }
+                $content = file_get_contents('routes.yml');
+                $content = '';
+                for ($i = 0; $i < count($output); $i++) {
+                    $content .= $output[$i];
+                }
+                file_put_contents('routes.yml', $content);
+
+                // create route
+                $content = file_get_contents('routes.yml');
+                $content .= "\n\n/" . $new_title_lower . ': ';
+                $content .= "\n  controller: frontmanga";
+                $content .= "\n  action: FrontManga";
+                $content .= "\n  params: null";
+                file_put_contents('routes.yml', $content);
+
+                break;
+
+        }
+
+        return header("Location: /admin/page");
+    }
 
 
 }

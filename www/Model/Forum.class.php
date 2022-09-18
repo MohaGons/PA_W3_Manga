@@ -10,6 +10,7 @@ class Forum extends MysqlBuilder
     protected $id = null;   
     protected $title = null;
     protected $description = null;
+    protected $picture = null;
     protected $date = null;
     protected $category_id = null;
     protected $user_id = null;
@@ -51,6 +52,16 @@ class Forum extends MysqlBuilder
     public function setDescriptionForum(?string $description): void
     {
         $this->description = ucwords(strtolower(trim($description)));
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): void
+    {
+        $this->picture = $picture;
     }
 
     public function getDate(): ?string
@@ -121,6 +132,7 @@ class Forum extends MysqlBuilder
                 "action"=>"",
                 "id"=>"formForum",
                 "class"=>"formForum",
+                "enctype"=>"multipart/form-data",
                 "submit"=>"Valider"
             ],
             "inputs"=>[
@@ -156,9 +168,16 @@ class Forum extends MysqlBuilder
                     "label"=> "Catégorie: ",
                     "type"=> "select",
                     "disabled"=>false,
-                    "id"=>"picture",
+                    "id"=>"category",
                     "option"=>$categorie_data,
                     "defaultValue"=>"",
+                ],
+                "file"=> [
+                    "type"=> "file",
+                    "label"=> "Image: ",
+                    "id"=>"file",
+                    "class"=>"formForum",
+                    "accept" => "image/*",
                 ]
             ]
         ];
@@ -172,6 +191,7 @@ class Forum extends MysqlBuilder
                 "action"=>"",
                 "id"=>"formForum",
                 "class"=>"formForum",
+                "enctype"=>"multipart/form-data",
                 "submit"=>"Valider"
             ],
             "inputs"=>[
@@ -207,9 +227,16 @@ class Forum extends MysqlBuilder
                     "label"=> "Catégorie: ",
                     "type"=> "select",
                     "disabled"=>false,
-                    "id"=>"picture",
+                    "id"=>"category",
                     "option"=>$categorie_data,
                     "defaultValue"=>$forum_data[0]['category_id'],
+                ],
+                "file"=> [
+                    "type"=> "file",
+                    "label"=> "Image: ",
+                    "id"=>"file",
+                    "class"=>"formForum",
+                    "accept" => "image/*",
                 ]
             ]
         ];

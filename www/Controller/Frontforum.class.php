@@ -48,6 +48,7 @@ class Frontforum
         if (!empty($forum_Id) && is_numeric($forum_Id)){
         
             $forum_commentaire = new ForumCommentaireModel();
+            $forum_data = ForumRepository::findById($forum_Id);
             $errors = [];
 
             if(!empty($_POST)) {
@@ -55,18 +56,24 @@ class Frontforum
                 $result = Verificator::checkForm($forum_commentaire->getCreateCommentaireForm(), $_POST);
 
                 if (empty($result)) {
-                    $forum_commentaire->setCommentaire(htmlspecialchars($_POST["commentaire"]));
+                    if (!empty($_POST["commentaire"])) {
+                        $forum_commentaire->setCommentaire(htmlspecialchars($_POST["commentaire"]));
+                    }
                     $forum_commentaire->setCreatedAt(date("Y-m-d H:i:s"));
                     $forum_commentaire->setForumId($forum_Id);
                     $forum_commentaire->setUserId(Session::get('id'));
                     $forum_commentaire->save();
-                    header("Location: /forum/detail/".$forum_Id);
+                    echo "<script>alert('Votre commentaire a bien été ajouté. Il est en attente de validation.')</script>";
+                } else {
+                    $errors = $result;
                 }
 
             }
 
             $view = new View("forum_commentaire", "front");
             $view->assign("forum_commentaire", $forum_commentaire);
+            $view->assign("errors", $errors);
+            $view->assign("forum_data", $forum_data);
         }
 
     }

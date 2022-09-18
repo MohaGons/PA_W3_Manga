@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Core\Security as Security;
 use App\Core\Session as Session;
 use App\Model\User as UserModel;
 use App\Model\Role as RoleModel;
@@ -38,8 +39,6 @@ class Category
                 }
                 $category->setDescriptionCategory(htmlspecialchars($_POST["description"]));
                 $category->setCreatedAt(date("Y-m-d H:i:s"));
-                $category->setUpdatedAt(date("Y-m-d H:i:s"));
-                $category->setUserId(Session::get('id'));
                 $category->save();
                 echo "<script>alert('Votre catégorie a bien été enregistrée')</script>";
                 header("Location: /admin/category");
@@ -73,9 +72,7 @@ class Category
                         $category->setNameCategory(htmlspecialchars($_POST["editName"]));
                     }
                     $category->setDescriptionCategory(htmlspecialchars($_POST["editDescription"]));
-                    $category->setCreatedAt($categorie_data[0]["createdAt"]);
                     $category->setUpdatedAt(date("Y-m-d H:i:s"));
-                    $category->setUserId(Session::get('id'));
                     $category->save();
                     header('Location: /admin/category');
                 } else {
@@ -87,6 +84,9 @@ class Category
             $view->assign("category", $category);
             $view->assign("categorie_data", $categorie_data);
             $view->assign("errors", $errors);
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
 
     }
@@ -102,6 +102,9 @@ class Category
             if ($categorie_delete == true) {
                 header('Location: /admin/category');
             }
+        }
+        else {
+            Security::returnHttpResponseCode(404);
         }
     }
 }
