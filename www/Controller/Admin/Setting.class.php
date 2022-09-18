@@ -95,12 +95,26 @@ class Setting {
         {
             $session = new Session();
             $media = new MediaModel();
+            $user = new UserModel();
             $email = $session->get('email', '');
+            $lastname = $user->getLastname($email);
+            $firstname = $user->getFirstname($email);
+            $gender = $user->getGender($email);
 
             $nom = htmlspecialchars($avatar);
             $media->updateAvatar($nom, $session->get('email'));
             $errors[] = "Votre Avatar est mise a jour avec succes";
-            header('Location: /admin/parametre');
+            $view = new View("admin/parametre", "back");
+            $data = array(
+                "email" => $email,
+                "lastname" => $lastname,
+                "firstname" => $firstname,
+                "gender" => $gender,
+                "avatar" => $avatar
+            );
+            $view->assign("data", $data);
+            $view->assign("user", $user);
+            $view->assign("errors", $errors); 
 
         }
         else {

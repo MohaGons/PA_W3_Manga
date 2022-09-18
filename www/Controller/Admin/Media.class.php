@@ -66,9 +66,9 @@ class Media
         $errors_media = [];
         $medias = $media->getAllMedia($session->get('email'));
 
-        if(!empty($_POST && !empty($_FILES))) {
+        if(!empty($_POST) && !empty($_FILES)) {
 
-            $errors_media = $media->setMedia($_POST['media'],$_SESSION['email'],"set");
+            $errors_media = $media->setCreateMedia($_POST['media'],$_SESSION['email'],"set");
             if (empty($errors_media)) {
                 header("Location: /admin/media");
             } else {
