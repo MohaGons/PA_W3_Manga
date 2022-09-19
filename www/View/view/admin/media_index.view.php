@@ -59,7 +59,7 @@ foreach ($medias as $media) {
 <?php
     if (!empty($dossier)){
         if ($categorie == $dossier){
-                echo "<div><a title='Cliquez pour agrandir le media' href='/Style/images/$categorie/$name'><img src='/Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a title='Supprimer la photo du dossier' href='?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i>
+                echo "<div><a title='Cliquez pour agrandir le media' href='/Style/images/$categorie/$name'><img src='/Style/images/$categorie/$name'></a><figcaption>$name</figcaption><a title='Supprimer la photo du dossier' href='/admin/media/delete?delete=$name&categorie=$categorie'><i class='fa-solid fa-trash'></i>
                 </a>";
                 if ($dossier =="Avatars"){
                     echo "<a title='Modifier la photo de profil' href='/admin/parametre/avatar/$name'><i class='fa-solid fa-recycle'></i></a></div>";
