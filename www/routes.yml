@@ -207,6 +207,12 @@
   action: create
   security: [Admin,Editeur]
 
+/admin/media/delete:
+  controller: media
+  action: delete
+  security: [Admin,Editeur]
+  params: true
+
 /admin/media/dossier/:
   controller: media
   action: dossier

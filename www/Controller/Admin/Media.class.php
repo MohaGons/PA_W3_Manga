@@ -82,6 +82,23 @@ class Media
         
     }
 
+    public function delete(){
+        $media = new MediaModel();
+        $session = New Session();
+        $messages=[];
+        $medias = $media->getAllMedia($session->get('email'));
+
+        if (isset($_GET['delete']) && isset($_GET['categorie'])){
+            $name = $_GET['delete'];
+            $categorie = $_GET['categorie'];
+            $media->deteleMedia($name,$categorie);
+            $messages[] = "l'image ".$name." a ete supprimé avec succues.";
+        }
+        $view = new View("admin/media_index", "back");
+        $view->assign("medias", $medias);
+        $view->assign("messages", $messages);
+    }
+
     public function dossier($params){
 
         $dossier = $params[0];
